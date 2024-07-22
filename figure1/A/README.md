@@ -103,7 +103,8 @@ Performing overlap with each compartment
 
 You should obtain the raw figure:
 
-[]()
+![Upset plot](complexUpset.png)
+
 
 ## Pre-processing
 
