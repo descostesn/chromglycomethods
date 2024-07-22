@@ -4,7 +4,7 @@
 # 1) Active promoter: K27ac peaks in TSS-/+1Kb.
 # 2) Transcription initiation: TSS-1/+1kb overlapping with Ser5P peaks.
 # 3) Heterochromatin: H3K9me3 peak intervals.
-# 4) Bivalent promoters: H3K4me3/H3K27me3 peaks overlapping TSS-/+1Kb. 
+# 4) Bivalent promoters: H3K4me3/H3K27me3 peaks overlapping TSS-/+1Kb.
 # 5) Polycomb domain: Suz12 and RING1B peaks overlapping each other.
 # 6) Transcription elongation: TSS+1kb to TES overlapping Ser2P peaks.
 # 7) Transcription termination: TES+50bp intervals.
@@ -20,10 +20,10 @@
 # png_0.1-7, readr_2.1.2, compiler_4.2.0, httr_1.4.2, backports_1.4.1,
 # assertthat_0.2.1, Matrix_1.4-1, fastmap_1.1.0, cli_3.6.1, org.Rn.eg.db_3.16.0,
 # org.Mm.eg.db_3.16.0, prettyunits_1.1.1, htmltools_0.5.2, quantreg_5.88,
-# tools_4.2.0, gtable_0.3.0, glue_1.6.2, GenomeInfoDbData_1.2.9, dplyr_1.0.8, 
+# tools_4.2.0, gtable_0.3.0, glue_1.6.2, GenomeInfoDbData_1.2.9, dplyr_1.0.8,
 # rappdirs_0.3.3, Rcpp_1.0.8.3, Biobase_2.58.0, vctrs_0.6.1, Biostrings_2.66.0,
-# nlme_3.1-157, rtracklayer_1.58.0, xfun_0.30, stringr_1.4.0, lifecycle_1.0.3, 
-# restfulr_0.0.15, XML_3.99-0.9, polspline_1.1.20, org.Hs.eg.db_3.16.0 
+# nlme_3.1-157, rtracklayer_1.58.0, xfun_0.30, stringr_1.4.0, lifecycle_1.0.3,
+# restfulr_0.0.15, XML_3.99-0.9, polspline_1.1.20, org.Hs.eg.db_3.16.0,
 # zoo_1.8-10, zlibbioc_1.44.0, MASS_7.3-57, scales_1.2.0, hms_1.1.1,
 # MatrixGenerics_1.10.0, sandwich_3.0-1, parallel_4.2.0,
 # SummarizedExperiment_1.28.0 ggupset_0.3.0, SparseM_1.81, RColorBrewer_1.1-3,
@@ -80,7 +80,6 @@ outputfolder <- "result"
 glcnacbwvec <- c("data/ESCHGGlcNAc_rep1.bw",
 "data/ESCHGGlcNAc_rep2.bw")
 
-#"https://www.ensembl.org"
 biomartstr <- "ENSEMBL_MART_ENSEMBL"
 datasetstr <- "mmusculus_gene_ensembl"
 hoststr <- "https://nov2020.archive.ensembl.org"
