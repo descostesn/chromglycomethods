@@ -55,34 +55,30 @@ library("chipgc")
 ## PARAMS
 #############
 
-geneannovec <- c(gencode = "/g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/mouse/mm10/genesAnnoForEnhancers/gencode.vM25.annotation.gff", # nolint
-        refgene = "/g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/mouse/mm10/genesAnnoForEnhancers/refGeneUCSC-mm10-March2021.gff", # nolint
-        refseq = "/g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/mouse/mm10/genesAnnoForEnhancers/refseqNCBI-mm10-March2021.gff") # nolint
+geneannovec <- c(gencode = "annotations/gencode.vM25.annotation.gff",
+        refgene = "annotations/refGeneUCSC-mm10-March2021.gff",
+        refseq = "annotations/refseqNCBI-mm10-March2021.gff")
 
-peakspathcategoriesvec <- c(H3K27ac = "/g/boulard/Projects/O-N-acetylglucosamine/analysis/peak_detection/macs2/Sept2023_chipatlas_candidates/mouse/HG/0.04/no_model_broad/H3K27ac_SRX19148013_peaks_broadPeak.gff", # nolint
-        H3K4me1 = "/g/boulard/Projects/O-N-acetylglucosamine/analysis/peak_detection/macs2/public_data/histones_marks/0.04/no_model_broad/Wysocka-H3K4me1-rep1-input1_peaks_broadPeak.gff", # nolint
-        H3K27me3 = "/g/boulard/Projects/O-N-acetylglucosamine/analysis/peak_detection/hiddenDomains/public_data/histones_marks/300/Bell-H3K27me3rep1-input1_vis.gff", # nolint
-        H3K4me3 = "/g/boulard/Projects/O-N-acetylglucosamine/analysis/peak_detection/macs2/Sept2023_chipatlas_candidates/mouse/HG/0.04/no_model_broad/H3K4me3_SRX5382140_peaks_broadPeak.gff", # nolint
-        Suz12 = "/g/boulard/Projects/O-N-acetylglucosamine/analysis/peak_detection/macs2/public_data/histones_marks/0.04/no_model_broad/Wysocka-Suz12-input2-single_SRR034190_peaks_broadPeak.gff", # nolint
-        RING1B = "/g/boulard/Projects/O-N-acetylglucosamine/analysis/peak_detection/macs2/public_data/Christensen_Ring1B_SRR10095137/0.001/no_model/RING1B_peaks_narrowPeak.gff", # nolint
-        H3K9me3 = "/g/boulard/Projects/O-N-acetylglucosamine/analysis/peak_detection/macs2/public_data/histones_marks/0.04/no_model_broad/H3K9me3_SRR925652_peaks_broadPeak.gff", # nolint
-        Ser5P = "/g/boulard/Projects/O-N-acetylglucosamine/analysis/peak_detection/macs2/public_data/histones_marks/1e-04/no_model_broad/Pombo-RNAPIISer5P-rep2-input1-single_SRR391050_peaks_broadPeak.gff", # nolint
-        Ser2P = "/g/boulard/Projects/O-N-acetylglucosamine/analysis/peak_detection/macs2/public_data/histones_marks/0.03/no_model_broad/Pombo-RNAPIISer2P-input1tech3-single_SRR391039_peaks_broadPeak.gff", # nolint
-        ATACSeq = "/g/boulard/Projects/O-N-acetylglucosamine/data/public_data/mouse/mm10/ATAC-Seq_ESC/data/sequencing/macs2/peak-calls/UniqueNoDupeShiftedNFR/narrow/ATACRep2_SRR466767_02.gff") # nolint
+peakspathcategoriesvec <- c(H3K27ac = "data/H3K27ac_SRX19148013_peaks_broadPeak.gff", # nolint
+        H3K4me1 = "data/H3K4me1_SRR5466745_peaks_broadPeak.gff",
+        H3K27me3 = "data/H3K27me3_SRR10032683_peaks_hiddendomains.gff",
+        H3K4me3 = "data/H3K4me3_SRX5382140_peaks_broadPeak.gff",
+        Suz12 = "data/Suz12_SRR034190_peaks_broadPeak.gff",
+        RING1B = "data/Ring1B_SRR10095137_peaks_narrowPeak.gff",
+        H3K9me3 = "data/H3K9me3_SRR925652_peaks_broadPeak.gff",
+        Ser5P = "data/Ser5P_SRR391050_peaks_broadPeak.gff",
+        Ser2P = "data/Ser2P_SRR391039_peaks_broadPeak.gff",
+        ATACSeq = "data/ATAC_SRR5466767_peaks_narrow.gff")
 
-peakspathqueryvec <- c("/g/boulard/Projects/O-N-acetylglucosamine/analysis/peak_detection/macs2/Sept2023_glcPolII/mouse/glcGlucose/0.04/no_model/ESCHGGlcNAc1_lane1sample12_peaks_narrowPeak.gff",
-"/g/boulard/Projects/O-N-acetylglucosamine/analysis/peak_detection/macs2/Sept2023_glcPolII/mouse/glcGlucose/0.04/no_model/ESCHGGlcNAc2_lane1sample13_peaks_narrowPeak.gff") # nolint
+peakspathqueryvec <- c("data/ESCHGGlcNAc_rep1.gff",
+"data/ESCHGGlcNAc_rep2.gff")
 
 querynamevec <- c("ESCHGGlcNAc1", "ESCHGGlcNAc2")
 
-repeatsannovec <- c(LINE = "/g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/mouse/mm10/repeatmasker/classes/gff/LINE.gff",  # nolint
-        LTR = "/g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/mouse/mm10/repeatmasker/classes/gff/LTR.gff",  # nolint
-        SINE = "/g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/mouse/mm10/repeatmasker/classes/gff/SINE.gff") # nolint
+outputfolder <- "result"
 
-outputfolder <- "/g/boulard/Projects/O-N-acetylglucosamine/analysis/extendedGenomicCompartments/sept2023_mouse_HG/rep1-2" # nolint
-
-glcnacbwvec <- c("/g/boulard/Projects/O-N-acetylglucosamine/data/Sofia_GlcPolIIGlucose_Sept2023/glc_glucoce_mouseESC/data/sequencing/bw/genome_norm/ESCHGGlcNAc1_lane1sample12.bw", # nolint
-"/g/boulard/Projects/O-N-acetylglucosamine/data/Sofia_GlcPolIIGlucose_Sept2023/glc_glucoce_mouseESC/data/sequencing/bw/genome_norm/ESCHGGlcNAc2_lane1sample13.bw") # nolint
+glcnacbwvec <- c("data/ESCHGGlcNAc_rep1.bw",
+"data/ESCHGGlcNAc_rep2.bw")
 
 includerepeats <- FALSE
 
