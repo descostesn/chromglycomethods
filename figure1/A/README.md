@@ -27,8 +27,8 @@ The processed data to use in the script can be downloaded from:
 - H3K4me1 peaks: H3K4me1_SRR5466745_peaks_broadPeak.gff
 - H3K27me3 peaks: H3K27me3_SRR10032683_peaks_hiddendomains.gff
 - H3K4me3 peaks: H3K4me3_SRX5382140_peaks_broadPeak.gff
-- Suz12 peaks:
-- RING1B peaks:
+- Suz12 peaks: Suz12_SRR034190_peaks_broadPeak.gff
+- RING1B peaks: Ring1B_SRR10095137_peaks_narrowPeak.gff
 - H3K9me3 peaks:
 - Ser5P peaks: 
 - Ser2P peaks:
