@@ -49,9 +49,13 @@ wget XXX/Ser2P_SRR391039_peaks_broadPeak.gff -P data/
 # ATAC-seq
 wget XXX/ATAC_SRR5466767_peaks_narrow.gff -P data/
 
-# O-GlcNac replicates
+# O-GlcNac peak replicates
 wget XXX/ESCHGGlcNAc_rep1.gff -P data/
 wget XXX/ESCHGGlcNAc_rep2.gff -P data/
+
+# O-GlcNac bigwig replicates
+wget XXX/ESCHGGlcNAc_rep1.bw -P data/
+wget XXX/ESCHGGlcNAc_rep2.bw -P data/
 ```
 
 
