@@ -73,7 +73,7 @@ peakspathcategoriesvec <- c(H3K27ac = "data/H3K27ac_SRX19148013_peaks_broadPeak.
 peakspathqueryvec <- c("data/ESCHGGlcNAc_rep1.gff",
 "data/ESCHGGlcNAc_rep2.gff")
 
-querynamevec <- c("ESCHGGlcNAc1", "ESCHGGlcNAc2")
+querynamevec <- c("Rep1", "Rep2")
 
 outputfolder <- "result"
 
