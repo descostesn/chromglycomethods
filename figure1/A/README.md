@@ -20,11 +20,11 @@ The genomic compartments were defined as follows:
 
 The processed data to use in the script can be downloaded from:
 
-- gencode annotation: 
-- refgene annotation:
-- refseq annotation:
+- gencode annotation: gencode.vM25.annotation.gff
+- refgene annotation: refGeneUCSC-mm10-March2021.gff
+- refseq annotation: refseqNCBI-mm10-March2021.gff
 - H3K27ac peaks: H3K27ac_SRX19148013_peaks_broadPeak.gff
-- H3K4me1 peaks:
+- H3K4me1 peaks: 
 - H3K27me3 peaks:
 - H3K4me3 peaks:
 - Suz12 peaks:
