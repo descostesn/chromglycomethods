@@ -118,7 +118,7 @@ gclist <- mapply(function(querypath, queryname, glcnacbw, peakscat, geneannos,
         gc <- buildIntervalsObject(peakspathvec, geneannos)
 
         ## PART 2: Extract coordinates for compartments having a peak
-        gc <- extractCompCoordWithPeak(gc, outfold, includerep)
+        gc <- extractCompCoordWithPeak(gc, outfold)
 
         return(gc)
     }, peakspathqueryvec, querynamevec, glcnacbwvec,
