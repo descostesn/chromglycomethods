@@ -97,7 +97,7 @@ checkParams(peakspathqueryvec, glcnacbwvec, querynamevec, geneannovec,
 ## Define vector names
 names(peakspathqueryvec) <- querynamevec
 
-## Connecting to ensembl
+## Connecting to ensembl and retrieving the geneid conversion table
 geneidtab <- retrieveconversiontab(biomartstr, datasetstr, hoststr,
   alternativemirroropt)
 
