@@ -117,9 +117,6 @@ gclist <- mapply(function(querypath, queryname, glcnacbw, peakscat, geneannos,
         #includerepeats <- includerep
         gc <- buildIntervalsObject(peakspathvec, geneannos)
 
-        # Retrieve query chip-seq signal on peaks
-        gc <- retrieveGlcPeakVal(gc, includerep, glcnacbw)
-
         ## PART 2: Extract coordinates for compartments having a peak
         gc <- extractCompCoordWithPeak(gc, outfold, includerep)
 
