@@ -33,40 +33,10 @@ The processed data to use in the script can be downloaded from:
 - Ser5P peaks: Ser5P_SRR391050_peaks_broadPeak.gff
 - Ser2P peaks: Ser2P_SRR391039_peaks_broadPeak.gff
 - ATACSeq peaks: ATAC_SRR5466767_peaks_narrow.gff
+- O-GlcNac Cut&Run replicate 1 peaks: ESCHGGlcNAc_rep1.gff
+- O-GlcNac Cut&Run replicate 2 peaks: ESCHGGlcNAc_rep2.gff
 
-- O-GlcNac Cut&Run replicate 1:
+## Pre-processing
 
-
-
-
-
-
-peakspathqueryvec <- c("/g/boulard/Projects/O-N-acetylglucosamine/analysis/peak_detection/macs2/Sept2023_glcPolII/mouse/glcGlucose/0.04/no_model/ESCHGGlcNAc1_lane1sample12_peaks_narrowPeak.gff",
-"/g/boulard/Projects/O-N-acetylglucosamine/analysis/peak_detection/macs2/Sept2023_glcPolII/mouse/glcGlucose/0.04/no_model/ESCHGGlcNAc2_lane1sample13_peaks_narrowPeak.gff") # nolint
-
-querynamevec <- c("ESCHGGlcNAc1", "ESCHGGlcNAc2")
-
-repeatsannovec <- c(LINE = "/g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/mouse/mm10/repeatmasker/classes/gff/LINE.gff",  # nolint
-        LTR = "/g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/mouse/mm10/repeatmasker/classes/gff/LTR.gff",  # nolint
-        SINE = "/g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/mouse/mm10/repeatmasker/classes/gff/SINE.gff") # nolint
-
-outputfolder <- "/g/boulard/Projects/O-N-acetylglucosamine/analysis/extendedGenomicCompartments/sept2023_mouse_HG/rep1-2" # nolint
-
-glcnacbwvec <- c("/g/boulard/Projects/O-N-acetylglucosamine/data/Sofia_GlcPolIIGlucose_Sept2023/glc_glucoce_mouseESC/data/sequencing/bw/genome_norm/ESCHGGlcNAc1_lane1sample12.bw", # nolint
-"/g/boulard/Projects/O-N-acetylglucosamine/data/Sofia_GlcPolIIGlucose_Sept2023/glc_glucoce_mouseESC/data/sequencing/bw/genome_norm/ESCHGGlcNAc2_lane1sample13.bw") # nolint
-
-includerepeats <- FALSE
-
-outputObjectPath <- "/g/boulard/Projects/O-N-acetylglucosamine/analysis/extendedGenomicCompartments/sept2023_mouse_HG/rep1-2/gclist.Rdat" #nolint
-
-countstable <- "/g/boulard/Projects/O-N-acetylglucosamine/data/Sofia_mRNASeq_oct2019/recompute_with_ensembl/data/sequencing/counts/featureCounts/featurecounts_MB1-WT-E14-T2i-replicate1.txt.gz.tabular" #nolint
-countslength <- "/g/boulard/Projects/O-N-acetylglucosamine/data/Sofia_mRNASeq_oct2019/recompute_with_ensembl/data/sequencing/counts/featureCounts/MB1-WT-E14-T2i-replicate1.txt.gz.tabular" # nolint
-countsannotype <- "ensembl"
-
-#"https://www.ensembl.org"
-biomartstr <- "ENSEMBL_MART_ENSEMBL"
-datasetstr <- "mmusculus_gene_ensembl"
-hoststr <- "https://nov2020.archive.ensembl.org"
-alternativemirroropt <- FALSE
 
 
