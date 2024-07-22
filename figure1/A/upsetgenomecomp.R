@@ -83,6 +83,7 @@ glcnacbwvec <- c("data/ESCHGGlcNAc_rep1.bw",
 biomartstr <- "ENSEMBL_MART_ENSEMBL"
 datasetstr <- "mmusculus_gene_ensembl"
 hoststr <- "https://nov2020.archive.ensembl.org"
+# Change this parameter to TRUE if the connection to ensembl fails
 alternativemirroropt <- FALSE
 
 
