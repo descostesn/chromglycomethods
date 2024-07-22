@@ -29,11 +29,10 @@ The processed data to use in the script can be downloaded from:
 - H3K4me3 peaks: H3K4me3_SRX5382140_peaks_broadPeak.gff
 - Suz12 peaks: Suz12_SRR034190_peaks_broadPeak.gff
 - RING1B peaks: Ring1B_SRR10095137_peaks_narrowPeak.gff
-- H3K9me3 peaks:
-- Ser5P peaks: 
-- Ser2P peaks:
-- ATACSeq peaks:
-
+- H3K9me3 peaks: H3K9me3_SRR925652_peaks_broadPeak.gff
+- Ser5P peaks: Ser5P_SRR391050_peaks_broadPeak.gff
+- Ser2P peaks: Ser2P_SRR391039_peaks_broadPeak.gff
+- ATACSeq peaks: ATAC_SRR5466767_peaks_narrow.gff
 
 - O-GlcNac Cut&Run replicate 1:
 
