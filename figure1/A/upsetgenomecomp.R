@@ -113,7 +113,6 @@ gclist <- mapply(function(querypath, queryname, glcnacbw, peakscat, geneannos,
 
         ## PART 1: Build initial information
         # Define intervals of the different genomic compartments
-        #includerepeats <- includerep
         gc <- buildIntervalsObject(peakspathvec, geneannos)
 
         ## PART 2: Extract coordinates for compartments having a peak
