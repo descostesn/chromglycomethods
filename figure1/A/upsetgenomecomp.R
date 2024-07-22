@@ -127,4 +127,4 @@ gclist <- mapply(function(querypath, queryname, glcnacbw, peakscat, geneannos,
 
 
 ## Generating the complex upset
-complexUpsetDiagram(gclist, includerepeats, outputfolder)
+complexUpsetDiagram(gclist, outputfolder)
