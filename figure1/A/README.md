@@ -20,21 +20,40 @@ The genomic compartments were defined as follows:
 
 The processed data to use in the script can be downloaded from:
 
-- gencode annotation: gencode.vM25.annotation.gff
-- refgene annotation: refGeneUCSC-mm10-March2021.gff
-- refseq annotation: refseqNCBI-mm10-March2021.gff
-- H3K27ac peaks: H3K27ac_SRX19148013_peaks_broadPeak.gff
-- H3K4me1 peaks: H3K4me1_SRR5466745_peaks_broadPeak.gff
-- H3K27me3 peaks: H3K27me3_SRR10032683_peaks_hiddendomains.gff
-- H3K4me3 peaks: H3K4me3_SRX5382140_peaks_broadPeak.gff
-- Suz12 peaks: Suz12_SRR034190_peaks_broadPeak.gff
-- RING1B peaks: Ring1B_SRR10095137_peaks_narrowPeak.gff
-- H3K9me3 peaks: H3K9me3_SRR925652_peaks_broadPeak.gff
-- Ser5P peaks: Ser5P_SRR391050_peaks_broadPeak.gff
-- Ser2P peaks: Ser2P_SRR391039_peaks_broadPeak.gff
-- ATACSeq peaks: ATAC_SRR5466767_peaks_narrow.gff
-- O-GlcNac replicate 1 peaks: ESCHGGlcNAc_rep1.gff
-- O-GlcNac replicate 2 peaks: ESCHGGlcNAc_rep2.gff
+```
+#!/bin/bash
+
+mkdir annotations
+mkdir data
+
+# gencode, refgene, refseq annotations
+wget XXX/gencode.vM25.annotation.gff -P annotations/
+wget XXX/refGeneUCSC-mm10-March2021.gff -P annotations/
+wget XXX/refseqNCBI-mm10-March2021.gff -P annotations/
+
+# Histone marks
+wget XXX/H3K27ac_SRX19148013_peaks_broadPeak.gff -P data/
+wget XXX/H3K4me1_SRR5466745_peaks_broadPeak.gff -P data/
+wget XXX/H3K27me3_SRR10032683_peaks_hiddendomains.gff -P data/
+wget XXX/H3K4me3_SRX5382140_peaks_broadPeak.gff -P data/
+wget XXX/H3K9me3_SRR925652_peaks_broadPeak.gff -P data/
+
+# Polycomb marks
+wget XXX/Suz12_SRR034190_peaks_broadPeak.gff -P data/
+wget XXX/Ring1B_SRR10095137_peaks_narrowPeak.gff -P data/
+
+# CTD marks
+wget XXX/Ser5P_SRR391050_peaks_broadPeak.gff -P data/
+wget XXX/Ser2P_SRR391039_peaks_broadPeak.gff -P data/
+
+# ATAC-seq
+wget XXX/ATAC_SRR5466767_peaks_narrow.gff -P data/
+
+# O-GlcNac replicates
+wget XXX/ESCHGGlcNAc_rep1.gff -P data/
+wget XXX/ESCHGGlcNAc_rep2.gff -P data/
+```
+
 
 ## Installation
 
