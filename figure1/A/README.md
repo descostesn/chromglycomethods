@@ -33,10 +33,21 @@ The processed data to use in the script can be downloaded from:
 - Ser5P peaks: Ser5P_SRR391050_peaks_broadPeak.gff
 - Ser2P peaks: Ser2P_SRR391039_peaks_broadPeak.gff
 - ATACSeq peaks: ATAC_SRR5466767_peaks_narrow.gff
-- O-GlcNac Cut&Run replicate 1 peaks: ESCHGGlcNAc_rep1.gff
-- O-GlcNac Cut&Run replicate 2 peaks: ESCHGGlcNAc_rep2.gff
+- O-GlcNac replicate 1 peaks: ESCHGGlcNAc_rep1.gff
+- O-GlcNac replicate 2 peaks: ESCHGGlcNAc_rep2.gff
+
+## Installation
+
+## Figure generation
 
 ## Pre-processing
 
+### Raw to bam
 
+**Workflows:**
+**ChIP-seq and CutnRun:**
+**ATAC-seq:**
 
+### Peak detection
+
+**Scripts**:
