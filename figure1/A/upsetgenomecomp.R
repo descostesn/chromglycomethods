@@ -86,12 +86,6 @@ glcnacbwvec <- c("/g/boulard/Projects/O-N-acetylglucosamine/data/Sofia_GlcPolIIG
 
 includerepeats <- FALSE
 
-outputObjectPath <- "/g/boulard/Projects/O-N-acetylglucosamine/analysis/extendedGenomicCompartments/sept2023_mouse_HG/rep1-2/gclist.Rdat" #nolint
-
-countstable <- "/g/boulard/Projects/O-N-acetylglucosamine/data/Sofia_mRNASeq_oct2019/recompute_with_ensembl/data/sequencing/counts/featureCounts/featurecounts_MB1-WT-E14-T2i-replicate1.txt.gz.tabular" #nolint
-countslength <- "/g/boulard/Projects/O-N-acetylglucosamine/data/Sofia_mRNASeq_oct2019/recompute_with_ensembl/data/sequencing/counts/featureCounts/MB1-WT-E14-T2i-replicate1.txt.gz.tabular" # nolint
-countsannotype <- "ensembl"
-
 #"https://www.ensembl.org"
 biomartstr <- "ENSEMBL_MART_ENSEMBL"
 datasetstr <- "mmusculus_gene_ensembl"
