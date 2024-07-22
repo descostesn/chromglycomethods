@@ -47,7 +47,7 @@
 
 
 
-library("chipgc")
+library("genomecompr")
 
 
 
@@ -80,8 +80,6 @@ outputfolder <- "result"
 glcnacbwvec <- c("data/ESCHGGlcNAc_rep1.bw",
 "data/ESCHGGlcNAc_rep2.bw")
 
-includerepeats <- FALSE
-
 #"https://www.ensembl.org"
 biomartstr <- "ENSEMBL_MART_ENSEMBL"
 datasetstr <- "mmusculus_gene_ensembl"
@@ -95,8 +93,7 @@ alternativemirroropt <- FALSE
 
 ## Checking parameters
 checkParams(peakspathqueryvec, glcnacbwvec, querynamevec, geneannovec,
-        peakspathcategoriesvec, repeatsannovec, countstable, includerepeats,
-        countsannotype)
+        peakspathcategoriesvec)
 
 ## Define vector names
 names(peakspathqueryvec) <- querynamevec
@@ -106,14 +103,18 @@ geneidtab <- retrieveconversiontab(biomartstr, datasetstr, hoststr,
   alternativemirroropt)
 
 ## Start processing for each peak file
-# querypath <- peakspathqueryvec[1]; queryname <- querynamevec[1]
-# glcnacbw <- glcnacbwvec[1]; peakscat <- peakspathcategoriesvec;
-# geneannos <- geneannovec; outputfold <- outputfolder; 
-# includerep <- includerepeats; rnacounts <- countstable;
-# refseqpath <- geneannovec["refseq"]
+
+!!!!!!!!!!!!!!!!!!!!!!!
+querypath=peakspathqueryvec[1]
+queryname=querynamevec[1]
+glcnacbw=glcnacbwvec[1]
+peakscat=peakspathcategoriesvec
+geneannos=geneannovec
+outputfold=outputfolder
+refseqpath=geneannovec["refseq"]
+!!!!!!!!!!!!!!!!!
 gclist <- mapply(function(querypath, queryname, glcnacbw, peakscat, geneannos,
-                outputfold, includerep, rnacounts, refseqpath,
-                geneidtab, countsannotype) {
+                outputfold, refseqpath, geneidtab) {
 
         message("Processing ", queryname)
 
@@ -160,8 +161,7 @@ gclist <- mapply(function(querypath, queryname, glcnacbw, peakscat, geneannos,
             return(gc)
         }, peakspathqueryvec, querynamevec, glcnacbwvec,
         MoreArgs = list(peakspathcategoriesvec, geneannovec, outputfolder,
-                includerepeats, countstable, geneannovec["refseq"],
-                geneidtab, countsannotype), SIMPLIFY = FALSE)
+            geneannovec["refseq"], geneidtab), SIMPLIFY = FALSE)
 
 save(gclist, file = outputObjectPath)
 #load(outputObjectPath)
