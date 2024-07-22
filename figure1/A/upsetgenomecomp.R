@@ -47,7 +47,7 @@
 
 
 
-library("genomecompr")
+library("genomecompR")
 
 
 
