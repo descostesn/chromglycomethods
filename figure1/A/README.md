@@ -63,6 +63,48 @@ wget XXX/ESCHGGlcNAc_rep2.bw -P data/
 
 ## Figure generation
 
+The script should output the following numbers:
+
+```
+# Replicate 1
+Performing overlap with each compartment
+		 activeProm
+		76/5371 compartments contain a peak
+		 PcGDomain
+		22/10515 compartments contain a peak
+		 heteroChrom
+		28/48747 compartments contain a peak
+		 bivalentProm
+		29/13237 compartments contain a peak
+		 initiation
+		62/3364 compartments contain a peak
+		 elongation
+		20/2455 compartments contain a peak
+		 termination
+		9/13962 compartments contain a peak
+
+# Replicate 2
+Performing overlap with each compartment
+		 activeProm
+		82/5371 compartments contain a peak
+		 PcGDomain
+		21/10515 compartments contain a peak
+		 heteroChrom
+		37/48747 compartments contain a peak
+		 bivalentProm
+		29/13237 compartments contain a peak
+		 initiation
+		70/3364 compartments contain a peak
+		 elongation
+		11/2455 compartments contain a peak
+		 termination
+		11/13962 compartments contain a peak
+```
+
+You should obtain the raw figure:
+
+[]()
+
 ## Pre-processing
 
 ### Raw to bam
