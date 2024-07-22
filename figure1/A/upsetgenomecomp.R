@@ -125,7 +125,7 @@ gclist <- mapply(function(querypath, queryname, glcnacbw, peakscat, geneannos,
         ## PART 1: Build initial information
         # Define intervals of the different genomic compartments
         #includerepeats <- includerep
-        gc <- buildIntervalsObject(peakspathvec, geneannos, includerep)
+        gc <- buildIntervalsObject(peakspathvec, geneannos)
         # Retrieve query chip-seq signal on peaks
         # theobject <- gc
         # includerepeats <- includerep
