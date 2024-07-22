@@ -103,16 +103,6 @@ geneidtab <- retrieveconversiontab(biomartstr, datasetstr, hoststr,
   alternativemirroropt)
 
 ## Start processing for each peak file
-
-!!!!!!!!!!!!!!!!!!!!!!!
-querypath=peakspathqueryvec[1]
-queryname=querynamevec[1]
-glcnacbw=glcnacbwvec[1]
-peakscat=peakspathcategoriesvec
-geneannos=geneannovec
-outputfold=outputfolder
-refseqpath=geneannovec["refseq"]
-!!!!!!!!!!!!!!!!!
 gclist <- mapply(function(querypath, queryname, glcnacbw, peakscat, geneannos,
                 outputfold, refseqpath, geneidtab) {
 
@@ -126,45 +116,18 @@ gclist <- mapply(function(querypath, queryname, glcnacbw, peakscat, geneannos,
         # Define intervals of the different genomic compartments
         #includerepeats <- includerep
         gc <- buildIntervalsObject(peakspathvec, geneannos)
+
         # Retrieve query chip-seq signal on peaks
-        # theobject <- gc
-        # includerepeats <- includerep
-        # bwpath <- glcnacbw
         gc <- retrieveGlcPeakVal(gc, includerep, glcnacbw)
 
-        ## PART 2: Upset diagram of the glucnac peaks overlap with each
-        ## compartment
-        upsetDiagram(gc, outfold, includerep)
-
-        ## PART 3: Boxplot of glucnac levels accross the different
-        ## compartments
-        boxplotGlcnacLevels(gc, glcnacbw, outfold, includerep)
-
-        ## PART 4: Extract glucnac coordinates in each compartment
-        outputGlcPeaksCoordPerCompartment(gc, outfold,
-                peakspathvec[1], includerep)
-
-        ## PART 5: Extract coordinates for compartments having a peak
+        ## PART 2: Extract coordinates for compartments having a peak
         gc <- extractCompCoordWithPeak(gc, outfold, includerep)
 
-        ## PART 6: Retrieve gene expression in each compartment. The gene
-        ## must be associated with a glc peak
-        #theobject <- gc
-        #plotviolin <- FALSE
-        violinplotExpression(gc, outfold, includerep, rnacounts,
-                refseqpath, geneidtab, countsannotype)
-
-        ##!! PART 7: Retrieve expression for ALL genes in each compartment
-        ##!! PART 8: Retrieve levels of each mark in each compartment
-
-
-            return(gc)
-        }, peakspathqueryvec, querynamevec, glcnacbwvec,
+        return(gc)
+    }, peakspathqueryvec, querynamevec, glcnacbwvec,
         MoreArgs = list(peakspathcategoriesvec, geneannovec, outputfolder,
             geneannovec["refseq"], geneidtab), SIMPLIFY = FALSE)
 
-save(gclist, file = outputObjectPath)
-#load(outputObjectPath)
 
 ## Generating the complex upset
 complexUpsetDiagram(gclist, includerepeats, outputfolder)
