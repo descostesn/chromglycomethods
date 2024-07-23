@@ -123,7 +123,10 @@ You should obtain the raw figure:
 ### Raw to bam
 
 **Workflows:**
-**ChIP-seq and CutnRun:**
+
+**ChIP-seq and CutnRun:** Briefly, quality control was done with FastQC 0.11.9 (`fastqc --outdir $outputfolder --threads $nbcpu --quiet --extract --kmers 7 -f 'fastq' $input`). Adapters and low quality reads were removed with trim-galore 0.4.3 (`trim_galore --phred33 --quality 20 --stringency 1 -e 0.1 --length 20 --output_dir ./ $input`). Reads were aligned to mm10 with Bowtie 2.3.4.1 and the bam were sorted using Samtools 1.9 (single: `bowtie2 -p $nbcpu -x m.musculus/mm10/mm10 -U $input --sensitive --no-unal 2> $log |  samtools sort -@$nbcpu -O bam -o $output`, paired: `bowtie2 -p $nbcpu -x m.musculus/mm10/mm10 -1 $input1 -2 $input2 -I 0 -X 500 --fr --dovetail --sensitive --no-unal 2> $log  | samtools sort -@$nbcpu -O bam -o $output`). 
+
+
 **ATAC-seq:**
 
 ### Peak detection
