@@ -63,7 +63,13 @@ wget XXX/ESCHGGlcNAc_rep2.bw -P data/
 
 ## Figure generation
 
-The script should output the following numbers:
+Run the script [upsetgenomecomp.R](upsetgenomecomp.R) from the current folder, it uses the files downloaded in the subfolders `data/` and `annotations/`. From the terminal:
+
+```
+Rscript upsetgenomecomp.R
+```
+
+It should output the following numbers:
 
 ```
 # Replicate 1
