@@ -61,6 +61,12 @@ wget XXX/ESCHGGlcNAc_rep2.bw -P data/
 
 ## Installation
 
+Install conda following the instructions [here](https://conda.io/projects/conda/en/latest/user-guide/install/index.html). Using the reciepe given in [fig1A.yaml], run:
+
+```
+conda env create -p ./fig1a --file fig1A.yml
+```
+
 ## Figure generation
 
 Run the script [upsetgenomecomp.R](upsetgenomecomp.R) from the current folder, it uses the files downloaded in the subfolders `data/` and `annotations/`. From the terminal:
