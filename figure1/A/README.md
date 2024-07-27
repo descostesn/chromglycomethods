@@ -150,12 +150,24 @@ macs2/peak-calls/UniqueNoDupeShiftedNFR/narrow/ATACRep2_SRR466767_02.gff
 | Target | Broad | q-value | Duplicates Thres. | Tag size |
 |--------|-------|---------|-------------------|----------|
 | H3K27ac | YES | 0.04 |
-| H3K4me1 | YES | 0.04 |
+| H3K4me1 | YES | 0.04 | 6 | 76 |
 | H3K4me3 | YES | 0.04 |
-| Suz12   | YES | 0.04 |
-| RING1B | NO | 0.001 |
-| H3K9me3 | YES | 0.04 |
-| Ser5P | YES | 1e-04 |
-| Ser2P | YES | 0.03 |
+| Suz12   | YES | 0.04 | 4 | 36 |
+| RING1B | NO | 0.001 | 1 | 75 |
+| H3K9me3 | YES | 0.04 | 12 | 119 |
+| Ser5P | YES | 1e-04 | 1 | 36 |
+| Ser2P | YES | 0.03 | 1 | 51 |
 | ESCHGGlcNAc_rep1 | NO | 0.04 | 
 | ESCHGGlcNAc_rep2 | NO | 0.04 |
+
+
+expname_vec <- c("8WG16", "S5P", "S7P", "RNAPII", "Suz12", "CBX7", "PCGF1",  "RYBP", "EED", "RING1B", "FOXK1", "FOXK2", "BAP1", "PCGF2", "PCGF6", "JARID2", "EZH2", "TET1", "SIN3A")
+tagsize_vec <- c(38, 36, 36, 76,36,50,50,50,50,76,76,76,76,40,40,26,36,38,36)
+genome_size <- c(1.87e9)
+artefact_threshold <- c(2,1,1,7,4,4,3,9,3,1,3,3,2,4,2,1,1,5,3)
+
+expname_vec <- c("H3K27ac_SRX19148013", "H3K4me3_SRX5382140")
+tagsize_vec <- c(51, 69)
+artefact_threshold <- c(4,4)
+
+
