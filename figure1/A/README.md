@@ -61,7 +61,7 @@ wget XXX/ESCHGGlcNAc_rep2.bw -P data/
 
 ## Installation
 
-Install conda following the instructions [here](https://conda.io/projects/conda/en/latest/user-guide/install/index.html). Using the reciepe given in [fig1A.yaml](fig1A.yaml), run:
+Install conda following the instructions [here](https://conda.io/projects/conda/en/latest/user-guide/install/index.html). Using the recipe [fig1A.yaml](fig1A.yaml), run:
 
 ```
 conda env create -n fig1a --file ./fig1A.yml
@@ -146,6 +146,7 @@ Only primary alignments were kept using Samtools: `samtools view -o $output.bam 
 Reads not aligned to consensus chromosomes were excluded: `samtools view -o $output.bam -h -b $input.bam 'chr1' 'chr2' 'chr3' 'chr4' 'chr5' 'chr6' 'chr7' 'chr8' 'chr9' 'chr10' 'chr11' 'chr12' 'chr13' 'chr14' 'chr15' 'chr16' 'chr17' 'chr18' 'chr19' 'chrX' 'chrY'`.
 
 ### ATAC-seq
+
 
 
 ### Peak detection
