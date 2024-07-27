@@ -68,6 +68,14 @@ conda env create -n fig1a --file ./fig1A.yml
 conda activate fig1a
 ```
 
+Open an R session and install our in-house package [genomecompR](https://github.com/descostesn/genomecompR/tree/main):
+
+```
+if (!require("devtools")) install.packages("devtools")
+devtools::install_github("descostesn/genomecompR")
+```
+
+
 ## Figure generation
 
 Run the script [upsetgenomecomp.R](upsetgenomecomp.R) from the current folder, it uses the files downloaded in the subfolders `data/` and `annotations/`. From the terminal:
@@ -138,6 +146,7 @@ Only primary alignments were kept using Samtools: `samtools view -o $output.bam 
 Reads not aligned to consensus chromosomes were excluded: `samtools view -o $output.bam -h -b $input.bam 'chr1' 'chr2' 'chr3' 'chr4' 'chr5' 'chr6' 'chr7' 'chr8' 'chr9' 'chr10' 'chr11' 'chr12' 'chr13' 'chr14' 'chr15' 'chr16' 'chr17' 'chr18' 'chr19' 'chrX' 'chrY'`.
 
 ### ATAC-seq
+
 
 ### Peak detection
 
