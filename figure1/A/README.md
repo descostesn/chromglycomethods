@@ -153,8 +153,8 @@ Reads not aligned to consensus chromosomes were excluded: `samtools view -o $out
 | H3K9me3 | YES | 0.04 | 12 | 119 |
 | Ser5P | YES | 1e-04 | 1 | 36 |
 | Ser2P | YES | 0.03 | 1 | 51 |
-| ESCHGGlcNAc_rep1 | NO | 7 | 82 |
-| ESCHGGlcNAc_rep2 | NO | 7 | 82 |
+| ESCHGGlcNAc_rep1 | NO | 0.04 | 7 | 82 |
+| ESCHGGlcNAc_rep2 | NO | 0.04 | 7 | 82 |
 
 
 mouse/hiddenDomains/public_data/histones_marks/300/Bell-H3K27me3rep1-input1_vis.gff
