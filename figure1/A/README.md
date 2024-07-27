@@ -143,15 +143,19 @@ Reads not aligned to consensus chromosomes were excluded: `samtools view -o $out
 
 !! Give macs2 commands and parameters
 
-mouse/HG/0.04/no_model_broad/H3K27ac_SRX19148013_peaks_broadPeak.gff
-mouse/0.04/no_model_broad/Wysocka-H3K4me1-rep1-input1_peaks_broadPeak.gff
-mouse/HG/0.04/no_model_broad/H3K4me3_SRX5382140_peaks_broadPeak.gff
 mouse/hiddenDomains/public_data/histones_marks/300/Bell-H3K27me3rep1-input1_vis.gff
+macs2/peak-calls/UniqueNoDupeShiftedNFR/narrow/ATACRep2_SRR466767_02.gff
+
+
+| Target | Model | Broad | q-value | Duplicates Thres. | Tag size |
+|--------|-------|-------|---------|-------------------|----------|
+| H3K27ac | NO | YES | 0.04 |
+| H3K4me1 | NO | YES | 0.04 |
+mouse/HG/0.04/no_model_broad/H3K4me3_SRX5382140_peaks_broadPeak.gff
 mouse/0.04/no_model_broad/Wysocka-Suz12-input2-single_SRR034190_peaks_broadPeak.gff
 mouse/001/no_model/RING1B_peaks_narrowPeak.gff
 mouse/0.04/no_model_broad/H3K9me3_SRR925652_peaks_broadPeak.gff
 mouse/1e-04/no_model_broad/Pombo-RNAPIISer5P-rep2-input1-single_SRR391050_peaks_broadPeak.gff
 mouse/0.03/no_model_broad/Pombo-RNAPIISer2P-input1tech3-single_SRR391039_peaks_broadPeak.gff
-macs2/peak-calls/UniqueNoDupeShiftedNFR/narrow/ATACRep2_SRR466767_02.gff
 mouse/0.04/no_model/ESCHGGlcNAc1_lane1sample12_peaks_narrowPeak.gff
 mouse/0.04/no_model/ESCHGGlcNAc2_lane1sample13_peaks_narrowPeak.gff
