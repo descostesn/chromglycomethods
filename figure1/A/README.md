@@ -147,15 +147,15 @@ mouse/hiddenDomains/public_data/histones_marks/300/Bell-H3K27me3rep1-input1_vis.
 macs2/peak-calls/UniqueNoDupeShiftedNFR/narrow/ATACRep2_SRR466767_02.gff
 
 
-| Target | Model | Broad | q-value | Duplicates Thres. | Tag size |
-|--------|-------|-------|---------|-------------------|----------|
-| H3K27ac | NO | YES | 0.04 |
-| H3K4me1 | NO | YES | 0.04 |
-mouse/HG/0.04/no_model_broad/H3K4me3_SRX5382140_peaks_broadPeak.gff
-mouse/0.04/no_model_broad/Wysocka-Suz12-input2-single_SRR034190_peaks_broadPeak.gff
-mouse/001/no_model/RING1B_peaks_narrowPeak.gff
-mouse/0.04/no_model_broad/H3K9me3_SRR925652_peaks_broadPeak.gff
-mouse/1e-04/no_model_broad/Pombo-RNAPIISer5P-rep2-input1-single_SRR391050_peaks_broadPeak.gff
-mouse/0.03/no_model_broad/Pombo-RNAPIISer2P-input1tech3-single_SRR391039_peaks_broadPeak.gff
-mouse/0.04/no_model/ESCHGGlcNAc1_lane1sample12_peaks_narrowPeak.gff
-mouse/0.04/no_model/ESCHGGlcNAc2_lane1sample13_peaks_narrowPeak.gff
+| Target | Broad | q-value | Duplicates Thres. | Tag size |
+|--------|-------|---------|-------------------|----------|
+| H3K27ac | YES | 0.04 |
+| H3K4me1 | YES | 0.04 |
+| H3K4me3 | YES | 0.04 |
+| Suz12   | YES | 0.04 |
+| RING1B | NO | 0.001 |
+| H3K9me3 | YES | 0.04 |
+| Ser5P | YES | 1e-04 |
+| Ser2P | YES | 0.03 |
+| ESCHGGlcNAc_rep1 | NO | 0.04 | 
+| ESCHGGlcNAc_rep2 | NO | 0.04 |
