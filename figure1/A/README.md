@@ -143,8 +143,8 @@ Reads not aligned to consensus chromosomes were excluded: `samtools view -o $out
 
 !! Give macs2 commands and parameters
 
-|                      MACS2                              |
-|---------------------------------------------------------|
+|  MACS2 |
+|--------|
 | Target | Broad | q-value | Duplicates Thres. | Tag size |
 |--------|-------|---------|-------------------|----------|
 | H3K27ac | YES | 0.04 | 4 | 51 |
