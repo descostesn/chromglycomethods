@@ -155,9 +155,13 @@ Reads not aligned to consensus chromosomes were excluded: `samtools view -o $out
 | Ser2P | YES | 0.03 | 1 | 51 |
 | ESCHGGlcNAc_rep1 | NO | 0.04 | 7 | 82 |
 | ESCHGGlcNAc_rep2 | NO | 0.04 | 7 | 82 |
+| ATAC-seq (Galaxy) | NO | 0.1 | NR |
+
+
+
+* Macs2 v
+* Galaxy Macs2 v2.1.1.20160309: `macs2 callpeak -t $input.bam --name $expname --format BAMPE --gsize 1.87e9 --keep-dup '1' --qvalue '0.1' --nomodel --extsize '75' --shift '0'`
+
 
 
 mouse/hiddenDomains/public_data/histones_marks/300/Bell-H3K27me3rep1-input1_vis.gff
-macs2/peak-calls/UniqueNoDupeShiftedNFR/narrow/ATACRep2_SRR466767_02.gff
-
-
