@@ -125,7 +125,7 @@ You should obtain the raw figure:
 
 ### ChIP-seq and CutnRun
 
-Briefly, quality control was done with FastQC 0.11.9: `fastqc --outdir $outputfolder --threads $nbcpu --quiet --extract --kmers 7 -f 'fastq' $input.fastq.gz`.
+Quality control was done with FastQC 0.11.9: `fastqc --outdir $outputfolder --threads $nbcpu --quiet --extract --kmers 7 -f 'fastq' $input.fastq.gz`.
 
 Adapters and low quality reads were removed with trim-galore 0.4.3: `trim_galore --phred33 --quality 20 --stringency 1 -e 0.1 --length 20 --output_dir ./ $input.fastq.gz`.
 
@@ -137,7 +137,21 @@ Only primary alignments were kept using Samtools: `samtools view -o $output.bam 
 
 Reads not aligned to consensus chromosomes were excluded: `samtools view -o $output.bam -h -b $input.bam 'chr1' 'chr2' 'chr3' 'chr4' 'chr5' 'chr6' 'chr7' 'chr8' 'chr9' 'chr10' 'chr11' 'chr12' 'chr13' 'chr14' 'chr15' 'chr16' 'chr17' 'chr18' 'chr19' 'chrX' 'chrY'`.
 
-
 ### ATAC-seq
 
 ### Peak detection
+
+!! Give macs2 commands and parameters
+
+mouse/HG/0.04/no_model_broad/H3K27ac_SRX19148013_peaks_broadPeak.gff
+mouse/0.04/no_model_broad/Wysocka-H3K4me1-rep1-input1_peaks_broadPeak.gff
+mouse/HG/0.04/no_model_broad/H3K4me3_SRX5382140_peaks_broadPeak.gff
+mouse/hiddenDomains/public_data/histones_marks/300/Bell-H3K27me3rep1-input1_vis.gff
+mouse/0.04/no_model_broad/Wysocka-Suz12-input2-single_SRR034190_peaks_broadPeak.gff
+mouse/001/no_model/RING1B_peaks_narrowPeak.gff
+mouse/0.04/no_model_broad/H3K9me3_SRR925652_peaks_broadPeak.gff
+mouse/1e-04/no_model_broad/Pombo-RNAPIISer5P-rep2-input1-single_SRR391050_peaks_broadPeak.gff
+mouse/0.03/no_model_broad/Pombo-RNAPIISer2P-input1tech3-single_SRR391039_peaks_broadPeak.gff
+macs2/peak-calls/UniqueNoDupeShiftedNFR/narrow/ATACRep2_SRR466767_02.gff
+mouse/0.04/no_model/ESCHGGlcNAc1_lane1sample12_peaks_narrowPeak.gff
+mouse/0.04/no_model/ESCHGGlcNAc2_lane1sample13_peaks_narrowPeak.gff
