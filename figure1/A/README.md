@@ -158,10 +158,11 @@ Reads not aligned to consensus chromosomes were excluded: `samtools view -o $out
 | ATAC-seq (Galaxy) | NO | 0.1 | NR |
 
 
-
-* Macs2 v
+* Macs2 v2.2.7.1 Broad: `macs2 callpeak -t $input.bam -c $control.bam -n $expname --outdir $outfold -f BAM -g 1.87e9 -s $tagsize --nomodel --extsize 150 --keep-dup $dupthresh --broad --broad-cutoff $qvalue`
+* Macs2 v2.2.7.1 Narrow: `macs2 callpeak -t $input.bam -c $control.bam -n $expname --outdir $outfold -f BAM -g 1.87e9 -s $tagsize -q $qvalue --nomodel --extsize 150 --keep-dup $dupthres`
 * Galaxy Macs2 v2.1.1.20160309: `macs2 callpeak -t $input.bam --name $expname --format BAMPE --gsize 1.87e9 --keep-dup '1' --qvalue '0.1' --nomodel --extsize '75' --shift '0'`
 
 
+**hiddenDomains v3.1**
 
-mouse/hiddenDomains/public_data/histones_marks/300/Bell-H3K27me3rep1-input1_vis.gff
+Used to detect H3K27me3 domains: `hiddenDomains -g $chromInfoFile -b 300 -t $input.bam -c $control.bam -o $outfold`
