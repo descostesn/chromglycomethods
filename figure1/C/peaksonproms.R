@@ -146,6 +146,39 @@ if (!isTRUE(all.equal(length(idxna), 0))) {
 
 
 
+
+
+
+
+
+
+
+
+
+writePromWithUnique(IDVec = symbolsTab$ensembl_gene_id[idxTable],
+            startvec = symbolsTab$start_position[idxTable],
+            endvec = symbolsTab$end_position[idxTable], symbolsTab = symbolsTab,
+            idxTable =  idxTable, outFold = outFold, filename = "genes_fromProm")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 !!!!!!!!!!!!!!!!!!!!!!!!!!
 
 message("Building list of repeats")
