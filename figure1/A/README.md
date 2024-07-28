@@ -146,6 +146,14 @@ Reads not aligned to consensus chromosomes were excluded: `samtools view -o $out
 
 ### ATAC-seq
 
+This pipeline was kindly provided by Charles Girardot from EMBL [GBCS](https://www.embl.org/groups/genome-biology-computational-support/).
+
+Adapters and low quality reads were removed with trim-galore v0.4.3: `trim_galore --phred33 --output_dir ./ --paired input_1.fastq.gz input_2.fastq.gz`
+
+Reads were aligned to the mm10 genome with bowtie2 v2.3.4 and sorted with samtools v1.8: `bowtie2  -p $nbcpu -x m.musculus/mm10/mm10 -1 input_f.fastq.gz -2 input_r.fastq.gz --un-conc-gz $unaligned.fastq.gz -I 0 -X 2000 --fr --dovetail --sensitive 2> $ouput.log | samtools sort -@$nbcpu -O bam -T $TMPDIR -o $output.bam`
+
+Duplicated alignments were marked with  picard v2.7.1: `picard ReorderSam INPUT=$input.bam OUTPUT=$ouput.bam REFERENCE="M.musculus/mm10/fasta/mm10.fa" ALLOW_INCOMPLETE_DICT_CONCORDANCE="true" ALLOW_CONTIG_LENGTH_DISCORDANCE="false" VALIDATION_STRINGENCY="LENIENT" QUIET=true VERBOSITY=ERROR`
+
 
 
 ### Peak detection
@@ -175,3 +183,7 @@ Reads not aligned to consensus chromosomes were excluded: `samtools view -o $out
 **hiddenDomains v3.1**
 
 Used to detect H3K27me3 domains: `hiddenDomains -g $chromInfoFile -b 300 -t $input.bam -c $control.bam -o $outfold`
+
+## Acknowledgement
+
+Data management, HPC node, Gitlab, and Galaxy instance were managed by [GBCS](https://www.embl.org/groups/genome-biology-computational-support/).
