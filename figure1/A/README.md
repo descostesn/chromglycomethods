@@ -154,8 +154,7 @@ Reads were aligned to the mm10 genome with bowtie2 v2.3.4 and sorted with samtoo
 
 Duplicated alignments were marked with picard v2.7.1: `picard MarkDuplicates INPUT=$input.bam OUTPUT=$output.bam METRICS_FILE=$metrics.txt REMOVE_DUPLICATES='false' ASSUME_SORTED='true' DUPLICATE_SCORING_STRATEGY='SUM_OF_BASE_QUALITIES' READ_NAME_REGEX='[a-zA-Z0-9]+:[0-9]:([0-9]+):([0-9]+):([0-9]+).*.' OPTICAL_DUPLICATE_PIXEL_DISTANCE='100' VALIDATION_STRINGENCY='LENIENT' QUIET=true VERBOSITY=ERROR`
 
-Fastqc v0.11.9 was run after the Bowtie2 alignment, marking, and removing duplicates: ``
-
+Fastqc v0.11.9 was run after the Bowtie2 alignment, marking, and removing duplicates ([rgFastQC.py](others/rgFastQC.py)): `rgFastQC.py -i $input.bam -d $outputdir -o $htmloutput -t $output.txt -f "bam" -j "Valid Uniquely Mapped Reads"`
 
 
 picard v2.7.1: `picard ReorderSam INPUT=$input.bam OUTPUT=$ouput.bam REFERENCE="M.musculus/mm10/fasta/mm10.fa" ALLOW_INCOMPLETE_DICT_CONCORDANCE="true" ALLOW_CONTIG_LENGTH_DISCORDANCE="false" VALIDATION_STRINGENCY="LENIENT" QUIET=true VERBOSITY=ERROR`
