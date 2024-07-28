@@ -1,5 +1,18 @@
 # Pan-O-GlcNac Cut&Run in non-repetitive DNA in mouse ES cells
 
+I. [Description](#description)  
+II. [Details](#details)  
+III. [Data](#data)
+IV. [Installation](#installation)
+V. [Figure Generation](#figure-generation)  
+VI. [Pre-processing](#pre-processing)  
+&nbsp;&nbsp; 1. [Workflows](#workflows)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 4.1. [ChIP-seq and CutnRun](#chip-seq-and-cutnrun)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 4.2. [ATAC-seq](#atac-seq)  
+&nbsp;&nbsp; 2. [Peak Detection](#peak-detection)  
+VII. [Acknowledgements](#acknowledgements)
+
+
 ## Description
 
 Upset plot of the location of O-GlcNac Cut&Run peaks (replicates 1/2) in functional genomic compartments: Active promoters (79/84 peaks), Transcription Initiation (64/71 peaks), Heterochromatin (42/52 peaks), Bivalent Promoters (29/30 peaks), PcG (polycombs) Domains (24/23 peaks), Transcription Elongation (23/12 peaks), and Transcription Termination (9/11 peaks). O-GlcNac preferentially occupies active promoters at the transcription initiation sites.
@@ -76,7 +89,7 @@ devtools::install_github("descostesn/genomecompR")
 ```
 
 
-## Figure generation
+## Figure Generation
 
 Run the script [upsetgenomecomp.R](upsetgenomecomp.R) from the current folder, it uses the files downloaded in the subfolders `data/` and `annotations/`. From the terminal:
 
@@ -170,8 +183,7 @@ Alignments having an insert size lower or equal to 100 bp were removed with bamt
 
 
 
-
-### Peak detection
+### Peak Detection
 
 **MACS2**
 
