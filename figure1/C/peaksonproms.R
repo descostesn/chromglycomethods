@@ -95,8 +95,10 @@ trygetbm <- function(attributes, ensembl, values = NULL, filters = NULL) {
 
 retrievegeneinfo  <- function(ensembl, annogr) {
     attributes <- c('chromosome_name', 'ensembl_gene_id', 'external_gene_name', # nolint
-            'start_position', 'end_position', 'strand') # nolint
-    symbolstab <- trygetbm(attributes, ensembl, values = names(annogr))
+            'start_position', 'end_position', 'strand', # nolint
+            'ensembl_transcript_id_version') # nolint
+    symbolstab <- trygetbm(attributes, ensembl, values = names(annogr),
+        filters='ensembl_transcript_id_version') # nolint
     symbolstab$strand[which(symbolstab$strand == 1)] <- '+' # nolint
     symbolstab$chromosome_name <- paste0("chr", symbolstab$chromosome_name)
     if (!isTRUE(all.equal(length(which(symbolstab$strand == -1)), 0)))
