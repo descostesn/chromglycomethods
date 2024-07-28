@@ -2,8 +2,8 @@
 
 I. [Description](#description)  
 II. [Details](#details)  
-III. [Data](#data)
-IV. [Installation](#installation)
+III. [Data](#data)  
+IV. [Installation](#installation)  
 V. [Figure Generation](#figure-generation)  
 VI. [Pre-processing](#pre-processing)  
 &nbsp;&nbsp; 1. [Workflows](#workflows)  
