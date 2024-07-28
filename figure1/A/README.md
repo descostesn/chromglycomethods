@@ -6,11 +6,11 @@ III. [Data](#data)
 IV. [Installation](#installation)  
 V. [Figure Generation](#figure-generation)  
 VI. [Pre-processing](#pre-processing)  
-&nbsp;&nbsp; 1. [Workflows](#workflows)  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 4.1. [ChIP-seq and CutnRun](#chip-seq-and-cutnrun)  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 4.2. [ATAC-seq](#atac-seq)  
-&nbsp;&nbsp; 2. [Peak Detection](#peak-detection)  
-VII. [Acknowledgements](#acknowledgements)
+&nbsp;&nbsp; VI.I. [Workflows](#workflows)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; VI.I.I. [ChIP-seq and CutnRun](#chip-seq-and-cutnrun)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; VI.I.II. [ATAC-seq](#atac-seq)  
+&nbsp;&nbsp; VI.II. [Peak Detection](#peak-detection)  
+
 
 
 ## Description
