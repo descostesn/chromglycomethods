@@ -30,6 +30,16 @@ queryfile <- "/g/boulard/Projects/O-N-acetylglucosamine/analysis/peak_detection/
 ## FUNCTIONS
 #############
 
+buildGR <- function(currentPath){
+	
+	message("\t Processing ", currentPath)
+	fi <- read.table(currentPath, stringsAsFactors=FALSE)
+    fi <- checkChromosomes(fi)
+	gr <- GenomicRanges::GRanges(seqnames=fi$V1,
+			ranges=IRanges(start=fi$V4, end=fi$V5, names=fi$V9),
+			strand=fi$V7)
+	return(gr)
+}
 
 
 ################
@@ -48,6 +58,9 @@ seqlevels(txdb) <- c("chr1", "chr2", "chr3", "chr4", "chr5", "chr6", "chr7",
 promotersGR <- unique(GenomicFeatures::promoters(txdb, upstream=1000, 
 				    downstream=1000))
 queryGR <- unique(buildGR(queryfile))
+
+
+
 
 ## Building the GRanges of annotations to which query is compared to
 annotationsGRList <- buildRepeatsTarget(txdb, repeatsList, enhancerspath)
