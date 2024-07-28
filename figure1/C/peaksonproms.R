@@ -137,7 +137,12 @@ ensembl <- tryusemart(biomart = "ENSEMBL_MART_ENSEMBL",
     "mmusculus_gene_ensembl", host = "https://nov2020.archive.ensembl.org",
     alternativemirror = usealtmirror)
 symbolstab <- retrievegeneinfo(ensembl, promotersgr)
-
+idxtable <- match(names(promotersgr), symbolstab$ensembl_transcript_id_version)
+idxna <- which(is.na(idxtable))
+if (!isTRUE(all.equal(length(idxna), 0))) {
+    promotersgr <- promotersgr[-idxna, ]
+    idxtable <- idxtable[-idxna]
+}
 
 
 
