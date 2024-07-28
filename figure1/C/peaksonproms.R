@@ -42,15 +42,9 @@ txdb <- TxDb.Mmusculus.UCSC.mm10.knownGene
 
 ## Filtering chromosomes
 message("Filtering chromosomes")
-if (isTRUE(all.equal(species, "mouse"))) {
-    seqlevels(txdb) <- c("chr1", "chr2", "chr3", "chr4", "chr5", "chr6", "chr7",
-		"chr8", "chr9", "chr10", "chr11", "chr12", "chr13", "chr14", "chr15",
-		"chr16", "chr17", "chr18", "chr19", "chrX", "chrY")
-} else {
-    seqlevels(txdb) <- c("chr1", "chr2", "chr3", "chr4", "chr5", "chr6", "chr7",
-		"chr8", "chr9", "chr10", "chr11", "chr12", "chr13", "chr14", "chr15",
-		"chr16", "chr17", "chr18", "chr19", "chr20", "chr21", "chrX", "chrY")
-}
+seqlevels(txdb) <- c("chr1", "chr2", "chr3", "chr4", "chr5", "chr6", "chr7",
+    "chr8", "chr9", "chr10", "chr11", "chr12", "chr13", "chr14", "chr15",
+    "chr16", "chr17", "chr18", "chr19", "chrX", "chrY")
 
 ## Building the GRanges of annotations to which query is compared to
 annotationsGRList <- buildRepeatsTarget(txdb, repeatsList, enhancerspath)
@@ -63,7 +57,7 @@ percentageRepVec <- 100 * cntRepeats / sum(cntRepeats)
 
 ## Building colors for piechart
 pieColorVec <- c(brewer.pal(n = 12, name = "Paired"), "aliceblue", "azure4", 
-		"darkgoldenrod1", "slategray")
+        "darkgoldenrod1", "slategray")
 names(pieColorVec) <- names(annotationsGRList)
 
 message("Connecting to biomart")
