@@ -129,7 +129,7 @@ querygr <- unique(buildgr(queryfile))
 resultoverlap <- GenomicRanges::findOverlaps(querygr, promotersgr,
     ignore.strand = FALSE)
 idxkeep <- which(!duplicated(S4Vectors::queryHits(resultoverlap)))
-resultoverlap <- resultOverlap[idxkeep, ]
+resultoverlap <- resultoverlap[idxkeep, ]
 promotersgr <- promotersgr[S4Vectors::subjectHits(result), ]
 
 ## Retrieving information on genes
