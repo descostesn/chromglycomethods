@@ -40,13 +40,6 @@ source("/g/boulard/Projects/O-N-acetylglucosamine/src/R/genomicRepartion/groupin
 
 txdb <- TxDb.Mmusculus.UCSC.mm10.knownGene
 
-
-## Building GR with repeats
-message("Building list of repeats")
-repeatsList <- lapply(repeatFilesVec, buildGR)
-#save(repeatsList, file="/g/boulard/Projects/O-N-acetylglucosamine/analysis/tmp/repeatsList.Rdat")
-#load("/g/boulard/Projects/O-N-acetylglucosamine/analysis/tmp/repeatsList.Rdat")
-
 ## Filtering chromosomes
 message("Filtering chromosomes")
 if (isTRUE(all.equal(species, "mouse"))) {
