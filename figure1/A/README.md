@@ -132,17 +132,18 @@ You should obtain the raw figure:
 
 ### ChIP-seq and CutnRun
 
-Quality control was done with FastQC 0.11.9: `fastqc --outdir $outputfolder --threads $nbcpu --quiet --extract --kmers 7 -f 'fastq' $input.fastq.gz`.
+Quality control was done with FastQC v0.11.9: `fastqc --outdir $outputfolder --threads $nbcpu --quiet --extract --kmers 7 -f 'fastq' $input.fastq.gz`.
 
-Adapters and low quality reads were removed with trim-galore 0.4.3: `trim_galore --phred33 --quality 20 --stringency 1 -e 0.1 --length 20 --output_dir ./ $input.fastq.gz`.
+Adapters and low quality reads were removed with trim-galore v0.4.3: `trim_galore --phred33 --quality 20 --stringency 1 -e 0.1 --length 20 --output_dir ./ $input.fastq.gz`.
 
-Reads were aligned to mm10 with Bowtie 2.3.4.1 and the bam were sorted using Samtools 1.9:
+Reads were aligned to mm10 with Bowtie 2.3.4.1 and the bam were sorted using samtools v1.9:
 single: `bowtie2 -p $nbcpu -x m.musculus/mm10/mm10 -U $input.fastq.gz --sensitive --no-unal 2> $log |  samtools sort -@$nbcpu -O bam -o $output.bam`
 paired: `bowtie2 -p $nbcpu -x m.musculus/mm10/mm10 -1 $input1.fastq.gz -2 $input2.fastq.gz -I 0 -X 500 --fr --dovetail --sensitive --no-unal 2> $log  | samtools sort -@$nbcpu -O bam -o $output.bam`.
 
-Only primary alignments were kept using Samtools: `samtools view -o $output.bam -h -b -q 20 -F 0x800 $input.bam`.
+Only primary alignments were kept using samtools v1.9: `samtools view -o $output.bam -h -b -q 20 -F 0x800 $input.bam`.
 
-Reads not aligned to consensus chromosomes were excluded: `samtools view -o $output.bam -h -b $input.bam 'chr1' 'chr2' 'chr3' 'chr4' 'chr5' 'chr6' 'chr7' 'chr8' 'chr9' 'chr10' 'chr11' 'chr12' 'chr13' 'chr14' 'chr15' 'chr16' 'chr17' 'chr18' 'chr19' 'chrX' 'chrY'`.
+Reads not aligned to consensus chromosomes were excluded with samtools v1.9: `samtools view -o $output.bam -h -b $input.bam 'chr1' 'chr2' 'chr3' 'chr4' 'chr5' 'chr6' 'chr7' 'chr8' 'chr9' 'chr10' 'chr11' 'chr12' 'chr13' 'chr14' 'chr15' 'chr16' 'chr17' 'chr18' 'chr19' 'chrX' 'chrY'`.
+
 
 ### ATAC-seq
 
@@ -152,13 +153,16 @@ Adapters and low quality reads were removed with trim-galore v0.4.3: `trim_galor
 
 Reads were aligned to the mm10 genome with bowtie2 v2.3.4 and sorted with samtools v1.8: `bowtie2  -p $nbcpu -x m.musculus/mm10/mm10 -1 input_f.fastq.gz -2 input_r.fastq.gz --un-conc-gz $unaligned.fastq.gz -I 0 -X 2000 --fr --dovetail --sensitive 2> $ouput.log | samtools sort -@$nbcpu -O bam -T $TMPDIR -o $output.bam`
 
+Only reads with valid primary alignments were kept with samtools v1.2: `samtools view -o $output.bam -h -b -q 20 -f 0x3 -F 0x800 input.bam`. Reads aligned to non-canonical chromosomes were filtered out with samtools v1.2: `samtools view -o $ouput.bam -h  -b $input.bam 'chr1' 'chr2' 'chr3' 'chr4' 'chr5' 'chr6' 'chr7' 'chr8' 'chr9' 'chr10' 'chr11' 'chr12' 'chr13' 'chr14' 'chr15' 'chr16' 'chr17' 'chr18' 'chr19' 'chrX' 'chrY'`. Duplicates were removed with picard v2.7.1: `picard MarkDuplicates  INPUT=$input.bam OUTPUT=$ouput.bam METRICS_FILE=$metrics.txt REMOVE_DUPLICATES='true' ASSUME_SORTED='true' DUPLICATE_SCORING_STRATEGY='SUM_OF_BASE_QUALITIES' READ_NAME_REGEX='[a-zA-Z0-9]+:[0-9]:([0-9]+):([0-9]+):([0-9]+).*.' OPTICAL_DUPLICATE_PIXEL_DISTANCE='100'`.
 
-To perform quality controls, duplicated alignments were marked with picard v2.7.1: `picard MarkDuplicates INPUT=$input.bam OUTPUT=$output.bam METRICS_FILE=$metrics.txt REMOVE_DUPLICATES='false' ASSUME_SORTED='true' DUPLICATE_SCORING_STRATEGY='SUM_OF_BASE_QUALITIES' READ_NAME_REGEX='[a-zA-Z0-9]+:[0-9]:([0-9]+):([0-9]+):([0-9]+).*.' OPTICAL_DUPLICATE_PIXEL_DISTANCE='100' VALIDATION_STRINGENCY='LENIENT' QUIET=true VERBOSITY=ERROR`. Bam files were then sorted with picard v2.7.1: `picard ReorderSam INPUT=$input.bam OUTPUT=$ouput.bam REFERENCE="M.musculus/mm10/fasta/mm10.fa" ALLOW_INCOMPLETE_DICT_CONCORDANCE="true" ALLOW_CONTIG_LENGTH_DISCORDANCE="false" VALIDATION_STRINGENCY="LENIENT" QUIET=true VERBOSITY=ERROR`
+To perform quality controls, from the output of Bowtie2, duplicated alignments were marked with picard v2.7.1: `picard MarkDuplicates INPUT=$input.bam OUTPUT=$output.bam METRICS_FILE=$metrics.txt REMOVE_DUPLICATES='false' ASSUME_SORTED='true' DUPLICATE_SCORING_STRATEGY='SUM_OF_BASE_QUALITIES' READ_NAME_REGEX='[a-zA-Z0-9]+:[0-9]:([0-9]+):([0-9]+):([0-9]+).*.' OPTICAL_DUPLICATE_PIXEL_DISTANCE='100' VALIDATION_STRINGENCY='LENIENT' QUIET=true VERBOSITY=ERROR`. Bam files were then sorted with picard v2.7.1: `picard ReorderSam INPUT=$input.bam OUTPUT=$ouput.bam REFERENCE="M.musculus/mm10/fasta/mm10.fa" ALLOW_INCOMPLETE_DICT_CONCORDANCE="true" ALLOW_CONTIG_LENGTH_DISCORDANCE="false" VALIDATION_STRINGENCY="LENIENT" QUIET=true VERBOSITY=ERROR`
 
-Fastqc v0.11.9 was run after the Bowtie2 alignment, marking, and removing duplicates ([rgFastQC.py](others/rgFastQC.py)): `rgFastQC.py -i $input.bam -d $outputdir -o $htmloutput -t $output.txt -f "bam" -j "Valid Uniquely Mapped Reads"`
+FastQC v0.11.9 was run after the Bowtie2 alignment, marking, and removing duplicates ([rgFastQC.py](others/rgFastQC.py)): `rgFastQC.py -i $input.bam -d $outputdir -o $htmloutput -t $output.txt -f "bam" -j "Valid Uniquely Mapped Reads"`
 Statistics on the reordered bam were obtained with samtools v1.9: `samtools flagstat $input.bam > $output.txt`
 Alignment summary statistics were retrieved with picard v2.7.1: `picard CollectAlignmentSummaryMetrics INPUT=$input.bam OUTPUT=$outputstats.txt MAX_INSERT_SIZE=5000 METRIC_ACCUMULATION_LEVEL="ALL_READS" IS_BISULFITE_SEQUENCED="false" REFERENCE_SEQUENCE="M.musculus/mm10/fasta/mm10.fa" ASSUME_SORTED="true"  VALIDATION_STRINGENCY="LENIENT" QUIET=true VERBOSITY=ERROR`
 Insert size metrics were obtained with picard v2.7.1: `picard CollectInsertSizeMetrics INPUT=$input.bam OUTPUT=$output.pdf HISTOGRAM_FILE=$hist.txt DEVIATIONS="10.0"   MINIMUM_PCT="0.05" REFERENCE_SEQUENCE="M.musculus/mm10/fasta/mm10.fa" ASSUME_SORTED="true" METRIC_ACCUMULATION_LEVEL="ALL_READS" VALIDATION_STRINGENCY="LENIENT" QUIET=true VERBOSITY=ERROR`
+
+The log files of bowtie2, remove duplicates, FastQC, alignment summary, and insert size metrics were sent to MultiQC v1.7 to perform an overall quality assessment: `multiqc multiqc_WDir --filename "report"`
 
 
 ### Peak detection
