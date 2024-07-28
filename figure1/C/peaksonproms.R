@@ -8,12 +8,12 @@
 #################
 
 
+# library("ChIPpeakAnno")
+# library("RColorBrewer")
+# library("ggplot2")
+# library("biomaRt")
+# library("reshape2")
 library("GenomicFeatures")
-library("ChIPpeakAnno")
-library("RColorBrewer")
-library("ggplot2")
-library("biomaRt")
-library("reshape2")
 library("TxDb.Mmusculus.UCSC.mm10.knownGene")
 
 
@@ -22,7 +22,7 @@ library("TxDb.Mmusculus.UCSC.mm10.knownGene")
 ################
 
 
-queryfile <- "/g/boulard/Projects/O-N-acetylglucosamine/analysis/peak_detection/macs2/Sept2023_glcPolII/mouse/glcGlucose/0.04/no_model/ESCHGGlcNAc1_lane1sample12_peaks_narrowPeak.gff"
+queryfile <- "/g/boulard/Projects/O-N-acetylglucosamine/analysis/peak_detection/macs2/Sept2023_glcPolII/mouse/glcGlucose/0.04/no_model/ESCHGGlcNAc1_lane1sample12_peaks_narrowPeak.gff" # nolint
 
 
 
@@ -57,52 +57,18 @@ promotersgr <- unique(GenomicFeatures::promoters(txdb, upstream=1000,
                     downstream=1000))
 querygr <- unique(buildgr(queryfile))
 
+## Perform overlap between O-GlcNac peaks and promoters
+resultoverlap <- findOverlaps(querygr, promotersgr, ignore.strand = FALSE)
+idxkeep <- which(!duplicated(queryHits(resultoverlap)))
+resultoverlap <- resultOverlap[idxkeep, ]
+promotersgr <- promotersgr[subjectHits(result),]
 
 
 
-## Building the GRanges of annotations to which query is compared to
-annotationsGRList <- buildRepeatsTarget(txdb, repeatsList, enhancerspath)
-#save(annotationsGRList, file="/g/boulard/Projects/O-N-acetylglucosamine/analysis/tmp/annotationsGRList.Rdat")
-#load("/g/boulard/Projects/O-N-acetylglucosamine/analysis/tmp/annotationsGRList.Rdat")
-
-## Calculate number of annotations
-cntRepeats <- lengths(annotationsGRList)
-percentageRepVec <- 100 * cntRepeats / sum(cntRepeats)
-
-## Building colors for piechart
-pieColorVec <- c(brewer.pal(n = 12, name = "Paired"), "aliceblue", "azure4", 
-        "darkgoldenrod1", "slategray")
-names(pieColorVec) <- names(annotationsGRList)
-
-message("Connecting to biomart")
-if (isTRUE(all.equal(species, "mouse"))){
-    ensembl <- tryUseMart(biomart = "ENSEMBL_MART_ENSEMBL",
-    "mmusculus_gene_ensembl", host = "https://nov2020.archive.ensembl.org",
-    alternativeMirror = TRUE)
-} else {
-    ensembl <- tryUseMart(biomart="ENSEMBL_MART_ENSEMBL",
-    "hsapiens_gene_ensembl", host="https://nov2020.archive.ensembl.org",
-    alternativeMirror = TRUE)
-}
-
-
-## Determining proportions on each target category for each query file
-numbersPieList <- list()
-percentagesList <- list()
 
 for(i in seq_len(length(queryfilevec))){
     
     ## Processing query files
-    queryFile <- queryfilevec[i]
-    nameQuery <- pieTitleVec[i]
-    outFold <- file.path(outputFolder, nameQuery)
-    if(!file.exists(outFold))
-        dir.create(outFold, recursive=TRUE)
-    
-    message("Processing ", nameQuery)
-    
-    message("\t Building GR with query file")
-    queryGR <- unique(buildgr(queryFile))
     
     ## Performing overlap on the different categories
     res <- performOverlap(annotationsGRList, queryGR)
