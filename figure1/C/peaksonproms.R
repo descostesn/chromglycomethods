@@ -143,15 +143,12 @@ if (!isTRUE(all.equal(length(idxna), 0))) {
     promotersgr <- promotersgr[-idxna, ]
     idxtable <- idxtable[-idxna]
 }
-
-
-GFF <- data.frame(seqname=symbolsTab$chromosome_name[idxTable], 
-            source= symbolsTab$external_gene_name[idxTable], 
-            feature= symbolsTab$ensembl_gene_id[idxTable], 
-            start=symbolsTab$start_position[idxTable],
-            end=symbolsTab$end_position[idxTable],
-            score=0, strand=symbolsTab$strand[idxTable], frame=".",
-            group=".")
-    GFFUnique <- GFF[-which(duplicated(GFF$feature)),]
-    
+promgff <- data.frame(seqname = symbolstab$chromosome_name[idxtable],
+            source = symbolstab$external_gene_name[idxtable],
+            feature = symbolstab$ensembl_gene_id[idxtable],
+            start = symbolstab$start_position[idxtable],
+            end = symbolstab$end_position[idxtable],
+            score = 0, strand = symbolstab$strand[idxtable], frame = ".",
+            group = ".")
+promgff <- promgff[-which(duplicated(promgff$feature)), ]
 
