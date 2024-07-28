@@ -69,9 +69,71 @@ promotersgr <- promotersgr[S4Vectors::subjectHits(result), ]
 
 
 
-for(i in seq_len(length(queryfilevec))){
+
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+message("Building list of repeats")
+repeatsList <- lapply(repeatFilesVec, buildGR)
+#save(repeatsList, file="/g/boulard/Projects/O-N-acetylglucosamine/analysis/tmp/repeatsList.Rdat")
+#load("/g/boulard/Projects/O-N-acetylglucosamine/analysis/tmp/repeatsList.Rdat")
+
+## Filtering chromosomes
+message("Filtering chromosomes")
+if (isTRUE(all.equal(species, "mouse"))) {
+    seqlevels(txdb) <- c("chr1", "chr2", "chr3", "chr4", "chr5", "chr6", "chr7",
+		"chr8", "chr9", "chr10", "chr11", "chr12", "chr13", "chr14", "chr15",
+		"chr16", "chr17", "chr18", "chr19", "chrX", "chrY")
+} else {
+    seqlevels(txdb) <- c("chr1", "chr2", "chr3", "chr4", "chr5", "chr6", "chr7",
+		"chr8", "chr9", "chr10", "chr11", "chr12", "chr13", "chr14", "chr15",
+		"chr16", "chr17", "chr18", "chr19", "chr20", "chr21", "chrX", "chrY")
+}
+
+## Building the GRanges of annotations to which query is compared to
+annotationsGRList <- buildRepeatsTarget(txdb, repeatsList, enhancerspath)
+#save(annotationsGRList, file="/g/boulard/Projects/O-N-acetylglucosamine/analysis/tmp/annotationsGRList.Rdat")
+#load("/g/boulard/Projects/O-N-acetylglucosamine/analysis/tmp/annotationsGRList.Rdat")
+
+## Calculate number of annotations
+cntRepeats <- lengths(annotationsGRList)
+percentageRepVec <- 100 * cntRepeats / sum(cntRepeats)
+
+## Building colors for piechart
+pieColorVec <- c(brewer.pal(n = 12, name = "Paired"), "aliceblue", "azure4", 
+		"darkgoldenrod1", "slategray")
+names(pieColorVec) <- names(annotationsGRList)
+
+message("Connecting to biomart")
+if (isTRUE(all.equal(species, "mouse"))){
+    ensembl <- tryUseMart(biomart = "ENSEMBL_MART_ENSEMBL",
+    "mmusculus_gene_ensembl", host = "https://nov2020.archive.ensembl.org",
+    alternativeMirror = TRUE)
+} else {
+    ensembl <- tryUseMart(biomart="ENSEMBL_MART_ENSEMBL",
+    "hsapiens_gene_ensembl", host="https://nov2020.archive.ensembl.org",
+    alternativeMirror = TRUE)
+}
+
+
+## Determining proportions on each target category for each query file
+numbersPieList <- list()
+percentagesList <- list()
+
+for(i in seq_len(length(queryFileVec))){
     
     ## Processing query files
+    queryFile <- queryFileVec[i]
+    nameQuery <- pieTitleVec[i]
+    outFold <- file.path(outputFolder, nameQuery)
+    if(!file.exists(outFold))
+        dir.create(outFold, recursive=TRUE)
+    
+    message("Processing ", nameQuery)
+    
+    message("\t Building GR with query file")
+    queryGR <- unique(buildGR(queryFile))
     
     ## Performing overlap on the different categories
     res <- performOverlap(annotationsGRList, queryGR)
