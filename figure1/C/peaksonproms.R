@@ -13,8 +13,10 @@
 # library("ggplot2")
 # library("biomaRt")
 # library("reshape2")
-library("GenomicFeatures")
 library("TxDb.Mmusculus.UCSC.mm10.knownGene")
+library("GenomicFeatures")
+library("GenomicRanges")
+library("S4Vectors")
 
 
 ################
@@ -53,15 +55,16 @@ seqlevels(txdb) <- c("chr1", "chr2", "chr3", "chr4", "chr5", "chr6", "chr7",
     "chr16", "chr17", "chr18", "chr19", "chrX", "chrY")
 
 ## Retrieve promoters coordinates
-promotersgr <- unique(GenomicFeatures::promoters(txdb, upstream=1000,
-                    downstream=1000))
+promotersgr <- unique(GenomicFeatures::promoters(txdb, upstream = 1000,
+                    downstream = 1000))
 querygr <- unique(buildgr(queryfile))
 
 ## Perform overlap between O-GlcNac peaks and promoters
-resultoverlap <- findOverlaps(querygr, promotersgr, ignore.strand = FALSE)
-idxkeep <- which(!duplicated(queryHits(resultoverlap)))
+resultoverlap <- GenomicRanges::findOverlaps(querygr, promotersgr,
+    ignore.strand = FALSE)
+idxkeep <- which(!duplicated(S4Vectors::queryHits(resultoverlap)))
 resultoverlap <- resultOverlap[idxkeep, ]
-promotersgr <- promotersgr[subjectHits(result),]
+promotersgr <- promotersgr[S4Vectors::subjectHits(result), ]
 
 
 
