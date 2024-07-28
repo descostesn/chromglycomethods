@@ -197,7 +197,7 @@ Alignments having an insert size lower or equal to 100 bp were removed with bamt
 
 **hiddenDomains v3.1**
 
-Used to detect H3K27me3 domains: `hiddenDomains -g $chromInfoFile -b 300 -t $input.bam -c $control.bam -o $outfold`
+Used to detect H3K27me3 peaks: `hiddenDomains -g $chromInfoFile -b 300 -t $input.bam -c $control.bam -o $outfold`
 
 ## Acknowledgements
 
