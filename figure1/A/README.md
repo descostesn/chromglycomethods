@@ -164,6 +164,10 @@ Insert size metrics were obtained with picard v2.7.1: `picard CollectInsertSizeM
 
 The log files of bowtie2, remove duplicates, FastQC, alignment summary, and insert size metrics were sent to MultiQC v1.7 to perform an overall quality assessment: `multiqc multiqc_WDir --filename "report"`
 
+Alignments having an insert size lower or equal to 100 bp were removed with bamtools v2.4.0: `bamtools filter -in $input.bam -out $output.bam -length 100`
+
+
+
 
 ### Peak detection
 
