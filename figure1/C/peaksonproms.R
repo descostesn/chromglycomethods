@@ -22,7 +22,7 @@ library("TxDb.Mmusculus.UCSC.mm10.knownGene")
 ################
 
 
-queryfilevec <- "/g/boulard/Projects/O-N-acetylglucosamine/analysis/peak_detection/macs2/Sept2023_glcPolII/mouse/glcGlucose/0.04/no_model/ESCHGGlcNAc1_lane1sample12_peaks_narrowPeak.gff"
+queryfile <- "/g/boulard/Projects/O-N-acetylglucosamine/analysis/peak_detection/macs2/Sept2023_glcPolII/mouse/glcGlucose/0.04/no_model/ESCHGGlcNAc1_lane1sample12_peaks_narrowPeak.gff"
 
 
 
@@ -30,8 +30,6 @@ queryfilevec <- "/g/boulard/Projects/O-N-acetylglucosamine/analysis/peak_detecti
 ## FUNCTIONS
 #############
 
-source("/g/boulard/Projects/O-N-acetylglucosamine/src/R/genomicRepartion/grouping_utils_enhancers.R")
-#source("grouping_utils.R")
 
 
 ################
@@ -45,6 +43,11 @@ message("Filtering chromosomes")
 seqlevels(txdb) <- c("chr1", "chr2", "chr3", "chr4", "chr5", "chr6", "chr7",
     "chr8", "chr9", "chr10", "chr11", "chr12", "chr13", "chr14", "chr15",
     "chr16", "chr17", "chr18", "chr19", "chrX", "chrY")
+
+## Retrieve promoters coordinates
+promotersGR <- unique(GenomicFeatures::promoters(txdb, upstream=1000, 
+				    downstream=1000))
+queryGR <- unique(buildGR(queryfile))
 
 ## Building the GRanges of annotations to which query is compared to
 annotationsGRList <- buildRepeatsTarget(txdb, repeatsList, enhancerspath)
