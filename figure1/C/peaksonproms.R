@@ -30,15 +30,13 @@ queryfile <- "/g/boulard/Projects/O-N-acetylglucosamine/analysis/peak_detection/
 ## FUNCTIONS
 #############
 
-buildGR <- function(currentPath){
-	
-	message("\t Processing ", currentPath)
-	fi <- read.table(currentPath, stringsAsFactors=FALSE)
-    fi <- checkChromosomes(fi)
-	gr <- GenomicRanges::GRanges(seqnames=fi$V1,
-			ranges=IRanges(start=fi$V4, end=fi$V5, names=fi$V9),
-			strand=fi$V7)
-	return(gr)
+buildgr <- function(currentpath) {
+    message("\t Processing ", currentpath)
+    fi <- read.table(currentpath, stringsAsFactors = FALSE)
+    gr <- GenomicRanges::GRanges(seqnames = fi$V1,
+            ranges = IRanges::IRanges(start = fi$V4, end = fi$V5,
+                names = fi$V9), strand = fi$V7)
+    return(gr)
 }
 
 
@@ -55,9 +53,9 @@ seqlevels(txdb) <- c("chr1", "chr2", "chr3", "chr4", "chr5", "chr6", "chr7",
     "chr16", "chr17", "chr18", "chr19", "chrX", "chrY")
 
 ## Retrieve promoters coordinates
-promotersGR <- unique(GenomicFeatures::promoters(txdb, upstream=1000, 
-				    downstream=1000))
-queryGR <- unique(buildGR(queryfile))
+promotersgr <- unique(GenomicFeatures::promoters(txdb, upstream=1000,
+                    downstream=1000))
+querygr <- unique(buildgr(queryfile))
 
 
 
@@ -104,7 +102,7 @@ for(i in seq_len(length(queryfilevec))){
     message("Processing ", nameQuery)
     
     message("\t Building GR with query file")
-    queryGR <- unique(buildGR(queryFile))
+    queryGR <- unique(buildgr(queryFile))
     
     ## Performing overlap on the different categories
     res <- performOverlap(annotationsGRList, queryGR)
