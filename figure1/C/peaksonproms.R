@@ -14,7 +14,7 @@ library("RColorBrewer")
 library("ggplot2")
 library("biomaRt")
 library("reshape2")
-
+library("TxDb.Mmusculus.UCSC.mm10.knownGene")
 
 
 ################
@@ -22,7 +22,7 @@ library("reshape2")
 ################
 
 
-queryFileVec <- "/g/boulard/Projects/O-N-acetylglucosamine/analysis/peak_detection/macs2/Sept2023_glcPolII/mouse/glcGlucose/0.04/no_model/ESCHGGlcNAc1_lane1sample12_peaks_narrowPeak.gff"
+queryfilevec <- "/g/boulard/Projects/O-N-acetylglucosamine/analysis/peak_detection/macs2/Sept2023_glcPolII/mouse/glcGlucose/0.04/no_model/ESCHGGlcNAc1_lane1sample12_peaks_narrowPeak.gff"
 
 
 
@@ -38,26 +38,8 @@ source("/g/boulard/Projects/O-N-acetylglucosamine/src/R/genomicRepartion/groupin
 # MAIN
 ################
 
-if (!isTRUE(all.equal(length(queryFileVec), length(pieTitleVec))))
-    stop("One title per experiment should be given.")
+txdb <- TxDb.Mmusculus.UCSC.mm10.knownGene
 
-if (!isTRUE(all.equal(length(enhancerspath), 1)))
-    stop("Only one list of enhancers is supported.")
-
-if (!file.exists(outputFolder))
-        dir.create(outputFolder, recursive=TRUE)
-
-if (!isTRUE(all.equal(species, "mouse")) &&
-    !isTRUE(all.equal(species, "human")))
-    stop("species should be mouse or human")
-
-if (isTRUE(all.equal(species, "mouse"))) {
-    library("TxDb.Mmusculus.UCSC.mm10.knownGene")
-    txdb <- TxDb.Mmusculus.UCSC.mm10.knownGene
-} else {
-    library("TxDb.Hsapiens.UCSC.hg38.knownGene")
-    txdb <- TxDb.Hsapiens.UCSC.hg38.knownGene
-}
 
 ## Building GR with repeats
 message("Building list of repeats")
@@ -107,10 +89,10 @@ if (isTRUE(all.equal(species, "mouse"))){
 numbersPieList <- list()
 percentagesList <- list()
 
-for(i in seq_len(length(queryFileVec))){
+for(i in seq_len(length(queryfilevec))){
     
     ## Processing query files
-    queryFile <- queryFileVec[i]
+    queryFile <- queryfilevec[i]
     nameQuery <- pieTitleVec[i]
     outFold <- file.path(outputFolder, nameQuery)
     if(!file.exists(outFold))
