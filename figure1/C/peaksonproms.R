@@ -134,7 +134,7 @@ promotersgr <- promotersgr[S4Vectors::subjectHits(result), ]
 ensembl <- tryusemart(biomart = "ENSEMBL_MART_ENSEMBL",
     "mmusculus_gene_ensembl", host = "https://nov2020.archive.ensembl.org",
     alternativemirror = usealtmirror)
-
+symbolstab <- retrievegeneinfo(ensembl, promotersgr)
 
 
 
