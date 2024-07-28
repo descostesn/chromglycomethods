@@ -187,7 +187,7 @@ Alignments having an insert size lower or equal to 100 bp were removed with bamt
 | Ser2P | YES | 0.03 | 1 | 51 |
 | ESCHGGlcNAc_rep1 | NO | 0.04 | 7 | 82 |
 | ESCHGGlcNAc_rep2 | NO | 0.04 | 7 | 82 |
-| ATAC-seq (Galaxy) | NO | 0.1 | NR |
+| ATAC-seq (Galaxy) | NO | 0.1 | NR | NR |
 
 
 * Macs2 v2.2.7.1 Broad: `macs2 callpeak -t $input.bam -c $control.bam -n $expname --outdir $outfold -f BAM -g 1.87e9 -s $tagsize --nomodel --extsize 150 --keep-dup $dupthresh --broad --broad-cutoff $qvalue`
