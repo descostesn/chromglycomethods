@@ -124,7 +124,7 @@ Performing overlap with each compartment
 
 You should obtain the raw figure:
 
-<img src="complexUpset.png" alt="Upset plot" width="200"/>
+<img src="complexUpset.png" alt="Upset plot" width="400"/>
 
 ## Pre-processing
 
