@@ -66,6 +66,46 @@ tryusemart <- function(biomart = "ensembl", dataset, host, alternativemirror) {
     }
 }
 
+## Function by Ilyess Rachedi
+trygetbm <- function(attributes, ensembl, values = NULL, filters = NULL) {
+    c <- 1
+    repeat {
+        message("# Attempt ", c, "/5 # ",
+                "Retrieving information about genes from biomaRt ...")
+        if (is.null(values) && is.null(filters))
+            res <- try(biomaRt::getBM(attributes = attributes, mart = ensembl),
+                silent = TRUE)
+        else
+            res <- try(biomaRt::getBM(attributes = attributes, mart = ensembl,
+                values = values, filters = filters), silent = TRUE)
+
+        if( isTRUE(is(res, "try-error"))) {
+            c <- c + 1
+            error_type <- attr(res, "condition")
+            message(error_type$message)
+            if (c > 5)
+                stop("There is a problem of connexion to Ensembl for ",
+                        "now. Please retry later.")
+        } else {
+            message("Information retrieved with success.")
+            return(res)
+        }
+    }
+}
+
+retrievegeneinfo  <- function(ensembl, annogr) {
+    attributes <- c('chromosome_name', 'ensembl_gene_id', 'external_gene_name', # nolint
+            'start_position', 'end_position', 'strand') # nolint
+    symbolstab <- trygetbm(attributes, ensembl, values = names(annogr))
+    symbolstab$strand[which(symbolstab$strand == 1)] <- '+' # nolint
+    symbolstab$chromosome_name <- paste0("chr", symbolstab$chromosome_name)
+    if (!isTRUE(all.equal(length(which(symbolstab$strand == -1)), 0)))
+        symbolstab$strand[which(symbolstab$strand == -1)] <- '-' # nolint
+    return(symbolstab)
+}
+
+
+
 ################
 # MAIN
 ################
