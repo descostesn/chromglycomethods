@@ -132,6 +132,8 @@ You should obtain the raw figure:
 
 ### ChIP-seq and CutnRun
 
+The pre-processing was performed with the Galaxy workflow [](). The .ga file can be imported in your own galaxy account.
+
 Quality control was done with FastQC v0.11.9: `fastqc --outdir $outputfolder --threads $nbcpu --quiet --extract --kmers 7 -f 'fastq' $input.fastq.gz`.
 
 Adapters and low quality reads were removed with trim-galore v0.4.3: `trim_galore --phred33 --quality 20 --stringency 1 -e 0.1 --length 20 --output_dir ./ $input.fastq.gz`.
@@ -147,7 +149,7 @@ Reads not aligned to consensus chromosomes were excluded with samtools v1.9: `sa
 
 ### ATAC-seq
 
-This pipeline was kindly provided by Charles Girardot from EMBL [GBCS](https://www.embl.org/groups/genome-biology-computational-support/).
+The Galaxy workflow [OGlcNac_ATAC_Seq-PEmm10](others/Galaxy-Workflow-OGlcNac_ATAC_Seq-PEmm10.ga) was kindly provided by Charles Girardot from EMBL [GBCS](https://www.embl.org/groups/genome-biology-computational-support/). The .ga file can be imported in your own galaxy account.
 
 Adapters and low quality reads were removed with trim-galore v0.4.3: `trim_galore --phred33 --output_dir ./ --paired input_1.fastq.gz input_2.fastq.gz`
 
