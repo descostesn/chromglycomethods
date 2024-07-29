@@ -7,8 +7,29 @@
 #
 # The comparison is done in the form of a violin plot.
 #
+
+# > sessionInfo()
+# MatrixGenerics_1.10.0, httr_1.4.2, bit64_4.0.5, assertthat_0.2.1,
+# BiocFileCache_2.6.1, blob_1.2.3, GenomeInfoDbData_1.2.9, Rsamtools_2.14.0,
+# yaml_2.3.5, progress_1.2.2, pillar_1.7.0, RSQLite_2.2.12, lattice_0.20-45,
+# glue_1.6.2, digest_0.6.29, XVector_0.38.0, colorspace_2.0-3, Matrix_1.4-1,
+# XML_3.99-0.9, pkgconfig_2.0.3, zlibbioc_1.44.0, purrr_0.3.4, scales_1.2.0,
+# BiocParallel_1.32.6, tibble_3.1.6, KEGGREST_1.38.0, farver_2.1.0,
+# generics_0.1.2, ellipsis_0.3.2, cachem_1.0.6, withr_2.5.0,
+# SummarizedExperiment_1.28.0, cli_3.6.1, magrittr_2.0.3, crayon_1.5.1,
+# memoise_2.0.1, fansi_1.0.3, xml2_1.3.3, tools_4.2.0, prettyunits_1.1.1,
+# hms_1.1.1, BiocIO_1.8.0, lifecycle_1.0.3, matrixStats_0.62.0, stringr_1.4.0,
+# munsell_0.5.0, DelayedArray_0.24.0, Biostrings_2.66.0, compiler_4.2.0,
+# rlang_1.1.0, grid_4.2.0, RCurl_1.98-1.6, rjson_0.2.21, rappdirs_0.3.3,
+# labeling_0.4.2, bitops_1.0-7, restfulr_0.0.15, gtable_0.3.0, codetools_0.2-18,
+# DBI_1.1.2, curl_4.3.2, R6_2.5.1, GenomicAlignments_1.34.1, dplyr_1.0.8,
+# rtracklayer_1.58.0, fastmap_1.1.0, bit_4.0.4, utf8_1.2.2, filelock_1.0.2,
+# stringi_1.7.6, parallel_4.2.0, Rcpp_1.0.8.3, vctrs_0.6.1, png_0.1-7,
+# dbplyr_2.1.1, tidyselect_1.1.2
+
 # Descostes - April 2024 with R-4.3.3
 #################
+
 
 library("ggplot2")
 library("RColorBrewer")
