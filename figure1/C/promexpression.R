@@ -42,7 +42,7 @@ downstreambp <- 1000
 countspath <- "/g/boulard/Projects/O-N-acetylglucosamine/data/RNASeq_hackett_T2iESC/galaxy/data/sequencing/counts_table/raw_ensembl/featureCounts_SRR11294181.tabular" # nolint
 namescountsvec <- "rep1"
 countslength <- "/g/boulard/Projects/O-N-acetylglucosamine/data/RNASeq_hackett_T2iESC/galaxy/data/sequencing/counts_table/raw_ensembl/Feature_lengths_SRR11294181.tabular" # nolint
-outputfolder <- "/g/boulard/Projects/O-N-acetylglucosamine/analysis/expression_vs_glc/violinplot_bycategory_promexpression/hackett_rnaseq/ESCHGGlcNAc1_lane1sample12/tmp/" # nolint
+outputfolder <- "/g/boulard/Projects/O-N-acetylglucosamine/analysis/expression_vs_glc/violinplot_bycategory_promexpression/hackett_rnaseq/ESCHGGlcNAc1_lane1sample12/tmp" # nolint
 
 
 
