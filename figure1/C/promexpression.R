@@ -121,7 +121,7 @@ prepareMatrix <- function(counts_glcprom, counts_noglcprom, counts_random, # nol
         return(list(df_matrix, category, labelvec))
 }
 
-performPlot <- function(labelvec, df_matrix, currentname, outfold,
+performplot <- function(labelvec, df_matrix, currentname, outfold,
     showplot = FALSE) {
 
     colvec <- brewer.pal(n = length(labelvec), name = "Paired")
@@ -317,9 +317,11 @@ if (!file.exists(outputfolder))
 ###
 
 ## Reading gene lengths
+message("Reading gene lengths")
 genelengthvec <- read.delim(countslength, header = TRUE)
 
 ## Reading counts and computing TPM
+message("Reading counts and computing TPM")
 counts_list <- lapply(countspath, function(x, genelengthvec) {
     fi <- read.delim(x, header = TRUE)
     if (!isTRUE(all.equal(nrow(fi), nrow(genelengthvec))))
@@ -338,6 +340,7 @@ promglc <- retrieveglcproms(upstreambp, downstreambp, queryfile,
     usealtmirror)
 
 ## Making counts list with only expressed one
+message("Making counts list with only expressed one")
 counts_nozero_list <- lapply(counts_list, function(x) {
     idxzero <- which(x$NumReads == 0)
     nonZeroIndex(idxzero, "step 1")
@@ -373,7 +376,7 @@ outfold) {
     labelvec <- res[[3]]
 
     ## Generating the violin plot
-    performPlot(labelvec, df_matrix, currentname, outfold)
+    performplot(labelvec, df_matrix, currentname, outfold)
 
     ## Computing mann-whitney-wilcoxson on each violin
     wilcoxonTest(counts_glcprom, counts_noglcprom, counts_random,
