@@ -13,6 +13,11 @@
 library("ggplot2")
 library("RColorBrewer")
 
+library("TxDb.Mmusculus.UCSC.mm10.knownGene")
+library("GenomicFeatures")
+library("GenomicRanges")
+library("S4Vectors")
+library("biomaRt")
 
 
 ##################
@@ -20,22 +25,24 @@ library("RColorBrewer")
 ##################
 
 
-countspath
-namescountsvec
-countslength
-promsglcpath
-outputfolder
-
-
 countspath <- "data/ESCRNAseq_SRR11294181counts.txt"
 namescountsvec <- "rep1"
 countslength <- "data/ESCRNAseq_SRR11294181countslength.txt" # nolint
-promsglcpath <- c("/g/boulard/Projects/O-N-acetylglucosamine/analysis/genomicDistribution/Sept2023_mouseGlucose_enhancers/HGGlcNAc1s12/renamed/genes_fromProm-HGGlcNAc1s12.gff", #nolint
-"/g/boulard/Projects/O-N-acetylglucosamine/analysis/genomicDistribution/Sept2023_mouseGlucose_enhancers/HGGlcNAc2s13/renamed/genes_fromProm-HGGlcNAc2s13.gff") #nolint
+outputfolder <- "./"
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-outputfolder <- c("/g/boulard/Projects/O-N-acetylglucosamine/analysis/expression_vs_glc/violinplot_bycategory_promexpression/hackett_rnaseq/ESCHGGlcNAc1_lane1sample12/", # nolint
-"/g/boulard/Projects/O-N-acetylglucosamine/analysis/expression_vs_glc/violinplot_bycategory_promexpression/hackett_rnaseq/ESCHGGlcNAc2_lane1sample13/") # nolint
 
+queryfile <- "/g/boulard/Projects/O-N-acetylglucosamine/analysis/peak_detection/macs2/Sept2023_glcPolII/mouse/glcGlucose/0.04/no_model/ESCHGGlcNAc1_lane1sample12_peaks_narrowPeak.gff" # nolint
+## Would an alternative mirror be used to connect to ensembl
+usealtmirror <- TRUE
+## Number of bp upstream and downstream TSS for the promoter coordinates
+upstreambp <- 1000
+downstreambp <- 1000
+
+countspath <- "/g/boulard/Projects/O-N-acetylglucosamine/data/RNASeq_hackett_T2iESC/galaxy/data/sequencing/counts_table/raw_ensembl/featureCounts_SRR11294181.tabular" # nolint
+namescountsvec <- "rep1"
+countslength <- "/g/boulard/Projects/O-N-acetylglucosamine/data/RNASeq_hackett_T2iESC/galaxy/data/sequencing/counts_table/raw_ensembl/Feature_lengths_SRR11294181.tabular" # nolint
+outputfolder <- "/g/boulard/Projects/O-N-acetylglucosamine/analysis/expression_vs_glc/violinplot_bycategory_promexpression/hackett_rnaseq/ESCHGGlcNAc1_lane1sample12/tmp/" # nolint
 
 
 
@@ -153,6 +160,134 @@ wilcoxonTest <- function(counts_glcprom, counts_noglcprom, counts_random, # noli
     MoreArgs = list(currentname, outfold)))
 }
 
+buildgr <- function(currentpath) {
+    message("\t Processing ", currentpath)
+    fi <- read.table(currentpath, stringsAsFactors = FALSE)
+    gr <- GenomicRanges::GRanges(seqnames = fi$V1,
+            ranges = IRanges::IRanges(start = fi$V4, end = fi$V5,
+                names = fi$V9), strand = fi$V7)
+    return(gr)
+}
+
+## Function by Ilyess Rachedi
+tryusemart <- function(biomart = "ensembl", dataset, host, alternativemirror) {
+    c <- 1
+    repeat {
+        message("# Attempt ", c, "/5 # Connection to Ensembl ... ")
+        if (!alternativemirror)
+            ensembl <- try(biomaRt::useMart(biomart, dataset = dataset,
+                host = host), silent = TRUE)
+        else
+            ensembl <- try(biomaRt::useEnsembl(biomart, dataset = dataset,
+                host = host, mirror = "useast"), silent = TRUE)
+
+        if (isTRUE(is(ensembl, "try-error"))) {
+            c <- c + 1
+            error_type <- attr(ensembl, "condition")
+            message(error_type$message)
+
+            if (c > 5)
+                stop("There is a problem of connexion to Ensembl for now. ",
+                "Please retry later or set alternativemirror=TRUE.")
+        }else {
+            message("Connected with success.")
+            return(ensembl)
+        }
+    }
+}
+
+## Function by Ilyess Rachedi
+trygetbm <- function(attributes, ensembl, values = NULL, filters = NULL) {
+    c <- 1
+    repeat {
+        message("# Attempt ", c, "/5 # ",
+                "Retrieving information about genes from biomaRt ...")
+        if (is.null(values) && is.null(filters))
+            res <- try(biomaRt::getBM(attributes = attributes, mart = ensembl),
+                silent = TRUE)
+        else
+            res <- try(biomaRt::getBM(attributes = attributes, mart = ensembl,
+                values = values, filters = filters), silent = TRUE)
+
+        if( isTRUE(is(res, "try-error"))) {
+            c <- c + 1
+            error_type <- attr(res, "condition")
+            message(error_type$message)
+            if (c > 5)
+                stop("There is a problem of connexion to Ensembl for ",
+                        "now. Please retry later.")
+        } else {
+            message("Information retrieved with success.")
+            return(res)
+        }
+    }
+}
+
+retrievegeneinfo  <- function(ensembl, annogr) {
+    attributes <- c('chromosome_name', 'ensembl_gene_id', 'external_gene_name', # nolint
+            'start_position', 'end_position', 'strand', # nolint
+            'ensembl_transcript_id_version') # nolint
+    symbolstab <- trygetbm(attributes, ensembl, values = names(annogr),
+        filters='ensembl_transcript_id_version') # nolint
+    symbolstab$strand[which(symbolstab$strand == 1)] <- '+' # nolint
+    symbolstab$chromosome_name <- paste0("chr", symbolstab$chromosome_name)
+    if (!isTRUE(all.equal(length(which(symbolstab$strand == -1)), 0)))
+        symbolstab$strand[which(symbolstab$strand == -1)] <- '-' # nolint
+    return(symbolstab)
+}
+
+
+retrieveglcproms <- function(upstreambp, downstreambp, queryfile,
+    usealtmirror) {
+
+    message("Retrieve the promoters coordinates")
+    txdb <- TxDb.Mmusculus.UCSC.mm10.knownGene # nolint
+    ## Filtering chromosomes
+    message("Filtering chromosomes")
+    seqlevels(txdb) <- c("chr1", "chr2", "chr3", "chr4", "chr5", "chr6", "chr7",
+    "chr8", "chr9", "chr10", "chr11", "chr12", "chr13", "chr14", "chr15",
+    "chr16", "chr17", "chr18", "chr19", "chrX", "chrY")
+    ## Retrieve promoters coordinates
+    promotersgr <- unique(GenomicFeatures::promoters(txdb,
+        upstream = upstreambp, downstream = downstreambp))
+
+    ## Reading the OGlcNac peaks
+    message("Reading the OGlcNac peaks")
+    querygr <- unique(buildgr(queryfile))
+
+    ## Perform overlap between O-GlcNac peaks and promoters
+    message("Perform overlap between O-GlcNac peaks and promoters")
+    resultoverlap <- GenomicRanges::findOverlaps(querygr, promotersgr,
+        ignore.strand = FALSE)
+    idxkeep <- which(!duplicated(S4Vectors::queryHits(resultoverlap)))
+    resultoverlap <- resultoverlap[idxkeep, ]
+    promotersgr <- promotersgr[S4Vectors::subjectHits(resultoverlap), ]
+
+    ## Retrieving information on genes
+    ensembl <- tryusemart(biomart = "ENSEMBL_MART_ENSEMBL",
+        "mmusculus_gene_ensembl", host = "https://nov2020.archive.ensembl.org",
+        alternativemirror = usealtmirror)
+    symbolstab <- retrievegeneinfo(ensembl, promotersgr)
+    idxtable <- match(names(promotersgr),
+        symbolstab$ensembl_transcript_id_version)
+    idxna <- which(is.na(idxtable))
+    if (!isTRUE(all.equal(length(idxna), 0))) {
+        promotersgr <- promotersgr[-idxna, ]
+        idxtable <- idxtable[-idxna]
+    }
+    promgff <- data.frame(seqname = symbolstab$chromosome_name[idxtable],
+            source = symbolstab$external_gene_name[idxtable],
+            feature = symbolstab$ensembl_gene_id[idxtable],
+            start = symbolstab$start_position[idxtable],
+            end = symbolstab$end_position[idxtable],
+            score = 0, strand = symbolstab$strand[idxtable], frame = ".",
+            group = ".")
+    promgff <- promgff[-which(duplicated(promgff$feature)), ]
+
+    return(promgff)
+}
+
+
 
 ##################
 # MAIN
@@ -183,10 +318,11 @@ counts_list <- lapply(countspath, function(x, genelengthvec) {
     fi <- cbind(fi, countsvectpm)
     colnames(fi) <- c("Name", "NumReads", "TPM")
     return(fi)
-    }, genelengthvec)
+}, genelengthvec)
 
 ## Reading prom glc
-promglc <- read.delim(promsglcpath, header = FALSE)
+promglc <- retrieveglcproms(upstreambp, downstreambp, queryfile,
+    usealtmirror)
 
 ## Making counts list with only expressed one
 counts_nozero_list <- lapply(counts_list, function(x) {
