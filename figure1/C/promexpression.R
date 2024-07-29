@@ -7,7 +7,6 @@
 #
 # The comparison is done in the form of a violin plot.
 #
-
 # > sessionInfo()
 # MatrixGenerics_1.10.0, httr_1.4.2, bit64_4.0.5, assertthat_0.2.1,
 # BiocFileCache_2.6.1, blob_1.2.3, GenomeInfoDbData_1.2.9, Rsamtools_2.14.0,
@@ -26,7 +25,7 @@
 # rtracklayer_1.58.0, fastmap_1.1.0, bit_4.0.4, utf8_1.2.2, filelock_1.0.2,
 # stringi_1.7.6, parallel_4.2.0, Rcpp_1.0.8.3, vctrs_0.6.1, png_0.1-7,
 # dbplyr_2.1.1, tidyselect_1.1.2
-
+#
 # Descostes - April 2024 with R-4.3.3
 #################
 
