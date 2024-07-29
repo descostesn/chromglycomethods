@@ -35,3 +35,42 @@ wget https://zenodo.org/records/12793186/files/ESCRNAseq_SRR11294181countslength
 
 ## Installation
 
+Install conda following the instructions [here](https://conda.io/projects/conda/en/latest/user-guide/install/index.html). Using the recipe [fig1C.yml](fig1C.yml), run:
+
+```
+conda env create -n fig1c --file ./fig1C.yml
+conda activate fig1c
+```
+
+## Figure Generation
+
+Run the script [promexpression.R](promexpression.R) from the current folder, it uses the files downloaded in the subfolders `data/`. From the terminal:
+
+```
+Rscript promexpression.R
+```
+
+It should output:
+
+```
+Reading gene lengths
+Reading counts and computing TPM
+Retrieve the promoters coordinates
+Filtering chromosomes
+Reading the OGlcNac peaks
+         Processing data/ESCHGGlcNAc_rep1.gff
+Perform overlap between O-GlcNac peaks and promoters
+# Attempt 1/5 # Connection to Ensembl ...
+Connected with success.
+# Attempt 1/5 # Retrieving information about genes from biomaRt ...
+Information retrieved with success.
+Making counts list with only expressed one
+Processing rep1
+Writing file
+Saving 7 x 7 in image
+Computing mann-whitney-wilcoxson on each violin
+Writing file
+```
+
+You should obtain the raw figure:
+
