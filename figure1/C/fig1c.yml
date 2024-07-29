@@ -10,3 +10,4 @@ dependencies:
   - bioconductor-genomicranges=1.52.0
   - bioconductor-s4vectors=0.38.1
   - bioconductor-biomart=2.56.1
+
