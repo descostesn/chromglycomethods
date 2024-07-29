@@ -24,7 +24,12 @@ library("biomaRt")
 
 
 queryfile <- "/g/boulard/Projects/O-N-acetylglucosamine/analysis/peak_detection/macs2/Sept2023_glcPolII/mouse/glcGlucose/0.04/no_model/ESCHGGlcNAc1_lane1sample12_peaks_narrowPeak.gff" # nolint
+## Would an alternative mirror be used to connect to ensembl
 usealtmirror <- TRUE
+## Number of bp upstream and downstream TSS for the promoter coordinates
+upstreambp <- 1000
+downstreambp <- 1000
+
 
 #############
 ## FUNCTIONS
@@ -107,48 +112,60 @@ retrievegeneinfo  <- function(ensembl, annogr) {
 }
 
 
+retrieveglcproms <- function(upstreambp, downstreambp, queryfile,
+    usealtmirror) {
 
-################
-# MAIN
-################
-
-txdb <- TxDb.Mmusculus.UCSC.mm10.knownGene
-
-## Filtering chromosomes
-message("Filtering chromosomes")
-seqlevels(txdb) <- c("chr1", "chr2", "chr3", "chr4", "chr5", "chr6", "chr7",
+    message("Retrieve the promoters coordinates")
+    txdb <- TxDb.Mmusculus.UCSC.mm10.knownGene # nolint
+    ## Filtering chromosomes
+    message("Filtering chromosomes")
+    seqlevels(txdb) <- c("chr1", "chr2", "chr3", "chr4", "chr5", "chr6", "chr7",
     "chr8", "chr9", "chr10", "chr11", "chr12", "chr13", "chr14", "chr15",
     "chr16", "chr17", "chr18", "chr19", "chrX", "chrY")
+    ## Retrieve promoters coordinates
+    promotersgr <- unique(GenomicFeatures::promoters(txdb,
+        upstream = upstreambp, downstream = downstreambp))
 
-## Retrieve promoters coordinates
-promotersgr <- unique(GenomicFeatures::promoters(txdb, upstream = 1000,
-                    downstream = 1000))
-querygr <- unique(buildgr(queryfile))
+    ## Reading the OGlcNac peaks
+    message("Reading the OGlcNac peaks")
+    querygr <- unique(buildgr(queryfile))
 
-## Perform overlap between O-GlcNac peaks and promoters
-resultoverlap <- GenomicRanges::findOverlaps(querygr, promotersgr,
-    ignore.strand = FALSE)
-idxkeep <- which(!duplicated(S4Vectors::queryHits(resultoverlap)))
-resultoverlap <- resultoverlap[idxkeep, ]
-promotersgr <- promotersgr[S4Vectors::subjectHits(resultoverlap), ]
+    ## Perform overlap between O-GlcNac peaks and promoters
+    message("Perform overlap between O-GlcNac peaks and promoters")
+    resultoverlap <- GenomicRanges::findOverlaps(querygr, promotersgr,
+        ignore.strand = FALSE)
+    idxkeep <- which(!duplicated(S4Vectors::queryHits(resultoverlap)))
+    resultoverlap <- resultoverlap[idxkeep, ]
+    promotersgr <- promotersgr[S4Vectors::subjectHits(resultoverlap), ]
 
-## Retrieving information on genes
-ensembl <- tryusemart(biomart = "ENSEMBL_MART_ENSEMBL",
-    "mmusculus_gene_ensembl", host = "https://nov2020.archive.ensembl.org",
-    alternativemirror = usealtmirror)
-symbolstab <- retrievegeneinfo(ensembl, promotersgr)
-idxtable <- match(names(promotersgr), symbolstab$ensembl_transcript_id_version)
-idxna <- which(is.na(idxtable))
-if (!isTRUE(all.equal(length(idxna), 0))) {
-    promotersgr <- promotersgr[-idxna, ]
-    idxtable <- idxtable[-idxna]
-}
-promgff <- data.frame(seqname = symbolstab$chromosome_name[idxtable],
+    ## Retrieving information on genes
+    ensembl <- tryusemart(biomart = "ENSEMBL_MART_ENSEMBL",
+        "mmusculus_gene_ensembl", host = "https://nov2020.archive.ensembl.org",
+        alternativemirror = usealtmirror)
+    symbolstab <- retrievegeneinfo(ensembl, promotersgr)
+    idxtable <- match(names(promotersgr),
+        symbolstab$ensembl_transcript_id_version)
+    idxna <- which(is.na(idxtable))
+    if (!isTRUE(all.equal(length(idxna), 0))) {
+        promotersgr <- promotersgr[-idxna, ]
+        idxtable <- idxtable[-idxna]
+    }
+    promgff <- data.frame(seqname = symbolstab$chromosome_name[idxtable],
             source = symbolstab$external_gene_name[idxtable],
             feature = symbolstab$ensembl_gene_id[idxtable],
             start = symbolstab$start_position[idxtable],
             end = symbolstab$end_position[idxtable],
             score = 0, strand = symbolstab$strand[idxtable], frame = ".",
             group = ".")
-promgff <- promgff[-which(duplicated(promgff$feature)), ]
+    promgff <- promgff[-which(duplicated(promgff$feature)), ]
 
+    return(promgff)
+}
+
+
+################
+# MAIN
+################
+
+promgff <- retrieveglcproms(upstreambp, downstreambp, queryfile,
+    usealtmirror)
