@@ -10,11 +10,11 @@ V. [Pre-processing](#pre-processing)
 
 Violin plot showing the mouse ESC RNA-seq expression levels of O-GlcNAc enriched gene promoters (236 genes). The median expression of genes having O-GlcNac at promoters is higher when compared to 236 randomly selected promoters without O-GlcNac, 236 randomly selected promoters, and 21,085 promoters. The three groups to which O-GlcNac promoters are compared to have at least 1 RNA-seq read.
 
-The statistical test used is a two-sided Mann-Whitney test (mu = 0, paired = FALSE) giving the p-value:
+The statistical test used is a two-sided Mann-Whitney (mu = 0, paired = FALSE) giving the p-values:
 
-glcprom vs noglcprom: 0.000692837371518593
-glcprom vs randomprom: 0.0356250808138736
-glcprom vs allprom: 0.000158394211256996
+* glcprom vs noglcprom: 0.000692837371518593  
+* glcprom vs randomprom: 0.0356250808138736  
+* glcprom vs allprom: 0.000158394211256996  
 
 ## Data
 
@@ -35,7 +35,7 @@ wget https://zenodo.org/records/12793186/files/ESCRNAseq_SRR11294181countslength
 
 ## Installation
 
-Install conda following the instructions [here](https://conda.io/projects/conda/en/latest/user-guide/install/index.html). Using the recipe [fig1C.yml](fig1C.yml), run:
+Install conda following the instructions [here](https://conda.io/projects/conda/en/latest/user-guide/install/index.html). Using the recipe [fig1C.yml](fig1c.yml), run:
 
 ```
 conda env create -n fig1c --file ./fig1c.yml
@@ -83,7 +83,7 @@ You should obtain the raw figure:
 
 ### CutnRun
 
-The pre-processing was performed with the Galaxy workflows [OGlcNac_ChIP-SeqSEmm10](../A/galaxy-workflows/Galaxy-Workflow-OGlcNac_ChIP-SeqSEmm10.ga).
+The pre-processing was performed with the Galaxy workflows [OGlcNac_ChIP-SeqSEmm10](../A/galaxy-workflows/Galaxy-Workflow-OGlcNac_ChIP-SeqSEmm10.ga). The .ga file can be imported in your own galaxy account.
 
 Quality control was done with FastQC v0.11.9: `fastqc --outdir $outputfolder --threads $nbcpu --quiet --extract --kmers 7 -f 'fastq' $input.fastq.gz`.
 
