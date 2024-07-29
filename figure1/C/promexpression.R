@@ -25,24 +25,17 @@ library("biomaRt")
 ##################
 
 
+queryfile <- "data/ESCHGGlcNAc_rep1.gff"
 countspath <- "data/ESCRNAseq_SRR11294181counts.txt"
 namescountsvec <- "rep1"
-countslength <- "data/ESCRNAseq_SRR11294181countslength.txt" # nolint
+countslength <- "data/ESCRNAseq_SRR11294181countslength.txt"
 outputfolder <- "./"
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-
-queryfile <- "/g/boulard/Projects/O-N-acetylglucosamine/analysis/peak_detection/macs2/Sept2023_glcPolII/mouse/glcGlucose/0.04/no_model/ESCHGGlcNAc1_lane1sample12_peaks_narrowPeak.gff" # nolint
 ## Would an alternative mirror be used to connect to ensembl
 usealtmirror <- TRUE
 ## Number of bp upstream and downstream TSS for the promoter coordinates
 upstreambp <- 1000
 downstreambp <- 1000
-
-countspath <- "/g/boulard/Projects/O-N-acetylglucosamine/data/RNASeq_hackett_T2iESC/galaxy/data/sequencing/counts_table/raw_ensembl/featureCounts_SRR11294181.tabular" # nolint
-namescountsvec <- "rep1"
-countslength <- "/g/boulard/Projects/O-N-acetylglucosamine/data/RNASeq_hackett_T2iESC/galaxy/data/sequencing/counts_table/raw_ensembl/Feature_lengths_SRR11294181.tabular" # nolint
-outputfolder <- "/g/boulard/Projects/O-N-acetylglucosamine/analysis/expression_vs_glc/violinplot_bycategory_promexpression/hackett_rnaseq/ESCHGGlcNAc1_lane1sample12/tmp" # nolint
 
 
 
