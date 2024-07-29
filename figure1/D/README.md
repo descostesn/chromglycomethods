@@ -19,8 +19,8 @@ O-GlcNac peaks mainly overlap with RNA Polymerase II (RNAPol II) factors: [TBP](
 
 The results given by ChIP-Atlas are not manually curated. We manually identified the following problematic datasets:
 
-!!
+See [problematic-rep1.txt](replacement-files/problematic-rep1.txt) and [problematic-rep2.txt](replacement-files/problematic-rep2.txt)
 
 These datasets were replaced by the following valid one which were found in the sorted lists of the scripts. In other words, we looked manually for the next candidates that had a lower overlap (but still > 20%). NA means that no suitable candidate was found:
 
-!!
+See [replacement-rep1.txt](replacement-files/replacement-rep1.txt) and [replacement-rep2.txt](replacement-files/replacement-rep2.txt)
