@@ -5,6 +5,10 @@ II. [Data](#data)
 III. [Installation](#installation)  
 IV. [Figure Generation](#figure-generation)  
 V. [Pre-processing](#pre-processing)  
+&nbsp;&nbsp; V.I. [Workflows](#workflows)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; V.I.I. [CutnRun](#cutnrun)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; V.I.II. [RNA-seq](#rna-seq)  
+
 
 ## Description
 
