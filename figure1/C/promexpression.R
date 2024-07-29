@@ -337,10 +337,6 @@ counts_nozero_list <- lapply(counts_list, function(x) {
 # random prom, and glc prom and generating the boxplot of TPM values
 ###
 
-# allcounts <- counts_list[[1]]
-# allcountsnozero <- counts_nozero_list[[1]]
-# currentname <- namescountsvec[1]
-# outfold <- outputfolder
 invisible(mapply(function(allcounts, allcountsnozero, currentname, promglc,
 outfold) {
 
