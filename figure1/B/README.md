@@ -15,6 +15,8 @@ Genome browser view of O-GlcNac, H3K4me3, and H3K27ac at the Zfp639 and Mfn1 gen
 The bigwig files used in this figure can be obtained with:
 
 ```
+#!/bin/bash
+
 wget XXX/ESCHGGlcNAc_rep1.bw
 wget https://zenodo.org/records/12793186/files/H3K27ac_SRX19148013.bw
 wget https://zenodo.org/records/12793186/files/H3K4me3_SRX5382140.bw
