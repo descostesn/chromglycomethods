@@ -1,68 +1,80 @@
-Nanog - SRX9486380:  Nanog ChIP-nexus with CRISPR-knockout of Sox2 binding site
-Sp3 - SRX5371695: A17Lox_Sp1het1_ESC_Sp3_ChIPseq
-Kmt2d - SRX2762171: WT_RA_ChIP_MLL4; Mus musculus; ChIP-Seq
-Sp1 - SRX5371690: A17Lox_Sp1het2_ESC_Sp1_ChIPseq
-Tbp - SRX11677010: Pol III_degron mESCs IAA 1hr
-Utf1 - SRX404068: KH2 mouse ESC
-Taf12 - SRX11221956: TFIIA degron 0h
-Setd1a - SRX5600782: mES_WT_shNT_Set1aChIP; Mus musculus; ChIP-Seq
-Sox2 - SRX9486383: Sox2 ChIP-nexus with CRISPR-knockout of Nanog binding site
-RNA polymerase II - SRX4178816: Cell line R1
-Yy1 - SRX5850150: TKO.TSA_SP1_REP3
-Epitope tags - SRX2486173: CFP1 fl/fl cell line, with 3xT7-Strep2 tag knockin at SET1A N-ter
-Sin3a - SRX9450269: Genotype Ainv15(iCre)
-Smad2  - SRX14663260: PML KO-SMAD2/3 rep2; Mus musculus; ChIP-Seq
-Taf3 - SRX13439109: ChIP-Seq_TAF3_BRD2_degron_3h_rep1
-Ssrp1 - SRX11677018: treatment Pol III_degron mESCs IAA 1hr
-Esrrb - SRX11221882: TAF12 degron 0h
-GFP - SRX385377: E14_Mll2FL_C_GFP_FCS_LIF_2i_double_crosslink
-Taf1 - SRX11221945: TAF12_degron_0h_TAF1_ChIP_Rep2; Mus musculus; ChIP-Seq
-Dendra2 - SRX4178805:Dendra2-RPB1, Halo-MED19, R1 ESC
-Otx2  - SRX9450552: D4_Ctr_OTX2_2; Mus musculus; ChIP-Seq
-Med1 - SRX11221877: TAF12_degron_0h_MED1_ChIP_Rep1
-Banp - SRX10157266: deleted by the GEO staff
-Ints3 - SRX11677013: ChIP_Seq_Pol_III_IAA_anti_INTS3_rep1, treatment Pol III_degron mESCs IAA 1hr
-Med4 - SRX11221901: MED4_degron_0h_MED6_ChIP_Rep1; Mus musculus; ChIP-Seq
-Kdm6a - SRX13332957: SRM220498_Dnttip1KO1E6_UTX-AB11; Mus musculus; ChIP-Seq
-Brd4 - SRX3898501: Hexanediol treatment
-Kmt2c - SRX2752337: genotype Mll3/4 dCD, R1 ESC
-Mettl3 - SRX2415040: genotype/variation Rosa26:BirA, METTL3 FLAG/Avi
-Kdm4c - SRX213793: Phenotype Agouti
-Med24 - SRX5926394: Treatment 4OHT 2h
-Nelfe - SRX9450256: Genotype Ainv15(iCre)
-Tcf12 - SRX390394: Strain CGR8
-Ctcf - SRX10437500:  F-ALL-INV genotype
-Brd9 - SRX3751909: DMSO treatment
-Rnf2 - SRX482879: RING1A-B_cKO_RING1B_treated_rep2
-Rpa1 - SRX11676997: Pol III_degron mESCs IAA 1hr
-Nipbl - SRX15652647: NIPBL ChIP-M of wt stembryos at 168h
-Rad21 - SRX1670207: Mll3-4 DKO Day1
-Brca2 - SRX15464337: Zfp281 KO
-Med14 - SRX12622651: Treatment tamoxifen 96h
-Ncaph2 - SRX1688321: Transfection shGFP
-Hif1a - SRX13945545: Hypoxia day 6
-DNA-RNA hybrid - SRX13439146:  Rloop_BRD2_BRD3_BRD3_KO_rep1
-Brd3 - SRX13439086: hIP-Seq_BRD3_BRD2_degron_3h_rep1
-Ep400 - SRX9424475: Treatment Auxin 1h
-Max - SRX5850126: TKO TSA Max Rep3
-Ercc3 - SRX11221923: MED4_degron_0h_XPB_ChIP_Rep2
-Tet3 - SRX2545592: Tet3-CXXC
-Dnttip1 - SRX13332921: SRM166780_Bruce4_rep2_DNTTIP1-AB1
-Fgfr1 - SRX868181: Retinoic acid treatment for 48h
-Gtf3c1 - SRX1688323: shGFP_TFIIIC_1
-Klf5 - SRX334975: Cell line GCR8
-Gabpa - SRX5850112: Treatment 5 ng microl trichostatin A for 36h
-Biotin - SRX2388542: Gata3 overexpression
-Pcgf1 - SRX6071847: Treatment tamoxifen 72h
-Maz - SRX13440032: genotype MAZ HoxA delta 5-6
-Runx1 - SRX8754229: R201Q no dox
-Zfp42 - SRX128354: Expressing V5-tagged REX1
-Ctnnb1 - SRX9101843: 3xFlag knock-in to endogeous Kdm2b C-terminus
-Gata4 - SRX191946: Dnmt3a-3b DKO
-Sumo1 - SRX11525492: Cell line R1 Day 8
-0610010K14Rik - SRX19028417: ChIP_BAP18_dTAG-24h_mRBBP5-dTAG_ES_Rep2
-Zic2 - SRX5817869: 32h N2B27
-Ints5 - SRX19028478: ChIP_INTS5_dTAG-24h_mRBBP5-dTAG_ES_Rep2
-Hoxb1 - SRX4980239: 24h post-RA induction
-Kdm2b - SRX186548: Treatment shRNA
-E2f6 - SRX3581849: V6.5_shGFP_E2f6_StaphSeq_rep2
+## H3K4me3 - SRX10304465: treated with WNT3a protein for 12h
+## H4 - SRX16815323: Brg1-depleted auxin 20h replicate 2
+## H3K79me2 - SRX13332952: ES Bruce 4
+## H3K4me2 - SRX4681571:  H3K4me2_dm_RA_d6; Mus musculus; ChIP-Seq
+## H3K64ac - SRX1560890: Cell line 46c (sox1_GFP)
+## H3K122ac - SRX1560888: Cell line 46c (sox1_GFP)
+## H3.3 - SRX2245482: H3.3-HA ChIP-seq ES cells 1hr DOX; Mus musculus; ChIP-Seq #nolint
+## H3K9ac - SRX185848: ES Bruce 4
+## H2A.Z - SRX2955747: J1 mouse ESC
+## H3K36me3 - SRX12382446: Day 1 SETD8 KO
+## H4ac - SRX10445814: SUZ12 KO Day 8
+## H4K5ac - SRX14210149: SET1A SET domain deletion
+## H4K20ac - SRX13332963: SRM200254_Dnttip1KO1E6_H4K20Ac-AB2
+## H4K16ac - SRX298193: Cell line 46c (sox1_GFP)
+## H3K9K14ac - ERX245530: Cfp1 KO
+## H3K18ac - SRX10424671: Trim66 KO
+## Nanog - SRX9486380:  Nanog ChIP-nexus with CRISPR-knockout of Sox2 binding site #nolint
+## Kmt2d - SRX2762171: WT_RA_ChIP_MLL4; Mus musculus; ChIP-Seq
+## Sp3 - SRX5371695: A17Lox_Sp1het1_ESC_Sp3_ChIPseq
+## Tbp - SRX11677010: Pol III_degron mESCs IAA 1hr
+## RNA polymerase II - SRX19391748: ChIP-Seq_RPB1_RPB3_IAA_0h_rep1;
+## Sox2 - SRX9486383: Sox2 ChIP-nexus with CRISPR-knockout of Nanog binding site #nolint
+## Setd1a - SRX5600782: mES_WT_shNT_Set1aChIP; Mus musculus; ChIP-Seq
+## Sp1 - SRX5371688: cell line A17Lox
+## Utf1 - SRX404068: KH2 mouse ESC
+## Taf12 - SRX11221956: TFIIA degron 0h
+## Sin3a - SRX9450269: Genotype Ainv15(iCre)
+## Taf3 - SRX13439109: ChIP-Seq_TAF3_BRD2_degron_3h_rep1
+## Ssrp1 - SRX11677018: treatment Pol III_degron mESCs IAA 1hr
+## GFP - SRX385377: E14_Mll2FL_C_GFP_FCS_LIF_2i_double_crosslink
+## Esrrb - SRX11221882: TAF12 degron 0h
+## Smad2  - SRX14663260: PML KO-SMAD2/3 rep2; Mus musculus; ChIP-Seq
+## Taf1 - SRX11221945: TAF12_degron_0h_TAF1_ChIP_Rep2; Mus musculus; ChIP-Seq
+## Epitope tags - SRX2486173: CFP1 fl/fl cell line, with 3xT7-Strep2 tag knockin at SET1A N-ter #nolint
+## Dendra2 - SRX4178805:Dendra2-RPB1, Halo-MED19, R1 ESC
+## Banp - SRX10157266: deleted by the GEO staff
+## Med4 - SRX11221901: MED4_degron_0h_MED6_ChIP_Rep1; Mus musculus; ChIP-Seq
+## Med1 - SRX11221877: TAF12_degron_0h_MED1_ChIP_Rep1
+## Yy1 - SRX5850150: TKO.TSA_SP1_REP3
+## Brd4 - SRX3898501: Hexanediol treatment
+## Otx2  - SRX9450552: D4_Ctr_OTX2_2; Mus musculus; ChIP-Seq
+## Kdm6a - SRX13332957: SRM220498_Dnttip1KO1E6_UTX-AB11; Mus musculus; ChIP-Seq
+## Med24 - SRX5926395: Treatment 4OHT 2h
+## Kmt2c - SRX2752337: genotype Mll3/4 dCD, R1 ESC
+## Tcf12 - SRX390394: Strain CGR8
+## Nelfe - SRX9450256: Genotype Ainv15(iCre)
+## Ctcf - SRX10437500:  F-ALL-INV genotype
+## Kdm4c - SRX213793: Phenotype Agouti
+## Mettl3 - SRX2415040: genotype/variation Rosa26:BirA, METTL3 FLAG/Avi
+## Rpa1 - SRX11676997: Pol III_degron mESCs IAA 1hr
+## Rad21 - SRX1670207: Mll3-4 DKO Day1
+## Med14 - SRX12622651: Treatment tamoxifen 96h
+## Rnf2 - SRX6071873: Treatment tamoxifen 72h
+## Nipbl - SRX15652647: NIPBL ChIP-M of wt stembryos at 168h
+## Brd9 - SRX3751909: DMSO treatment
+## Brd3 - SRX13439086: hIP-Seq_BRD3_BRD2_degron_3h_rep1
+## Ncaph2 - SRX1688321: Transfection shGFP
+## Dnttip1 - SRX13332921: SRM166780_Bruce4_rep2_DNTTIP1-AB1
+## Ep400 - SRX9424476: Dox treatment
+## Tet3 - SRX2545592: Tet3-CXXC
+## Hif1a - SRX13945545: Hypoxia day 6
+## Ercc3 - SRX11221923: MED4_degron_0h_XPB_ChIP_Rep2
+## Klf5 - SRX334975: Cell line GCR8
+## Fgfr1 - SRX868181: Retinoic acid treatment for 48h
+## DNA-RNA hybrid - SRX13439146:  Rloop_BRD2_BRD3_BRD3_KO_rep1
+## Max - SRX5850126: TKO TSA Max Rep3
+## Biotin - SRX2388542: Gata3 overexpression
+## Pcgf1 - SRX6071847: Treatment tamoxifen 72h
+## Brca2 - SRX15464337: Zfp281 KO
+## Gtf3c1 - SRX1688324: Transfection shGFP
+## Gabpa - SRX5850112: Treatment 5 ng microl trichostatin A for 36h
+## Sumo1 - SRX11525492: Cell line R1 Day 8
+## Maz - SRX13440032: genotype MAZ HoxA delta 5-6
+## Myc - SRX17793746: Cleavable Myc
+## Ctnnb1 - SRX9101843: 3xFlag knock-in to endogeous Kdm2b C-terminus
+## Zic2 - SRX5817869: 32h N2B27
+## Zfp42 - SRX128354: Expressing V5-tagged REX1
+## 0610010K14Rik - SRX19028417: ChIP_BAP18_dTAG-24h_mRBBP5-dTAG_ES_Rep2
+## Ints5 - SRX19028478: ChIP_INTS5_dTAG-24h_mRBBP5-dTAG_ES_Rep2
+## Runx1 - SRX8754229: R201Q no dox
