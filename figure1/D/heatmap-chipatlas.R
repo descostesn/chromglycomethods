@@ -676,6 +676,7 @@ resultlist <- readandfilter(resultpathvec, resultnamevec, chipatlascolnames,
 names(resultlist) <- resultnamevec
 idxremove <- which(is.na(resultlist))
 resultlist <- removeelements(resultlist, idxremove)
+message("Retrieving the number of peaks per categories")
 nbpeaksvec <- unlist(lapply(resultlist, function(currentcat){
                     nbpeaks <- unique(as.numeric(unlist(lapply(
                         strsplit(currentcat$OverlapQuery, "/"), "[", 2))))
@@ -683,6 +684,7 @@ nbpeaksvec <- unlist(lapply(resultlist, function(currentcat){
                         stop("nbpeaks should be unique")
                     return(nbpeaks)
                 }))
+print(nbpeaksvec)
 
 
 ## Retrieving embryonic stem cells and other cells
