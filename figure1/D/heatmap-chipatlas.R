@@ -182,7 +182,7 @@ filteroncells <- function(resultlist, lookesc = TRUE) {
     return(df)
 }
 
-.buildantigenlist <- function(resultlist, thres = 1, keepmaxonly = FALSE) {
+buildantigenlist <- function(resultlist, thres = 1, keepmaxonly = FALSE) {
 
     result <- mapply(function(df, dfname, thres) {
 
@@ -697,9 +697,9 @@ if (!isTRUE(all.equal(length(idxremove), 0)))
 
 ## Building antigen unique list
 message("Building antigen unique lists for Embryonic Stem Cells:")
-resultlistescsra <- .buildantigenlist(resultlistesc, thres = percentthreshold,
+resultlistescsra <- buildantigenlist(resultlistesc, thres = percentthreshold,
     keepmaxonly = TRUE)
-completeresultlistescsra <- .buildantigenlist(resultlistesc)
+completeresultlistescsra <- buildantigenlist(resultlistesc)
 
 if (!isTRUE(all.equal(names(resultlistescsra),
     names(completeresultlistescsra))))
