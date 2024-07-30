@@ -222,7 +222,7 @@ mergepolandtf <- function(reslist, prefvec) {
 
     res <- lapply(prefvec, function(currentpref, reslist) {
 
-        message("Processing ", currentpref)
+        message("\t Processing ", currentpref)
         suffvec <- c("hist", "pol", "TF")
         reslistnames <- names(reslist)
 
@@ -706,6 +706,7 @@ if (!isTRUE(all.equal(names(resultlistescsra),
     stop("The two lists do not contain the same elements.")
 
 ## Merging pol and TFs for each replicates
+message("Merging pol and TFs for each replicates")
 resultlistescsramerged <- mergepolandtf(resultlistescsra, repprefixvec)
 completeresultlistescsramerged <- mergepolandtf(completeresultlistescsra,
     repprefixvec)
