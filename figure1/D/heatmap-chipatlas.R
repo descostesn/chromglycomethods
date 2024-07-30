@@ -52,7 +52,7 @@ ignoreqval <- FALSE
 ## FUNCTIONS
 #############
 
-.checkparams <- function(outputfolder, resultpathvec, resultnamevec,
+checkparams <- function(outputfolder, resultpathvec, resultnamevec,
         experimentname, repprefixvec) {
 
     if (!file.exists(file.path(outputfolder, experimentname)))
@@ -655,7 +655,7 @@ ignoreqval <- FALSE
 ####
 
 ## Checking parameters
-.checkparams(outputfolder, resultpathvec, resultnamevec, experimentname,
+checkparams(outputfolder, resultpathvec, resultnamevec, experimentname,
     repprefixvec)
 
 if (ignoreqval)
