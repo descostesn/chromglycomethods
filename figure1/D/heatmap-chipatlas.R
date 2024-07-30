@@ -1,6 +1,16 @@
 #############################
 ## This script builds different heatmaps based on the chip-atlas results.
 ##
+# > sessionInfo()
+# R version 4.3.2 (2023-10-31)
+# Platform: x86_64-conda-linux-gnu (64-bit)
+# Running under: Rocky Linux 8.8 (Green Obsidian)
+# [1] pheatmap_1.0.12
+# loaded via a namespace (and not attached):
+#  [1] colorspace_2.1-0   scales_1.3.0       compiler_4.3.2     R6_2.5.1
+#  [5] cli_3.6.2          glue_1.7.0         gtable_0.3.5     RColorBrewer_1.1-3
+#  [9] grid_4.3.2         lifecycle_1.0.4    munsell_0.5.1      rlang_1.1.3
+#
 ## Run on R 4.3.2
 ## Descostes June 2020 - modified dec 2023
 #############################
