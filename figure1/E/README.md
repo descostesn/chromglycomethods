@@ -54,5 +54,9 @@ wget XXX/ESCHGGlcNAc_rep1_peaks.gff -P data/
 wget XXX/ESCHGGlcNAc_rep2_peaks.gff -P data/
 ```
 
+## Installation
+
 ## Figure Generation
+
+### Union of peaks
 
