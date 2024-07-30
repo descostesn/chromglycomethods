@@ -27,6 +27,8 @@ See [replacement-rep1.txt](replacement-files/replacement-rep1.txt) and [replacem
 
 ## Data
 ## Installation
+
+
 ## Figure Generation
 
 The script should output:
@@ -132,5 +134,42 @@ Merging pol and TFs for each replicates
          Processing mHG14
 
 ## PART 2: Filtering the data
+Retrieve information from the manual curation
+Replacing values
+         Processing mHG1
+                 Elements: mHG1hist
+                 Elements: mHG1polTFs
+         Processing mHG2
+                 Elements: mHG2hist
+                 Elements: mHG2polTFs
 
+## PART 3: Generating the heatmap
+Generating heatmap for PolII-TFs
+         Retrieving all
+                 Extracting mHG1polTFs from mHG1
+                 Extracting mHG2polTFs from mHG2
+Completing missing data for mHG1polTFs from mHG1
+                 The missing data are RNApolII-Kdm2b-Ints3 having sra SRX8556273-SRX191070-SRX11677012
+                         Complementary sra found
+                         Complementary sra found
+                         Complementary sra found
+         Completing missing data for mHG2polTFs from mHG14
+                 The missing data are RNA polymerase II-Aebp2-Arid1a-Kat8-Mtf2-Pknox1-Smad2-Tbx3-Ythdc1 having sra SRX8556273-SRX1829032-SRX4506772-SRX142127-SRX7423745-SRX759626-SRX12702093-SRX248284-SRX8722031
+                         Complementary sra found
+                         Complementary sra found
+                         Complementary sra found
+                         Complementary sra found
+                         Complementary sra found
+                         Complementary sra found
+                         Complementary sra found
+                         Complementary sra found
+                         Complementary sra found
+        Merging replicates and create result table
+        Writing output table result
+        Plotting to result
 ```
+
+You should obtain the raw figure:
+
+<img src="peaksHG-20-none.png" alt="ChIP-Atlas Heatmap" width="400"/>
+
