@@ -76,7 +76,7 @@ readandfilter <- function(resultpathvec, resultnamevec, chipatlascolnames,
 
         resultlist <- mapply(function(currentpath, currentname, colnamevec) {
 
-            message("\t Processing ", currentname)
+            message("\t Reading ", currentname)
             fi <- read.delim(currentpath, stringsAsFactors = FALSE,
                 header = FALSE)
             colnames(fi) <- colnamevec
@@ -88,18 +88,21 @@ readandfilter <- function(resultpathvec, resultnamevec, chipatlascolnames,
             fi$QueryHigher <- nbquery > nbcontrol
 
             ## Filtering results having more overlap on random control
+            message("\t Filtering lines having more overlap on random control")
             if (isTRUE(all.equal(length(which(fi$QueryHigher)), 0)))
                 stop("All random controls have more peaks than query.")
             fi <- fi[fi$QueryHigher, ]
 
             ## Filtering on the Qvalue
             if (!ignoreqval) {
+                message("\t Filtering on the Qvalue")
                 if (isTRUE(all.equal(length(which(fi$LogQval < -1.3)), 0)))
                     stop("All q-value are not significant. See line 73.")
                 fi <- fi[fi$LogQval < -1.3, ]
             }
 
             ## Filtering the input expriments
+            message("\t Filtering out the mock IP expriments")
             idxinput <- fi$AntigenClass != "Input control"
             if (isTRUE(all.equal(length(which(idxinput)), 0)))
                 stop("All results are mock IP. See line 92.")
