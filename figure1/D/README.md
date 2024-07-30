@@ -43,6 +43,12 @@ wget XXX/ESCHGGlcNAc_rep2.gff -P data/
 
 ## Installation
 
+Install conda following the instructions [here](https://conda.io/projects/conda/en/latest/user-guide/install/index.html). Using the recipe [fig1C.yml](fig1c.yml), run:
+
+```
+conda env create -n fig1d --file ./fig1D.yml
+conda activate fig1d
+```
 
 ## Figure Generation
 
