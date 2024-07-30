@@ -124,12 +124,12 @@ readandfilter <- function(resultpathvec, resultnamevec, chipatlascolnames,
 removeelements <- function(resultlist, idxremove) {
 
     if (!isTRUE(all.equal(length(idxremove), 0))) {
-        message("\t Removing the following categories because of lack of ",
+        message("Removing the following categories because of lack of ",
                 "significant results: ", paste(resultnamevec[idxremove],
                         collapse = "-"))
         resultlist <- resultlist[-idxremove]
     }else {
-        message("\t Nothing to remove.")
+        message("Nothing to remove.")
     }
     return(resultlist)
 }
