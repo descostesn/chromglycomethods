@@ -24,7 +24,7 @@ resultnamevec <- c("mHG13hist", "mHG13pol", "mHG13TF", "mHG14hist", "mHG14pol",
 repprefixvec <- c("mHG13", "mHG14")
 suffixmerged <- c("hist", "polTFs")
 experimentname <- c("peaksHG")
-outputfolder <- c("/g/boulard/Projects/O-N-acetylglucosamine/analysis/chipatlas/sept2023/mouse_HG/heatmaps") #nolint
+outputfolder <- c("/g/boulard/Projects/O-N-acetylglucosamine/analysis/chipatlas/sept2023/mouse_HG/heatmaps/test") #nolint
 percentthreshold <- c(20)
 ignoreqval <- FALSE
 
@@ -71,7 +71,7 @@ checkparams <- function(outputfolder, resultpathvec, resultnamevec,
         stop("This script was designed to handle two replicates.")
 }
 
-.readandfilter <- function(resultpathvec, resultnamevec, chipatlascolnames,
+readandfilter <- function(resultpathvec, resultnamevec, chipatlascolnames,
     ignoreqval) {
 
         resultlist <- mapply(function(currentpath, currentname, colnamevec) {
@@ -668,7 +668,7 @@ message("Reading ChIP-Atlas results")
 chipatlascolnames <- c("ID", "AntigenClass", "Antigen", "CellClass", "Cell",
         "NumOfPeaks", "OverlapQuery", "OverlapControl", "LogPVal", "LogQval",
         "FoldEnrichment")
-resultlist <- .readandfilter(resultpathvec, resultnamevec, chipatlascolnames,
+resultlist <- readandfilter(resultpathvec, resultnamevec, chipatlascolnames,
     ignoreqval)
 names(resultlist) <- resultnamevec
 idxremove <- which(is.na(resultlist))
