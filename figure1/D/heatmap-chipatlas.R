@@ -12,24 +12,6 @@ library("pheatmap")
 ## PARAMS
 #############
 
-resultpathvec <- c("/g/boulard/Projects/O-N-acetylglucosamine/analysis/chipatlas/sept2023/mouse_HG/results/mHG13_hist_PST.txt", #nolint
-"/g/boulard/Projects/O-N-acetylglucosamine/analysis/chipatlas/sept2023/mouse_HG/results/mHG13_pol_PST.txt", #nolint
-"/g/boulard/Projects/O-N-acetylglucosamine/analysis/chipatlas/sept2023/mouse_HG/results/mHG13_TF_PST.txt", #nolint
-"/g/boulard/Projects/O-N-acetylglucosamine/analysis/chipatlas/sept2023/mouse_HG/results/mHG14_hist_PST.txt", #nolint
-"/g/boulard/Projects/O-N-acetylglucosamine/analysis/chipatlas/sept2023/mouse_HG/results/mHG14_pol_PST.txt", #nolint
-"/g/boulard/Projects/O-N-acetylglucosamine/analysis/chipatlas/sept2023/mouse_HG/results/mHG14_TF_PST.txt") #nolint
-
-resultnamevec <- c("mHG13hist", "mHG13pol", "mHG13TF", "mHG14hist", "mHG14pol",
-    "mHG14TF")
-repprefixvec <- c("mHG13", "mHG14")
-suffixmerged <- c("hist", "polTFs")
-experimentname <- c("peaksHG")
-outputfolder <- c("/g/boulard/Projects/O-N-acetylglucosamine/analysis/chipatlas/sept2023/mouse_HG/heatmaps/test") #nolint
-percentthreshold <- c(20)
-ignoreqval <- FALSE
-
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
 resultpathvec <- c("chipatlas_results/mHG1_hist_PST.txt",
 "chipatlas_results/mHG1_pol_PST.txt",
 "chipatlas_results/mHG1_TF_PST.txt",
