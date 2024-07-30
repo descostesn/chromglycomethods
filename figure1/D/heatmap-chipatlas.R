@@ -28,6 +28,26 @@ outputfolder <- c("/g/boulard/Projects/O-N-acetylglucosamine/analysis/chipatlas/
 percentthreshold <- c(20)
 ignoreqval <- FALSE
 
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+resultpathvec <- c("chipatlas_results/mHG1_hist_PST.txt",
+"chipatlas_results/mHG1_pol_PST.txt",
+"chipatlas_results/mHG1_TF_PST.txt",
+"chipatlas_results/mHG2_hist_PST.txt",
+"chipatlas_results/mHG2_pol_PST.txt",
+"chipatlas_results/mHG2_TF_PST.txt")
+
+resultnamevec <- c("mHG1hist", "mHG1pol", "mHG1TF", "mHG2hist", "mHG2pol",
+    "mHG2TF")
+repprefixvec <- c("mHG1", "mHG2")
+suffixmerged <- c("hist", "polTFs")
+experimentname <- c("peaksHG")
+outputfolder <- c("result")
+percentthreshold <- c(20)
+ignoreqval <- FALSE
+
+
+
 #############
 ## FUNCTIONS
 #############
