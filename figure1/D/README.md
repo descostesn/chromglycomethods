@@ -24,3 +24,43 @@ See [problematic-rep1.txt](replacement-files/problematic-rep1.txt) and [problema
 These datasets were replaced by the following valid one which were found in the sorted lists of the scripts. In other words, we looked manually for the next candidates that had a lower overlap (but still > 20%). NA means that no suitable candidate was found:
 
 See [replacement-rep1.txt](replacement-files/replacement-rep1.txt) and [replacement-rep2.txt](replacement-files/replacement-rep2.txt)
+
+## Data
+## Installation
+## Figure Generation
+
+The script should output:
+
+```
+Reading ChIP-Atlas results
+Reading mHG1hist
+  Filtering lines having more overlap on random control
+  Filtering on the Qvalue
+  Filtering out the mock IP expriments
+  Keeping 7300/7330(100%)
+Reading mHG1pol
+  Filtering lines having more overlap on random control
+  Filtering on the Qvalue
+  Filtering out the mock IP expriments
+  Keeping 774/776(100%)
+Reading mHG1TF
+  Filtering lines having more overlap on random control
+  Filtering on the Qvalue
+  Filtering out the mock IP expriments
+  Keeping 6772/6784(100%)
+Reading mHG1hist
+  Filtering lines having more overlap on random control
+  Filtering on the Qvalue
+  Filtering out the mock IP expriments
+  Keeping 7301/7330(100%)
+Reading mHG2pol
+  Filtering lines having more overlap on random control
+  Filtering on the Qvalue
+  Filtering out the mock IP expriments
+  Keeping 774/776(100%)
+Reading mHG2TF
+  Filtering lines having more overlap on random control
+  Filtering on the Qvalue
+  Filtering out the mock IP expriments
+  Keeping 6779/6785(100%)
+```
