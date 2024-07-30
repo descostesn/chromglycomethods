@@ -218,7 +218,7 @@ buildantigenlist <- function(resultlist, thres = 1, keepmaxonly = FALSE) {
     return(result)
 }
 
-.mergepolandtf <- function(reslist, prefvec) {
+mergepolandtf <- function(reslist, prefvec) {
 
     res <- lapply(prefvec, function(currentpref, reslist) {
 
@@ -706,8 +706,8 @@ if (!isTRUE(all.equal(names(resultlistescsra),
     stop("The two lists do not contain the same elements.")
 
 ## Merging pol and TFs for each replicates
-resultlistescsramerged <- .mergepolandtf(resultlistescsra, repprefixvec)
-completeresultlistescsramerged <- .mergepolandtf(completeresultlistescsra,
+resultlistescsramerged <- mergepolandtf(resultlistescsra, repprefixvec)
+completeresultlistescsramerged <- mergepolandtf(completeresultlistescsra,
     repprefixvec)
 names(resultlistescsramerged) <- repprefixvec
 names(completeresultlistescsramerged) <- repprefixvec
