@@ -1,6 +1,7 @@
 ##############
-# This script computes the union of intervals from several bed files and output a gff file.
-# Descostes, September 2015, update nov 2018
+## This script computes the union of intervals from several bed/gff files and
+## output a gff file.
+## Descostes
 ##############
 
 
@@ -15,64 +16,51 @@ library("GenomicRanges")
 
 filepathvec <- c("/g/boulard/Projects/O-N-acetylglucosamine/analysis/peak_detection/macs2/Sept2023_glcPolII/mouse/glcGlucose/0.04/no_model/ESCHGGlcNAc1_lane1sample12_peaks_narrowPeak.gff",
 "/g/boulard/Projects/O-N-acetylglucosamine/analysis/peak_detection/macs2/Sept2023_glcPolII/mouse/glcGlucose/0.04/no_model/ESCHGGlcNAc2_lane1sample13_peaks_narrowPeak.gff")
-outputfile <- "/g/romebioinfo/tmp"
+outputfile <- "/g/romebioinfo/tmp/union_sept2023mouse_HG1-2.gff"
 inputformat <- "gff"
+featurename <- "union-glc-rep1_2"
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-filepathvec <- c("/g/boulard/Projects/O-N-acetylglucosamine/analysis/peak_detection/macs2/Sept2023_glcPolII/mouse/glcGlucose/0.04/no_model/ESCHGGlcNAc1_lane1sample12_peaks_narrowPeak.gff",
-"/g/boulard/Projects/O-N-acetylglucosamine/analysis/peak_detection/macs2/Sept2023_glcPolII/mouse/glcGlucose/0.04/no_model/ESCHGGlcNAc2_lane1sample13_peaks_narrowPeak.gff")
-outputfile <- "/g/romebioinfo/tmp"
+filepathvec <- c("data/ESCHGGlcNAc_rep1_peaks.gff",
+    "data/ESCHGGlcNAc_rep2_peaks.gff")
+outputfile <- "result/union_sept2023mouse_HG1-2.gff"
 inputformat <- "gff"
-
+featurename <- "union-glc-rep1_2"
 
 ##############
 # MAIN
 ##############
 
+if (!isTRUE(all.equal(inputformat, "bed")) &&
+    !isTRUE(all.equal(inputformat, "gff")))
+    stop("input format should be bed or gff")
 
-# Retreives the parameters
-getParams(paramsDefinition);
+if (!file.exists(dirname(outputfile)))
+    dir.create(dirname(outputfile), recursive = TRUE)
 
-if(inputformat != "bed" && inputformat != "gff")
-{
-	stop("input format should be bed or gff\n");
+message("Reading peak files")
+peaklist <- lapply(filepathvec, read.table, stringsAsFactors = FALSE,
+    header = FALSE)
+
+peaksdf <- do.call(rbind, files_vec)
+
+if (isTRUE(all.equal(inputformat, "bed"))) {
+    peaksgr <- GenomicRanges::GRanges(seqnames = peaksdf[, 1],
+        ranges = IRanges::IRanges(start = peaksdf[, 2], end = peaksdf[, 3]))
+} else {
+    peaksgr <- GenomicRanges::GRanges(seqnames = peaksdf[,1],
+        ranges = IRanges::IRanges(start = peaksdf[, 4], end = peaksdf[, 5]))
 }
 
+message("Reducing intervals")
+peaksgr <- GenomicRanges::reduce(peaksgr)
 
-if(!file.exists(output_path))
-{
-	dir.create(output_path, recursive = TRUE)
-}
+res <- data.frame(seqname = as.character(seqnames(peaksgr)),
+    source = "union of peaks", feature = featurename, start = start(peaksgr),
+    end = end(peaksgr), score = 0, strand = '+', frame = ".",
+    group = make.unique(rep("group", length(start(peaksgr))), sep = "-"))
 
+write.table(res, file = outputfile, sep = "\t", quote = FALSE,
+    col.names = FALSE, row.names = FALSE)
 
-# Reading bed files
-
-cat("Reading files\n");
-
-files_vec <- list();
-
-for(i in 1:length(filepathvec)) 
-{
-	files_vec[[i]] <- read.table(filepathvec[i], stringsAsFactors=FALSE);
-}
-
-union_files <- do.call(rbind,files_vec);
-
-if(inputformat == "bed"){
-	
-	##intervals_rangedData <- RangedData(IRanges(start = union_files[,2], end = union_files[,3]), space = union_files[,1]);
-	intervals_gRanges <- GRanges(seqnames= union_files[,1], ranges= IRanges(start = union_files[,2], end = union_files[,3]))
-	
-}else{
-	##intervals_rangedData <- RangedData(IRanges(start = union_files[,4], end = union_files[,5]), space = union_files[,1]);
-	intervals_gRanges <- GRanges(seqnames= union_files[,1], ranges= IRanges(start = union_files[,4], end = union_files[,5]))
-}
-
-cat("Reducing intervals\n");
-intervals_gRanges <- reduce(intervals_gRanges);
-
-gff_file_to_write <- cbind(seqName = as.character(seqnames(intervals_gRanges)), source = "union_files", feature = "union_files", start = start(intervals_gRanges), end = end(intervals_gRanges), 
-		score = 0, strand = '+', frame = ".", group = make.unique(rep("group", length(start(intervals_gRanges))), sep="-"));
-
-write.table(gff_file_to_write, file=paste(output_path, outputfile, sep=""), sep="\t", quote=FALSE, col.names=FALSE, row.names=FALSE);
