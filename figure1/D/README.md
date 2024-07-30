@@ -26,6 +26,21 @@ These datasets were replaced by the following valid one which were found in the 
 See [replacement-rep1.txt](replacement-files/replacement-rep1.txt) and [replacement-rep2.txt](replacement-files/replacement-rep2.txt)
 
 ## Data
+
+As explained in the description section, The online tool is rapidly evolving and new experiments submitted to [GEO](https://www.ncbi.nlm.nih.gov/geo/) are regularly added. We provide the results of the enrichment analysis in the folder [chipatlas_results](chipatlas_results/).
+
+If one whishes to obtain results with the updated database, the O-GlcNac peaks can be obtained at:
+
+```
+#!/bin/bash
+
+mkdir data
+
+# O-GlcNac peaks
+wget XXX/ESCHGGlcNAc_rep1.gff -P data/
+wget XXX/ESCHGGlcNAc_rep2.gff -P data/
+```
+
 ## Installation
 
 
