@@ -46,7 +46,7 @@ outputfolder <- c("result")
 percentthreshold <- c(20)
 ignoreqval <- FALSE
 
-
+plothistheatmap <- FALSE
 
 #############
 ## FUNCTIONS
@@ -745,13 +745,15 @@ resultlistescsramerged <- replaceelementschipatlas(sra_to_filter, perc_replace,
 ## PART 3: Generating the heatmap
 ####
 
+message("\n ## PART 3: Generating the heatmap")
 ## Completing each element of the list with missing sra
 ## First retrieving all sra of the list
 histsections <- paste0(repprefixvec, suffixmerged[1])
 poltfsections <- paste0(repprefixvec, suffixmerged[2])
-.callheatmapgeneration(resultlistescsramerged, completeresultlistescsramerged,
-    histsections, "Histones", outputfolder, experimentname, percentthreshold,
-    ignoreqval)
+if (plothistheatmap)
+    .callheatmapgeneration(resultlistescsramerged,
+        completeresultlistescsramerged, histsections, "Histones", outputfolder,
+        experimentname, percentthreshold, ignoreqval)
 .callheatmapgeneration(resultlistescsramerged, completeresultlistescsramerged,
     poltfsections, "PolII-TFs", outputfolder, experimentname,
     percentthreshold, ignoreqval)
