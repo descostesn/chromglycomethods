@@ -609,7 +609,7 @@ replaceelementschipatlas <- function(sra_to_filter, perc_replace, sra_replace,
 callheatmapgeneration <- function(res, rescomplete, sectionvec, sectiontype,
     outputfolder, experimentname, percentthreshold, ignoreqval) {
 
-    message("Generating heatmap for ", sectiontype)
+    message("\t Generating heatmap for ", sectiontype)
     alldf <- .retrieveall(res, sectionvec)
     allsra <- alldf$SRA
     allantigen <- alldf$Antigen
@@ -620,14 +620,14 @@ callheatmapgeneration <- function(res, rescomplete, sectionvec, sectiontype,
 
     ## Merge results by antigen (assuming two replicates, verified when checking
     ## parameters)
-    message("Merging replicates and create result table")
+    message("\t Merging replicates and create result table")
     resmerged <- merge(rescompletedlist[[1]], rescompletedlist[[2]],
         by = "Antigen")
 
     ## Writing the result table
-    message("Writing output table result")
+    message("\t Writing output table result")
     outfold <- file.path(outputfolder, experimentname, sectiontype)
-    if(!file.exists(outfold))
+    if (!file.exists(outfold))
         dir.create(outfold, recursive = TRUE)
     filename <- paste0(experimentname, "-", percentthreshold,
         if (ignoreqval) "-noQval", ".txt")
@@ -642,8 +642,6 @@ callheatmapgeneration <- function(res, rescomplete, sectionvec, sectiontype,
 
     ## Plotting heatmap
     .plotheatmap(mat, "none", ignoreqval, experimentname, percentthreshold,
-        outputfolder, sectiontype)
-    .plotheatmap(mat, "row", ignoreqval, experimentname, percentthreshold,
         outputfolder, sectiontype)
 }
 
