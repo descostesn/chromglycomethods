@@ -10,7 +10,7 @@ V. [Pre-processing](#pre-processing)
 &nbsp;&nbsp; V.II. [Union](#union)  
 
 !! Perform the union of peaks before computing the heatmap, show a venn diagram in the doc
-!! Delete union_sept2023mouse_HG.gff from zenodo and upload the new one called union_sept2023mouse_HG1-2.gff
+!! Delete union_sept2023mouse_HG.gff from zenodo and upload the new one called union_sept2023mouse_HG1-2.gff, replace the name in the data section
 !! precise number of peaks in the description
 !! Define a single heatmap with 3 groups for pol II
 !! Delete mouseESC_fig1E_peakorder.bed on zenodo and upload the new file with same name
@@ -47,10 +47,8 @@ wget https://zenodo.org/records/12793186/files/Med26_SRX4167136.bw  -P data/
 wget https://zenodo.org/records/12793186/files/Dr1_SRX2894853.bw  -P data/
 
 ## The peak files of each replicates
-wget XXX/  -P data/
-ESCHGGlcNAc_rep1_peaks.gff
-ESCHGGlcNAc_rep2_peaks.gff
-
+wget XXX/ESCHGGlcNAc_rep1_peaks.gff -P data/
+wget XXX/ESCHGGlcNAc_rep2_peaks.gff -P data/
 ```
 
 
