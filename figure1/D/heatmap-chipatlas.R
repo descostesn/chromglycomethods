@@ -76,7 +76,7 @@ readandfilter <- function(resultpathvec, resultnamevec, chipatlascolnames,
 
         resultlist <- mapply(function(currentpath, currentname, colnamevec) {
 
-            message("\t Reading ", currentname)
+            message("Reading ", currentname)
             fi <- read.delim(currentpath, stringsAsFactors = FALSE,
                 header = FALSE)
             colnames(fi) <- colnamevec
