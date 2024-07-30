@@ -134,8 +134,9 @@ removeelements <- function(resultlist, idxremove) {
     return(resultlist)
 }
 
-.filteroncells <- function(resultlist, lookesc = TRUE) {
+filteroncells <- function(resultlist, lookesc = TRUE) {
 
+    message("Retrieving ES cell results")
     result <- mapply(function(currentdf, currentname, lookesc) {
 
                 if (lookesc)
@@ -688,8 +689,8 @@ print(nbpeaksvec)
 
 
 ## Retrieving embryonic stem cells and other cells
-message("\n\n Retrieving embryonic stem cells")
-resultlistesc <- .filteroncells(resultlist)
+message("Retrieving embryonic stem cells")
+resultlistesc <- filteroncells(resultlist)
 idxremove <- which(is.na(resultlistesc))
 resultlistesc <- removeelements(resultlistesc, idxremove)
 if (!isTRUE(all.equal(length(idxremove), 0)))
