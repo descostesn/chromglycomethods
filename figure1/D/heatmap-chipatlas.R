@@ -460,7 +460,7 @@ testvaluesvec <- function(sra_to_filter, perc_replace, sra_replace,
                     reslist <- mapply(function(currentname, repsrafilter,
                         reppercreplace, repsrareplace, repantireplace, resrep) {
 
-                            message("\t\t Elements: ", currentname)
+                            message("\t Elements: ", currentname)
                             elsratofilter <- repsrafilter[[currentname]]
                             newperc <- reppercreplace[[currentname]]
                             newsra <- repsrareplace[[currentname]]
@@ -495,7 +495,7 @@ replaceelementschipatlas <- function(sra_to_filter, perc_replace, sra_replace,
             srareplace, antigenreplace, res) {
 
         ## Retrieving the lists of histones and polTFs for current rep
-        message("\t Processing ", currentrepname)
+        message(" Processing ", currentrepname)
         repsrafilter <- sratofilter[[currentrepname]]
         reppercreplace <- percreplace[[currentrepname]]
         repsrareplace <- srareplace[[currentrepname]]
