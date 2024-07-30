@@ -136,7 +136,6 @@ removeelements <- function(resultlist, idxremove) {
 
 filteroncells <- function(resultlist, lookesc = TRUE) {
 
-    message("Retrieving ES cell results")
     result <- mapply(function(currentdf, currentname, lookesc) {
 
                 if (lookesc)
