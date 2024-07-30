@@ -75,4 +75,53 @@ Retrieving embryonic stem cells
          Number of results for mHG14pol: 658
          Number of results for mHG14TF: 5363
 Nothing to remove.
+Building antigen unique lists for Embryonic Stem Cells:
+Processing mHG1hist
+         Keeping 1618/5594
+         Keeping max overlap by antigens
+         Returning 27/1618
+Processing mHG1pol
+         Keeping 302/658
+         Keeping max overlap by antigens
+         Returning 1/302
+Processing mHG1TF
+         Keeping 840/5356
+         Keeping max overlap by antigens
+         Returning 141/840
+Processing mHG2hist
+         Keeping 1508/5595
+         Keeping max overlap by antigens
+         Returning 26/1508
+Processing mHG2pol
+         Keeping 296/658
+         Keeping max overlap by antigens
+         Returning 1/296
+Processing mHG2TF
+         Keeping 759/5363
+         Keeping max overlap by antigens
+         Returning 130/759
+Processing mHG2hist
+         Keeping 5594/5594
+         Computing percentages only
+         Returning 5594/5594
+Processing mHG2pol
+         Keeping 658/658
+         Computing percentages only
+         Returning 658/658
+Processing mHG2TF
+         Keeping 5356/5356
+         Computing percentages only
+         Returning 5356/5356
+Processing mHG2hist
+         Keeping 5550/5595
+         Computing percentages only
+         Returning 5550/5550
+Processing mHG2pol
+         Keeping 654/658
+         Computing percentages only
+         Returning 654/654
+Processing mHG2TF
+         Keeping 5337/5363
+         Computing percentages only
+         Returning 5337/5337
 ```
