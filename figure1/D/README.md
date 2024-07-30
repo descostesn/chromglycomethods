@@ -63,4 +63,16 @@ Reading mHG2TF
   Filtering on the Qvalue
   Filtering out the mock IP expriments
   Keeping 6779/6785(100%)
+Nothing to remove.
+Retrieving the number of peaks per categories
+mHG1hist  mHG1pol   mHG1TF mHG2hist  mHG2pol   mHG2TF
+      523       523       523      1074      1074      1074
+Retrieving embryonic stem cells
+         Number of results for mHG13hist: 5594
+         Number of results for mHG13pol: 658
+         Number of results for mHG13TF: 5356
+         Number of results for mHG14hist: 5595
+         Number of results for mHG14pol: 658
+         Number of results for mHG14TF: 5363
+Nothing to remove.
 ```
