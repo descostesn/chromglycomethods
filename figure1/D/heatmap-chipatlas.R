@@ -427,14 +427,6 @@ ignoreqval <- FALSE
 .testvaluesvec <- function(sra_to_filter, perc_replace, sra_replace,
     antigen_replace) {
 
-        # repsra <- sra_to_filter[[1]]
-        # reppercreplace <- perc_replace[[1]]
-        # repsrareplace <- sra_replace[[1]]
-        # repantigenreplace <- antigen_replace[[1]]
-        # namesrepsra <- names(sra_to_filter)[1]
-        # namesreppercreplace <- names(perc_replace)[1]
-        # namesrepsrareplace <- names(sra_replace)[1]
-        # namesantigenreplace <- names(antigen_replace)[1]
     invisible(mapply(function(repsra, reppercreplace, repsrareplace,
         repantigenreplace, namesrepsra, namesreppercreplace, namesrepsrareplace,
         namesantigenreplace) {
@@ -442,14 +434,6 @@ ignoreqval <- FALSE
             .testrepnames(namesrepsra, namesreppercreplace, namesrepsrareplace,
                 namesantigenreplace)
 
-            # sra <- repsra[[1]]
-            # percreplace <- reppercreplace[[1]]
-            # srareplace <- repsrareplace[[1]]
-            # antireplace <- repantigenreplace[[1]]
-            # namessra <- names(repsra)[1]
-            # namespercreplace <- names(reppercreplace)[1]
-            # namessrareplace <- names(repsrareplace)[1]
-            # namesantireplace <- names(repantigenreplace)[1]
             mapply(function(sra, percreplace, srareplace, antireplace, namessra,
             namespercreplace, namessrareplace, namesantireplace) {
 
@@ -523,8 +507,6 @@ ignoreqval <- FALSE
             antigen_replace, resultlistescsramerged), SIMPLIFY = FALSE)
     return(res)
 }
-
-
 
 .retrieveall <- function(res, sectionvec) {
 
