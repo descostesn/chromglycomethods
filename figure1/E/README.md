@@ -4,10 +4,13 @@ I. [Description](#description)
 II. [Data](#data)  
 III. [Installation](#installation)  
 IV. [Figure Generation](#figure-generation)  
+&nbsp;&nbsp; IV.II. [Union of peaks](#union-of-peaks)  
+&nbsp;&nbsp; IV.II. [Matrix Generation](#matrix-generation)
+&nbsp;&nbsp; IV.III. [Heatmaps](#heatmaps)  
 V. [Pre-processing](#pre-processing)  
 &nbsp;&nbsp; V.I. [Workflows](#workflows)  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; VI.I.I. [ChIP-seq and CutnRun](#cutnrun)  
-&nbsp;&nbsp; V.II. [Union](#union)  
+
 
 !! Perform the union of peaks before computing the heatmap, show a venn diagram in the doc
 !! Delete union_sept2023mouse_HG.gff from zenodo and upload the new one called union_sept2023mouse_HG1-2.gff, replace the name in the data section
@@ -51,5 +54,5 @@ wget XXX/ESCHGGlcNAc_rep1_peaks.gff -P data/
 wget XXX/ESCHGGlcNAc_rep2_peaks.gff -P data/
 ```
 
-
+## Figure Generation
 
