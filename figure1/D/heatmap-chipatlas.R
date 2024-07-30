@@ -606,7 +606,7 @@ replaceelementschipatlas <- function(sra_to_filter, perc_replace, sra_replace,
         filename = outfile)
 }
 
-.callheatmapgeneration <- function(res, rescomplete, sectionvec, sectiontype,
+callheatmapgeneration <- function(res, rescomplete, sectionvec, sectiontype,
     outputfolder, experimentname, percentthreshold, ignoreqval) {
 
     message("Generating heatmap for ", sectiontype)
@@ -751,9 +751,9 @@ message("\n ## PART 3: Generating the heatmap")
 histsections <- paste0(repprefixvec, suffixmerged[1])
 poltfsections <- paste0(repprefixvec, suffixmerged[2])
 if (plothistheatmap)
-    .callheatmapgeneration(resultlistescsramerged,
+    callheatmapgeneration(resultlistescsramerged,
         completeresultlistescsramerged, histsections, "Histones", outputfolder,
         experimentname, percentthreshold, ignoreqval)
-.callheatmapgeneration(resultlistescsramerged, completeresultlistescsramerged,
+callheatmapgeneration(resultlistescsramerged, completeresultlistescsramerged,
     poltfsections, "PolII-TFs", outputfolder, experimentname,
     percentthreshold, ignoreqval)
