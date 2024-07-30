@@ -194,7 +194,7 @@ buildantigenlist <- function(resultlist, thres = 1, keepmaxonly = FALSE) {
 
             ## Keeping the line with the highest percentage of overlap by
             ## antigen
-            message("\t\t\t Keeping max overlap by antigens")
+            message("\t Keeping max overlap by antigens")
             antigenlist <- split(df, df$Antigen)
             antigenlist <- lapply(antigenlist, function(currentantigen) {
                 if (isTRUE(all.equal(nrow(currentantigen), 1)))
@@ -203,12 +203,12 @@ buildantigenlist <- function(resultlist, thres = 1, keepmaxonly = FALSE) {
                 return(currentantigen[idxmax, ])})
             antigendf <- do.call(rbind, antigenlist)
         } else {
-            message("\t\t\t Computing percentages only")
+            message("\t Computing percentages only")
             antigendf <- df
         }
 
         ## Keeping only the name of the antigen and the percentage
-        message("\t\t Returning ", nrow(antigendf), "/", length(nbquery))
+        message("\t Returning ", nrow(antigendf), "/", length(nbquery))
         result <- data.frame(Antigen = antigendf$Antigen,
                             PercentOverlap = antigendf$percentoverlap,
                             SRA = antigendf$ID)
