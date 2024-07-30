@@ -32,6 +32,7 @@ See [replacement-rep1.txt](replacement-files/replacement-rep1.txt) and [replacem
 The script should output:
 
 ```
+## PART 1: Preparing the data
 Reading ChIP-Atlas results
 Reading mHG1hist
   Filtering lines having more overlap on random control
@@ -124,4 +125,12 @@ Processing mHG2TF
          Keeping 5337/5363
          Computing percentages only
          Returning 5337/5337
+Merging pol and TFs for each replicates
+         Processing mHG13
+         Processing mHG14
+         Processing mHG13
+         Processing mHG14
+
+## PART 2: Filtering the data
+
 ```

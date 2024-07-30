@@ -243,7 +243,7 @@ mergepolandtf <- function(reslist, prefvec) {
     return(res)
 }
 
-.buildreplacementvectors <- function() {
+buildreplacementvectors <- function() {
 
     sra_to_filter <- list(
         "mHG13" = list(
@@ -657,6 +657,8 @@ mergepolandtf <- function(reslist, prefvec) {
 ## PART 1: Preparing the data
 ####
 
+message("## PART 1: Preparing the data")
+
 ## Checking parameters
 checkparams(outputfolder, resultpathvec, resultnamevec, experimentname,
     repprefixvec)
@@ -718,11 +720,12 @@ names(completeresultlistescsramerged) <- repprefixvec
 ## PART 2: Filtering the data
 ####
 
+message("\n ## PART 2: Filtering the data")
 ## The list of sra to filter was determined manually looking at the sra records.
 ##
-## See the top of the script and the function .buildreplacementvectors() for
+## See the top of the script and the function buildreplacementvectors() for
 ## details
-resultsreplacement <- .buildreplacementvectors()
+resultsreplacement <- buildreplacementvectors()
 sra_to_filter <- resultsreplacement[[1]]
 perc_replace <- resultsreplacement[[2]]
 sra_replace <- resultsreplacement[[3]]
