@@ -54,6 +54,13 @@ wget XXX/ESCHGGlcNAc_rep2_peaks.gff -P data/
 
 ## Installation
 
+Install conda following the instructions [here](https://conda.io/projects/conda/en/latest/user-guide/install/index.html). Using the recipe [fig1E.yml](fig1E.yml), run:
+
+```
+conda env create -n fig1e --file ./fig1E.yml
+conda activate fig1e
+```
+
 ## Figure Generation
 
 Generate the gff file of the union of peaks by running:
@@ -70,5 +77,10 @@ Reducing intervals
 The union returned 702 peaks
 ```
 
-### Union of peaks
+Generate a matrix with the RNAPolII bigwig using the coordinates of the union of peaks:
+
+```
+computeMatrix  reference-point --regionsFileName union_sept2023mouse_HG1-2.gff --scoreFileName RNApolymeraseII_SRX8556273.bw --outFileName 'polIImatrix' --samplesLabel 'RNAPolII' --numberOfProcessors $NBCPU --referencePoint TSS --beforeRegionStartLength 1000 --afterRegionStartLength 1000 --sortRegions 'keep' --sortUsing 'mean' --averageTypeBins 'mean'   --binSize 50  --transcriptID transcript --exonID exon --transcript_id_designator transcript_id
+```
+
 
