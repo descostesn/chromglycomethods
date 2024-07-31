@@ -58,5 +58,19 @@ wget XXX/ESCHGGlcNAc_rep2_peaks.gff -P data/
 
 ## Figure Generation
 
+Generate the gff file of the union of peaks by running:
+
+```
+Rscript union.R
+```
+
+The script should give the output:
+
+```
+Reading peak files
+Reducing intervals
+The union returned 702 peaks
+```
+
 ### Union of peaks
 
