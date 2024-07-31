@@ -43,7 +43,7 @@ message("Reading peak files")
 peaklist <- lapply(filepathvec, read.table, stringsAsFactors = FALSE,
     header = FALSE)
 
-peaksdf <- do.call(rbind, files_vec)
+peaksdf <- do.call(rbind, peaklist)
 
 if (isTRUE(all.equal(inputformat, "bed"))) {
     peaksgr <- GenomicRanges::GRanges(seqnames = peaksdf[, 1],
@@ -61,6 +61,7 @@ res <- data.frame(seqname = as.character(seqnames(peaksgr)),
     end = end(peaksgr), score = 0, strand = '+', frame = ".",
     group = make.unique(rep("group", length(start(peaksgr))), sep = "-"))
 
+message("The union returned ", nrow(res), " peaks")
+
 write.table(res, file = outputfile, sep = "\t", quote = FALSE,
     col.names = FALSE, row.names = FALSE)
-
