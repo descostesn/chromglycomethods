@@ -13,15 +13,6 @@ library("GenomicRanges")
 # PARAMETERS
 ################
 
-
-filepathvec <- c("/g/boulard/Projects/O-N-acetylglucosamine/analysis/peak_detection/macs2/Sept2023_glcPolII/mouse/glcGlucose/0.04/no_model/ESCHGGlcNAc1_lane1sample12_peaks_narrowPeak.gff",
-"/g/boulard/Projects/O-N-acetylglucosamine/analysis/peak_detection/macs2/Sept2023_glcPolII/mouse/glcGlucose/0.04/no_model/ESCHGGlcNAc2_lane1sample13_peaks_narrowPeak.gff")
-outputfile <- "/g/romebioinfo/tmp/union_sept2023mouse_HG1-2.gff"
-inputformat <- "gff"
-featurename <- "union-glc-rep1_2"
-
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
 filepathvec <- c("data/ESCHGGlcNAc_rep1_peaks.gff",
     "data/ESCHGGlcNAc_rep2_peaks.gff")
 outputfile <- "result/union_sept2023mouse_HG1-2.gff"
