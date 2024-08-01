@@ -104,7 +104,7 @@ rm results/peakscoord.bed
 mv results/tmp.bed results/peakscoord.bed
 ```
 
-Regenerate the RNAPol II heatmap:
+Regenerate the RNAPol II matrix with the new coordinates:
 
 ```
 
