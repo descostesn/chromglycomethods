@@ -5,16 +5,12 @@ II. [Data](#data)
 III. [Installation](#installation)  
 IV. [Figure Generation](#figure-generation)  
 &nbsp;&nbsp; IV.II. [Union of peaks](#union-of-peaks)  
-&nbsp;&nbsp; IV.II. [Matrix Generation](#matrix-generation)
+&nbsp;&nbsp; IV.II. [RNAPol II clustering](#rnapol-ii-clustering)  
 &nbsp;&nbsp; IV.III. [Heatmaps](#heatmaps)  
 V. [Pre-processing](#pre-processing)  
 &nbsp;&nbsp; V.I. [Workflows](#workflows)  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; VI.I.I. [ChIP-seq and CutnRun](#cutnrun)  
 
-
-
-!! Define a single heatmap with 3 groups for pol II
-!! Delete mouseESC_fig1E_peakorder.bed on zenodo and upload the new file with same name
 
 ## Description
 
@@ -63,6 +59,8 @@ conda activate fig1e
 
 ## Figure Generation
 
+### Union of peaks
+
 Generate the gff file of the union of peaks by running:
 
 ```
@@ -77,6 +75,8 @@ Reducing intervals
 The union returned 702 peaks
 Writing results/union_sept2023mouse_HG1-2.bed
 ```
+
+### RNAPol II clustering
 
 Generate a matrix with the RNAPolII bigwig using the coordinates of the union of peaks:
 
@@ -123,6 +123,9 @@ FORMAT='png'
 FILENAME='rnapolII-3groups.png'
 plotHeatmap --matrixFile results/polIImatrixsorted.mat --outFileName results/$FILENAME --plotFileFormat $FORMAT    --dpi '200' --sortRegions 'no' --sortUsing 'mean' --averageTypeSummaryPlot 'mean' --plotType 'lines'  --missingDataColor 'black' --alpha '1.0' --colorList white,blue --zMin 0 --zMax 180 --yMin 0.0 --yMax 80.0  --xAxisLabel 'distance from peak start (bp)' --yAxisLabel 'peaks' --heatmapWidth 7.5 --heatmapHeight 25.0  --whatToShow 'plot, heatmap and colorbar' --startLabel 'peak' --endLabel 'TES' --refPointLabel 'peak'     --legendLocation 'best' --labelRotation '0'
 ```
+
+### Heatmaps
+
 
 Performing the same procedure for the other datasets:
 
