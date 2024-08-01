@@ -115,9 +115,9 @@ The analysis was done on Galaxy with the workflow !!
 
 The file to annotate the genes can be downloaded from `wget https://zenodo.org/records/12793186/files/Mus_musculus.GRCm38.102.chr.gtf.tar.gz`
 
-Differentially expressed genes were determined with bioconductor-deseq2 v1.22.1 (see the Galaxy script [deseq2.R](others/deseq2.R)]): ``
+Differentially expressed genes were determined with bioconductor-deseq2 v1.22.1 (see the Galaxy script [deseq2.R](others/deseq2.R)]): `Rscript deseq2.R --cores $nbcpu -o results_deseq2.txt -p results_deseq2.pdf -n countfiles -H  -f '[["condition2_vs_condition1", [{"ctrl": ["sictrl_rep2_counts.txt", "sictrl_rep1_counts.txt"]}, {"siogt": ["siogt_rep1_counts.txt", "siogt_rep2_counts.txt"]}]]]' -l '{"siogt_rep1_counts.txt": "siogt_rep1_counts.txt", "siogt_rep2_counts.txt": "siogt_rep2_counts.txt", "sictrl_rep2_counts.txt": "sictrl_rep2_counts.txt", "sictrl_rep1_counts.txt": "sictrl_rep1_counts.txt"}' -t 1`
 
-Rscript '/g/funcgen/galaxy-production/shed_tools/toolshed.g2.bx.psu.edu/repos/iuc/deseq2/e5c8afac22a7/deseq2/deseq2.R' --cores ${GALAXY_SLOTS:-1} -o '/g/funcgen/galaxy-production/database/files/001/164/dataset_1164321.dat' -p '/g/funcgen/galaxy-production/database/files/001/164/dataset_1164322.dat' -n '/g/funcgen/galaxy-production/database/files/001/164/dataset_1164323.dat'              -H  -f '[["condition2_vs_condition1", [{"ctrl": ["/g/boulard/Projects/O-N-acetylglucosamine/data/formichetti_sigot_mrnaseq/data/sequencing/counts_table/raw_ensembl/sictrl_Sample51.tabular", "/g/boulard/Projects/O-N-acetylglucosamine/data/formichetti_sigot_mrnaseq/data/sequencing/counts_table/raw_ensembl/sictrl_Sample49.tabular"]}, {"siogt": ["/g/boulard/Projects/O-N-acetylglucosamine/data/formichetti_sigot_mrnaseq/data/sequencing/counts_table/raw_ensembl/siogt_Sample50.tabular", "/g/boulard/Projects/O-N-acetylglucosamine/data/formichetti_sigot_mrnaseq/data/sequencing/counts_table/raw_ensembl/siogt_Sample52.tabular"]}]]]' -l '{"siogt_Sample50.tabular": "siogt_Sample50.tabular", "siogt_Sample52.tabular": "siogt_Sample52.tabular", "sictrl_Sample51.tabular": "sictrl_Sample51.tabular", "sictrl_Sample49.tabular": "sictrl_Sample49.tabular"}' -t 1
+
 
 ### Merging replicates
 ### DEG overlap O-GlcNac
