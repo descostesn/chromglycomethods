@@ -207,3 +207,9 @@ Reads not aligned to consensus chromosomes were excluded with samtools v1.9: `sa
 
 ### Peak detection
 
+| Target | Broad | q-value | Duplicates Thres. | Tag size |
+|--------|-------|---------|-------------------|----------|
+| ESCHGGlcNAc_rep1 | NO | 0.04 | 7 | 82 |
+| ESCHGGlcNAc_rep2 | NO | 0.04 | 7 | 82 |
+
+* Macs2 v2.2.7.1 Narrow: `macs2 callpeak -t $input.bam -c $control.bam -n $expname --outdir $outfold -f BAM -g 1.87e9 -s $tagsize -q $qvalue --nomodel --extsize 150 --keep-dup $dupthres`
