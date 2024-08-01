@@ -30,7 +30,22 @@ wget https://zenodo.org/records/12793186/files/resultDeseq2_siogt.txt  -P data/
 ## The down- and up-regulated genes having an O-GlcNac peak
 wget https://zenodo.org/records/12793186/files/siogtdown_withOGlcNac.gff -P data/
 wget https://zenodo.org/records/12793186/files/siogtup_withOGlcNac.gff  -P data/
+
+# O-GlcNac peak replicates to perform merge
+wget XXX/ESCHGGlcNAc_rep1.gff -P data/
+wget XXX/ESCHGGlcNAc_rep2.gff -P data/
+
+## Counts and feature length files for DESeq2
+wget XXX/sictrl_rep1_countslength.txt -P data/
+wget XXX/sictrl_rep1_counts.txt -P data/
+wget XXX/sictrl_rep2_counts.txt -P data/
+wget XXX/siogt_rep1_counts.txt -P data/
+wget XXX/siogt_rep2_counts.txt -P data/
+
+## All 'countslength' files contain the same information
+mv sictrl_rep1_countslength.txt sictrlogt_featurelength.txt
 ```
+
 
 ## Installation
 
