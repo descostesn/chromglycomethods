@@ -191,7 +191,7 @@ The script should output:
 
 ### Workflows
 
-### ChIP-seq and CutnRun
+#### ChIP-seq and CutnRun
 
 The pre-processing was performed with the Galaxy workflows [OGlcNac_ChIP-SeqPEmm10](../A/galaxy-workflows/Galaxy-Workflow-OGlcNac_ChIP-SeqPEmm10.ga) and [OGlcNac_ChIP-SeqSEmm10](../A/galaxy-workflows/Galaxy-Workflow-OGlcNac_ChIP-SeqSEmm10.ga) for paired-end and single-end data respectively. The .ga files can be imported in one own galaxy account.
 
