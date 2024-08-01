@@ -81,6 +81,8 @@ Writing results/union_sept2023mouse_HG1-2.bed
 Generate a matrix with the RNAPolII bigwig using the coordinates of the union of peaks:
 
 ```
+#!/bin/bash
+
 ## Define the number of CPUs
 NBCPU=1
 
@@ -91,27 +93,40 @@ computeMatrix  reference-point --regionsFileName results/union_sept2023mouse_HG1
 Generate a heatmap of RNAPol II performing a k-means clustering on 3 groups to retrieve the peak coordinates:
 
 ```
+#!/bin/bash
+
 FORMAT='png'
 FILENAME='rnapolII-3groups-initial.png'
-plotHeatmap --matrixFile results/polIImatrix.mat --outFileName results/$FILENAME --plotFileFormat $FORMAT --outFileSortedRegions results/peakscoord.bed --dpi '200' --sortRegions 'descend'  --sortUsing 'mean' --averageTypeSummaryPlot 'mean' --plotType 'lines' --missingDataColor 'black' --alpha '1.0' --colorList white,blue --xAxisLabel 'distance from peak start (bp)' --yAxisLabel 'peaks' --heatmapWidth 7.5 --heatmapHeight 25.0 --whatToShow 'plot, heatmap and colorbar' --startLabel 'peak' --endLabel 'TES' --refPointLabel 'peak' --legendLocation 'best' --labelRotation '0' --kmeans 3
+plotHeatmap --matrixFile results/polIImatrix.mat --outFileName results/$FILENAME --plotFileFormat $FORMAT --outFileSortedRegions results/peakscoord-fig1E.bed --dpi '200' --sortRegions 'descend'  --sortUsing 'mean' --averageTypeSummaryPlot 'mean' --plotType 'lines' --missingDataColor 'black' --alpha '1.0' --colorList white,blue --xAxisLabel 'distance from peak start (bp)' --yAxisLabel 'peaks' --heatmapWidth 7.5 --heatmapHeight 25.0 --whatToShow 'plot, heatmap and colorbar' --startLabel 'peak' --endLabel 'TES' --refPointLabel 'peak' --legendLocation 'best' --labelRotation '0' --kmeans 3
 ```
 
-Replace the groups 'cluster_2' and 'cluster_3' in results/peakscoord.bed to avoid visual separation of the groups:
+Replace the groups 'cluster_2' and 'cluster_3' in results/peakscoord-fig1E.bed to avoid visual separation of the groups:
 
 ```
-sed "s/cluster_[2-3]/cluster_1/" results/peakscoord.bed > results/tmp.bed
-rm results/peakscoord.bed
-mv results/tmp.bed results/peakscoord.bed
+#!/bin/bash
+
+sed "s/cluster_[2-3]/cluster_1/" results/peakscoord-fig1E.bed > results/tmp.bed
+rm results/peakscoord-fig1E.bed
+mv results/tmp.bed results/peakscoord-fig1E.bed
 ```
 
 Regenerate the RNAPol II matrix with the new coordinates and plot the signal without changing the coordinate order:
 
 ```
+#!/bin/bash
+
 ## Matrix
-computeMatrix  reference-point --regionsFileName results/peakscoord.bed --scoreFileName data/RNApolymeraseII_SRX8556273.bw --outFileName results/polIImatrixsorted.mat --samplesLabel RNAPolII --numberOfProcessors $NBCPU --referencePoint TSS --beforeRegionStartLength 1000 --afterRegionStartLength 1000 --sortRegions 'keep' --sortUsing 'mean' --averageTypeBins 'mean' --binSize 50 --transcriptID transcript --exonID exon --transcript_id_designator transcript_id
+computeMatrix  reference-point --regionsFileName results/peakscoord-fig1E.bed --scoreFileName data/RNApolymeraseII_SRX8556273.bw --outFileName results/polIImatrixsorted.mat --samplesLabel RNAPolII --numberOfProcessors $NBCPU --referencePoint TSS --beforeRegionStartLength 1000 --afterRegionStartLength 1000 --sortRegions 'keep' --sortUsing 'mean' --averageTypeBins 'mean' --binSize 50 --transcriptID transcript --exonID exon --transcript_id_designator transcript_id
 
 ## Heatmap
 FORMAT='png'
 FILENAME='rnapolII-3groups.png'
 plotHeatmap --matrixFile results/polIImatrixsorted.mat --outFileName results/$FILENAME --plotFileFormat $FORMAT    --dpi '200' --sortRegions 'no' --sortUsing 'mean' --averageTypeSummaryPlot 'mean' --plotType 'lines'  --missingDataColor 'black' --alpha '1.0' --colorList white,blue --zMin 0 --zMax 180 --yMin 0.0 --yMax 80.0  --xAxisLabel 'distance from peak start (bp)' --yAxisLabel 'peaks' --heatmapWidth 7.5 --heatmapHeight 25.0  --whatToShow 'plot, heatmap and colorbar' --startLabel 'peak' --endLabel 'TES' --refPointLabel 'peak'     --legendLocation 'best' --labelRotation '0'
 ```
+
+Performing the same procedure for the other datasets:
+
+```
+
+```
+
