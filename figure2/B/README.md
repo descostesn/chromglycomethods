@@ -119,6 +119,16 @@ Differentially expressed genes were determined with bioconductor-deseq2 v1.22.1 
 
 The deseq2 table was then filtered on columns 3 (fold-change) and 7 (adj p-val) with `abs(c3)>0 and c7<0.05` to keep significant fold-changes that are not equal to zero.
 
+The lists of down- and up-regulated genes were separated to their respective files using the third column: c3 < 0 for down and c3 > 0 for up.
+
+The resulting files can be downloaded:
+
+```
+#!/bin/bash
+
+wget https://zenodo.org/records/12793186/files/log0_siogtdown-ensembl.gff
+wget https://zenodo.org/records/12793186/files/log0_siogtup-ensembl.gff
+```
 
 ### Merging replicates
 ### DEG overlap O-GlcNac
