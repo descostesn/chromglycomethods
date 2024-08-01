@@ -127,6 +127,9 @@ plotHeatmap --matrixFile results/polIImatrixsorted.mat --outFileName results/$FI
 Performing the same procedure for the other datasets:
 
 ```
-FILEVEC=()
-```
+FILEVEC=( 'ESCHGGlcNAc_rep1.bw' 'Tbp_SRX9195301.bw' 'Taf12_SRX11221932.bw' 'Nelfa_SRX017058.bw' 'Med1_SRX9195310.bw' 'Med12_SRX1670201.bw' 'Med24_SRX5926394.bw' 'Med26_SRX4167136.bw' 'Dr1_SRX2894853.bw' )
+HEATMAPMAXVEC=( 100 70 80 250 50 40 40 60 140 )
+PROFILEMAXVEC=( 60 30 40 100 20 18 18 30 50 )
 
+
+```
