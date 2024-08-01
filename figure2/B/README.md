@@ -111,7 +111,7 @@ Counts were obtained with subread v2.0.1: `featureCounts -a Mus_musculus.GRCm38.
 
 ### DEseq2
 
-The analysis was done on Galaxy with the workflow !!
+The analysis was done on Galaxy with the workflow [OGlcNac_ensembl_deseq2_4samplesmouse](galaxy-workflows/Galaxy-Workflow-OGlcNac_ensembl_deseq2_4samplesmouse.ga)
 
 If one wants to run the complete workflow, the file that was used to annotate the genes can be downloaded from `wget https://zenodo.org/records/12793186/files/Mus_musculus.GRCm38.102.chr.gtf.tar.gz`
 
