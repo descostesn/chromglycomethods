@@ -73,6 +73,7 @@ if (!file.exists(outfold))
     dir.create(outfold, recursive = TRUE)
 
 ## Reading files
+message("Reading files")
 colnamedeseq2 <- c("geneID", "baseMean", "log2FoldChange", "lfcSE", "stat", # nolint
             "pvalue", "padj", "symbol")
 deseq2 <- suppressWarnings(readfilteraddsymbols(deseq2paths, colnamedeseq2, 1))
@@ -86,6 +87,7 @@ uppeaks <- readfilteraddsymbols(overuppeakspath, colnamespeaks, 3,
     checkna = TRUE)
 
 ## Add a status column to deseq2tab: up, down, glcpeaks, nodiff
+message("Defining status")
 statusvec <- rep("nodiff", nrow(deseq2))
 idxdown <- which(deseq2$log2FoldChange < 0 & deseq2$padj < 0.05)
 idxup <- which(deseq2$log2FoldChange > 0 & deseq2$padj < 0.05)
@@ -101,7 +103,12 @@ statusvec[idxglcdown] <- "downwithglc"
 statusvec[idxglcup] <- "upwithglc"
 deseq2 <- cbind(deseq2, statusvec)
 
+message("The number of genes per category is: ")
+print(table(deseq2$statusvec))
+
+
 ## Plotting volcano
+message("Plotting volcano")
 colvec <- c("deepskyblue4", "darkturquoise", "darkgrey", "orange4",
     "orange")
 idxnoglc <- which(deseq2$statusvec != "downwithglc" &
