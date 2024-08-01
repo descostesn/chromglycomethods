@@ -91,7 +91,15 @@ computeMatrix  reference-point --regionsFileName results/union_sept2023mouse_HG1
 Generate a heatmap of RNAPol II performing a k-means clustering on 3 groups to retrieve the peak coordinates:
 
 ```
-plotHeatmap --matrixFile results/polIImatrix.mat --outFileName results/rnapolII-3groups-initial.pdf --plotFileFormat 'pdf'   --outFileSortedRegions results/peakscoord.bed --dpi '200' --sortRegions 'descend' --sortUsing 'mean' --averageTypeSummaryPlot 'mean' --plotType 'lines' --missingDataColor 'black' --alpha '1.0' --colorList white,blue --xAxisLabel 'distance from peak start (bp)' --yAxisLabel 'peaks' --heatmapWidth 7.5 --heatmapHeight 25.0  --whatToShow 'plot, heatmap and colorbar' --startLabel 'peak' --endLabel 'TES' --refPointLabel 'peak'     --legendLocation 'best'  --labelRotation '0'
+plotHeatmap --matrixFile results/polIImatrix.mat --outFileName results/rnapolII-3groups-initial.pdf  --plotFileFormat 'pdf' --outFileSortedRegions results/peakscoord.bed --dpi '200' --sortRegions 'descend'  --sortUsing 'mean' --averageTypeSummaryPlot 'mean' --plotType 'lines' --missingDataColor 'black' --alpha '1.0' --colorList white,blue --xAxisLabel 'distance from peak start (bp)' --yAxisLabel 'peaks' --heatmapWidth 7.5 --heatmapHeight 25.0 --whatToShow 'plot, heatmap and colorbar' --startLabel 'peak' --endLabel 'TES' --refPointLabel 'peak' --legendLocation 'best' --labelRotation '0' --kmeans 3
+```
+
+Replace the groups 'cluster_2' and 'cluster_3' in results/peakscoord.bed to avoid visual separation of the groups:
+
+```
+sed "s/cluster_[2-3]/cluster_1/" results/peakscoord.bed > results/tmp.bed
+rm results/peakscoord.bed
+mv results/tmp.bed results/peakscoord.bed
 ```
 
 
