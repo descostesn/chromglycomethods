@@ -56,6 +56,6 @@ res <- data.frame(chrom = as.character(seqnames(peaksgr)),
     blockSizes = end(peaksgr) - start(peaksgr), blockStarts = start(peaksgr))
 
 message("The union returned ", nrow(res), " peaks")
-
+message("Writing ", outputfile)
 write.table(res, file = outputfile, sep = "\t", quote = FALSE,
     col.names = FALSE, row.names = FALSE)
