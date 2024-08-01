@@ -104,8 +104,14 @@ rm results/peakscoord.bed
 mv results/tmp.bed results/peakscoord.bed
 ```
 
-Regenerate the RNAPol II matrix with the new coordinates:
+Regenerate the RNAPol II matrix with the new coordinates and plot the signal without changing the coordinate order:
 
 ```
+## Matrix
+computeMatrix  reference-point --regionsFileName results/peakscoord.bed --scoreFileName data/RNApolymeraseII_SRX8556273.bw --outFileName results/polIImatrixsorted.mat --samplesLabel RNAPolII --numberOfProcessors $NBCPU --referencePoint TSS --beforeRegionStartLength 1000 --afterRegionStartLength 1000 --sortRegions 'keep' --sortUsing 'mean' --averageTypeBins 'mean' --binSize 50 --transcriptID transcript --exonID exon --transcript_id_designator transcript_id
 
+## Heatmap
+FORMAT='png'
+FILENAME='rnapolII-3groups.png'
+plotHeatmap --matrixFile results/polIImatrixsorted.mat --outFileName results/$FILENAME --plotFileFormat $FORMAT    --dpi '200' --sortRegions 'no' --sortUsing 'mean' --averageTypeSummaryPlot 'mean' --plotType 'lines'  --missingDataColor 'black' --alpha '1.0' --colorList white,blue --zMin 0 --zMax 180 --yMin 0.0 --yMax 80.0  --xAxisLabel 'distance from peak start (bp)' --yAxisLabel 'peaks' --heatmapWidth 7.5 --heatmapHeight 25.0  --whatToShow 'plot, heatmap and colorbar' --startLabel 'peak' --endLabel 'TES' --refPointLabel 'peak'     --legendLocation 'best' --labelRotation '0'
 ```
