@@ -52,6 +52,12 @@ conda activate fig1d
 
 ## Figure Generation
 
+Run the command:
+
+```
+Rscript heatmap-chipatlas.R
+```
+
 The script should output:
 
 ```
