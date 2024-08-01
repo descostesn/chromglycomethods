@@ -75,12 +75,23 @@ The script should give the output:
 Reading peak files
 Reducing intervals
 The union returned 702 peaks
+Writing results/union_sept2023mouse_HG1-2.bed
 ```
 
 Generate a matrix with the RNAPolII bigwig using the coordinates of the union of peaks:
 
 ```
-computeMatrix  reference-point --regionsFileName union_sept2023mouse_HG1-2.gff --scoreFileName RNApolymeraseII_SRX8556273.bw --outFileName 'polIImatrix' --samplesLabel 'RNAPolII' --numberOfProcessors $NBCPU --referencePoint TSS --beforeRegionStartLength 1000 --afterRegionStartLength 1000 --sortRegions 'keep' --sortUsing 'mean' --averageTypeBins 'mean'   --binSize 50  --transcriptID transcript --exonID exon --transcript_id_designator transcript_id
+## Define the number of CPUs
+NBCPU=1
+
+## Build the deeptools matrix
+computeMatrix  reference-point --regionsFileName results/union_sept2023mouse_HG1-2.bed --scoreFileName data/RNApolymeraseII_SRX8556273.bw --outFileName results/polIImatrix.mat --samplesLabel RNAPolII --numberOfProcessors $NBCPU --referencePoint TSS --beforeRegionStartLength 1000 --afterRegionStartLength 1000 --sortRegions 'keep' --sortUsing 'mean' --averageTypeBins 'mean'   --binSize 50  --transcriptID transcript --exonID exon --transcript_id_designator transcript_id
+```
+
+Generate a heatmap of RNAPol II performing a k-means clustering on 3 groups to retrieve the peak coordinates:
+
+```
+plotHeatmap --matrixFile results/polIImatrix.mat --outFileName results/rnapolII-3groups-initial.pdf --plotFileFormat 'pdf'   --outFileSortedRegions results/peakscoord.bed --dpi '200' --sortRegions 'descend' --sortUsing 'mean' --averageTypeSummaryPlot 'mean' --plotType 'lines' --missingDataColor 'black' --alpha '1.0' --colorList white,blue --xAxisLabel 'distance from peak start (bp)' --yAxisLabel 'peaks' --heatmapWidth 7.5 --heatmapHeight 25.0  --whatToShow 'plot, heatmap and colorbar' --startLabel 'peak' --endLabel 'TES' --refPointLabel 'peak'     --legendLocation 'best'  --labelRotation '0'
 ```
 
 
