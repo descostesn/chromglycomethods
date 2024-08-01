@@ -10,6 +10,6 @@ V. [Pre-processing](#pre-processing)
 ## Description
 
     Volcano plot indicating the differentially expressed genes upon degradation of OGT by siRNA in mouse ES cells.
-We found 867 down regulated and 594 upregulated genes. Among these, 44 down- and 12 up-regulated genes have a fold-change higher than two. !! indicate nb with glc
+We found 867 down regulated (dark blue) and 594 upregulated genes (dark red). Among these, 44 down- and 12 up-regulated genes have a fold-change higher than two. 33 down- (light blue) and 2 up-regulated (orange) genes had an O-GlcNac peaks.
 
 !~! check also previous numbers from script
