@@ -30,7 +30,7 @@ Download the following data:
 mkdir data
 
 # The bed file containing the sorted peak coordinates:
-wget https://zenodo.org/records/12793186/files/mouseESC_fig1E_peakorder.bed -P data/
+wget https://zenodo.org/records/12793186/files/peakscoord-fig1E.bed -P data/
 
 # The union of the O-GlcNac peaks
 wget https://zenodo.org/records/12793186/files/union_sept2023mouse_HG1-2.gff -P data/
@@ -127,6 +127,6 @@ plotHeatmap --matrixFile results/polIImatrixsorted.mat --outFileName results/$FI
 Performing the same procedure for the other datasets:
 
 ```
-
+FILEVEC=()
 ```
 
