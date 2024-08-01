@@ -150,3 +150,34 @@ do
 done
 ```
 
+The script should output:
+
+```
+##  ESCHGGlcNAc_rep1.bw
+-- matrix
+-- heatmap
+##  Tbp_SRX9195301.bw
+-- matrix
+-- heatmap
+##  Taf12_SRX11221932.bw
+-- matrix
+-- heatmap
+##  Nelfa_SRX017058.bw
+-- matrix
+-- heatmap
+##  Med1_SRX9195310.bw
+-- matrix
+-- heatmap
+##  Med12_SRX1670201.bw
+-- matrix
+-- heatmap
+##  Med24_SRX5926394.bw
+-- matrix
+-- heatmap
+##  Med26_SRX4167136.bw
+-- matrix
+-- heatmap
+##  Dr1_SRX2894853.bw
+-- matrix
+-- heatmap
+```
