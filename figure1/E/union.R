@@ -1,6 +1,6 @@
 ##############
 ## This script computes the union of intervals from several bed/gff files and
-## output a gff file.
+## output a bed file.
 ## Descostes
 ##############
 
@@ -47,10 +47,13 @@ if (isTRUE(all.equal(inputformat, "bed"))) {
 message("Reducing intervals")
 peaksgr <- GenomicRanges::reduce(peaksgr)
 
-res <- data.frame(seqname = as.character(seqnames(peaksgr)),
-    source = "union of peaks", feature = featurename, start = start(peaksgr),
-    end = end(peaksgr), score = 0, strand = '+', frame = ".",
-    group = make.unique(rep("group", length(start(peaksgr))), sep = "-"))
+res <- data.frame(chrom = as.character(seqnames(peaksgr)),
+    start = start(peaksgr),
+    end = end(peaksgr),
+    name = featurename,  score = 0, strand = '+',
+    thickStart = start(peaksgr), thickEnd = end(peaksgr),
+    itemrgb = "255,0,0", blockCount = 1,
+    blockSizes = end(peaksgr) - start(peaksgr), blockStarts = start(peaksgr))
 
 message("The union returned ", nrow(res), " peaks")
 
