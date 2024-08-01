@@ -15,7 +15,7 @@ library("GenomicRanges")
 
 filepathvec <- c("data/ESCHGGlcNAc_rep1_peaks.gff",
     "data/ESCHGGlcNAc_rep2_peaks.gff")
-outputfile <- "result/union_sept2023mouse_HG1-2.gff"
+outputfile <- "result/union_sept2023mouse_HG1-2.bed"
 inputformat <- "gff"
 featurename <- "union-glc-rep1_2"
 
