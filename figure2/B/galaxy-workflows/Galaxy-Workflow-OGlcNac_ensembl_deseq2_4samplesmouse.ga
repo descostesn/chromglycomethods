@@ -1,0 +1,1306 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "",
+    "format-version": "0.1",
+    "name": "OGlcNac_ensembl_deseq2_4samplesmouse",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "condition2Tables"
+                }
+            ],
+            "label": "condition2Tables",
+            "name": "Input dataset collection",
+            "outputs": [],
+            "position": {
+                "left": 0,
+                "top": 400.4250183105469
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"format\": [\"tabular\"], \"tag\": null, \"collection_type\": \"list\"}",
+            "tool_version": null,
+            "type": "data_collection_input",
+            "uuid": "d78be44b-de20-42b7-bc91-fc04bcf530a8",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "condition1Tables"
+                }
+            ],
+            "label": "condition1Tables",
+            "name": "Input dataset collection",
+            "outputs": [],
+            "position": {
+                "left": 14.73748779296875,
+                "top": 541.2500305175781
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"format\": [\"tabular\"], \"tag\": null, \"collection_type\": \"list\"}",
+            "tool_version": null,
+            "type": "data_collection_input",
+            "uuid": "76c04579-bc77-46f5-85d1-5cdcb7eaa78c",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 2,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "ensembl gtf"
+                }
+            ],
+            "label": "ensembl gtf",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 714.5625381469727,
+                "top": 583.4375305175781
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "2cf4a5e4-d5da-458a-a80d-5182c47618cb",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 3,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "feature counts length"
+                }
+            ],
+            "label": "feature counts length",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 1047.6000061035156,
+                "top": 1595.3875122070312
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"format\": [\"tabular\"], \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "907295b7-0a97-45d5-bd4c-91f4a2393777",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/deseq2/deseq2/2.11.40.6",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "select_data|rep_factorName_0|rep_factorLevel_0|countsFile": {
+                    "id": 0,
+                    "output_name": "output"
+                },
+                "select_data|rep_factorName_0|rep_factorLevel_1|countsFile": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool DESeq2",
+                    "name": "batch_factors"
+                }
+            ],
+            "label": null,
+            "name": "DESeq2",
+            "outputs": [
+                {
+                    "name": "deseq_out",
+                    "type": "tabular"
+                },
+                {
+                    "name": "plots",
+                    "type": "pdf"
+                },
+                {
+                    "name": "counts_out",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 391.62506103515625,
+                "top": 447.6125183105469
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/deseq2/deseq2/2.11.40.6",
+            "tool_shed_repository": {
+                "changeset_revision": "e5c8afac22a7",
+                "name": "deseq2",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"auto_mean_filter_off\": false, \"batch_factors\": {\"__class__\": \"RuntimeValue\"}, \"esf\": \"\", \"fit_type\": \"1\", \"header\": true, \"many_contrasts\": false, \"normCounts\": true, \"normRLog\": false, \"normVST\": false, \"outlier_filter_off\": false, \"outlier_replace_off\": false, \"pdf\": true, \"select_data\": {\"how\": \"datasets_per_level\", \"__current_case__\": 1, \"rep_factorName\": [{\"__index__\": 0, \"factorName\": \"condition2_vs_condition1\", \"rep_factorLevel\": [{\"__index__\": 0, \"factorLevel\": \"${condition2}\", \"countsFile\": {\"__class__\": \"ConnectedValue\"}}, {\"__index__\": 1, \"factorLevel\": \"${condition1}\", \"countsFile\": {\"__class__\": \"ConnectedValue\"}}]}]}, \"tximport\": {\"tximport_selector\": \"count\", \"__current_case__\": 1}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.11.40.6",
+            "type": "tool",
+            "uuid": "3019edf4-6ff8-4ce2-9069-65a0d635b846",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "DESeq2 result file on input dataset(s)",
+                    "output_name": "deseq_out",
+                    "uuid": "a53a8db8-9462-4020-bdc0-5a2d13e2fc18"
+                },
+                {
+                    "label": "DESeq2 plots on input dataset(s)",
+                    "output_name": "plots",
+                    "uuid": "21347d98-83f2-4351-8537-9cbe84142605"
+                },
+                {
+                    "label": null,
+                    "output_name": "counts_out",
+                    "uuid": "26d52ab2-a4d3-4cc4-9f1e-549c8023e331"
+                }
+            ]
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "Filter1",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "input": {
+                    "id": 4,
+                    "output_name": "deseq_out"
+                }
+            },
+            "inputs": [],
+            "label": "filter FC and padj",
+            "name": "Filter",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 702.5625381469727,
+                "top": 426.5500183105469
+            },
+            "post_job_actions": {
+                "TagDatasetActionout_file1": {
+                    "action_arguments": {
+                        "tags": "#filtered"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "Filter1",
+            "tool_state": "{\"cond\": \"abs(c3)>${LogFCthreshold} and c7<0.05\", \"header_lines\": \"0\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.1",
+            "type": "tool",
+            "uuid": "42c07eb2-70fd-4be0-adea-bc5750f4efa4",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "out_file1",
+                    "uuid": "be755e27-ecf0-4021-b3e2-75e55c2f7371"
+                }
+            ]
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/1.1.0",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "input": {
+                    "id": 4,
+                    "output_name": "deseq_out"
+                }
+            },
+            "inputs": [],
+            "label": "add true false",
+            "name": "Compute",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 622.000036239624,
+                "top": 1017.6125183105469
+            },
+            "post_job_actions": {
+                "HideDatasetActionout_file1": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/1.1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "626658afe4cb",
+                "name": "column_maker",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"cond\": \"abs(c3)>${LogFCthreshold} and c7<0.05\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"round\": \"no\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.0",
+            "type": "tool",
+            "uuid": "d09ec03a-8e6a-4dce-b0b8-d73f3c859c54",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "7": {
+            "annotation": "",
+            "content_id": "Filter1",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "input": {
+                    "id": 5,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": "retrieve upregulated",
+            "name": "Filter",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 1008.487548828125,
+                "top": 0.0
+            },
+            "post_job_actions": {
+                "RenameDatasetActionout_file1": {
+                    "action_arguments": {
+                        "newname": "${prefix}_up"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "Filter1",
+            "tool_state": "{\"cond\": \"c3>0\", \"header_lines\": \"0\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.1",
+            "type": "tool",
+            "uuid": "4a6a6e9e-9476-4f41-a112-4548cfe5ad5f",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "out_file1",
+                    "uuid": "8abb468f-f8e5-41ca-95f8-73ad4e85b863"
+                }
+            ]
+        },
+        "8": {
+            "annotation": "",
+            "content_id": "Filter1",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "input": {
+                    "id": 5,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": "Retrieve downregulated",
+            "name": "Filter",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 1013.487548828125,
+                "top": 136.11251831054688
+            },
+            "post_job_actions": {
+                "RenameDatasetActionout_file1": {
+                    "action_arguments": {
+                        "newname": "${prefix}_down"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "Filter1",
+            "tool_state": "{\"cond\": \"c3<0\", \"header_lines\": \"0\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.1",
+            "type": "tool",
+            "uuid": "704842d6-ef8e-4499-b8a5-342e14a1d015",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "out_file1",
+                    "uuid": "4a2b8d1e-8b50-4808-9a52-506c4a69fd20"
+                }
+            ]
+        },
+        "9": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/deg_annotate/deg_annotate/1.1.0",
+            "errors": null,
+            "id": 9,
+            "input_connections": {
+                "annotation": {
+                    "id": 2,
+                    "output_name": "output"
+                },
+                "input_table": {
+                    "id": 5,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Annotate DESeq2/DEXSeq output tables",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 1011.4625549316406,
+                "top": 319.7375183105469
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/deg_annotate/deg_annotate/1.1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "e98d4ab5b5bc",
+                "name": "deg_annotate",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"advanced_parameters\": {\"gff_feature_type\": \"exon\", \"gff_feature_attribute\": \"gene_id\", \"gff_transcript_attribute\": \"transcript_id\", \"gff_attributes\": \"gene_biotype, gene_name\"}, \"annotation\": {\"__class__\": \"ConnectedValue\"}, \"input_table\": {\"__class__\": \"ConnectedValue\"}, \"mode\": \"degseq\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.0",
+            "type": "tool",
+            "uuid": "2e040f85-eb1c-48f2-bcc9-e236ed3e282f",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "10": {
+            "annotation": "",
+            "content_id": "Remove beginning1",
+            "errors": null,
+            "id": 10,
+            "input_connections": {
+                "input": {
+                    "id": 6,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Remove beginning",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 899.0375366210938,
+                "top": 1021.6125183105469
+            },
+            "post_job_actions": {
+                "HideDatasetActionout_file1": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "Remove beginning1",
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"num_lines\": \"1\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "8bfc2e29-9c6b-4aee-b616-d34463b8137b",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "11": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/estrain/add_column_headers/add_column_headers/0.1.3",
+            "errors": null,
+            "id": 11,
+            "input_connections": {
+                "datatable": {
+                    "id": 9,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Add Header",
+            "outputs": [
+                {
+                    "name": "Data Table",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 1277.612548828125,
+                "top": 440.6125183105469
+            },
+            "post_job_actions": {
+                "HideDatasetActionData Table": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "Data Table"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/estrain/add_column_headers/add_column_headers/0.1.3",
+            "tool_shed_repository": {
+                "changeset_revision": "ff2acdb98a74",
+                "name": "add_column_headers",
+                "owner": "estrain",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"datatable\": {\"__class__\": \"ConnectedValue\"}, \"header\": \"GeneID,Base_mean,log2FC,StdErr,Wald-Stats,P-value,P-adj,Chromosome,Start,End,Strand,Feature,Gene_name\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.1.3",
+            "type": "tool",
+            "uuid": "2cd0141e-a647-4fc7-ba17-a37205507ef9",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "12": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/estrain/add_column_headers/add_column_headers/0.1.3",
+            "errors": null,
+            "id": 12,
+            "input_connections": {
+                "datatable": {
+                    "id": 10,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": "Deseq2 results ensembl true false",
+            "name": "Add Header",
+            "outputs": [
+                {
+                    "name": "Data Table",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 1158.9125366210938,
+                "top": 1366.5500183105469
+            },
+            "post_job_actions": {
+                "HideDatasetActionData Table": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "Data Table"
+                },
+                "RenameDatasetActionData Table": {
+                    "action_arguments": {
+                        "newname": "Deseq2 results ensembl true false"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "Data Table"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/estrain/add_column_headers/add_column_headers/0.1.3",
+            "tool_shed_repository": {
+                "changeset_revision": "ff2acdb98a74",
+                "name": "add_column_headers",
+                "owner": "estrain",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"datatable\": {\"__class__\": \"ConnectedValue\"}, \"header\": \"GeneID,Base mean,log2FC,StdErr,Wald-Stats,P-value,P-adj,Select\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.1.3",
+            "type": "tool",
+            "uuid": "29af0213-e378-4107-8242-3ae192c6c924",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "13": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/1.1.2",
+            "errors": null,
+            "id": 13,
+            "input_connections": {
+                "infile1": {
+                    "id": 4,
+                    "output_name": "counts_out"
+                },
+                "infile2": {
+                    "id": 11,
+                    "output_name": "Data Table"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Join",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 1534.737548828125,
+                "top": 625.4875183105469
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/1.1.2",
+            "tool_shed_repository": {
+                "changeset_revision": "ddf54b12c295",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"column1\": \"1\", \"column2\": \"1\", \"empty_string_filler\": \"0\", \"header\": true, \"ignore_case\": false, \"infile1\": {\"__class__\": \"ConnectedValue\"}, \"infile2\": {\"__class__\": \"ConnectedValue\"}, \"jointype\": \" \", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.2",
+            "type": "tool",
+            "uuid": "cf6d467a-113b-4dd0-8369-0a4caa04e1c8",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "14": {
+            "annotation": "",
+            "content_id": "Filter1",
+            "errors": null,
+            "id": 14,
+            "input_connections": {
+                "input": {
+                    "id": 12,
+                    "output_name": "Data Table"
+                }
+            },
+            "inputs": [],
+            "label": "filter abs(logfc)>0.1",
+            "name": "Filter",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 1545.8375244140625,
+                "top": 1055.6750183105469
+            },
+            "post_job_actions": {
+                "HideDatasetActionout_file1": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "Filter1",
+            "tool_state": "{\"cond\": \"abs(c3)>0.1\", \"header_lines\": \"0\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.1",
+            "type": "tool",
+            "uuid": "f63f8f81-2b49-4fdd-aaf2-2aeeb80134c9",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "15": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/goseq/goseq/1.34.0+galaxy1",
+            "errors": null,
+            "id": 15,
+            "input_connections": {
+                "dge_file": {
+                    "id": 12,
+                    "output_name": "Data Table"
+                },
+                "length_file": {
+                    "id": 3,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "goseq CC",
+            "name": "goseq",
+            "outputs": [
+                {
+                    "name": "wallenius_tab",
+                    "type": "tabular"
+                },
+                {
+                    "name": "top_plot",
+                    "type": "pdf"
+                }
+            ],
+            "position": {
+                "left": 1603.800048828125,
+                "top": 1424.5750427246094
+            },
+            "post_job_actions": {
+                "RenameDatasetActiontop_plot": {
+                    "action_arguments": {
+                        "newname": "${prefix}_CC"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "top_plot"
+                },
+                "RenameDatasetActionwallenius_tab": {
+                    "action_arguments": {
+                        "newname": "${prefix}_CC"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "wallenius_tab"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/goseq/goseq/1.34.0+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "67c29afac85f",
+                "name": "goseq",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"adv\": {\"p_adj_method\": \"BH\", \"use_genes_without_cat\": false}, \"categorySource\": {\"catSource\": \"getgo\", \"__current_case__\": 0, \"genome\": \"mm10\", \"gene_id\": \"ensGene\", \"fetchcats\": [\"GO:CC\"]}, \"dge_file\": {\"__class__\": \"ConnectedValue\"}, \"length_file\": {\"__class__\": \"ConnectedValue\"}, \"methods\": {\"wallenius\": true, \"hypergeometric\": false, \"repcnt\": \"0\"}, \"out\": {\"topgo_plot\": true, \"make_plots\": false, \"rdata_out\": false}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.34.0+galaxy1",
+            "type": "tool",
+            "uuid": "142bd266-81cd-4ca5-b148-c3b3ca4b79d8",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "wallenius_tab",
+                    "uuid": "a00b79de-6080-4eba-a666-dbf5933cadb4"
+                },
+                {
+                    "label": null,
+                    "output_name": "top_plot",
+                    "uuid": "08d67e25-431d-4d95-88b5-2c9b5166e65f"
+                }
+            ]
+        },
+        "16": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/goseq/goseq/1.34.0+galaxy1",
+            "errors": null,
+            "id": 16,
+            "input_connections": {
+                "dge_file": {
+                    "id": 12,
+                    "output_name": "Data Table"
+                },
+                "length_file": {
+                    "id": 3,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "goseqBP",
+            "name": "goseq",
+            "outputs": [
+                {
+                    "name": "wallenius_tab",
+                    "type": "tabular"
+                },
+                {
+                    "name": "top_plot",
+                    "type": "pdf"
+                }
+            ],
+            "position": {
+                "left": 1607.4749755859375,
+                "top": 1737.0375366210938
+            },
+            "post_job_actions": {
+                "RenameDatasetActiontop_plot": {
+                    "action_arguments": {
+                        "newname": "${prefix}_BP"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "top_plot"
+                },
+                "RenameDatasetActionwallenius_tab": {
+                    "action_arguments": {
+                        "newname": "${prefix}_BP"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "wallenius_tab"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/goseq/goseq/1.34.0+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "67c29afac85f",
+                "name": "goseq",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"adv\": {\"p_adj_method\": \"BH\", \"use_genes_without_cat\": false}, \"categorySource\": {\"catSource\": \"getgo\", \"__current_case__\": 0, \"genome\": \"mm10\", \"gene_id\": \"ensGene\", \"fetchcats\": [\"GO:BP\"]}, \"dge_file\": {\"__class__\": \"ConnectedValue\"}, \"length_file\": {\"__class__\": \"ConnectedValue\"}, \"methods\": {\"wallenius\": true, \"hypergeometric\": false, \"repcnt\": \"0\"}, \"out\": {\"topgo_plot\": true, \"make_plots\": false, \"rdata_out\": false}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.34.0+galaxy1",
+            "type": "tool",
+            "uuid": "f56319b9-6489-42d4-ad82-14805a5b4dbd",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "top_plot",
+                    "uuid": "753e4ec3-ea05-45d6-bf12-74e53fce8133"
+                },
+                {
+                    "label": null,
+                    "output_name": "wallenius_tab",
+                    "uuid": "f34c6770-8d85-46d5-a1ca-a6fe2856e100"
+                }
+            ]
+        },
+        "17": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/goseq/goseq/1.34.0+galaxy1",
+            "errors": null,
+            "id": 17,
+            "input_connections": {
+                "dge_file": {
+                    "id": 12,
+                    "output_name": "Data Table"
+                },
+                "length_file": {
+                    "id": 3,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "goseqMF",
+            "name": "goseq",
+            "outputs": [
+                {
+                    "name": "wallenius_tab",
+                    "type": "tabular"
+                },
+                {
+                    "name": "top_plot",
+                    "type": "pdf"
+                }
+            ],
+            "position": {
+                "left": 1609.5875244140625,
+                "top": 2058.5625915527344
+            },
+            "post_job_actions": {
+                "RenameDatasetActiontop_plot": {
+                    "action_arguments": {
+                        "newname": "${prefix}_MF"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "top_plot"
+                },
+                "RenameDatasetActionwallenius_tab": {
+                    "action_arguments": {
+                        "newname": "${prefix}_MF"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "wallenius_tab"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/goseq/goseq/1.34.0+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "67c29afac85f",
+                "name": "goseq",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"adv\": {\"p_adj_method\": \"BH\", \"use_genes_without_cat\": false}, \"categorySource\": {\"catSource\": \"getgo\", \"__current_case__\": 0, \"genome\": \"mm10\", \"gene_id\": \"ensGene\", \"fetchcats\": [\"GO:MF\"]}, \"dge_file\": {\"__class__\": \"ConnectedValue\"}, \"length_file\": {\"__class__\": \"ConnectedValue\"}, \"methods\": {\"wallenius\": true, \"hypergeometric\": false, \"repcnt\": \"0\"}, \"out\": {\"topgo_plot\": true, \"make_plots\": false, \"rdata_out\": false}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.34.0+galaxy1",
+            "type": "tool",
+            "uuid": "7c0e8b31-09bc-4f0e-92c5-c92886c1e5ea",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "wallenius_tab",
+                    "uuid": "725edf61-817d-44c0-9670-31dfca7f4b33"
+                },
+                {
+                    "label": null,
+                    "output_name": "top_plot",
+                    "uuid": "2ec2e1fa-2ee7-427f-a123-73e1b104b701"
+                }
+            ]
+        },
+        "18": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/goseq/goseq/1.34.0+galaxy1",
+            "errors": null,
+            "id": 18,
+            "input_connections": {
+                "dge_file": {
+                    "id": 12,
+                    "output_name": "Data Table"
+                },
+                "length_file": {
+                    "id": 3,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "goseqKegg",
+            "name": "goseq",
+            "outputs": [
+                {
+                    "name": "wallenius_tab",
+                    "type": "tabular"
+                },
+                {
+                    "name": "top_plot",
+                    "type": "pdf"
+                }
+            ],
+            "position": {
+                "left": 1621.2000122070312,
+                "top": 2379.6000061035156
+            },
+            "post_job_actions": {
+                "RenameDatasetActiontop_plot": {
+                    "action_arguments": {
+                        "newname": "${prefix}_KEGG"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "top_plot"
+                },
+                "RenameDatasetActionwallenius_tab": {
+                    "action_arguments": {
+                        "newname": "${prefix}_KEGG"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "wallenius_tab"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/goseq/goseq/1.34.0+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "67c29afac85f",
+                "name": "goseq",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"adv\": {\"p_adj_method\": \"BH\", \"use_genes_without_cat\": false}, \"categorySource\": {\"catSource\": \"getgo\", \"__current_case__\": 0, \"genome\": \"mm10\", \"gene_id\": \"ensGene\", \"fetchcats\": [\"KEGG\"]}, \"dge_file\": {\"__class__\": \"ConnectedValue\"}, \"length_file\": {\"__class__\": \"ConnectedValue\"}, \"methods\": {\"wallenius\": true, \"hypergeometric\": false, \"repcnt\": \"0\"}, \"out\": {\"topgo_plot\": true, \"make_plots\": false, \"rdata_out\": false}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.34.0+galaxy1",
+            "type": "tool",
+            "uuid": "dfa797bc-dc4d-42ab-aee3-84590fa49929",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "wallenius_tab",
+                    "uuid": "44da6114-3fb2-41ab-b2e9-bdc43ab6c696"
+                },
+                {
+                    "label": null,
+                    "output_name": "top_plot",
+                    "uuid": "0bc5253a-e8b0-4b90-ae7b-80db4dc74037"
+                }
+            ]
+        },
+        "19": {
+            "annotation": "The number of columns to keep is nb of samples + 1. If result is n, should be 1-n",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0",
+            "errors": null,
+            "id": 19,
+            "input_connections": {
+                "input": {
+                    "id": 13,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "Normalized counts for the most differentially expressed genes",
+            "name": "Advanced Cut",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 1803.9251098632812,
+                "top": 623.7500305175781
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output"
+                },
+                "RenameDatasetActionoutput": {
+                    "action_arguments": {
+                        "newname": "norm counts for DE"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "ddf54b12c295",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"complement\": \"\", \"cut_type_options\": {\"cut_element\": \"-f\", \"__current_case__\": 0, \"list\": \"1\\n2\\n3\\n4\\n5\"}, \"delimiter\": \"\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.0",
+            "type": "tool",
+            "uuid": "350583a5-3f99-47a8-a86f-4beeeeacb8b9",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "20": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/deg_annotate/deg_annotate/1.1.0",
+            "errors": null,
+            "id": 20,
+            "input_connections": {
+                "annotation": {
+                    "id": 2,
+                    "output_name": "output"
+                },
+                "input_table": {
+                    "id": 14,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Annotate DESeq2/DEXSeq output tables",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 1863.050048828125,
+                "top": 992.6125183105469
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/deg_annotate/deg_annotate/1.1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "e98d4ab5b5bc",
+                "name": "deg_annotate",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"advanced_parameters\": {\"gff_feature_type\": \"exon\", \"gff_feature_attribute\": \"gene_id\", \"gff_transcript_attribute\": \"transcript_id\", \"gff_attributes\": \"gene_biotype, gene_name\"}, \"annotation\": {\"__class__\": \"ConnectedValue\"}, \"input_table\": {\"__class__\": \"ConnectedValue\"}, \"mode\": \"degseq\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.0",
+            "type": "tool",
+            "uuid": "aca4ad9b-756e-496e-8d43-c5298aaffba1",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "21": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/table_compute/table_compute/0.9.2",
+            "errors": null,
+            "id": 21,
+            "input_connections": {
+                "singtabop|input": {
+                    "id": 19,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Table Compute",
+            "outputs": [
+                {
+                    "name": "table",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 2104.1500854492188,
+                "top": 539.6875305175781
+            },
+            "post_job_actions": {
+                "HideDatasetActiontable": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "table"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/table_compute/table_compute/0.9.2",
+            "tool_shed_repository": {
+                "changeset_revision": "60ff16842fcd",
+                "name": "table_compute",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"out_opts\": [\"ignore_nas\", \"output_headers_col\", \"output_headers_row\"], \"precision\": \"6\", \"singtabop\": {\"use_type\": \"single\", \"__current_case__\": 0, \"input\": {\"__class__\": \"ConnectedValue\"}, \"col_row_names\": [\"has_col_names\", \"has_row_names\"], \"adv\": {\"header\": null, \"nrows\": null, \"skipfooter\": null, \"skip_blank_lines\": true}, \"user\": {\"mode\": \"fulltable\", \"__current_case__\": 4, \"general\": {\"use\": \"custom\", \"__current_case__\": 3, \"fulltable_custom_expr\": \"table.sub(table.mean(1), 0)\"}}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.9.2",
+            "type": "tool",
+            "uuid": "d6b152dc-9d0f-4340-b000-0f6df9f04b31",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "22": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_heatmap2/ggplot2_heatmap2/2.2.1",
+            "errors": null,
+            "id": 22,
+            "input_connections": {
+                "input1": {
+                    "id": 19,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "heatmap2 log2(value+1)",
+            "name": "heatmap2",
+            "outputs": [
+                {
+                    "name": "output1",
+                    "type": "pdf"
+                }
+            ],
+            "position": {
+                "left": 2083.1126098632812,
+                "top": 767.6250305175781
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutput1": {
+                    "action_arguments": {
+                        "newname": "${prefix}_heatmap2"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output1"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_heatmap2/ggplot2_heatmap2/2.2.1",
+            "tool_shed_repository": {
+                "changeset_revision": "cb04f3235a4e",
+                "name": "ggplot2_heatmap2",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"cluster\": true, \"colorscheme\": \"blwhre\", \"input1\": {\"__class__\": \"ConnectedValue\"}, \"key\": \"\", \"labels\": \"columns\", \"scale\": \"none\", \"title\": \"${heatmap2LogTitle}\", \"transform\": \"log2plus1\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.2.1",
+            "type": "tool",
+            "uuid": "52aec1c0-0b99-49b7-b02b-ce30999c22ff",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output1",
+                    "uuid": "e1812bd2-b71b-4d76-80f2-5c0ef9df9bce"
+                }
+            ]
+        },
+        "23": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/volcanoplot/volcanoplot/0.0.3",
+            "errors": null,
+            "id": 23,
+            "input_connections": {
+                "input": {
+                    "id": 20,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Volcano Plot",
+            "outputs": [
+                {
+                    "name": "plot",
+                    "type": "pdf"
+                }
+            ],
+            "position": {
+                "left": 2159.1875610351562,
+                "top": 1090.6750183105469
+            },
+            "post_job_actions": {
+                "RenameDatasetActionplot": {
+                    "action_arguments": {
+                        "newname": "${prefix}_volcano"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "plot"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/volcanoplot/volcanoplot/0.0.3",
+            "tool_shed_repository": {
+                "changeset_revision": "73b8cb5bddcd",
+                "name": "volcanoplot",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"fdr_col\": \"7\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"label_col\": \"14\", \"labels\": {\"label_select\": \"signif\", \"__current_case__\": 0, \"top_num\": \"20\"}, \"lfc_col\": \"3\", \"lfc_thresh\": \"${LogFCthreshold}\", \"plot_options\": {\"boxes\": true, \"title\": \"${heatmap2LogTitle}\", \"xlab\": \"\", \"ylab\": \"\", \"xmin\": null, \"xmax\": null, \"ymax\": null, \"legend\": \"\", \"legend_labs\": \"Down,Not Sig,Up\"}, \"pval_col\": \"6\", \"signif_thresh\": \"0.05\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.0.3",
+            "type": "tool",
+            "uuid": "133873c5-623e-4513-ba26-4efb5b41dcd7",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "Volcano plot on input dataset(s)",
+                    "output_name": "plot",
+                    "uuid": "0b822304-ec2b-4406-83b7-d69653f3f410"
+                }
+            ]
+        },
+        "24": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/table_compute/table_compute/0.9.2",
+            "errors": null,
+            "id": 24,
+            "input_connections": {
+                "singtabop|tables_0|input": {
+                    "id": 19,
+                    "output_name": "output"
+                },
+                "singtabop|tables_1|input": {
+                    "id": 21,
+                    "output_name": "table"
+                }
+            },
+            "inputs": [],
+            "label": "Z-scores for the most differentially expressed genes",
+            "name": "Table Compute",
+            "outputs": [
+                {
+                    "name": "table",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 2423.1751098632812,
+                "top": 625.4875183105469
+            },
+            "post_job_actions": {
+                "HideDatasetActiontable": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "table"
+                },
+                "RenameDatasetActiontable": {
+                    "action_arguments": {
+                        "newname": "zscoresTable"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "table"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/table_compute/table_compute/0.9.2",
+            "tool_shed_repository": {
+                "changeset_revision": "60ff16842fcd",
+                "name": "table_compute",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"out_opts\": [\"ignore_nas\", \"output_headers_col\", \"output_headers_row\"], \"precision\": \"6\", \"singtabop\": {\"use_type\": \"multiple\", \"__current_case__\": 1, \"tables\": [{\"__index__\": 0, \"input\": {\"__class__\": \"ConnectedValue\"}, \"col_row_names\": [\"has_col_names\", \"has_row_names\"], \"adv\": {\"header\": null, \"nrows\": null, \"skipfooter\": null, \"skip_blank_lines\": true}}, {\"__index__\": 1, \"input\": {\"__class__\": \"ConnectedValue\"}, \"col_row_names\": [\"has_col_names\", \"has_row_names\"], \"adv\": {\"header\": null, \"nrows\": null, \"skipfooter\": null, \"skip_blank_lines\": true}}], \"fulltable_custom_expr\": \"table2.div(table1.std(1),0)\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.9.2",
+            "type": "tool",
+            "uuid": "5c50d7a1-56e8-4db8-85b8-012a8be88b30",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "25": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_heatmap2/ggplot2_heatmap2/2.2.1",
+            "errors": null,
+            "id": 25,
+            "input_connections": {
+                "input1": {
+                    "id": 24,
+                    "output_name": "table"
+                }
+            },
+            "inputs": [],
+            "label": "heatmap2 z-scores",
+            "name": "heatmap2",
+            "outputs": [
+                {
+                    "name": "output1",
+                    "type": "pdf"
+                }
+            ],
+            "position": {
+                "left": 2732.0250854492188,
+                "top": 634.5500183105469
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutput1": {
+                    "action_arguments": {
+                        "newname": "${prefix}_heatmap2z-scores"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output1"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_heatmap2/ggplot2_heatmap2/2.2.1",
+            "tool_shed_repository": {
+                "changeset_revision": "cb04f3235a4e",
+                "name": "ggplot2_heatmap2",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"cluster\": true, \"colorscheme\": \"blwhre\", \"input1\": {\"__class__\": \"ConnectedValue\"}, \"key\": \"\", \"labels\": \"columns\", \"scale\": \"none\", \"title\": \"${heatmap2ZscoreTitle}\", \"transform\": \"none\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.2.1",
+            "type": "tool",
+            "uuid": "0ac2236b-7728-44bb-a2cd-d55ef06d21b4",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output1",
+                    "uuid": "fe4ebca0-9cb3-413a-b823-c748aca9ab7c"
+                }
+            ]
+        }
+    },
+    "tags": [
+        "deseq2",
+        "glucnac"
+    ],
+    "uuid": "c86871d0-1c1b-4922-bfc5-702d5b34aee0",
+    "version": 3
+}
