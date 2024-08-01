@@ -127,23 +127,10 @@ deseq2downglc <- deseq2[which(deseq2$statusvec == "downwithglc"), ]
 deseq2upglc <- deseq2[which(deseq2$statusvec == "upwithglc"), ]
 p2 <- p1 + geom_label_repel(data = deseq2downglc, aes(label = symbol),
                    force = 2, nudge_y = 1,  max.overlaps = Inf,
-                   show.legend = FALSE, min.segment.length = 0,
-                   direction = "y") +
-            geom_label_repel(data = deseq2upglc, aes(label = symbol),
-                   force = 2, nudge_y = 1,  max.overlaps = Inf,
-                   show.legend = FALSE, min.segment.length = 0,
-                   direction = "y")
-p2bis <- p1 + geom_label_repel(data = deseq2downglc, aes(label = symbol),
-                   force = 2, nudge_y = 1,  max.overlaps = Inf,
                    show.legend = FALSE, min.segment.length = 0) +
               geom_label_repel(data = deseq2upglc, aes(label = symbol),
                    force = 2, nudge_y = 1,  max.overlaps = Inf,
                    show.legend = FALSE, min.segment.length = 0)
 
-
-ggsave(filename = "volcano-siogt.svg", plot = p1, device = svg(),
-     path = outfold)
-ggsave(filename = "volcano-siogt-glcdown-vertical.svg", plot = p2,
-    device = svg(), path = outfold)
-ggsave(filename = "volcano-siogt-glcdown.svg", plot = p2bis, device = svg(),
+ggsave(filename = "volcano-siogt.png", plot = p2, device = png(),
      path = outfold)
