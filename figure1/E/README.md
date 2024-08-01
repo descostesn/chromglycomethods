@@ -130,6 +130,23 @@ Performing the same procedure for the other datasets:
 FILEVEC=( 'ESCHGGlcNAc_rep1.bw' 'Tbp_SRX9195301.bw' 'Taf12_SRX11221932.bw' 'Nelfa_SRX017058.bw' 'Med1_SRX9195310.bw' 'Med12_SRX1670201.bw' 'Med24_SRX5926394.bw' 'Med26_SRX4167136.bw' 'Dr1_SRX2894853.bw' )
 HEATMAPMAXVEC=( 100 70 80 250 50 40 40 60 140 )
 PROFILEMAXVEC=( 60 30 40 100 20 18 18 30 50 )
+FORMAT='png'
 
+for i in "${!FILEVEC[@]}"
+do
+    filename=${FILEVEC[$i]}
+    echo "## " $filename
+    rootname="$(basename $filename .bw)"
+    
+    echo "-- matrix"
+    computeMatrix  reference-point --regionsFileName results/peakscoord-fig1E.bed --scoreFileName data/$filename --outFileName results/$rootname-matrixsorted.mat --samplesLabel $rootname --numberOfProcessors $NBCPU --referencePoint TSS --beforeRegionStartLength 1000 --afterRegionStartLength 1000 --sortRegions 'keep' --sortUsing 'mean' --averageTypeBins 'mean' --binSize 50 --transcriptID transcript --exonID exon --transcript_id_designator transcript_id
 
+    echo "-- heatmap"
+    zmaxi=${HEATMAPMAXVEC[$i]}
+    ymaxi=${PROFILEMAXVEC[$i]}
+    plotHeatmap --matrixFile results/$rootname-matrixsorted.mat --outFileName results/$rootname.$FORMAT --plotFileFormat $FORMAT --dpi '200' --sortRegions 'no' --sortUsing 'mean' --averageTypeSummaryPlot 'mean' --plotType 'lines' --missingDataColor 'black' --alpha '1.0' --colorList white,blue --zMin 0 --zMax $zmaxi --yMin 0.0 --yMax $ymaxi --xAxisLabel 'distance from peak start (bp)' --yAxisLabel 'peaks' --heatmapWidth 7.5 --heatmapHeight 25.0 --whatToShow 'plot, heatmap and colorbar' --startLabel 'peak' --endLabel 'TES' --refPointLabel 'peak' --legendLocation 'best' --labelRotation '0'
+
+    rm results/$rootname-matrixsorted.mat
+done
 ```
+
