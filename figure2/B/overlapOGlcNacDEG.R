@@ -103,6 +103,42 @@ readgff <- function(gff_file_vec) {
     return(currentgff)}))
 }
 
+.defineformat <- function(outformat, outfolder, comparisonname) {
+    if (outformat == "png") {
+        png(filename = file.path(outfolder, paste0(comparisonname, ".png")),
+            width = 1000, height = 1000, bg = "transparent")
+    }else {
+        pdf(file = file.path(outfolder, paste0(comparisonname, ".pdf")),
+            width = 10, height = 10)
+    }
+}
+
+eulerthree <- function(ol, outformat, outfolder, comparisonname, expnamevec,
+    colvec) {
+    area1 <- retrieve_peaks_number(ol$peaklist, "peaks1")
+    area2 <- retrieve_peaks_number(ol$peaklist, "peaks2")
+    area3 <- retrieve_peaks_number(ol$peaklist, "peaks3")
+    area1_area2 <- retrieve_peaks_number(ol$peaklist, "peaks1///peaks2")
+    area1_area3 <- retrieve_peaks_number(ol$peaklist, "peaks1///peaks3")
+    area2_area3 <- retrieve_peaks_number(ol$peaklist, "peaks2///peaks3")
+    area1_area2_area3 <- retrieve_peaks_number(ol$peaklist,
+        "peaks1///peaks2///peaks3")
+
+    .defineformat(outformat, outfolder, comparisonname)
+    VennDiagram::draw.triple.venn(
+        area1 = area1 + area1_area2 + area1_area3 + area1_area2_area3,
+        area2 = area2 + area1_area2 + area2_area3 + area1_area2_area3,
+        area3 = area3 + area1_area3 + area2_area3 + area1_area2_area3,
+        n12 = area1_area2 + area1_area2_area3,
+        n23 = area2_area3 + area1_area2_area3,
+        n13 = area1_area3 + area1_area2_area3,
+        n123 = area1_area2_area3, category = expnamevec, euler.d = TRUE,
+        scaled = TRUE, ext.text = FALSE, col = colvec, fill = colvec,
+        cex = rep(2, 7), cat.cex = rep(2.5, 3))
+    dev.off()
+}
+
+
 ################
 
 
@@ -126,46 +162,11 @@ ol <- findOverlapsOfPeaks(peaks1, peaks2, peaks3, maxgap = 0,
         connectedPeaks = "keepAll")
 
 # Making the venn diagram venneuler
-.defineformat <- function(outformat, outfolder, comparisonname) {
-    if (outformat == "png") {
-        png(filename = file.path(outfolder, paste0(comparisonname, ".png")),
-            width = 1000, height = 1000, bg = "transparent")
-    }else {
-        pdf(file = file.path(outfolder, paste0(comparisonname, ".pdf")),
-            width = 10, height = 10)
-    }
-}
+eulerthree(ol, outformat, outfolder, comparisonname, expnamevec, colvec)
 
-eulerthree <- function(ol, outformat, outfolder, comparisonname) {
-    area1 <- retrieve_peaks_number(ol$peaklist, "peaks1")
-    area2 <- retrieve_peaks_number(ol$peaklist, "peaks2")
-    area3 <- retrieve_peaks_number(ol$peaklist, "peaks3")
-    area1_area2 <- retrieve_peaks_number(ol$peaklist, "peaks1///peaks2")
-    area1_area3 <- retrieve_peaks_number(ol$peaklist, "peaks1///peaks3")
-    area2_area3 <- retrieve_peaks_number(ol$peaklist, "peaks2///peaks3")
-    area1_area2_area3 <- retrieve_peaks_number(ol$peaklist,
-        "peaks1///peaks2///peaks3")
-
-    .defineformat(outformat, outfolder, comparisonname)
-}
 
     
-    draw.triple.venn(area1 = area1 + area1_area2 + area1_area3 + area1_area2_area3, 
-            area2 = area2 + area1_area2 + area2_area3 + area1_area2_area3, 
-            area3 = area3 + area1_area3 + area2_area3 + area1_area2_area3, 
-            n12 = area1_area2 + area1_area2_area3, 
-            n23 = area2_area3 + area1_area2_area3, 
-            n13 = area1_area3 + area1_area2_area3, 
-            n123 = area1_area2_area3,
-            category = expnamevec,
-            euler.d = TRUE, 
-            scaled = TRUE, 
-            ext.text = FALSE,
-            col = colvec, 
-            fill = colvec,
-            cex = rep(2, 7), 
-            cat.cex = rep(2.5, 3));
-    dev.off();
+    
 
 
 cat("Retrieving list of element per overlap\n");
