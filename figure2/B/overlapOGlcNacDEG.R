@@ -3,6 +3,7 @@
 # Descostes November 2015
 # update: feb 2018
 # Format: May 2024 (except second part)
+# R-4.2.0
 ###############
 
 
@@ -27,7 +28,7 @@ gff_file_vec <- c("/g/boulard/Projects/O-N-acetylglucosamine/analysis/venndiagra
 "/g/boulard/Projects/O-N-acetylglucosamine/analysis/differential_analysis/deseq2/RNASeq_siogt_formichetti/lfc0/upanddown/log0_up-ensembl.gff")  # nolint
 output_folder <- "/g/boulard/Projects/O-N-acetylglucosamine/analysis/venndiagrams/Sofia_polIIGlc_sept2023/mouse/glucose-levels/glcHG_vs_DEGsiogt/mergedrep1-2/test" # nolint
 comparison_title <- "mergedrep1-2_vs_DEGsiogt"
-expnames_tab <- "mergedrep1-2 Down Up"
+expnames_tab <- c("mergedrep1-2", "Down", "Up")
 genome_version <- "mm10"
 organism_name <- "mouse"
 center_criterion <- "max"
@@ -61,7 +62,7 @@ retrieve_peaks_number <- function(peak_list, label_name) {
     if (is.null(peak_number)) return(0) else return(peak_number)
 }
 
-checkparams3 <- function(output_format) {
+checkparams2 <- function(output_format) {
 
     if (!isTRUE(all.equal(output_format, "ps")) &&
         !isTRUE(all.equal(output_format, "png")) &&
@@ -69,24 +70,8 @@ checkparams3 <- function(output_format) {
         stop("output_format should be png, pdf or ps")
 }
 
-checkparams2 <- function(ref_exp_max_centering, bigwig_name_vec, bigwig_vec,
-    center_criterion) {
-
-    res <- grep(ref_exp_max_centering, bigwig_name_vec)
-    if (!is.na(bigwig_vec) &&
-        (isTRUE(all.equal(length(res), 0)) ||
-            length(ref_exp_max_centering) > 1))
-        stop("The reference name to center on max should be one of the ",
-            "experiment name AND bigwig name")
-
-    if (!is.na(bigwig_vec) && isTRUE(all.equal(center_criterion, "max")) &&
-        is.na(ref_exp_max_centering))
-        stop("You should use a reference experiment to center on max. This ",
-            "name has to be present in expnames AND bigwig_names")
-}
-
-checkparams <- function(gff_file_vec, expnames_tab, bigwig_vec, bigwig_name_vec,
-    organism_name, center_criterion, ref_exp_max_centering, output_format) {
+checkparams <- function(gff_file_vec, expnames_tab, bigwig_vec,
+    center_criterion, ref_exp_max_centering, output_format) {
 
     if (length(gff_file_vec) > 5)
         stop("This script takes at most 5 gff files as input")
@@ -98,11 +83,6 @@ checkparams <- function(gff_file_vec, expnames_tab, bigwig_vec, bigwig_name_vec,
         stop("The number of exp names should be equal to the number of gff ",
             "files")
 
-    if (!is.na(bigwig_vec) &&
-        !isTRUE(all.equal(length(bigwig_name_vec), length(bigwig_vec))))
-            stop("The number of bigwig names should be equal to the number ",
-                "of bigwig files")
-
     if (!isTRUE(all.equal(organism_name, "mouse")) &&
         !isTRUE(all.equal(organism_name, "human")))
             stop("The organism name should be mouse or human")
@@ -111,9 +91,7 @@ checkparams <- function(gff_file_vec, expnames_tab, bigwig_vec, bigwig_name_vec,
         !isTRUE(all.equal(center_criterion, "max")))
         stop("Center criterion should be 'coordinates' or 'max'")
 
-    checkparams2(ref_exp_max_centering, bigwig_name_vec, bigwig_vec,
-    center_criterion)
-    checkparams3(output_format)
+    checkparams2(output_format)
 }
 
 convert2gr <- function(gfflist) {
@@ -160,8 +138,8 @@ loadorg <- function(organism_name) {
 # MAIN
 ##############
 
-checkparams(gff_file_vec, expnames_tab, bigwig_vec, bigwig_name_vec,
-    organism_name, center_criterion, ref_exp_max_centering, output_format)
+checkparams(gff_file_vec, expnames_tab, organism_name, center_criterion,
+    ref_exp_max_centering, output_format)
 checkingOutputFolder(output_folder)
 loadorg(organism_name)
 
