@@ -149,6 +149,12 @@ Done.
 
 ### DEG overlap O-GlcNac
 
+Run the command:
+
+```
+Rscript overlapOGlcNacDEG.R
+```
+
 The script should output:
 
 ```
