@@ -36,9 +36,9 @@ col_vec <- c("#E69F00", "#56B4E9", "#E95680")
 output_format <- "png"
 
 
-paramsDefinition[["--upstreamHeatmap"]] <- list(variableName="upstream_heatmap", numeric=T, mandatory=F, description="Number of nucleotides upstream the center of the peak on the heatmap.", default=NA) # nolint
-paramsDefinition[["--downstreamHeatmap"]] <- list(variableName="downstream_heatmap", numeric=T, mandatory=F, description="Number of nucleotides downstream the center of the peak on the heatmap.", default=NA) # nolint
-paramsDefinition[["--bigwigVec"]] <- list(variableName="bigwig_vec", numeric=F, mandatory=F, description="Vector of big wig files that will be used to generate heatmaps of signal.", default=NA) # nolint
+
+
+
 paramsDefinition[["--bigwigNameVec"]] <- list(variableName="bigwig_name_vec", numeric=F, mandatory=F, description="Vector of big wig file names.", default=NA) # nolint
 paramsDefinition[["--maxgap"]] <- list(variableName="max_gap", numeric=T, mandatory=F, description="Non-negative integer. Peak intervals with a separation of maxgap or less are considered to be overlapped.", default=0) # nolint
 
@@ -77,8 +77,8 @@ checkparams2 <- function(output_format) {
         stop("output_format should be png, pdf or ps")
 }
 
-checkparams <- function(gff_file_vec, expnames_tab, bigwig_vec,
-    center_criterion, output_format) {
+checkparams <- function(gff_file_vec, expnames_tab, center_criterion,
+    output_format) {
 
     if (length(gff_file_vec) > 5)
         stop("This script takes at most 5 gff files as input")
