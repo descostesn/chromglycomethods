@@ -180,29 +180,6 @@ if (length(gffgrlist) == 2) {
         maxgap = max_gap, connectedPeaks = "keepAll")
 }
 
-message("Making the venn diagram")
-fileout <- paste0(comparison_title, "overlap-chippeakanno")
-
-if (isTRUE(all.equal(output_format, "png"))) {
-    png(filename = file.path(output_folder, paste0(fileout, ".png")),
-      width = 1000, height = 1000, bg = "transparent")
-}else if (isTRUE(all.equal(output_format, "ps"))){
-    cairo_ps(filename = file.path(output_folder, paste0(fileout, ".ps")),
-      width = 7, height = 7, bg = "transparent")
-}else if(isTRUE(all.equal(output_format, "pdf"))) {
-    pdf(file = file.path(output_folder, paste0(fileout, ".pdf")),
-      width = 10, height = 10)
-}else {
-    stop("Format ", output_format, " is not supported")
-}
-result <- makeVennDiagram(ol, NameOfPeaks= expnames_tab,
-    totalTest = max(sapply(gfflist, nrow)) * 2, ignore.strand = TRUE,
-    connectedPeaks = "keepAll")
-dev.off()
-
-result$p.value[, "pval"] <- p.adjust(result$p.value[, "pval"], method = "BH")
-write.table(result$p.value, file = file.path(output_folder, "pvalue_stats.txt"),
-  sep = "\t", quote = FALSE, col.names = TRUE, row.names = FALSE)
 
 
 # Making the venn diagram venneuler
