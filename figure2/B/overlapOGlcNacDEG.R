@@ -9,7 +9,6 @@
 library("GenomicFeatures")
 library("NGSprofiling")
 library("ChIPpeakAnno")
-library("Rargs")
 library("rtracklayer")
 library("biomaRt")
 library("annotate")
@@ -21,27 +20,6 @@ library("VennDiagram")
 #################
 # PARAMETERS
 ################
-
-
-paramsDefinition <- list() # nolint
-
-paramsDefinition[["--gffFileVec"]] <- list(variableName="gff_file_vec", numeric=F, mandatory=T, description="Vector containing file path in gff to the exp to compare.") # nolint
-paramsDefinition[["--outputFolder"]] <- list(variableName="output_folder", numeric=F, mandatory=T, description="single path to the output folder.") # nolint
-paramsDefinition[["--comparisonTitle"]] <- list(variableName="comparison_title", numeric=F, mandatory=T, description="Single string of the title of the analysis.") # nolint
-paramsDefinition[["--expnamesTab"]] <- list(variableName="expnames_tab", numeric=F, mandatory=T, description="Vector containing name of each experiment given as gff files.") # nolint
-paramsDefinition[["--genomeVersion"]] <- list(variableName="genome_version", numeric=F, mandatory=T, description="Version of the genome used to retrieve features.") # nolint
-paramsDefinition[["--organismName"]] <- list(variableName="organism_name", numeric=F, mandatory=T, description="String containing the name of the organism. Possible values are mouse or human.") # nolint
-paramsDefinition[["--centerCriterion"]] <- list(variableName="center_criterion", numeric=F, mandatory=T, description="The center can be either the middle of the interval (coordinates) or the maximum value (max).") # nolint
-paramsDefinition[["--colVec"]] <- list(variableName="col_vec", numeric=F, mandatory=T, description="Vector of colors to use for the venn diagrams.") # nolint
-paramsDefinition[["--outputFormat"]] <- list(variableName="output_format", numeric=F, mandatory=T, description="output format which can be png, pdf or ps.") # nolint
-
-#Optional argument
-paramsDefinition[["--refExpMaxCentering"]] <- list(variableName="ref_exp_max_centering", numeric=F, mandatory=F, description="The reference exp name to center on max.", default=NA) # nolint
-paramsDefinition[["--upstreamHeatmap"]] <- list(variableName="upstream_heatmap", numeric=T, mandatory=F, description="Number of nucleotides upstream the center of the peak on the heatmap.", default=NA) # nolint
-paramsDefinition[["--downstreamHeatmap"]] <- list(variableName="downstream_heatmap", numeric=T, mandatory=F, description="Number of nucleotides downstream the center of the peak on the heatmap.", default=NA) # nolint
-paramsDefinition[["--bigwigVec"]] <- list(variableName="bigwig_vec", numeric=F, mandatory=F, description="Vector of big wig files that will be used to generate heatmaps of signal.", default=NA) # nolint
-paramsDefinition[["--bigwigNameVec"]] <- list(variableName="bigwig_name_vec", numeric=F, mandatory=F, description="Vector of big wig file names.", default=NA) # nolint
-paramsDefinition[["--maxgap"]] <- list(variableName="max_gap", numeric=T, mandatory=F, description="Non-negative integer. Peak intervals with a separation of maxgap or less are considered to be overlapped.", default=0) # nolint
 
 
 gff_file_vec <- c("/g/boulard/Projects/O-N-acetylglucosamine/analysis/venndiagrams/Sofia_polIIGlc_sept2023/mouse/glucose-levels/glcHGPeaksRep1_vs_Rep2/Glc1.gff", # nolint
@@ -166,9 +144,6 @@ loadorg <- function(organism_name) {
 ##############
 # MAIN
 ##############
-
-# Retreives the parameters
-getParams(paramsDefinition)
 
 checkparams(gff_file_vec, expnames_tab, bigwig_vec, bigwig_name_vec,
     organism_name, center_criterion, ref_exp_max_centering, output_format)
