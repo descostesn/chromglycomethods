@@ -9,7 +9,7 @@ V. [Pre-processing](#pre-processing)
 
 ## Description
 
-On the 867 down regulated and 594 upregulated genes (see [fig2B](../B/README.md)), 779 down- and 545 up-regulated genes were found to be enriched in functional categories. On the 33 down-regulated genes having an O-GlcNac peak, 31 were found in functional categories. Among the unexpected categories, down-regulated genes appear to be coding for the structural componants of ribosomes. Strikingly, altered genes also appear to be coding for RNA Polymerase II-specific DNA-binding transcription factors.
+On the 867 down regulated and 594 upregulated genes (see [fig2B](../B/README.md)), 779 down- and 545 up-regulated genes were found to be enriched in functional categories. On the 33 down-regulated genes having an O-GlcNac peak, 31 were found in functional categories. Among the unexpected categories, down-regulated genes appear to be coding for the structural componants of ribosomes. Strikingly, altered genes of the three groups (down, up, down-glc) also appear to be coding for RNA Polymerase II-specific DNA-binding transcription factors.
 
 
 ## Data
