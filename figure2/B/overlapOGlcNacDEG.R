@@ -126,8 +126,17 @@ ol <- findOverlapsOfPeaks(peaks1, peaks2, peaks3, maxgap = 0,
         connectedPeaks = "keepAll")
 
 # Making the venn diagram venneuler
+.defineformat <- function(outformat, outfolder, comparisonname) {
+    if (outformat == "png") {
+        png(filename = file.path(outfolder, paste0(comparisonname, ".png")),
+            width = 1000, height = 1000, bg = "transparent")
+    }else {
+        pdf(file = file.path(outfolder, paste0(comparisonname, ".pdf")),
+            width = 10, height = 10)
+    }
+}
 
-eulerthree <- function(ol) {
+eulerthree <- function(ol, outformat, outfolder, comparisonname) {
     area1 <- retrieve_peaks_number(ol$peaklist, "peaks1")
     area2 <- retrieve_peaks_number(ol$peaklist, "peaks2")
     area3 <- retrieve_peaks_number(ol$peaklist, "peaks3")
@@ -136,16 +145,11 @@ eulerthree <- function(ol) {
     area2_area3 <- retrieve_peaks_number(ol$peaklist, "peaks2///peaks3")
     area1_area2_area3 <- retrieve_peaks_number(ol$peaklist,
         "peaks1///peaks2///peaks3")
+
+    .defineformat(outformat, outfolder, comparisonname)
 }
 
-
-    if (outformat == "png") {
-        png(filename=paste(outfolder, comparisonname, "overlap-chippeakanno-formatted.png",sep=""), width = 1000, height = 1000, bg = "transparent")
-    }else if(outformat == "ps"){
-        cairo_ps(filename=paste(outfolder, comparisonname, "overlap-chippeakanno-formatted.ps",sep=""), width = 7, height = 7, bg = "transparent");
-    }else{
-        pdf(file=paste0(outfolder, comparisonname,"overlap-chippeakanno-formatted.pdf"), width=10, height=10)
-    }
+    
     draw.triple.venn(area1 = area1 + area1_area2 + area1_area3 + area1_area2_area3, 
             area2 = area2 + area1_area2 + area2_area3 + area1_area2_area3, 
             area3 = area3 + area1_area3 + area2_area3 + area1_area2_area3, 
