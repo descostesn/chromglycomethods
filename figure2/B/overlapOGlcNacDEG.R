@@ -34,14 +34,7 @@ organism_name <- "mouse"
 center_criterion <- "max"
 col_vec <- c("#E69F00", "#56B4E9", "#E95680")
 output_format <- "png"
-
-
-
-
-
-paramsDefinition[["--bigwigNameVec"]] <- list(variableName="bigwig_name_vec", numeric=F, mandatory=F, description="Vector of big wig file names.", default=NA) # nolint
-paramsDefinition[["--maxgap"]] <- list(variableName="max_gap", numeric=T, mandatory=F, description="Non-negative integer. Peak intervals with a separation of maxgap or less are considered to be overlapped.", default=0) # nolint
-
+max_gap <- 0
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -55,7 +48,7 @@ organism_name <- "mouse"
 center_criterion <- "max"
 col_vec <- c("#E69F00", "#56B4E9", "#E95680")
 output_format <- "png"
-
+max_gap <- 0
 
 ################
 
