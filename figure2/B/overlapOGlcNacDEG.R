@@ -165,7 +165,7 @@ if (!file.exists(outfoldpeaks))
 
 message("Writing list of element per overlap to ", outfoldpeaks, "/")
 invisible(mapply(function(peaktab, peakname, expnamevec, outfoldpeaks) {
-    message("\t ", peakname)
+
     if (nchar(peakname) > 6) {
         idx <- as.numeric(unlist(lapply(strsplit(unlist(
             strsplit(peakname, "///")), "peaks"), "[", 2)))
