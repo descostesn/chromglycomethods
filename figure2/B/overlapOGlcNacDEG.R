@@ -6,11 +6,8 @@
 ###############
 
 
-
-
 library("ChIPpeakAnno")
 library("VennDiagram")
-
 
 
 #################
@@ -143,7 +140,8 @@ eulerthree <- function(ol, outformat, outfolder, comparisonname, expnamevec,
 ##############
 
 checkparams(gff_file_vec, expnamevec, outformat)
-checkingOutputFolder(outfolder)
+if (!file.exists(outfolder))
+    dir.create(outfolder, recursive = TRUE)
 
 message("Reading GFF files and converting to GRanges")
 gfflist <- readgff(gff_file_vec)
@@ -161,9 +159,11 @@ message("Generating the venn diagram")
 eulerthree(ol, outformat, outfolder, comparisonname, expnamevec, colvec)
 
 ## Writing list of element per overlap
-checkingOutputFolder(outfoldpeaks)
 outfoldpeaks <- file.path(outfolder, "peaks_per_circle/")
-message("Writing list of element per overlap to ", outfoldpeaks)
+if (!file.exists(outfoldpeaks))
+    dir.create(outfoldpeaks, recursive = TRUE)
+
+message("Writing list of element per overlap to ", outfoldpeaks, "/")
 invisible(mapply(function(peaktab, peakname, expnamevec, outfoldpeaks) {
     message("\t ", peakname)
     if (nchar(peakname) > 6) {
