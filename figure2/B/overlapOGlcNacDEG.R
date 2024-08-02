@@ -15,7 +15,7 @@ library("biomaRt")
 library("annotate")
 library("gplots")
 library("VennDiagram")
-# library("org.Mm.eg.db")
+
 
 
 #################
@@ -30,7 +30,6 @@ output_folder <- "/g/boulard/Projects/O-N-acetylglucosamine/analysis/venndiagram
 comparison_title <- "mergedrep1-2_vs_DEGsiogt"
 expnames_tab <- c("mergedrep1-2", "Down", "Up")
 genome_version <- "mm10"
-organism_name <- "mouse"
 center_criterion <- "max"
 col_vec <- c("#E69F00", "#56B4E9", "#E95680")
 output_format <- "png"
@@ -44,7 +43,6 @@ output_folder <- "results"
 comparison_title <- "Glcrep1-2_vs_DEGsiogt"
 expnames_tab <- "Glcrep1-2 Down Up"
 genome_version <- "mm10"
-organism_name <- "mouse"
 center_criterion <- "max"
 col_vec <- c("#E69F00", "#56B4E9", "#E95680")
 output_format <- "png"
@@ -83,10 +81,6 @@ checkparams <- function(gff_file_vec, expnames_tab, center_criterion,
         stop("The number of exp names should be equal to the number of gff ",
             "files")
 
-    if (!isTRUE(all.equal(organism_name, "mouse")) &&
-        !isTRUE(all.equal(organism_name, "human")))
-            stop("The organism name should be mouse or human")
-
     if (!isTRUE(all.equal(center_criterion, "coordinates")) &&
         !isTRUE(all.equal(center_criterion, "max")))
         stop("Center criterion should be 'coordinates' or 'max'")
@@ -122,14 +116,6 @@ readgff <- function(gff_file_vec) {
     return(currentgff)}))
 }
 
-loadorg <- function(organism_name) {
-    if (isTRUE(all.equal(organism_name, "mouse"))) {
-        library("org.Mm.eg.db")
-    }else {
-        library("org.Hs.eg.db")
-    }
-}
-
 ################
 
 
@@ -138,10 +124,9 @@ loadorg <- function(organism_name) {
 # MAIN
 ##############
 
-checkparams(gff_file_vec, expnames_tab, organism_name, center_criterion,
+checkparams(gff_file_vec, expnames_tab, center_criterion,
     output_format)
 checkingOutputFolder(output_folder)
-loadorg(organism_name)
 
 message("Reading GFF files and converting to GRanges")
 gfflist <- readgff(gff_file_vec)
