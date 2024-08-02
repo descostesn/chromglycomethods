@@ -149,3 +149,8 @@ Done.
 
 ### DEG overlap O-GlcNac
 
+The script should output:
+
+```
+Reading GFF files and converting to GRanges
+```
