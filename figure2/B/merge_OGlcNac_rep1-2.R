@@ -102,7 +102,9 @@ checkparams(gfffilevec, expnamevec, outputfolder)
 message("Reading gff input and converting to rangedData")
 gffgrangeslist <- buildgffrangeslist(gfffilevec)
 
-message(expnamevec[1], " has ", length())
+message(expnamevec[1], " has ", length(gffgrangeslist[[1]]), " peaks and ",
+expnamevec[2], " has ", length(gffgrangeslist[[2]]), " peaks")
+
 message("Performing the overlap")
 resultoverlap <- ChIPpeakAnno::findOverlapsOfPeaks(gffgrangeslist[[1]],
                         gffgrangeslist[[2]])
