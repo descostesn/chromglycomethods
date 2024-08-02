@@ -41,7 +41,6 @@ gff_file_vec <- c("results/Glc1.gff", "results/log0_siogtdown-ensembl.gff",
 outfolder <- "results"
 comparisonname <- "glcrep1-2_vs_degsiogt"
 expnamevec <- c("glcrep1-2", "Down", "Up")
-genome_version <- "mm10"
 col_vec <- c("#E69F00", "#56B4E9", "#E95680")
 outformat <- "png"
 max_gap <- 0
