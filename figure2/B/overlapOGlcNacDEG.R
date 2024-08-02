@@ -1,9 +1,8 @@
 ###############
-# This script aimns at representing differing and common intervals for a maximum of 4 gff files.
-# Descostes November 2015
-# update: feb 2018
-# Format: May 2024 (except second part)
-# R-4.2.0
+# This script aimns at representing differing and common intervals for
+# 3 gff files.
+#
+# Descostes - R-4.2.0
 ###############
 
 
@@ -169,34 +168,25 @@ eulerthree(ol, outformat, outfolder, comparisonname, expnamevec, colvec)
 checkingOutputFolder(outfoldpeaks)
 outfoldpeaks <- file.path(outfolder, "peaks_per_circle/")
 message("Writing list of element per overlap to ", outfoldpeaks)
-
-for(i in 1:length(ol$peaklist)) 
-{
-    cat("\t", i, "/", length(ol$peaklist), "\n");
-    
-    if(nchar(names(ol$peaklist)[i]) > 6)
-    {
-        index_exp_vec <- as.numeric(unlist(lapply(strsplit(unlist(strsplit(names(ol$peaklist)[i],"///")),"peaks"),"[",2)));
-        output_file <- paste(expnamevec[index_exp_vec], collapse="_");
+invisible(mapply(function(peaktab, peakname, expnamevec, outfoldpeaks) {
+    message("\t ", peakname)
+    if (nchar(peakname) > 6) {
+        idx <- as.numeric(unlist(lapply(strsplit(unlist(
+            strsplit(peakname, "///")), "peaks"), "[", 2)))
+        outfile <- paste(expnamevec[idx], collapse = "_")
+    } else {
+        idx <- as.numeric(unlist(lapply(strsplit(peakname, "peaks"), "[", 2)))
+        outfile <- expnamevec[idx]
     }
-    else
-    {
-        index_exp <- as.numeric(unlist(lapply(strsplit(names(ol$peaklist)[i],"peaks"),"[",2)));
-        output_file <- expnamevec[index_exp];
-    }
-    
-    gff_table <- data.frame(seqname=as.character(seqnames(ol$peaklist[[i]])), 
-            source="vennDiagram_overlapGFF", 
-            feature = as.character(unlist(lapply(elementMetadata(ol$peaklist[[i]])$peakNames, paste,collapse="-"))), 
-            start=start(ranges(ol$peaklist[[i]])),
-            end=end(ranges(ol$peaklist[[i]])),
-            score=0,
-            strand=as.character(strand(ol$peaklist[[i]])),
-            frame=".",
-            group=".")
-    
-    write.table(gff_table, file=paste(outfoldpeaks, output_file, ".gff", sep=""), sep="\t", quote=FALSE, col.names=FALSE, row.names=FALSE);
-}
-
-
-
+    message("\t", outfile)
+    outfile <- file.path(outfoldpeaks, paste0(outfile, ".gff"))
+    gffres <- data.frame(seqname = as.character(seqnames(peaktab)),
+            source = "vennDiagram_overlapGFF",
+            feature = as.character(unlist(lapply(
+                elementMetadata(peaktab)$peakNames, paste, collapse = "-"))),
+            start = start(ranges(peaktab)), end = end(ranges(peaktab)),
+            score = 0, strand = as.character(strand(peaktab)),
+            frame = ".", group = ".")
+    write.table(gffres, file = outfile, sep = "\t", quote = FALSE,
+        col.names = FALSE, row.names = FALSE)
+}, ol$peaklist, names(ol$peaklist), MoreArgs = list(expnamevec, outfoldpeaks)))
