@@ -6,7 +6,6 @@
 #################
 
 
-library("Rargs")
 library("GenomicRanges")
 library("ChIPpeakAnno")
 
@@ -15,15 +14,17 @@ library("ChIPpeakAnno")
 # PARAMETERS
 ################
 
+gfffilevec <- c("/g/boulard/Projects/O-N-acetylglucosamine/analysis/peak_detection/macs2/Sept2023_glcPolII/mouse/glcGlucose/0.04/no_model/ESCHGGlcNAc1_lane1sample12_peaks_narrowPeak.gff", # nolint
+"/g/boulard/Projects/O-N-acetylglucosamine/analysis/peak_detection/macs2/Sept2023_glcPolII/mouse/glcGlucose/0.04/no_model/ESCHGGlcNAc2_lane1sample13_peaks_narrowPeak.gff") # nolint
+outputfolder <- "/g/boulard/Projects/O-N-acetylglucosamine/analysis/venndiagrams/Sofia_polIIGlc_sept2023/mouse/glucose-levels/glcHGPeaksRep1_vs_Rep2/test/" # nolint
+expnamevec <- c("Glc1", "Glc2")
 
-#parameters defined from the command line using RIO
-paramsDefinition <- list() #nolint
-paramsDefinition[["--gffFileVec"]] <- list(variableName="gff_file_vec", numeric=F, mandatory=T, description="Vector containing file path in gff to the exp to compare.") #nolint
-paramsDefinition[["--outputFolder"]] <- list(variableName="output_folder", numeric=F, mandatory=T, description="single path to the output folder.") #nolint
-paramsDefinition[["--expnameVec"]] <- list(variableName="expname_vec", numeric=F, mandatory=T, description="Vector containing name of each experiment given as gff files.") #nolint
+!!!!!!!!!!!!!!!!!!!!!
 
-#Optional argument
-paramsDefinition[["--extractensemblgenename"]] <- list(variableName="extractensemblgenename", numeric=F, mandatory=F, description="Logical indicating if ensembl gene names should be extracted.", postConversion=as.logical, default=FALSE) #nolint
+gfffilevec <- c("ESCHGGlcNAc_rep1.gff",
+"ESCHGGlcNAc_rep2.gff")
+outputfolder <- "results"
+expnamevec <- c("Glc1", "Glc2")
 
 
 #############
@@ -36,58 +37,58 @@ checkingoutputfolder <- function(output_path) {
         dir.create(output_path, recursive = TRUE)
 }
 
-checkparams <- function(gff_file_vec, expname_vec, output_folder) {
+checkparams <- function(gfffilevec, expnamevec, outputfolder) {
 
-    if (length(gff_file_vec) != 2 || length(expname_vec) != 2)
+    if (length(gfffilevec) != 2 || length(expnamevec) != 2)
         stop("\n This script takes only two exp as input\n")
 
-    extsuffix <- unique(sapply(basename(gff_file_vec),
+    extsuffix <- unique(sapply(basename(gfffilevec),
         function(x) strsplit(x, "\\.")[[1]][2]))
 
     if (!isTRUE(all.equal(length(extsuffix), 1)) &&
         !isTRUE(all.equal(extsuffix, "gff")))
             stop("The files should be in gff format.")
 
-    checkingoutputfolder(output_folder)
+    checkingoutputfolder(outputfolder)
 }
 
 
-buildgffrangeslist <- function(gff_file_vec, extractensemblgenename) {
-    gff_granges_list <- list()
+buildgffrangeslist <- function(gfffilevec, extractensemblgenename = FALSE) {
+    gffgrangeslist <- list()
 
-    for (i in seq_len(length(gff_file_vec))) {
+    for (i in seq_len(length(gfffilevec))) {
 
-        current_gff <- read.delim(gff_file_vec[i], stringsAsFactors = FALSE,
+        currentgff <- read.delim(gfffilevec[i], stringsAsFactors = FALSE,
             header = FALSE)
 
         ## In case the overlap is done with ensembl genes, extract gene name
         if (isTRUE(all.equal(i, 2)) && extractensemblgenename)
             genenamevec <- unlist(lapply(strsplit(unlist(lapply(
-                strsplit(current_gff$V9, ";"), "[", 2)), "="), "[", 2))
+                strsplit(currentgff$V9, ";"), "[", 2)), "="), "[", 2))
         else
-            genenamevec <- current_gff[, 3]
+            genenamevec <- currentgff[, 3]
 
         ## Check for duplicated names
         if (length(genenamevec) != length(unique(genenamevec)))
             genenamevec <- make.unique(genenamevec, sep = "-")
 
         ## Check for duplicated ranges
-        tmp <- paste(current_gff[, 1], current_gff[, 4], current_gff[, 5])
+        tmp <- paste(currentgff[, 1], currentgff[, 4], currentgff[, 5])
         idxdup <- which(duplicated(tmp))
         if (!isTRUE(all.equal(length(idxdup), 0))) {
-            message("Removing ", length(idxdup), "/", nrow(current_gff))
-            current_gff <- current_gff[-idxdup, ]
+            message("Removing ", length(idxdup), "/", nrow(currentgff))
+            currentgff <- currentgff[-idxdup, ]
             genenamevec <- genenamevec[-idxdup]
         }
 
-        gff_granges_list[[i]] <- GenomicRanges::GRanges(
-            seqnames = current_gff[, 1],
-            ranges = IRanges::IRanges(start = current_gff[, 4],
-                                  end = current_gff[, 5],
+        gffgrangeslist[[i]] <- GenomicRanges::GRanges(
+            seqnames = currentgff[, 1],
+            ranges = IRanges::IRanges(start = currentgff[, 4],
+                                  end = currentgff[, 5],
                                   names = genenamevec),
-            strand = current_gff[, 7])
+            strand = currentgff[, 7])
     }
-    return(gff_granges_list)
+    return(gffgrangeslist)
 }
 
 
@@ -96,44 +97,43 @@ buildgffrangeslist <- function(gff_file_vec, extractensemblgenename) {
 # MAIN
 ##############
 
-# Retreives the parameters
-getParams(paramsDefinition)
-checkparams(gff_file_vec, expname_vec, output_folder)
+checkparams(gfffilevec, expnamevec, outputfolder)
 
 message("Reading gff input and converting to rangedData")
-gff_granges_list <- buildgffrangeslist(gff_file_vec, extractensemblgenename)
+gffgrangeslist <- buildgffrangeslist(gfffilevec)
 
+message(expnamevec[1], " has ", length())
 message("Performing the overlap")
-result_overlap <- ChIPpeakAnno::findOverlapsOfPeaks(gff_granges_list[[1]],
-                        gff_granges_list[[2]])
+resultoverlap <- ChIPpeakAnno::findOverlapsOfPeaks(gffgrangeslist[[1]],
+                        gffgrangeslist[[2]])
 
 message("Writting the overlapping peaks")
-gff_table_peak1 <- data.frame(
-    seqname = as.character(result_overlap$overlappingPeaks[[1]][, 2]),
+gffpeak1 <- data.frame(
+    seqname = as.character(resultoverlap$overlappingPeaks[[1]][, 2]),
     source = "vennDiagram_overlapGFF",
-    feature = result_overlap$overlappingPeaks[[1]][, 1],
-    start = result_overlap$overlappingPeaks[[1]][, 3],
-    end = result_overlap$overlappingPeaks[[1]][, 4],
-    score = result_overlap$overlappingPeaks[[1]][, 5],
-    strand = as.character(result_overlap$overlappingPeaks[[1]][, 6]),
+    feature = resultoverlap$overlappingPeaks[[1]][, 1],
+    start = resultoverlap$overlappingPeaks[[1]][, 3],
+    end = resultoverlap$overlappingPeaks[[1]][, 4],
+    score = resultoverlap$overlappingPeaks[[1]][, 5],
+    strand = as.character(resultoverlap$overlappingPeaks[[1]][, 6]),
     frame = ".", group = ".")
 
-gff_table_peak2 <- data.frame(
-    seqname = as.character(result_overlap$overlappingPeaks[[1]][, 8]),
+gffpeak2 <- data.frame(
+    seqname = as.character(resultoverlap$overlappingPeaks[[1]][, 8]),
     source = "vennDiagram_overlapGFF",
-    feature = result_overlap$overlappingPeaks[[1]][, 7],
-    start = result_overlap$overlappingPeaks[[1]][, 9],
-    end = result_overlap$overlappingPeaks[[1]][, 10],
-    score = result_overlap$overlappingPeaks[[1]][, 11],
-    strand = result_overlap$overlappingPeaks[[1]][, 12],
+    feature = resultoverlap$overlappingPeaks[[1]][, 7],
+    start = resultoverlap$overlappingPeaks[[1]][, 9],
+    end = resultoverlap$overlappingPeaks[[1]][, 10],
+    score = resultoverlap$overlappingPeaks[[1]][, 11],
+    strand = resultoverlap$overlappingPeaks[[1]][, 12],
     frame = ".", group = ".")
 
 message("Writing output files")
-write.table(gff_table_peak1,
-    file = file.path(output_folder, paste0(expname_vec[1], ".gff")),
+write.table(gffpeak1,
+    file = file.path(outputfolder, paste0(expnamevec[1], ".gff")),
     sep = "\t", quote = FALSE, row.names = FALSE, col.names = FALSE)
-write.table(gff_table_peak2,
-    file = file.path(output_folder, paste0(expname_vec[2], ".gff")),
+write.table(gffpeak2,
+    file = file.path(outputfolder, paste0(expnamevec[2], ".gff")),
     sep = "\t", quote = FALSE, row.names = FALSE, col.names = FALSE)
 
 message("Done.")
