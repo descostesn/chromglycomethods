@@ -26,24 +26,24 @@ library("VennDiagram")
 gff_file_vec <- c("/g/boulard/Projects/O-N-acetylglucosamine/analysis/venndiagrams/Sofia_polIIGlc_sept2023/mouse/glucose-levels/glcHGPeaksRep1_vs_Rep2/Glc1.gff", # nolint
 "/g/boulard/Projects/O-N-acetylglucosamine/analysis/differential_analysis/deseq2/RNASeq_siogt_formichetti/lfc0/upanddown/log0_down-ensembl.gff", # nolint
 "/g/boulard/Projects/O-N-acetylglucosamine/analysis/differential_analysis/deseq2/RNASeq_siogt_formichetti/lfc0/upanddown/log0_up-ensembl.gff")  # nolint
-output_folder <- "/g/boulard/Projects/O-N-acetylglucosamine/analysis/venndiagrams/Sofia_polIIGlc_sept2023/mouse/glucose-levels/glcHG_vs_DEGsiogt/mergedrep1-2/test" # nolint
-comparison_title <- "mergedrep1-2_vs_DEGsiogt"
-expnames_tab <- c("mergedrep1-2", "Down", "Up")
+outfolder <- "/g/boulard/Projects/O-N-acetylglucosamine/analysis/venndiagrams/Sofia_polIIGlc_sept2023/mouse/glucose-levels/glcHG_vs_DEGsiogt/mergedrep1-2/test" # nolint
+comparisonname <- "mergedrep1-2_vs_DEGsiogt"
+expnamevec <- c("mergedrep1-2", "Down", "Up")
 genome_version <- "mm10"
 col_vec <- c("#E69F00", "#56B4E9", "#E95680")
-output_format <- "png"
+outformat <- "png"
 max_gap <- 0
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 gff_file_vec <- c("results/Glc1.gff", "results/log0_siogtdown-ensembl.gff",
 "results/log0_siogtup-ensembl.gff")
-output_folder <- "results"
-comparison_title <- "Glcrep1-2_vs_DEGsiogt"
-expnames_tab <- "Glcrep1-2 Down Up"
+outfolder <- "results"
+comparisonname <- "glcrep1-2_vs_degsiogt"
+expnamevec <- c("glcrep1-2", "Down", "Up")
 genome_version <- "mm10"
 col_vec <- c("#E69F00", "#56B4E9", "#E95680")
-output_format <- "png"
+outformat <- "png"
 max_gap <- 0
 
 ################
@@ -58,7 +58,7 @@ retrieve_peaks_number <- function(peak_list, label_name) {
     if (is.null(peak_number)) return(0) else return(peak_number)
 }
 
-checkparams <- function(gff_file_vec, expnames_tab, output_format) {
+checkparams <- function(gff_file_vec, expnamevec, outformat) {
 
     if (length(gff_file_vec) > 5)
         stop("This script takes at most 5 gff files as input")
@@ -66,14 +66,14 @@ checkparams <- function(gff_file_vec, expnames_tab, output_format) {
     if (length(gff_file_vec) < 2)
         stop("This script takes a minimum of 2 gff files as input")
 
-    if (!isTRUE(all.equal(length(gff_file_vec), length(expnames_tab))))
+    if (!isTRUE(all.equal(length(gff_file_vec), length(expnamevec))))
         stop("The number of exp names should be equal to the number of gff ",
             "files")
 
-    if (!isTRUE(all.equal(output_format, "ps")) &&
-        !isTRUE(all.equal(output_format, "png")) &&
-        !isTRUE(all.equal(output_format, "pdf")))
-        stop("output_format should be png, pdf or ps")
+    if (!isTRUE(all.equal(outformat, "ps")) &&
+        !isTRUE(all.equal(outformat, "png")) &&
+        !isTRUE(all.equal(outformat, "pdf")))
+        stop("outformat should be png, pdf or ps")
 }
 
 convert2gr <- function(gfflist) {
@@ -112,8 +112,8 @@ readgff <- function(gff_file_vec) {
 # MAIN
 ##############
 
-checkparams(gff_file_vec, expnames_tab, output_format)
-checkingOutputFolder(output_folder)
+checkparams(gff_file_vec, expnamevec, outformat)
+checkingOutputFolder(outfolder)
 
 message("Reading GFF files and converting to GRanges")
 gfflist <- readgff(gff_file_vec)
@@ -127,6 +127,8 @@ ol <- findOverlapsOfPeaks(peaks1, peaks2, peaks3, maxgap = max_gap,
         connectedPeaks = "keepAll")
 
 # Making the venn diagram venneuler
+
+eulerthree <- function(ol) {
     area1 <- retrieve_peaks_number(ol$peaklist, "peaks1")
     area2 <- retrieve_peaks_number(ol$peaklist, "peaks2")
     area3 <- retrieve_peaks_number(ol$peaklist, "peaks3")
@@ -135,13 +137,15 @@ ol <- findOverlapsOfPeaks(peaks1, peaks2, peaks3, maxgap = max_gap,
     area2_area3 <- retrieve_peaks_number(ol$peaklist, "peaks2///peaks3")
     area1_area2_area3 <- retrieve_peaks_number(ol$peaklist,
         "peaks1///peaks2///peaks3")
+}
 
-    if (output_format == "png") {
-        png(filename=paste(output_folder, comparison_title, "overlap-chippeakanno-formatted.png",sep=""), width = 1000, height = 1000, bg = "transparent")
-    }else if(output_format == "ps"){
-        cairo_ps(filename=paste(output_folder, comparison_title, "overlap-chippeakanno-formatted.ps",sep=""), width = 7, height = 7, bg = "transparent");
+
+    if (outformat == "png") {
+        png(filename=paste(outfolder, comparisonname, "overlap-chippeakanno-formatted.png",sep=""), width = 1000, height = 1000, bg = "transparent")
+    }else if(outformat == "ps"){
+        cairo_ps(filename=paste(outfolder, comparisonname, "overlap-chippeakanno-formatted.ps",sep=""), width = 7, height = 7, bg = "transparent");
     }else{
-        pdf(file=paste0(output_folder, comparison_title,"overlap-chippeakanno-formatted.pdf"), width=10, height=10)
+        pdf(file=paste0(outfolder, comparisonname,"overlap-chippeakanno-formatted.pdf"), width=10, height=10)
     }
     draw.triple.venn(area1 = area1 + area1_area2 + area1_area3 + area1_area2_area3, 
             area2 = area2 + area1_area2 + area2_area3 + area1_area2_area3, 
@@ -150,7 +154,7 @@ ol <- findOverlapsOfPeaks(peaks1, peaks2, peaks3, maxgap = max_gap,
             n23 = area2_area3 + area1_area2_area3, 
             n13 = area1_area3 + area1_area2_area3, 
             n123 = area1_area2_area3,
-            category = expnames_tab,
+            category = expnamevec,
             euler.d = TRUE, 
             scaled = TRUE, 
             ext.text = FALSE,
@@ -163,8 +167,8 @@ ol <- findOverlapsOfPeaks(peaks1, peaks2, peaks3, maxgap = max_gap,
 
 cat("Retrieving list of element per overlap\n");
 
-output_folder_peaks <- paste(output_folder, "peaks_per_circle/", sep="");
-checkingOutputFolder(output_folder_peaks);
+outfolder_peaks <- paste(outfolder, "peaks_per_circle/", sep="");
+checkingOutputFolder(outfolder_peaks);
 
 for(i in 1:length(ol$peaklist)) 
 {
@@ -173,12 +177,12 @@ for(i in 1:length(ol$peaklist))
     if(nchar(names(ol$peaklist)[i]) > 6)
     {
         index_exp_vec <- as.numeric(unlist(lapply(strsplit(unlist(strsplit(names(ol$peaklist)[i],"///")),"peaks"),"[",2)));
-        output_file <- paste(expnames_tab[index_exp_vec], collapse="_");
+        output_file <- paste(expnamevec[index_exp_vec], collapse="_");
     }
     else
     {
         index_exp <- as.numeric(unlist(lapply(strsplit(names(ol$peaklist)[i],"peaks"),"[",2)));
-        output_file <- expnames_tab[index_exp];
+        output_file <- expnamevec[index_exp];
     }
     
     gff_table <- data.frame(seqname=as.character(seqnames(ol$peaklist[[i]])), 
@@ -191,7 +195,7 @@ for(i in 1:length(ol$peaklist))
             frame=".",
             group=".")
     
-    write.table(gff_table, file=paste(output_folder_peaks, output_file, ".gff", sep=""), sep="\t", quote=FALSE, col.names=FALSE, row.names=FALSE);
+    write.table(gff_table, file=paste(outfolder_peaks, output_file, ".gff", sep=""), sep="\t", quote=FALSE, col.names=FALSE, row.names=FALSE);
 }
 
 
