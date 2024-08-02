@@ -34,6 +34,21 @@ center_criterion <- "max"
 col_vec <- c("#E69F00", "#56B4E9", "#E95680")
 output_format <- "png"
 
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+gff_file_vec <- c("results/Glc1.gff", "results/log0_siogtdown-ensembl.gff",
+"results/log0_siogtup-ensembl.gff")
+output_folder <- "results"
+comparison_title <- "Glcrep1-2_vs_DEGsiogt"
+expnames_tab <- "Glcrep1-2 Down Up"
+genome_version <- "mm10"
+organism_name <- "mouse"
+center_criterion <- "max"
+col_vec <- c("#E69F00", "#56B4E9", "#E95680")
+output_format <- "png"
+
+
 ################
 
 
