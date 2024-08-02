@@ -30,7 +30,7 @@ outfolder <- "/g/boulard/Projects/O-N-acetylglucosamine/analysis/venndiagrams/So
 comparisonname <- "mergedrep1-2_vs_DEGsiogt"
 expnamevec <- c("mergedrep1-2", "Down", "Up")
 genome_version <- "mm10"
-col_vec <- c("#E69F00", "#56B4E9", "#E95680")
+colvec <- c("#E69F00", "#56B4E9", "#E95680")
 outformat <- "png"
 max_gap <- 0
 
@@ -41,7 +41,7 @@ gff_file_vec <- c("results/Glc1.gff", "results/log0_siogtdown-ensembl.gff",
 outfolder <- "results"
 comparisonname <- "glcrep1-2_vs_degsiogt"
 expnamevec <- c("glcrep1-2", "Down", "Up")
-col_vec <- c("#E69F00", "#56B4E9", "#E95680")
+colvec <- c("#E69F00", "#56B4E9", "#E95680")
 outformat <- "png"
 max_gap <- 0
 
@@ -157,8 +157,8 @@ eulerthree <- function(ol) {
             euler.d = TRUE, 
             scaled = TRUE, 
             ext.text = FALSE,
-            col = col_vec, 
-            fill = col_vec,
+            col = colvec, 
+            fill = colvec,
             cex = rep(2, 7), 
             cat.cex = rep(2.5, 3));
     dev.off();
