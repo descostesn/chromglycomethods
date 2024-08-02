@@ -15,14 +15,6 @@ library("ggrepel")
 ##################
 
 
-deseq2paths <- c("/g/boulard/Projects/O-N-acetylglucosamine/analysis/differential_analysis/deseq2/RNASeq_siogt_formichetti/lfc0/deseq2/DESeq2_result_file_on_data_9_data_8_and_others.tabular") # nolint
-overdownpeakspath <- "/g/boulard/Projects/O-N-acetylglucosamine/analysis/venndiagrams/Sofia_polIIGlc_sept2023/mouse/glucose-levels/glcHGmergedRep1-2_vs_downsiogt/siogtdown.gff" # nolint
-overuppeakspath <- "/g/boulard/Projects/O-N-acetylglucosamine/analysis/venndiagrams/Sofia_polIIGlc_sept2023/mouse/glucose-levels/glcHGmergedRep1-2_vs_upsiogt/siogtup.gff" # nolint
-outfold <- "/g/boulard/Projects/O-N-acetylglucosamine/analysis/volcanoCustom/siogt" # nolint
-
-!!!!!!!!!!!!!!!!!
-
-
 deseq2paths <- c("data/resultDeseq2_siogt.txt")
 overdownpeakspath <- "data/siogtdown_withOGlcNac.gff"
 overuppeakspath <- "data/siogtup_withOGlcNac.gff"
