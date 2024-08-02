@@ -1,0 +1,11 @@
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - r-base=4.3
+  - r-ggplot2=3.4.2
+  - r-ggrepel=0.9.1
+  - r-venndiagram=1.7.3
+  - bioconductor-genomicranges=1.52.0
+  - bioconductor-clusterprofiler=4.8.1
+  - bioconductor-chippeakanno=3.32.0
