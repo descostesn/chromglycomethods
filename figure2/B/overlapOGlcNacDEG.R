@@ -30,7 +30,6 @@ output_folder <- "/g/boulard/Projects/O-N-acetylglucosamine/analysis/venndiagram
 comparison_title <- "mergedrep1-2_vs_DEGsiogt"
 expnames_tab <- c("mergedrep1-2", "Down", "Up")
 genome_version <- "mm10"
-center_criterion <- "max"
 col_vec <- c("#E69F00", "#56B4E9", "#E95680")
 output_format <- "png"
 max_gap <- 0
@@ -43,7 +42,6 @@ output_folder <- "results"
 comparison_title <- "Glcrep1-2_vs_DEGsiogt"
 expnames_tab <- "Glcrep1-2 Down Up"
 genome_version <- "mm10"
-center_criterion <- "max"
 col_vec <- c("#E69F00", "#56B4E9", "#E95680")
 output_format <- "png"
 max_gap <- 0
@@ -68,8 +66,7 @@ checkparams2 <- function(output_format) {
         stop("output_format should be png, pdf or ps")
 }
 
-checkparams <- function(gff_file_vec, expnames_tab, center_criterion,
-    output_format) {
+checkparams <- function(gff_file_vec, expnames_tab, output_format) {
 
     if (length(gff_file_vec) > 5)
         stop("This script takes at most 5 gff files as input")
@@ -80,10 +77,6 @@ checkparams <- function(gff_file_vec, expnames_tab, center_criterion,
     if (!isTRUE(all.equal(length(gff_file_vec), length(expnames_tab))))
         stop("The number of exp names should be equal to the number of gff ",
             "files")
-
-    if (!isTRUE(all.equal(center_criterion, "coordinates")) &&
-        !isTRUE(all.equal(center_criterion, "max")))
-        stop("Center criterion should be 'coordinates' or 'max'")
 
     checkparams2(output_format)
 }
@@ -124,8 +117,7 @@ readgff <- function(gff_file_vec) {
 # MAIN
 ##############
 
-checkparams(gff_file_vec, expnames_tab, center_criterion,
-    output_format)
+checkparams(gff_file_vec, expnames_tab, output_format)
 checkingOutputFolder(output_folder)
 
 message("Reading GFF files and converting to GRanges")
