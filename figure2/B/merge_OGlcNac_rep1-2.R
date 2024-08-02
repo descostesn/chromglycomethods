@@ -109,28 +109,31 @@ message("Performing the overlap")
 resultoverlap <- ChIPpeakAnno::findOverlapsOfPeaks(gffgrangeslist[[1]],
                         gffgrangeslist[[2]])
 
-message("Writting the overlapping peaks")
+res <-  resultoverlap$overlappingPeaks[[1]]
+message("The intersection gives ", nrow(res), " peaks.")
+
 gffpeak1 <- data.frame(
-    seqname = as.character(resultoverlap$overlappingPeaks[[1]][, 2]),
+    seqname = as.character(res[, 2]),
     source = "vennDiagram_overlapGFF",
-    feature = resultoverlap$overlappingPeaks[[1]][, 1],
-    start = resultoverlap$overlappingPeaks[[1]][, 3],
-    end = resultoverlap$overlappingPeaks[[1]][, 4],
-    score = resultoverlap$overlappingPeaks[[1]][, 5],
-    strand = as.character(resultoverlap$overlappingPeaks[[1]][, 6]),
+    feature = res[, 1],
+    start = res[, 3],
+    end = res[, 4],
+    score = res[, 5],
+    strand = as.character(res[, 6]),
     frame = ".", group = ".")
 
 gffpeak2 <- data.frame(
-    seqname = as.character(resultoverlap$overlappingPeaks[[1]][, 8]),
+    seqname = as.character(res[, 8]),
     source = "vennDiagram_overlapGFF",
-    feature = resultoverlap$overlappingPeaks[[1]][, 7],
-    start = resultoverlap$overlappingPeaks[[1]][, 9],
-    end = resultoverlap$overlappingPeaks[[1]][, 10],
-    score = resultoverlap$overlappingPeaks[[1]][, 11],
-    strand = resultoverlap$overlappingPeaks[[1]][, 12],
+    feature = res[, 7],
+    start = res[, 9],
+    end = res[, 10],
+    score = res[, 11],
+    strand = res[, 12],
     frame = ".", group = ".")
 
-message("Writing output files")
+message("Writing the coordinates of intersecting peaks for each replicate to ",
+outputfolder, "/")
 write.table(gffpeak1,
     file = file.path(outputfolder, paste0(expnamevec[1], ".gff")),
     sep = "\t", quote = FALSE, row.names = FALSE, col.names = FALSE)
