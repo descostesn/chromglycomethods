@@ -58,14 +58,6 @@ retrieve_peaks_number <- function(peak_list, label_name) {
     if (is.null(peak_number)) return(0) else return(peak_number)
 }
 
-checkparams2 <- function(output_format) {
-
-    if (!isTRUE(all.equal(output_format, "ps")) &&
-        !isTRUE(all.equal(output_format, "png")) &&
-        !isTRUE(all.equal(output_format, "pdf")))
-        stop("output_format should be png, pdf or ps")
-}
-
 checkparams <- function(gff_file_vec, expnames_tab, output_format) {
 
     if (length(gff_file_vec) > 5)
@@ -78,7 +70,10 @@ checkparams <- function(gff_file_vec, expnames_tab, output_format) {
         stop("The number of exp names should be equal to the number of gff ",
             "files")
 
-    checkparams2(output_format)
+    if (!isTRUE(all.equal(output_format, "ps")) &&
+        !isTRUE(all.equal(output_format, "png")) &&
+        !isTRUE(all.equal(output_format, "pdf")))
+        stop("output_format should be png, pdf or ps")
 }
 
 convert2gr <- function(gfflist) {
