@@ -161,4 +161,13 @@ duplicated or NA names found.
 duplicated or NA names found.
                 Rename all the names by numbers.
 Generating the venn diagram
+Writing list of element per overlap to results/
+        Up
+        Down
+        Down_Up
+        glcrep1-2
+        glcrep1-2_Up
+        glcrep1-2_Down
 ```
+
+The files of coorinates of genes having an O-GlcNac peak are glcrep1-2_Up.gff and glcrep1-2_Down.gff.
