@@ -22,6 +22,7 @@ library("VennDiagram")
 # PARAMETERS
 ################
 
+
 paramsDefinition <- list() # nolint
 
 paramsDefinition[["--gffFileVec"]] <- list(variableName="gff_file_vec", numeric=F, mandatory=T, description="Vector containing file path in gff to the exp to compare.") # nolint
@@ -43,25 +44,17 @@ paramsDefinition[["--bigwigNameVec"]] <- list(variableName="bigwig_name_vec", nu
 paramsDefinition[["--maxgap"]] <- list(variableName="max_gap", numeric=T, mandatory=F, description="Non-negative integer. Peak intervals with a separation of maxgap or less are considered to be overlapped.", default=0) # nolint
 
 
-
-# gff_file_vec <- c("/g/boulard/Projects/O-N-acetylglucosamine/analysis/volcanoCustom/3cESC/noCommons/ESC_goodchrom_DOWN.gff",
-# "/g/boulard/Projects/O-N-acetylglucosamine/analysis/volcanoCustom/3cESC/noCommons/ESC_goodchrom_UP.gff",
-# "/g/boulard/Projects/O-N-acetylglucosamine/analysis/peak_detection/macs2/Yulia_CXXCPromoters_chipseq_May2021/1e-05/no_model/lane15CXXChighdoxb_peaks_narrowPeak.gff")
-# output_folder <- "/g/boulard/Projects/O-N-acetylglucosamine/analysis/venndiagrams/cxxcDEGESCvolcanonocomnoribo_vs_cxxcchipseqyulia/DownUp_lane15CXXChighdoxb/"
-# comparison_title <- "DownUp_lane15CXXChighdoxb"
-# expnames_tab <- c("Down", "Up", "lane15CXXChighdoxb")
-# genome_version <- "mm10"
-# organism_name <- "mouse"
-# center_criterion <- "max"
-# col_vec <- c("#E69F00", "#56B4E9", "#E95680")
-# output_format <- "pdf"
-
-# ref_exp_max_centering <- NA
-# upstream_heatmap <- NA
-# downstream_heatmap <- NA
-# bigwig_vec <- NA
-# bigwig_name_vec <- NA
-# max_gap <- 0
+gff_file_vec <- c("/g/boulard/Projects/O-N-acetylglucosamine/analysis/venndiagrams/Sofia_polIIGlc_sept2023/mouse/glucose-levels/glcHGPeaksRep1_vs_Rep2/Glc1.gff", # nolint
+"/g/boulard/Projects/O-N-acetylglucosamine/analysis/differential_analysis/deseq2/RNASeq_siogt_formichetti/lfc0/upanddown/log0_down-ensembl.gff", # nolint
+"/g/boulard/Projects/O-N-acetylglucosamine/analysis/differential_analysis/deseq2/RNASeq_siogt_formichetti/lfc0/upanddown/log0_up-ensembl.gff")  # nolint
+output_folder <- "/g/boulard/Projects/O-N-acetylglucosamine/analysis/venndiagrams/Sofia_polIIGlc_sept2023/mouse/glucose-levels/glcHG_vs_DEGsiogt/mergedrep1-2/test" # nolint
+comparison_title <- "mergedrep1-2_vs_DEGsiogt"
+expnames_tab <- "mergedrep1-2 Down Up"
+genome_version <- "mm10"
+organism_name <- "mouse"
+center_criterion <- "max"
+col_vec <- c("#E69F00", "#56B4E9", "#E95680")
+output_format <- "png"
 
 ################
 
