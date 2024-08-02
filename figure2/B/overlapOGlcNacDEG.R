@@ -32,7 +32,7 @@ expnamevec <- c("mergedrep1-2", "Down", "Up")
 genome_version <- "mm10"
 colvec <- c("#E69F00", "#56B4E9", "#E95680")
 outformat <- "png"
-max_gap <- 0
+
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -43,7 +43,7 @@ comparisonname <- "glcrep1-2_vs_degsiogt"
 expnamevec <- c("glcrep1-2", "Down", "Up")
 colvec <- c("#E69F00", "#56B4E9", "#E95680")
 outformat <- "png"
-max_gap <- 0
+
 
 ################
 
@@ -122,7 +122,7 @@ message("Performing the overlap")
 peaks1 <- gffgrlist[[1]]
 peaks2 <- gffgrlist[[2]]
 peaks3 <- gffgrlist[[3]]
-ol <- findOverlapsOfPeaks(peaks1, peaks2, peaks3, maxgap = max_gap,
+ol <- findOverlapsOfPeaks(peaks1, peaks2, peaks3, maxgap = 0,
         connectedPeaks = "keepAll")
 
 # Making the venn diagram venneuler
