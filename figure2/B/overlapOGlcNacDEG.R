@@ -165,10 +165,10 @@ ol <- findOverlapsOfPeaks(peaks1, peaks2, peaks3, maxgap = 0,
 message("Generating the venn diagram")
 eulerthree(ol, outformat, outfolder, comparisonname, expnamevec, colvec)
 
-cat("Retrieving list of element per overlap\n");
-
-outfolder_peaks <- paste(outfolder, "peaks_per_circle/", sep="");
-checkingOutputFolder(outfolder_peaks);
+## Writing list of element per overlap
+checkingOutputFolder(outfoldpeaks)
+outfoldpeaks <- file.path(outfolder, "peaks_per_circle/")
+message("Writing list of element per overlap to ", outfoldpeaks)
 
 for(i in 1:length(ol$peaklist)) 
 {
@@ -195,7 +195,7 @@ for(i in 1:length(ol$peaklist))
             frame=".",
             group=".")
     
-    write.table(gff_table, file=paste(outfolder_peaks, output_file, ".gff", sep=""), sep="\t", quote=FALSE, col.names=FALSE, row.names=FALSE);
+    write.table(gff_table, file=paste(outfoldpeaks, output_file, ".gff", sep=""), sep="\t", quote=FALSE, col.names=FALSE, row.names=FALSE);
 }
 
 
