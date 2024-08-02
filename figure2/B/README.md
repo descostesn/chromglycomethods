@@ -153,4 +153,12 @@ The script should output:
 
 ```
 Reading GFF files and converting to GRanges
+Performing the overlap
+duplicated or NA names found.
+                Rename all the names by numbers.
+duplicated or NA names found.
+                Rename all the names by numbers.
+duplicated or NA names found.
+                Rename all the names by numbers.
+
 ```
