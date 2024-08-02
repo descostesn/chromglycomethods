@@ -126,8 +126,8 @@ The resulting files can be downloaded:
 ```
 #!/bin/bash
 
-wget https://zenodo.org/records/12793186/files/log0_siogtdown-ensembl.gff
-wget https://zenodo.org/records/12793186/files/log0_siogtup-ensembl.gff
+wget https://zenodo.org/records/12793186/files/log0_siogtdown-ensembl.gff -P results/
+wget https://zenodo.org/records/12793186/files/log0_siogtup-ensembl.gff -P results/
 ```
 
 ### Merging replicates
