@@ -120,39 +120,11 @@ gfflist <- readgff(gff_file_vec)
 gffgrlist <- convert2gr(gfflist)
 
 message("Performing the overlap")
-
-if (length(gffgrlist) == 2) {
-    peaks1 <- gffgrlist[[1]]
-    peaks2 <- gffgrlist[[2]]
-    ol <- findOverlapsOfPeaks(peaks1, peaks2, maxgap = max_gap,
+peaks1 <- gffgrlist[[1]]
+peaks2 <- gffgrlist[[2]]
+peaks3 <- gffgrlist[[3]]
+ol <- findOverlapsOfPeaks(peaks1, peaks2, peaks3, maxgap = max_gap,
         connectedPeaks = "keepAll")
-}else if (length(gffgrlist) == 3) {
-    peaks1 <- gffgrlist[[1]]
-    peaks2 <- gffgrlist[[2]]
-    peaks3 <- gffgrlist[[3]]
-
-    ol <- findOverlapsOfPeaks(peaks1, peaks2, peaks3, maxgap = max_gap,
-        connectedPeaks = "keepAll")
-}else if (length(gffgrlist) == 4) {
-    peaks1 <- gffgrlist[[1]]
-    peaks2 <- gffgrlist[[2]]
-    peaks3 <- gffgrlist[[3]]
-    peaks4 <- gffgrlist[[4]]
-
-    ol <- findOverlapsOfPeaks(peaks1, peaks2, peaks3, peaks4, maxgap = max_gap,
-        connectedPeaks = "keepAll")
-} else if (length(gffgrlist) == 5) {
-    peaks1 <- gffgrlist[[1]]
-    peaks2 <- gffgrlist[[2]]
-    peaks3 <- gffgrlist[[3]]
-    peaks4 <- gffgrlist[[4]]
-    peaks5 <- gffgrlist[[5]]
-
-    ol <- findOverlapsOfPeaks(peaks1, peaks2, peaks3, peaks4, peaks5,
-        maxgap = max_gap, connectedPeaks = "keepAll")
-}
-
-
 
 # Making the venn diagram venneuler
 
