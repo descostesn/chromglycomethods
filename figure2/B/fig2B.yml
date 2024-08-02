@@ -4,8 +4,13 @@ channels:
 dependencies:
   - r-base=4.3
   - r-ggplot2=3.4.2
-  - r-ggrepel=0.9.1
+  - r-ggrepel=0.9.2
   - r-venndiagram=1.7.3
-  - bioconductor-genomicranges=1.52.0
-  - bioconductor-clusterprofiler=4.8.1
+  - bioconductor-genomicranges=1.50.0
   - bioconductor-chippeakanno=3.32.0
+  - bioconductor-zlibbioc=1.46.0
+  - bioconductor-xvector=0.40.0
+  - bioconductor-biostrings=2.68.0
+  - bioconductor-keggrest=1.40.0
+  - bioconductor-annotationdbi=1.62.0
+  - bioconductor-clusterprofiler=4.8.1
