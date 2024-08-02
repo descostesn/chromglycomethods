@@ -162,12 +162,8 @@ ol <- findOverlapsOfPeaks(peaks1, peaks2, peaks3, maxgap = 0,
         connectedPeaks = "keepAll")
 
 # Making the venn diagram venneuler
+message("Generating the venn diagram")
 eulerthree(ol, outformat, outfolder, comparisonname, expnamevec, colvec)
-
-
-    
-    
-
 
 cat("Retrieving list of element per overlap\n");
 
