@@ -49,7 +49,13 @@ mv sictrl_rep1_countslength.txt sictrlogt_featurelength.txt
 
 ## Installation
 
-TO DO
+Install conda following the instructions [here](https://conda.io/projects/conda/en/latest/user-guide/install/index.html). Using the recipe [fig2B.yml](fig2B.yml), run:
+
+```
+conda env create -n fig2b --file ./fig2B.yml
+conda activate fig2b
+```
+
 
 ## Figure generation
 
