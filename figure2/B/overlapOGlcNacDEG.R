@@ -6,13 +6,9 @@
 ###############
 
 
-library("GenomicFeatures")
-library("NGSprofiling")
+
+
 library("ChIPpeakAnno")
-library("rtracklayer")
-library("biomaRt")
-library("annotate")
-library("gplots")
 library("VennDiagram")
 
 
@@ -157,7 +153,7 @@ message("Performing the overlap")
 peaks1 <- gffgrlist[[1]]
 peaks2 <- gffgrlist[[2]]
 peaks3 <- gffgrlist[[3]]
-ol <- findOverlapsOfPeaks(peaks1, peaks2, peaks3, maxgap = 0,
+ol <- ChIPpeakAnno::findOverlapsOfPeaks(peaks1, peaks2, peaks3, maxgap = 0,
         connectedPeaks = "keepAll")
 
 # Making the venn diagram venneuler
