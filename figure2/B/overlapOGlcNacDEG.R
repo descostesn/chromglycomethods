@@ -15,7 +15,7 @@ library("biomaRt")
 library("annotate")
 library("gplots")
 library("VennDiagram")
-
+# library("org.Mm.eg.db")
 
 
 #################
@@ -143,7 +143,7 @@ checkparams(gff_file_vec, expnames_tab, organism_name, center_criterion,
 checkingOutputFolder(output_folder)
 loadorg(organism_name)
 
-message("Reading GFF files and onverting to GRanges")
+message("Reading GFF files and converting to GRanges")
 gfflist <- readgff(gff_file_vec)
 gffgrlist <- convert2gr(gfflist)
 
