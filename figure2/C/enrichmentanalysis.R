@@ -18,21 +18,6 @@ library("biomaRt")
 ################
 
 
-gffvec <- c("/g/boulard/Projects/O-N-acetylglucosamine/analysis/differential_analysis/deseq2/RNASeq_siogt_formichetti/lfc0/upanddown/log0_down-ensembl.gff",
-"/g/boulard/Projects/O-N-acetylglucosamine/analysis/differential_analysis/deseq2/RNASeq_siogt_formichetti/lfc0/upanddown/log0_up-ensembl.gff", 
-"/g/boulard/Projects/O-N-acetylglucosamine/analysis/venndiagrams/Sofia_polIIGlc_sept2023/mouse/glucose-levels/glcHGmergedRep1-2_vs_downsiogt/siogtdown.gff")
-expnamesvec <- c("down", "up", "downglc")
-species_name <- "mouse"
-output_folder <- c("/g/boulard/Projects/O-N-acetylglucosamine/analysis/clusterProfiler/rnaseq_siogt_formichetti/down_up_downglc/test")
-output_format <- "png"
-database_name <- "org.Mm.eg.db"
-kegg_name <- "mmu"
-backgroundpath <- NA
-datasetname <- "mmusculus_gene_ensembl"
-ensemblversion <- "Ensembl Genes 109"
-levelnum <- 3
-!!!!!!!!!!!!
-
 gffvec <- c("data/log0_down-ensembl.gff", "data/log0_up-ensembl.gff",
     "data/siogtdown_withOGlcNac.gff")
 expnamesvec <- c("down", "up", "downglc")
