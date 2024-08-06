@@ -28,6 +28,7 @@ output_format <- "png"
 database_name <- "org.Mm.eg.db"
 kegg_name <- "mmu"
 backgroundpath <- NA
+datasetname <- "mmusculus_gene_ensembl"
 !!!!!!!!!!!!
 
 gffvec <- c("data/log0_down-ensembl.gff", "data/log0_up-ensembl.gff",
@@ -39,6 +40,7 @@ output_format <- "png"
 database_name <- "org.Mm.eg.db"
 kegg_name <- "mmu"
 backgroundpath <- NA
+datasetname <- "mmusculus_gene_ensembl"
 ################
 
 
@@ -126,13 +128,6 @@ background_id_vec <- backgrounddef(different_id_list, backgroundpath,
 
 ## Retrieving info from biomart
 message("Retrieving info from biomart")
-
-if (isTRUE(all.equal(species_name, "mouse"))) {
-        datasetname <- "mmusculus_gene_ensembl"
-} else {
-        datasetname <- "hsapiens_gene_ensembl"
-}
-
 res <- retrieveInfo(biomartname = "ENSEMBL_MART_ENSEMBL",
         datasetname =  datasetname,
         versionname = "Ensembl Genes 109", alternativemirrorchoice = TRUE)
