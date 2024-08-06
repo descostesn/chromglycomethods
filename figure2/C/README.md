@@ -32,6 +32,16 @@ wget https://zenodo.org/records/12793186/files/siogtdown_withOGlcNac.gff -P data
 wget https://zenodo.org/records/12793186/files/fig2C_clusterprofiler.txt -P results/
 ```
 
+## Installation
+
+Install conda following the instructions [here](https://conda.io/projects/conda/en/latest/user-guide/install/index.html). Using the recipe [fig2C.yml](fig2C.yml), run:
+
+```
+conda env create -n fig2c --file ./fig2C.yml
+conda activate fig2c
+```
+
+
 ## Figure generation
 
 Run the script:
@@ -64,3 +74,9 @@ Output the dotplot of the comparison into results/
 You should obtain the raw figure:
 
 <img src="dotplot_top10.png" alt="Enrichment analysis" width="400"/>
+
+
+## Pre-processing
+
+See [fig2B pre-processing section](../B#pre-processing)
+
