@@ -31,3 +31,14 @@ wget https://zenodo.org/records/12793186/files/siogtdown_withOGlcNac.gff -P data
 ## The results given by cluster profiler (not needed to perform the analysis)
 wget https://zenodo.org/records/12793186/files/fig2C_clusterprofiler.txt -P results/
 ```
+
+## Figure generation
+
+The script should output:
+
+```
+Reading gff files and return conversion table
+Defining background
+### No background provided
+Retrieving info from biomart
+```
