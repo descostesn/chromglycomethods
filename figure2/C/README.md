@@ -49,5 +49,8 @@ Connected with success.
 Information retrieved with success.
 Filtering out non-canonical chromosomes from genesinfo
 	 Removing 70/57186 annotations with non canonical chromosomes
-
+Creating the input list of entrezID
+Creating the entrezID-symbol table
+Performing clusters comparison on molecular function
+Output the dotplot of the comparison into results/
 ```
