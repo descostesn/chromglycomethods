@@ -260,9 +260,5 @@ res <- clusterProfiler::compareCluster(geneClusters = idcomplist,
             ont = "MF", readable = TRUE) # nolint
 
 message("Output the dotplot of the comparison into ", output_folder)
-
-    if (!isTRUE(all.equal(length(results), 0)))
-        dotplotComparisons(results, output_format, outfoldcomp, idtable,
-            ensembl, genesinfo, different_id_list)
-    else
-        message("No enrichment found for any of the categories.")
+dpres <- clusterProfiler::dotplot(res, color = "p.adjust",
+            showCategory = 10, font.size = 10, title = "")
