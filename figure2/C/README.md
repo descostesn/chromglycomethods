@@ -41,4 +41,13 @@ Reading gff files and return conversion table
 Defining background
 ### No background provided
 Retrieving info from biomart
+Connecting to biomart
+# Attempt 1/5 # Connection to Ensembl ... 
+Connected with success.
+	 Retrieving gene info
+# Attempt 1/5 # Retrieving information about genes from biomaRt ...
+Information retrieved with success.
+Filtering out non-canonical chromosomes from genesinfo
+	 Removing 70/57186 annotations with non canonical chromosomes
+
 ```
