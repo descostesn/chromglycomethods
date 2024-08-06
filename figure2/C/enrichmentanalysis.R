@@ -27,7 +27,7 @@ output_folder <- c("/g/boulard/Projects/O-N-acetylglucosamine/analysis/clusterPr
 output_format <- "png"
 database_name <- "org.Mm.eg.db"
 kegg_name <- "mmu"
-
+backgroundpath <- NA
 !!!!!!!!!!!!
 
 gffvec <- c("data/log0_down-ensembl.gff", "data/log0_up-ensembl.gff",
@@ -38,7 +38,7 @@ output_folder <- c("results")
 output_format <- "png"
 database_name <- "org.Mm.eg.db"
 kegg_name <- "mmu"
-
+backgroundpath <- NA
 ################
 
 
@@ -70,6 +70,30 @@ checkparams <- function(species_name, gff_list, expnames_list, output_folder) {
         dir.create(output_folder, recursive = TRUE)
 }
 
+backgrounddef <- function(activeidslist, backgroundpath, species_name) { #nolint
+
+    if (is.na(backgroundpath)) {
+        message("\n\n ### No background provided\n\n")
+        background_id_vec <- unique(unlist(lapply(activeidslist,
+                                function(x) return(unique(x$ENTREZID)))))
+    }else {
+        message("\n\n ### Reading background file\n\n")
+        background_id_vec <- readLines(backgroundpath)
+        ## Convert the ensembl IDs to entrez IDs
+        if (isTRUE(all.equal(species_name, "human")))
+            background_id_vec <- as.character(
+                    AnnotationDbi::mapIds(org.Hs.eg.db::org.Hs.eg.db,
+                    background_id_vec, "ENTREZID", "ENSEMBL"))
+        else if (isTRUE(all.equal(species_name, "mouse")))
+            background_id_vec <- as.character(
+                    AnnotationDbi::mapIds(org.Mm.eg.db::org.Mm.eg.db,
+                        background_id_vec, "ENTREZID", "ENSEMBL"))
+        else
+            stop("Problem with the species in backgrounddef")
+    }
+    return(background_id_vec)
+}
+
 ################
 
 
@@ -97,7 +121,7 @@ different_id_list <- lapply(gffvec, function(currentgff, dbname) {
 
 ## Defining background
 message("Defining background")
-background_id_vec <- backgroundDef(different_id_list, backgroundpath,
+background_id_vec <- backgrounddef(different_id_list, backgroundpath,
         species_name)
 
 ## Retrieving info from biomart
