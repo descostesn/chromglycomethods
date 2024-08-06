@@ -14,4 +14,20 @@ On the 867 down regulated and 594 upregulated genes (see [fig2B](../B/README.md)
 
 ## Data
 
-add to zenodo with proper name: /g/boulard/Projects/O-N-acetylglucosamine/analysis/clusterProfiler/rnaseq_siogt_formichetti/down_up_downglc/3/compare_cluster/enrichGOMF-table.txt
+
+```
+#!/bin/bash
+
+mkdir data
+mkdir results
+
+## The down- and up-regulated genes obtained with DESeq2
+wget https://zenodo.org/records/12793186/files/log0_siogtdown-ensembl.gff -P data/
+wget https://zenodo.org/records/12793186/files/log0_siogtup-ensembl.gff -P data/
+
+## The down-regulated genes having an O-GlcNac peak
+wget https://zenodo.org/records/12793186/files/siogtdown_withOGlcNac.gff -P data/
+
+## The results given by cluster profiler (not needed to perform the analysis)
+wget https://zenodo.org/records/12793186/files/fig2C_clusterprofiler.txt -P results/
+```
