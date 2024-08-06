@@ -182,69 +182,6 @@ retrieveInfo <- function(biomartname = "ENSEMBL_MART_ENSEMBL", #nolint
     return(list(ensembl, genesinfo))
 }
 
-calculate_initial_GO <- function(id_df, dbname, levnum, bckid, kegg_name, #nolint
-                                 species) {
-        message("\t\t Grouping gene ontologies")
-        ggo_cc <- clusterProfiler::groupGO(
-                gene = unique(id_df$ENTREZID), OrgDb = dbname,
-                ont = "CC", level = levnum, readable = TRUE)
-        ggo_bp <- clusterProfiler::groupGO(
-                gene = unique(id_df$ENTREZID), OrgDb = dbname,
-                ont = "BP", level = levnum, readable = TRUE)
-        ggo_mf <- clusterProfiler::groupGO(
-                gene = unique(id_df$ENTREZID), OrgDb = dbname,
-                ont = "MF", level = levnum, readable = TRUE)
-
-        message("\t\t Computing gene ontologies enrichment")
-        ego_cc <- clusterProfiler::enrichGO(
-                gene = unique(id_df$ENTREZID), OrgDb = dbname,
-                ont = "CC", pvalueCutoff = 0.05, pAdjustMethod = "BH",
-                universe = bckid, qvalueCutoff = 0.2, minGSSize = 5,
-                maxGSSize = 1000, readable = TRUE
-        )
-        ego_bp <- clusterProfiler::enrichGO(
-                gene = unique(id_df$ENTREZID), OrgDb = dbname,
-                ont = "BP", pvalueCutoff = 0.05, pAdjustMethod = "BH",
-                universe = bckid, qvalueCutoff = 0.2, minGSSize = 5,
-                maxGSSize = 1000, readable = TRUE
-        )
-        ego_mf <- clusterProfiler::enrichGO(
-                gene = unique(id_df$ENTREZID), OrgDb = dbname,
-                ont = "MF", pvalueCutoff = 0.05, pAdjustMethod = "BH",
-                universe = bckid, qvalueCutoff = 0.2, minGSSize = 5,
-                maxGSSize = 1000, readable = TRUE
-        )
-
-        message("\t\t Computing KEGG enrichment")
-        kk <- clusterProfiler::enrichKEGG(
-                gene = unique(id_df$ENTREZID),
-                organism = kegg_name, pvalueCutoff = 0.05, pAdjustMethod = "BH",
-                universe = bckid, minGSSize = 5, maxGSSize = 1000,
-                qvalueCutoff = 0.2, use_internal_data = FALSE
-        )
-
-        message("\t\t Computing KEGG modules enrichment")
-        mkk <- clusterProfiler::enrichMKEGG(
-                gene = unique(id_df$ENTREZID),
-                organism = kegg_name, pvalueCutoff = 0.05, pAdjustMethod = "BH",
-                universe = bckid, minGSSize = 5, maxGSSize = 1000,
-                qvalueCutoff = 0.2
-        )
-
-        message("\t\t Computing reactome enrichment")
-        react <- ReactomePA::enrichPathway(
-                gene = unique(id_df$ENTREZID),
-                organism = species, pvalueCutoff = 0.05, pAdjustMethod = "BH",
-                qvalueCutoff = 0.2, universe = bckid, minGSSize = 5,
-                maxGSSize = 1000, readable = TRUE
-        )
-
-        return(list(
-                ggo_cc, ggo_bp, ggo_mf, ego_cc, ego_bp, ego_mf, kk, mkk,
-                react
-        ))
-}
-
 ################
 
 
@@ -297,24 +234,6 @@ if (!isTRUE(all.equal(length(idxremove), 0))) {
         " annotations with non canonical chromosomes")
     genesinfo <- genesinfo[-idxremove, ]
 }
-
-## Computing GO, bar, dot and cnet plots
-message("Computing GO, bar, dot and cnet plots")
-
-invisible(mapply(function(diff_ids, currentname, dbname, levelnum, background,
-                        kegg, species, outfold, outformat, ens, infos) {
-
-            message("\t Processing ", currentname)
-            results <- calculate_initial_GO(diff_ids, dbname, levelnum,
-                    background, kegg, species)
-            names(results) <- c("ggoCC", "ggoBP", "ggoMF", "egoCC", "egoBP",
-                    "egoMF", "kk", "mkk", "react")
-            loadplots(results, outfold, levelnum, currentname, outformat,
-                                ens, infos, diff_ids)
-        }, different_id_list, names(different_id_list),
-        MoreArgs = list(database_name, levelnum, background_id_vec, kegg_name,
-                species_name, output_folder, output_format, ensembl,
-                genesinfo), SIMPLIFY = FALSE))
 
 
 if (length(gffvec) > 1) {
