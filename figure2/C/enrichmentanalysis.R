@@ -7,6 +7,7 @@
 
 
 library("org.Mm.eg.db")
+library("clusterProfiler")
 
 # pacman::p_load(clusterProfiler, ReactomePA, qusage, topGO, Rgraphviz, ggplot2,
 #     stringr, biomaRt)
@@ -85,7 +86,7 @@ names(gffvec) <- expnamesvec
 checkparams(species_name, gffvec, expnamesvec, output_folder)
 
 ## Reading gff files
-message("Reading gff files")
+message("Reading gff files and return conversion table")
 different_id_list <- lapply(gffvec, function(currentgff, dbname) {
     fi <- read.delim(currentgff, header = FALSE)
     return(clusterProfiler::bitr(fi[, 3], fromType = "ENSEMBL",
