@@ -96,6 +96,87 @@ backgrounddef <- function(activeidslist, backgroundpath, species_name) { #nolint
     return(background_id_vec)
 }
 
+tryGetBM <- function(attributes, ensembl, values = NULL, filters = NULL) { #nolint
+
+    c <- 1
+    repeat {
+        message("# Attempt ", c, "/5 # ", "Retrieving information about genes",
+            " from biomaRt ...")
+
+        if (is.null(values) && is.null(filters))
+            res <- try(biomaRt::getBM(attributes = attributes, mart = ensembl),
+                silent = TRUE)
+        else
+            res <- try(biomaRt::getBM(attributes = attributes, mart = ensembl,
+                values = values, filters = filters), silent = TRUE)
+
+        if (isTRUE(is(res, "try-error"))) {
+            c <- c + 1
+            error_type <- attr(res, "condition")
+            message(error_type$message)
+            if (c > 5)
+                stop("There is a problem of connexion to Ensembl for ",
+                    "now. Please retry later.")
+        } else {
+            message("Information retrieved with success.")
+            return(res)
+        }
+    }
+}
+
+
+## Code taken from sharedInternals.R of the CONCLUS package
+tryUseMart <- function(biomart = "ensembl", dataset, version, #nolint
+                       alternativeMirror) { #nolint
+    c <- 1
+
+    repeat {
+        message("# Attempt ", c, "/5 # ", "Connection to Ensembl ... ")
+
+        if (!alternativeMirror)
+            ensembl <- try(biomaRt::useMart(biomart, dataset = dataset,
+                version = version), silent = TRUE)
+        else
+            ensembl <- try(biomaRt::useEnsembl(biomart, dataset = dataset,
+                mirror = "useast"), silent = TRUE)
+
+        if (isTRUE(is(ensembl, "try-error"))) {
+            c <- c + 1
+            error_type <- attr(ensembl, "condition")
+            message(error_type$message)
+
+            if (c > 5) {
+                stop(
+                    "There is a problem of connexion to Ensembl for ",
+                    "now. Please retry later or set ",
+                    "alternativeMirror=TRUE. ATTENTION: If you use the ",
+                    "alternative mirror at a time a more recent version ",
+                    "of FVB or mm39 is availablde, the alternative mirror ",
+                    "will pick the more recent version."
+                )
+            }
+        } else {
+            message("Connected with success.")
+            return(ensembl)
+        }
+    }
+}
+
+
+retrieveInfo <- function(biomartname = "ENSEMBL_MART_ENSEMBL", #nolint
+        datasetname = "mmusculus_gene_ensembl",
+        versionname = "Ensembl Genes 105", alternativemirrorchoice = TRUE) {
+
+    message("\t Connecting to biomart")
+    ensembl <- tryUseMart(biomart = biomartname, dataset = datasetname,
+        version = versionname, alternativeMirror = alternativemirrorchoice)
+    message("\t Retrieving gene info")
+    infovec <- c("chromosome_name", "start_position", "end_position",
+        "external_gene_name", "strand")
+    genesinfo <- tryGetBM(infovec, ensembl)
+    return(list(ensembl, genesinfo))
+}
+
 ################
 
 
