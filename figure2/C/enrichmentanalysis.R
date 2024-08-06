@@ -29,6 +29,7 @@ database_name <- "org.Mm.eg.db"
 kegg_name <- "mmu"
 backgroundpath <- NA
 datasetname <- "mmusculus_gene_ensembl"
+ensemblversion <- "Ensembl Genes 109"
 !!!!!!!!!!!!
 
 gffvec <- c("data/log0_down-ensembl.gff", "data/log0_up-ensembl.gff",
@@ -41,6 +42,8 @@ database_name <- "org.Mm.eg.db"
 kegg_name <- "mmu"
 backgroundpath <- NA
 datasetname <- "mmusculus_gene_ensembl"
+ensemblversion <- "Ensembl Genes 109"
+
 ################
 
 
@@ -211,7 +214,7 @@ background_id_vec <- backgrounddef(different_id_list, backgroundpath,
 message("Retrieving info from biomart")
 res <- retrieveInfo(biomartname = "ENSEMBL_MART_ENSEMBL",
         datasetname =  datasetname,
-        versionname = "Ensembl Genes 109", alternativemirrorchoice = TRUE)
+        versionname = ensemblversion, alternativemirrorchoice = TRUE)
 ensembl <- res[[1]]
 genesinfo <- res[[2]]
 
