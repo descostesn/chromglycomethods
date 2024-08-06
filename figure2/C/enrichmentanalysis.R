@@ -236,7 +236,7 @@ if (!isTRUE(all.equal(length(idxremove), 0))) {
 }
 
 
-if (length(gffvec) > 1) {
+
 
     message("Creating the input list of entrezID")
     idcomplist <- lapply(different_id_list,
@@ -264,8 +264,3 @@ if (length(gffvec) > 1) {
             ensembl, genesinfo, different_id_list)
     else
         message("No enrichment found for any of the categories.")
-}
-
-
-
-message("Done")
