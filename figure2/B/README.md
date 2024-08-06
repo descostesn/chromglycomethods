@@ -139,11 +139,13 @@ wget https://zenodo.org/records/12793186/files/log0_siogtup-ensembl.gff -P resul
 ### Merging replicates
 
 Run the script:
+
 ```
 Rscript merge_OGlcNac_rep1-2.R
 ```
 
 The script should output:
+
 ```
 Reading gff input and converting to rangedData
 Glc1 has 527 peaks and Glc2 has 523 peaks
