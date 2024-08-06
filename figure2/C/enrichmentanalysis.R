@@ -16,19 +16,19 @@ pacman::p_load(clusterProfiler, ReactomePA, qusage, topGO, Rgraphviz, ggplot2,
 ################
 
 
-gff_vec <- c("/g/boulard/Projects/O-N-acetylglucosamine/analysis/differential_analysis/deseq2/RNASeq_siogt_formichetti/lfc0/upanddown/log0_down-ensembl.gff",
+gffvec <- c("/g/boulard/Projects/O-N-acetylglucosamine/analysis/differential_analysis/deseq2/RNASeq_siogt_formichetti/lfc0/upanddown/log0_down-ensembl.gff",
 "/g/boulard/Projects/O-N-acetylglucosamine/analysis/differential_analysis/deseq2/RNASeq_siogt_formichetti/lfc0/upanddown/log0_up-ensembl.gff", 
 "/g/boulard/Projects/O-N-acetylglucosamine/analysis/venndiagrams/Sofia_polIIGlc_sept2023/mouse/glucose-levels/glcHGmergedRep1-2_vs_downsiogt/siogtdown.gff")
-expnames_vec <- c("down", "up", "downglc")
+expnamesvec <- c("down", "up", "downglc")
 species_name <- "mouse"
 output_folder <- c("/g/boulard/Projects/O-N-acetylglucosamine/analysis/clusterProfiler/rnaseq_siogt_formichetti/down_up_downglc/test")
 output_format <- "png"
 
 !!!!!!!!!!!!
 
-gff_vec <- c("data/log0_down-ensembl.gff", "data/log0_up-ensembl.gff",
-    "data/siogtdown.gff")
-expnames_vec <- c("down", "up", "downglc")
+gffvec <- c("data/log0_down-ensembl.gff", "data/log0_up-ensembl.gff",
+    "data/siogtdown_withOGlcNac.gff")
+expnamesvec <- c("down", "up", "downglc")
 species_name <- "mouse"
 output_folder <- c("results")
 output_format <- "png"
@@ -44,13 +44,27 @@ output_format <- "png"
 # FUNCTION
 ################
 
+checkparams <- function(species_name, gff_list, expnames_list, output_folder) {
 
-source("/g/boulard/Projects/O-N-acetylglucosamine/src/R/tools/clusterProfiler/utils/biomart.R") #nolint
-source("/g/boulard/Projects/O-N-acetylglucosamine/src/R/tools/clusterProfiler/utils/comparisons.R") #nolint
-source("/g/boulard/Projects/O-N-acetylglucosamine/src/R/tools/clusterProfiler/utils/go.R") #nolint
-source("/g/boulard/Projects/O-N-acetylglucosamine/src/R/tools/clusterProfiler/utils/io.R") #nolint
-source("/g/boulard/Projects/O-N-acetylglucosamine/src/R/tools/clusterProfiler/utils/plots.R") #nolint
-source("/g/boulard/Projects/O-N-acetylglucosamine/src/R/tools/clusterProfiler/utils/utils.R") #nolint
+    if (!isTRUE(all.equal(species_name, "human")) &&
+            !isTRUE(all.equal(species_name, "mouse")))
+        stop("\n The only supported species are mouse and human\n")
+
+    if (!isTRUE(all.equal(length(gff_list), length(expnames_list))))
+        stop("\n One name has to be given per gff file\n")
+
+    invisible(mapply(function(currentgff, currentnames) {
+
+        if (!isTRUE(all.equal(length(currentgff), length(currentnames))))
+            stop("The nb of names is different than nb of files in the lists.")
+    }, gff_list, expnames_list))
+
+    if (!isTRUE(all.equal(length(output_folder), 1)))
+        stop("\n outputfolder should be unique\n")
+
+    if (!file.exists(output_folder))
+        dir.create(output_folder, recursive = TRUE)
+}
 
 ################
 
@@ -65,7 +79,7 @@ source("/g/boulard/Projects/O-N-acetylglucosamine/src/R/tools/clusterProfiler/ut
 names(gffvec) <- expnamesvec
 
 ## Checking and retrieving parameters
-checkParams(species_name, gffvec, expnamesvec, output_folder)
+checkparams(species_name, gffvec, expnamesvec, output_folder)
 database_name <- returnDB(species_name)
 kegg_name <- returnDB(species_name, kegg = TRUE)
 
