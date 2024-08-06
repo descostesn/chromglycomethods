@@ -6,9 +6,10 @@
 ##############
 
 
+library("org.Mm.eg.db")
 
-pacman::p_load(clusterProfiler, ReactomePA, qusage, topGO, Rgraphviz, ggplot2,
-    stringr, biomaRt)
+# pacman::p_load(clusterProfiler, ReactomePA, qusage, topGO, Rgraphviz, ggplot2,
+#     stringr, biomaRt)
 
 
 ################
@@ -23,6 +24,8 @@ expnamesvec <- c("down", "up", "downglc")
 species_name <- "mouse"
 output_folder <- c("/g/boulard/Projects/O-N-acetylglucosamine/analysis/clusterProfiler/rnaseq_siogt_formichetti/down_up_downglc/test")
 output_format <- "png"
+database_name <- "org.Mm.eg.db"
+kegg_name <- "mmu"
 
 !!!!!!!!!!!!
 
@@ -32,8 +35,8 @@ expnamesvec <- c("down", "up", "downglc")
 species_name <- "mouse"
 output_folder <- c("results")
 output_format <- "png"
-
-
+database_name <- "org.Mm.eg.db"
+kegg_name <- "mmu"
 
 ################
 
@@ -80,9 +83,6 @@ names(gffvec) <- expnamesvec
 
 ## Checking and retrieving parameters
 checkparams(species_name, gffvec, expnamesvec, output_folder)
-database_name <- returnDB(species_name)
-kegg_name <- returnDB(species_name, kegg = TRUE)
-
 
 ## Reading gff files
 message("Reading gff files")
