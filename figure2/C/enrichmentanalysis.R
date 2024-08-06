@@ -24,6 +24,15 @@ species_name <- "mouse"
 output_folder <- c("/g/boulard/Projects/O-N-acetylglucosamine/analysis/clusterProfiler/rnaseq_siogt_formichetti/down_up_downglc/test")
 output_format <- "png"
 
+!!!!!!!!!!!!
+
+gff_vec <- c("data/log0_down-ensembl.gff", "data/log0_up-ensembl.gff",
+    "data/siogtdown.gff")
+expnames_vec <- c("down", "up", "downglc")
+species_name <- "mouse"
+output_folder <- c("results")
+output_format <- "png"
+
 
 
 ################
