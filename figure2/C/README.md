@@ -34,6 +34,12 @@ wget https://zenodo.org/records/12793186/files/fig2C_clusterprofiler.txt -P resu
 
 ## Figure generation
 
+Run the script:
+
+```
+Rscript enrichmentanalysis.R
+```
+
 The script should output:
 
 ```
@@ -54,3 +60,7 @@ Creating the entrezID-symbol table
 Performing clusters comparison on molecular function
 Output the dotplot of the comparison into results/
 ```
+
+You should obtain the raw figure:
+
+<img src="dotplot_top10.png" alt="Enrichment analysis" width="400"/>
