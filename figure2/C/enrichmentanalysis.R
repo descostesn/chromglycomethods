@@ -9,9 +9,8 @@
 library("org.Mm.eg.db")
 library("clusterProfiler")
 library("AnnotationDbi")
-
-# pacman::p_load(clusterProfiler, ReactomePA, qusage, topGO, Rgraphviz, ggplot2,
-#     stringr, biomaRt)
+library("ggplot2")
+library("biomaRt")
 
 
 ################
@@ -259,6 +258,8 @@ res <- clusterProfiler::compareCluster(geneClusters = idcomplist,
             fun = "enrichGO", OrgDb = database_name, # nolint
             ont = "MF", readable = TRUE) # nolint
 
-message("Output the dotplot of the comparison into ", output_folder)
+message("Output the dotplot of the comparison into ", output_folder, "/")
 dpres <- clusterProfiler::dotplot(res, color = "p.adjust",
             showCategory = 10, font.size = 10, title = "")
+ggplot2::ggsave(paste0("dotplot_top10.", output_format),
+            plot = dpres, device = output_format, path = output_folder)
