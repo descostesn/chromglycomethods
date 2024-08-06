@@ -245,58 +245,26 @@ if (!isTRUE(all.equal(length(idxremove), 0))) {
 ## Second part that compares the three categories
 #######
 
-message("Creating the input list of entrezID")
+message("Creating the input list of entrezID") # nolint
 idcomplist <- lapply(different_id_list, function(x) return(unique(x$ENTREZID)))
 
-message("Creating the entrezID-symbol table")
+message("Creating the entrezID-symbol table") # nolint
 idtable <- do.call("rbind", different_id_list)
 idx <- which(duplicated(paste(idtable$SYMBOL, idtable$ENTREZID, sep = "-")))
 idtable <- idtable[-idx, ]
 
-message("Performing clusters comparison")
-
-!!!!!!!!!!!!!!
-functionvec <- c("enrichGO")
-        categoryvec <- c("CC", "BP", "MF")
-        results <- gofun(functionvec, categoryvec, diffidlistforcomp,
-                database_name)
-tryCatchFunction <- function(id_list, f, db, currentcat, isread) { # nolint
-        return(tryCatch(
-                res <- compareCluster(geneClusters = id_list, fun = f,
-                        OrgDb = db, ont = currentcat, readable = isread),
-                error = function(e) e))
-}
-
-gofun <- function(functionvec, categoryvec, diffidlistforcomp, database_name) {
-        results <- lapply(functionvec,
-                function(currentfunction, catvec, diff_id_list, dbname) {
-                        message("\t Performing ", currentfunction)
-                        threego <- lapply(catvec, function(currentcat, f,
-                                id_list, db, levelnum) {
-                                message("\t\t on ", currentcat)
-                                comp <- tryCatchFunction(
-                                        id_list, f, db, currentcat, TRUE)
-                                return(comp)
-                        }, currentfunction, diff_id_list, dbname)
-                        return(threego)
-                }, categoryvec, diffidlistforcomp, database_name)
-        results <- unlist(results, recursive = FALSE)
-        names(results) <- paste0(functionvec[1], categoryvec)
-        return(results)
-}
-
-
-
-
-!!!!!!!!!!!!!!!!!!!
+message("Performing clusters comparison on molecular function") # nolint
+res <- clusterProfiler::compareCluster(geneClusters = idcomplist,
+            fun = "enrichGO", OrgDb = database_name, # nolint
+            ont = "MF", readable = TRUE) # nolint
 
 
 
 
 
 
-results <- clustersComparison(idcomplist, database_name, levelnum,
-    kegg_name, species_name, background_id_vec)
+
+
 
     message("Output dotplots of the comparisons")
     outfoldcomp <- file.path(output_folder, levelnum, "compare_cluster")
