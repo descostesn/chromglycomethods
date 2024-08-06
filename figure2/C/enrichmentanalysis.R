@@ -8,6 +8,7 @@
 
 library("org.Mm.eg.db")
 library("clusterProfiler")
+library("AnnotationDbi")
 
 # pacman::p_load(clusterProfiler, ReactomePA, qusage, topGO, Rgraphviz, ggplot2,
 #     stringr, biomaRt)
@@ -258,21 +259,7 @@ res <- clusterProfiler::compareCluster(geneClusters = idcomplist,
             fun = "enrichGO", OrgDb = database_name, # nolint
             ont = "MF", readable = TRUE) # nolint
 
-
-
-
-
-
-
-
-
-    message("Output dotplots of the comparisons")
-    outfoldcomp <- file.path(output_folder, levelnum, "compare_cluster")
-    if (!file.exists(outfoldcomp))
-        dir.create(outfoldcomp, recursive = TRUE)
-
-    ## Removing empty categories
-    results <- results[sapply(results, function(x) !is.null(nrow(x)))]
+message("Output the dotplot of the comparison into ", output_folder)
 
     if (!isTRUE(all.equal(length(results), 0)))
         dotplotComparisons(results, output_format, outfoldcomp, idtable,
