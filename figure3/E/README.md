@@ -54,7 +54,7 @@ conda activate fig3e
 
 ## Figure Generation
 
-The MA plot was obtained with DESeq2 1.22.1. The workflow [OGlcNac_deseq2_atacseqPE_peaks](galaxy-workflow/Galaxy-Workflow-OGlcNac_deseq2_atacseqPE_peaks.ga). Two lists of bam files for each condition (NoDox/Dox) are given as input. The counts are retrieved on the union of peaks (ESC1bNoDox_vs_Dox.gtf) with the featureCounts function of subread v2.0.3: `featureCounts -a ESC1bNoDox_vs_Dox.gtf -F "GTF" -o $output -T $nbcpu -s 0 -Q 0 -t 'peak' -g 'peak_id' --minOverlap 1 --fracOverlap 0 --fracOverlapFeature 0 -p -B -C --countReadPairs $input.bam`. The lists of counts are used as input of DESeq2 1.22.1 that is launched with the script [deseq2.R](../../figure2/B/others/deseq2.R). The deseq2 table was then filtered on columns 3 (fold-change) and 7 (adj p-val) with `abs(c3)>0 and c7<0.05` to keep significant fold-changes that are not equal to zero. The lists of down- and up-regulated genes were separated to their respective files using the third column: `c3<0` for down and `c3>0` for up.
+The MA plot was obtained with DESeq2 1.22.1. The workflow [OGlcNac_deseq2_atacseqPE_peaks](../D/galaxy-workflow/Galaxy-Workflow-OGlcNac_deseq2_atacseqPE_peaks.ga). Two lists of bam files for each condition (NoDox/Dox) are given as input. The counts are retrieved on the union of peaks (ESC1bNoDox_vs_Dox.gtf) with the featureCounts function of subread v2.0.3: `featureCounts -a ESC1bNoDox_vs_Dox.gtf -F "GTF" -o $output -T $nbcpu -s 0 -Q 0 -t 'peak' -g 'peak_id' --minOverlap 1 --fracOverlap 0 --fracOverlapFeature 0 -p -B -C --countReadPairs $input.bam`. The lists of counts are used as input of DESeq2 1.22.1 that is launched with the script [deseq2.R](../../figure2/B/others/deseq2.R). The deseq2 table was then filtered on columns 3 (fold-change) and 7 (adj p-val) with `abs(c3)>0 and c7<0.05` to keep significant fold-changes that are not equal to zero. The lists of down- and up-regulated genes were separated to their respective files using the third column: `c3<0` for down and `c3>0` for up.
 
 
 ## Pre-processing
@@ -87,12 +87,13 @@ Alignments having an insert size lower or equal to 100 bp were removed with bamt
 
 | Target | Broad | q-value | Duplicates Thres. | Tag size |
 |--------|-------|---------|-------------------|----------|
-| ESC1bNoDoxrep1 | YES | 0.001 | 1 | 38 |
-| ESC1bNoDoxrep2 | YES | 0.001 | 1 | 38 |
-| ESC1bNoDoxrep3 | YES | 0.001 | 1 | 38 |
-| ESC1bDoxrep1 | YES | 0.001 | 1 | 38 |
-| ESC1bDoxrep2 | YES | 0.001 | 1 | 38 |
-| ESC1bDoxrep3 | YES | 0.001 | 1 | 38 |
+| NPC1bNoDoxrep1 | YES | 0.001 | 1 | 38 |
+| NPC1bNoDoxrep2 | YES | 0.001 | 1 | 38 |
+| NPC1bNoDoxrep3 | YES | 0.001 | 1 | 38 |
+| NPC1bDoxrep1 | YES | 0.001 | 1 | 38 |
+| NPC1bDoxrep2 | YES | 0.001 | 1 | 38 |
+| NPC1bDoxrep3 | YES | 0.001 | 1 | 38 |
+
 
 * Macs2 v2.2.7.1 Broad: `macs2 callpeak -t $input.bam -c NA -n $expname --outdir $outfold -f BAM -g 1.87e9 -s $tagsize --nomodel --extsize 1 --keep-dup $dupthresh --broad --broad-cutoff $qvalue`
 
@@ -109,7 +110,7 @@ The script should give the output:
 ```
 Reading peak files
 Reducing intervals
-The union returned 106625 peaks
-Writing results/ESC1bNoDox_vs_Dox.gtf
+The union returned 114606 peaks
+Writing results/NPC1bNoDox_vs_Dox.gtf
 ```
 
