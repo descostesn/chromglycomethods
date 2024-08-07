@@ -16,7 +16,6 @@ This experiment uses a transgenic cell line expressing bacterial OGA BtGH84 fuse
 
 ## Data
 
-
 ```
 #!/bin/bash
 
@@ -40,6 +39,16 @@ wget XXX/ESC_1b_atac_NoDox_rep3_peaks.bed -P data/
 
 ## Annotations of the union of ATAC-seq peaks
 wget https://zenodo.org/api/records/12793186/files/ESC1bNoDox_vs_Dox.gtf -P data/
+```
+
+
+## Installation
+
+Install conda following the instructions [here](https://conda.io/projects/conda/en/latest/user-guide/install/index.html). Using the recipe [fig1E.yml](fig3C.yml), run:
+
+```
+conda env create -n fig3c --file ./fig3C.yml
+conda activate fig3c
 ```
 
 
