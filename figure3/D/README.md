@@ -1,7 +1,7 @@
 # Differential ATAC-seq in Mouse Embryonic Stem Cells
 
 
-I. [Dwget XXX/ESCription](#dwget XXX/ESCription)  
+I. [Description](#description)  
 II. [Data](#data)  
 III. [Figure Generation](#figure-generation)  
 IV. [Pre-processing](#pre-processing)  
@@ -10,7 +10,7 @@ IV. [Pre-processing](#pre-processing)
 &nbsp;&nbsp; V.IV. [Peak union](#peak-union)  
 
 
-## DESCription
+## Description
 
 This experiment uses a transgenic cell line expressing bacterial OGA BtGH84 fused to a localization peptide (NLS) and regulated by Tet-On system. OGA is a glycosidase that removes O-GlcNAc modifications. We evaluated the changes in chromatin accessibility before and after O-GlcNac removal by OGA. No differences were found which tells us that O-GlcNac does not influence the chromatin accessibility.
 
