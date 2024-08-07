@@ -26,11 +26,11 @@ wget XXX/DLD1GlcNAcDoxAux_rep1.bw -P data/
 wget XXX/DLD1GlcNAcDoxAux_rep2.bw -P data/
 wget XXX/DLD1GlcNAcNoDoxAux_rep1.bw -P data/
 wget XXX/DLD1GlcNAcNoDoxAux_rep2.bw -P data/
-wget https://zenodo.org/records/12793186/files/RNAPolII_SRX11070611_control.bw -P data/
-wget https://zenodo.org/records/12793186/files/RNAPolII_SRX11070613_auxin.bw -P data/
+wget https://zenodo.org/records/12793186/files/RNApolymeraseII_SRX10580013.bw -P data/
 
 ## The gene annotations
-wget https://zenodo.org/records/12793186/files/Homo_sapiens.GRCh38.100.chrfiltered.tar.gz
+wget https://zenodo.org/records/12793186/files/Homo_sapiens.GRCh38.110.chr_march2024_filtered.tar.gz
+tar -xvzf Homo_sapiens.GRCh38.110.chr_march2024_filtered.tar.gz
 ```
 
 ## Installation
@@ -41,3 +41,23 @@ Install conda following the instructions [here](https://conda.io/projects/conda/
 conda env create -n fig4b --file ./fig4B.yml
 conda activate fig4b
 ```
+
+## Figure generation
+
+Generate a matrix with the RNAPol II bigwig using the coordinates of the Ensembl genes and plot a heatmap in descending order:
+
+```
+#!/bin/bash
+
+mkdir results
+
+## Define the number of CPUs
+NBCPU=1
+
+## Build the deeptools matrix
+computeMatrix scale-regions --regionsFileName Homo_sapiens.GRCh38.110.chr_march2024_filtered.bed --scoreFileName RNApolymeraseII_SRX10580013.bw --outFileName results/polII.mat --samplesLabel RNAPol_II --numberOfProcessors $NBCPU --regionBodyLength 2000 --beforeRegionStartLength 2000 --afterRegionStartLength 2000 --unscaled5prime 0 --unscaled3prime 0
+
+## Plot the RNAPol II signal
+
+```
+
