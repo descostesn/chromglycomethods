@@ -44,11 +44,11 @@ wget https://zenodo.org/api/records/12793186/files/ESC1bNoDox_vs_Dox.gtf -P data
 
 ## Installation
 
-Install conda following the instructions [here](https://conda.io/projects/conda/en/latest/user-guide/install/index.html). Using the recipe [fig1E.yml](fig3C.yml), run:
+Install conda following the instructions [here](https://conda.io/projects/conda/en/latest/user-guide/install/index.html). Using the recipe [fig1E.yml](fig3D.yml), run:
 
 ```
-conda env create -n fig3c --file ./fig3C.yml
-conda activate fig3c
+conda env create -n fig3d --file ./fig3D.yml
+conda activate fig3d
 ```
 
 
