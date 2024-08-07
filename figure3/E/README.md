@@ -1,7 +1,7 @@
 # Differential ATAC-seq in mouse Neuronal Progenitor Cells
 
 
-I. [DESCription](#description)  
+I. [Description](#description)  
 II. [Data](#data)  
 III. [Figure Generation](#figure-generation)  
 IV. [Pre-processing](#pre-processing)  
