@@ -34,3 +34,10 @@ wget https://zenodo.org/records/12793186/files/Homo_sapiens.GRCh38.100.chrfilter
 ```
 
 ## Installation
+
+Install conda following the instructions [here](https://conda.io/projects/conda/en/latest/user-guide/install/index.html). Using the recipe [fig4B.yml](fig4B.yml), run:
+
+```
+conda env create -n fig4b --file ./fig4B.yml
+conda activate fig4b
+```
