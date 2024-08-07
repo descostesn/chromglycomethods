@@ -1,0 +1,4 @@
+channels:
+  - conda-forge
+dependencies:
+  - deeptools=3.5.5
