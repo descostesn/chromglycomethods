@@ -1,4 +1,4 @@
-# Differential ATAC-seq in mouse Embryonic Stem Cells
+# Differential ATAC-seq in Mouse Embryonic Stem Cells
 
 
 I. [Dwget XXX/ESCription](#dwget XXX/ESCription)  
