@@ -45,7 +45,7 @@ conda activate fig4b
 
 ## Figure generation
 
-Generate a matrix with the RNAPol II bigwig using the coordinates of the Ensembl genes and plot a heatmap in descending order:
+Generate a matrix with the RNAPol II bigwig using the coordinates of the Ensembl genes and plot a heatmap in descending order (deeptools v3.5.5):
 
 ```
 #!/bin/bash
