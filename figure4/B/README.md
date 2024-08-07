@@ -23,14 +23,15 @@ mkdir data
 
 ## The bigwig files of RNAPol II and O-GlcNac before and after induction
 wget XXX/DLD1GlcNAcDoxAux_rep1.bw -P data/
-wget XXX/DLD1GlcNAcDoxAux_rep2.bw -P data/
 wget XXX/DLD1GlcNAcNoDoxAux_rep1.bw -P data/
-wget XXX/DLD1GlcNAcNoDoxAux_rep2.bw -P data/
 wget https://zenodo.org/records/12793186/files/RNApolymeraseII_SRX10580013.bw -P data/
 
 ## The gene annotations
 wget https://zenodo.org/records/12793186/files/Homo_sapiens.GRCh38.110.chr_march2024_filtered.tar.gz
 tar -xvzf Homo_sapiens.GRCh38.110.chr_march2024_filtered.tar.gz
+
+## The peaks coordinates after decreasing sorting of RNAPol II
+wget https://zenodo.org/records/12793186/files/peakscoord-fig4B.bed
 ```
 
 ## Installation
@@ -57,7 +58,26 @@ NBCPU=1
 ## Build the deeptools matrix
 computeMatrix scale-regions --regionsFileName Homo_sapiens.GRCh38.110.chr_march2024_filtered.bed --scoreFileName RNApolymeraseII_SRX10580013.bw --outFileName results/polII.mat --samplesLabel RNAPol_II --numberOfProcessors $NBCPU --regionBodyLength 2000 --beforeRegionStartLength 2000 --afterRegionStartLength 2000 --unscaled5prime 0 --unscaled3prime 0
 
-## Plot the RNAPol II signal
+## Plot the RNAPol II signal using decreasing sorting
+FILENAME="heatmap_polII.png"
 
+plotHeatmap --matrixFile results/polII.mat --outFileName results/$FILENAME --plotFileFormat 'png' --outFileSortedRegions results/peakscoord-fig4B.bed --dpi '200' --sortRegions 'descend' --sortUsing 'mean' --averageTypeSummaryPlot 'mean' --plotType 'lines' --missingDataColor 'black' --alpha '1.0' --colorList white,blue --xAxisLabel 'distance from TSS (bp)' --yAxisLabel 'genes' --heatmapWidth 7.5 --heatmapHeight 25.0 --whatToShow 'plot, heatmap and colorbar' --startLabel 'TSS' --endLabel 'TES' --refPointLabel 'TSS' --samplesLabel RNAPolII --legendLocation 'best' --labelRotation '0'
 ```
 
+Using the sorted peak coordinates `peakscoord-fig4B.bed`, generate a matrix of O-GlcNac signal before and after (Dox)/Auxin treatment:
+
+```
+computeMatrix scale-regions --regionsFileName results/peakscoord-fig4B.bed --scoreFileName data/DLD1GlcNAcNoDoxAux_rep1.bw data/DLD1GlcNAcDoxAux_rep1.bw --outFileName results/OGlcNac.mat --samplesLabel GlcNAcNoDox GlcNAcDox --numberOfProcessors $NBCPU --regionBodyLength 2000 --beforeRegionStartLength 2000 --afterRegionStartLength 2000  --unscaled5prime 0 --unscaled3prime 0
+```
+
+The matrix is already sorted because it followed the order of `peakscoord-fig4B.bed`. Remains plotting the signal without performing sorting:
+
+```
+FILENAME="heatmap_OGlcNac.png"
+
+plotHeatmap --matrixFile results/OGlcNac.mat --outFileName results/$FILENAME  --plotFileFormat 'png' --dpi '200' --sortRegions 'no' --sortUsing 'mean' --averageTypeSummaryPlot 'mean' --plotType 'lines' --missingDataColor 'black' --alpha '1.0' --colorList white,blue --xAxisLabel 'distance from TSS (bp)' --yAxisLabel 'genes' --heatmapWidth 7.5 --heatmapHeight 25.0 --whatToShow 'plot, heatmap and colorbar' --startLabel 'TSS' --endLabel 'TES' --refPointLabel 'TSS' --samplesLabel NoDox Dox --legendLocation 'best' --labelRotation '0'
+```
+
+You should obtain the following heatmaps:
+
+!!!!!!! TO DO
