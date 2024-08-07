@@ -88,3 +88,19 @@ Alignments having an insert size lower or equal to 100 bp were removed with bamt
 * Macs2 v2.2.7.1 Broad: `macs2 callpeak -t $input.bam -c NA -n $expname --outdir $outfold -f BAM -g 1.87e9 -s $tagsize --nomodel --extsize 1 --keep-dup $dupthresh --broad --broad-cutoff $qvalue`
 
 ### Peak union
+
+Generate the gff file of the union of peaks by running:
+
+```
+Rscript union.R
+```
+
+The script should give the output:
+
+```
+Reading peak files
+Reducing intervals
+The union returned 106625 peaks
+Writing results/ESC1bNoDox_vs_Dox.gtf
+```
+
