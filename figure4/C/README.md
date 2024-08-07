@@ -67,7 +67,13 @@ conda activate fig4c
 Using the union of peaks as the reference loci, compute a matrix of O-GlcNac without and with Auxin treatment. This matrix is used to plot a heatmap with K-means clustering with 5 groups (deeptools v3.5.5):
 
 ```
-computeMatrix reference-point --regionsFileName data/union_OGlcNac_noauxaux-fig4C.bed --scoreFileName DLD1GlcNAcNoDoxAux_rep1.bw DLD1GlcNAcDoxAux_rep1.bw 'DLD1GlcNAcDoxAux1_lane1sample3_chrfiltered.bw_1.bw'  --outFileName '/g/funcgen/galaxy-production/database/files/001/169/dataset_1169997.dat' --samplesLabel 'DLD1GlcNAcNoDoxAux1_lane1sample1_chrfiltered.bw' 'DLD1GlcNAcDoxAux1_lane1sample3_chrfiltered.bw'  --numberOfProcessors "${GALAXY_SLOTS:-4}"   --referencePoint TSS  --beforeRegionStartLength 1000 --afterRegionStartLength 1000
+#!/bin/bash
+
+mkdir results
+
+NBCPU=1
+
+computeMatrix reference-point --regionsFileName data/union_OGlcNac_noauxaux-fig4C.bed --scoreFileName DLD1GlcNAcNoDoxAux_rep1.bw DLD1GlcNAcDoxAux_rep1.bw --outFileName results/OGlcNacnoauxaux.mat --samplesLabel DLD1GlcNAcNoAux DLD1GlcNAcAux  --numberOfProcessors $NBCPU --referencePoint TSS  --beforeRegionStartLength 1000 --afterRegionStartLength 1000
 ```
 
 
