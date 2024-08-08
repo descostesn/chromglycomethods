@@ -5,6 +5,8 @@ II. [Data](#data)
 III. [Installation](#installation)  
 IV. [Figure Generation](#figure-generation)  
 V. [Pre-processing](#pre-processing)  
+&nbsp;&nbsp; V.I. [Genomic Repartition](#genomic-repartition)
+&nbsp;&nbsp; V.I. [Genomic Repartition by Clusters](#genomic-repartition)
 
 
 ## Description
@@ -25,7 +27,7 @@ wget https://zenodo.org/records/12793186/files/fig4D_genes_cluster4.gff -P data/
 wget https://zenodo.org/records/12793186/files/fig4D_genes_cluster5.gff  -P data/
 
 ## The coordinates of the peaks sorted in 5 groups
-wget https://zenodo.org/records/12793186/files/peakscoord-fig4C.bed
+wget https://zenodo.org/records/12793186/files/peakscoord-fig4C.bed -P data
 
 ## The file of the union of the peaks used for preprocessing
 wget https://zenodo.org/records/12793186/files/union_OGlcNac_noauxaux-fig4C.bed -P data
@@ -93,6 +95,8 @@ You should obtain the raw figure:
 
 ### Pre-processing
 
+#### Genomic Repartition
+
 
 Perform the genomic repartition of the union of the glc peaks for each replicate. For details on the union of peaks see [fig4C](../C/README.md#peak-union).
 
@@ -139,14 +143,22 @@ Information retrieved with success.
 You should obtain the raw figures:
 
 <img src="pictures/piechart.png" alt="piecharts" width="400"/>
-<img src="pictures/priorityUpset.png" alt="upset" width="400"/>
+<img src="pictures/priorityUpSet.png" alt="upset" width="400"/>
 
 
+
+#### Genomic Repartition by Clusters
+
+
+The files produced in the results folder are then used to determine the genomic repartition of the peaks of each cluster:
+
+```
+Rscript genomicRepartitionClusters.R
+```
 
 
 The steps are:
 
-src/R/conf_generation/genomicRepartition_RepClasses_Grouping/glcsept2023_polII_human_enhancers_unionofpeaks.R
 src/R/tools/detailsGroupsHeatmapHumanSept2023.R
 src/R/conf_generation/venndiagrams_twoexp/glcpolIIhumansept2023/humanpolIIglcnac_heatmapclusters.R
 
