@@ -27,6 +27,9 @@ wget https://zenodo.org/records/12793186/files/fig4D_genes_cluster5.gff  -P data
 ## The coordinates of the peaks sorted in 5 groups
 wget https://zenodo.org/records/12793186/files/peakscoord-fig4C.bed
 
+## The file of the union of the peaks
+wget https://zenodo.org/records/12793186/files/union_OGlcNac_noauxaux-fig4C.bed -P data
+
 ```
 
 ## Installation
@@ -85,7 +88,27 @@ You should obtain the raw figure:
 ### Pre-processing
 
 
+Perform the genomic repartition of the union of the glc peaks for each replicate:
 
+```
+Rscript genomicRepartition.R
+```
+
+The script should output:
+
+```
+Filtering database chromosomes
+Building list of repeats (this might take a while)
+     Processing data/LINE.gff
+	 Processing data/LTR.gff
+	 Processing data/SINE.gff
+	 Processing data/Satellite.gff
+	 Processing data/DNA.gff
+	 Processing data/Simple_repeat.gff
+	 Processing data/RNA.gff
+	 Processing data/Low_complexity.gff
+
+```
 
 
 The steps are:
