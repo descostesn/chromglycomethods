@@ -192,7 +192,7 @@ performpiechart <- function(annonamesvec, overlappriority, piecolorvec, outfold,
     piecolorvechits <-  piecolorvec[names(percentagevec)]
 
     ## Plotting the priority piechart
-    pdf(file = file.path(outfold, paste0(namequery, "priorityPiechart.pdf")),
+    png(file = file.path(outfold, paste0(namequery, "priorityPiechart.png")),
             width = 10, height = 10)
     par(mfrow = c(1, 2))
     pie(percentagevec, labels = names(percentagevec), col = piecolorvechits,
