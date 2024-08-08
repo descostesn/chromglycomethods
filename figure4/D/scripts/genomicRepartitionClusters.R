@@ -57,7 +57,6 @@ unionfilepath <- "data/union_OGlcNac_noauxaux-fig4C.bed"
 ##################
 
 
-
 computecompfreq <- function(clustcoord, unioncoord, compcoord, outfold) {
 
 
@@ -108,6 +107,7 @@ computecompfreq <- function(clustcoord, unioncoord, compcoord, outfold) {
         dir.create(outfoldtmp, recursive = TRUE)
     message("\t Writing files to ", outfoldtmp)
     invisible(mapply(function(clustergff, namecomp, clustername, outfoldtmp) {
+        message("\t\t", namecomp, ": ", nrow(clustergff), " elements")
         write.table(clustergff, file = file.path(outfoldtmp,
             paste0(namecomp, ".gff")), sep = "\t", quote = FALSE,
         row.names = FALSE, col.names = FALSE)
