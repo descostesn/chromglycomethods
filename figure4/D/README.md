@@ -30,6 +30,7 @@ wget https://zenodo.org/records/12793186/files/peakscoord-fig4C.bed
 ## The file of the union of the peaks
 wget https://zenodo.org/records/12793186/files/union_OGlcNac_noauxaux-fig4C.bed -P data
 
+repeatshg38.tar.gz
 ```
 
 ## Installation
@@ -88,7 +89,7 @@ You should obtain the raw figure:
 ### Pre-processing
 
 
-Perform the genomic repartition of the union of the glc peaks for each replicate:
+Perform the genomic repartition of the union of the glc peaks for each replicate. For details on the union of peaks see [fig4C](../C/README.md#peak-union).
 
 ```
 Rscript genomicRepartition.R
@@ -99,15 +100,35 @@ The script should output:
 ```
 Filtering database chromosomes
 Building list of repeats (this might take a while)
-     Processing data/LINE.gff
-	 Processing data/LTR.gff
-	 Processing data/SINE.gff
-	 Processing data/Satellite.gff
-	 Processing data/DNA.gff
-	 Processing data/Simple_repeat.gff
-	 Processing data/RNA.gff
-	 Processing data/Low_complexity.gff
-
+	 Processing /g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/human/hg38/repeatmasker/classes/LINE.gff
+	 Processing /g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/human/hg38/repeatmasker/classes/LTR.gff
+	 Processing /g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/human/hg38/repeatmasker/classes/SINE.gff
+	 Processing /g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/human/hg38/repeatmasker/classes/Satellite.gff
+	 Processing /g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/human/hg38/repeatmasker/classes/DNA.gff
+	 Processing /g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/human/hg38/repeatmasker/classes/Simple_repeat.gff
+	 Processing /g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/human/hg38/repeatmasker/classes/RNA.gff
+	 Processing /g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/human/hg38/repeatmasker/classes/Low_complexity.gff
+	 Retrieving genomic features: Promoter, 5' UTR, 3' UTR, Exon, Intron, Downstream
+	 Retrieving first exons
+	 Retrieving enhancers
+	 Processing /g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/human/hg38/enhancerAtlas2/DLD1.gff
+	 Building list of annotations
+The list was built in:
+Time difference of 4.017577 mins
+Connecting to biomart
+# Attempt 1/5 # Connection to Ensembl ... 
+Connected with success.
+Determining proportions on each target category for each query file
+     Processing unionPeaksPolIIGlc
+		 Building GR with query file
+	 Processing /g/boulard/Projects/O-N-acetylglucosamine/analysis/makeunion/sept2023/human/glcPolII_samples1-2-3-4/union_glcPolII_sept2023.gff
+		 Performing overlap on the different categories
+		 Plotting piechart
+Plotting upset
+Saving 6.67 x 6.67 in image
+	 Saving peaks per category
+# Attempt 1/5 # Retrieving information about genes from biomaRt ...
+Information retrieved with success.
 ```
 
 
