@@ -7,7 +7,7 @@ IV. [Figure Generation](#figure-generation)
 V. [Pre-processing](#pre-processing)  
 &nbsp;&nbsp; V.I. [Genomic Repartition](#genomic-repartition)  
 &nbsp;&nbsp; V.II. [Genomic Repartition by Clusters](#genomic-repartition)  
-
+&nbsp;&nbsp; V.III. [Genes from Compartments](#genomic-repartition)  
 
 ## Description
 
@@ -165,27 +165,84 @@ Reading the coordinates of the union of the replicate peaks
 For each cluster group in coordgrouplist, retrieve the genomic compartment
 	 Processing cluster_1
 	 Writing files to results/cluster_1-compartmentsgff
+		DNA: 2 elements
+		enhancers: 2 elements
+		introns: 21 elements
+		LINE: 6 elements
+		Low_complexity: 6 elements
+		LTR: 3 elements
+		otherLocations: 87 elements
+		promoters: 106 elements
+		Satellite: 7 elements
+		Simple_repeat: 19 elements
+		SINE: 17 elements
 	 Processing cluster_2
 	 Writing files to results/cluster_2-compartmentsgff
+		DNA: 5 elements
+		enhancers: 14 elements
+		firstExons: 1 elements
+		introns: 36 elements
+		LINE: 12 elements
+		Low_complexity: 7 elements
+		LTR: 8 elements
+		otherExons: 3 elements
+		otherLocations: 112 elements
+		promoters: 302 elements
+		Satellite: 2 elements
+		Simple_repeat: 37 elements
+		SINE: 32 elements
 	 Processing cluster_3
 1 peaks do not have a ref in the union
 	 Writing files to results/cluster_3-compartmentsgff
+		DNA: 19 elements
+		enhancers: 27 elements
+		introns: 119 elements
+		LINE: 56 elements
+		Low_complexity: 22 elements
+		LTR: 34 elements
+		otherExons: 7 elements
+		otherLocations: 379 elements
+		promoters: 585 elements
+		Satellite: 7 elements
+		Simple_repeat: 91 elements
+		SINE: 57 elements
 	 Processing cluster_4
 	 Writing files to results/cluster_4-compartmentsgff
+		DNA: 13 elements
+		enhancers: 11 elements
+		introns: 86 elements
+		LINE: 46 elements
+		Low_complexity: 25 elements
+		LTR: 20 elements
+		otherExons: 13 elements
+		otherLocations: 327 elements
+		promoters: 473 elements
+		Satellite: 4 elements
+		Simple_repeat: 69 elements
+		SINE: 44 elements
 	 Processing cluster_5
 	 Writing files to results/cluster_5-compartmentsgff
+		DNA: 31 elements
+		enhancers: 64 elements
+		introns: 333 elements
+		LINE: 111 elements
+		Low_complexity: 46 elements
+		LTR: 96 elements
+		otherExons: 19 elements
+		otherLocations: 780 elements
+		promoters: 1023 elements
+		Satellite: 20 elements
+		Simple_repeat: 148 elements
+		SINE: 126 elements
 ```
 
 
+#### Genes from Compartments
+
+By performing an overlap of the promoter coordinates of each cluster with the Ensembl gene annotations, we retrieve the input files of cluster profiler to generate the main figure:
+
+```
+Rscript overlapClustersEnsemblGenes.R
+```
 
 
-
-
-
-
-The steps are:
-
-src/R/tools/detailsGroupsHeatmapHumanSept2023.R
-src/R/conf_generation/venndiagrams_twoexp/glcpolIIhumansept2023/humanpolIIglcnac_heatmapclusters.R
-
-The files with the ordered peaks coordinates `peakscoord-fig4C.bed` was obtained following the methods of [fig4C](../C/README.md).
