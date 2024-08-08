@@ -163,18 +163,20 @@ performoverlap <- function(annotationsgrlist, querygr) {
     resultoverlap <- GenomicRanges::findOverlaps(querygr, annotationsgrlist,
         ignore.strand = FALSE)
     idxkeep <- which(!duplicated(S4Vectors::queryHits(resultoverlap)))
-    resultoverlapPriority <- resultoverlap[idxkeep,]
-    
-    if(isTRUE(all.equal(length(resultoverlapPriority),0)) || 
-		    length(resultoverlapPriority) > length(resultoverlap))
-	    stop("Pb in the script.")
-    
-    if(!isTRUE(all.equal(length(resultoverlapPriority), length(querygr))))
-	    stop("All peaks of query should have a unique mapping location, pb in ",
-			    "the script")
-    
-    return(list(resultoverlapPriority, resultoverlap, annonamesvec))
+    resultoverlappriority <- resultoverlap[idxkeep, ]
+
+    if (isTRUE(all.equal(length(resultoverlappriority), 0)) ||
+            length(resultoverlappriority) > length(resultoverlap))
+        stop("Pb in the script.")
+
+    if (!isTRUE(all.equal(length(resultoverlappriority), length(querygr))))
+        stop("All peaks of query should have a unique mapping location, pb in ",
+                "the script")
+
+    return(list(resultoverlappriority, resultoverlap, annonamesvec))
 }
+
+
 
 ################
 # MAIN
