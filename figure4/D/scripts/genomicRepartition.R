@@ -359,9 +359,9 @@ outputgffprom <- function(annotationsgrlist, querygr, peaksidxbycatpriorlist,
 
     ## Genes
     .writepromwithunique(idvec = symbolstab$ensembl_gene_id[idxtable],
-            startvec = symbolstab$start_position[idxtable],
-            endvec = symbolstab$end_position[idxtable], symbolstab = symbolstab,
-            idxtable =  idxtable, outfold = outfold, filename = "genes_fromProm")
+        startvec = symbolstab$start_position[idxtable],
+        endvec = symbolstab$end_position[idxtable], symbolstab = symbolstab,
+        idxtable =  idxtable, outfold = outfold, filename = "genes_fromProm")
 }
 
 
