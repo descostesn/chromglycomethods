@@ -20,7 +20,7 @@ library("IRanges")
 library("GenomeInfoDb")
 library("S4Vectors")
 library("tibble")
-
+library("ggupset")
 
 ################
 # PARAMETERS
@@ -228,10 +228,11 @@ performupset <- function(annonamesvec, overlap, namequery, outfold){
     res <- tibble::tibble(anno = lapply(seq_len(nrow(regionsmatrix)),
                     function(i) namescolregions[regionsmatrix[i, ]]))
 
-    g <- ggplot2::ggplot(res, aes_(x = ~anno)) + geom_bar() +
-            xlab(NULL) + ylab(NULL) + theme_minimal() +
+    g <- ggplot2::ggplot(res, aes_(x = ~anno)) + ggplot2::geom_bar() +
+            ggplot2::xlab(NULL) + ggplot2::ylab(NULL) +
+            ggplot2::theme_minimal() +
             ggupset::scale_x_upset(n_intersections = 20, order_by = "freq")
-    
+
     ggsave(filename=paste0(namequery, "-priorityUpSet.pdf"), plot=g, 
             device=pdf(), path=outfold)
 }
