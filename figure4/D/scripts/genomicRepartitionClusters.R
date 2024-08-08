@@ -164,18 +164,3 @@ frqcomplist <- lapply(coordgrouplist, function(
     return(computecompfreq(clustcoord, unioncoord, compcoord, outfold))
 }, comptab, uniontab, output_folder)
 
-
-##  Plotting piecharts of compartments
-piecolorvec <- c(brewer.pal(n = 12, name = "Paired"), "aliceblue")
-nbelementvec <- lengths(frqcomplist)
-idmax <- which.max(nbelementvec)
-names(piecolorvec) <- names(frqcomplist[[idmax]])
-
-invisible(mapply(function(frqcomp, clustname, outfold, colvec) {
-    pdf(file = file.path(outfold, paste0(clustname, "-piechart.pdf")),
-            width = 10, height = 10)
-    pie(frqcomp, labels = paste(names(frqcomp), frqcomp, sep = "-"),
-        col = piecolorvec[names(frqcomp)], main = clustname)
-    dev.off()
-}, frqcomplist, names(frqcomplist), MoreArgs = list(output_folder,
-    piecolorvec)))
