@@ -448,16 +448,3 @@ for (i in seq_len(length(queryfilevec))) {
 }
 
 names(numberspielist) <- names(percentageslist) <- pietitlevec
-
-## Perform barplot of all exp
-message("Generating barplot for all experiments")
-colVec <- c("antiquewhite1", "antiquewhite2", "antiquewhite3", 
-        "aquamarine2", "aquamarine3", "aquamarine4", 
-        "cadetblue2", "cadetblue3", "cadetblue4", 
-        "chocolate1", "chocolate2", "chocolate3", "chocolate4",
-        "black")
-groupedBarplot(percentageslist, "overlap proportions", outputfolder, percentagerepvec, 
-        colVec)
-groupedBarplot(numberspielist, "Nb_of_overlap", outputfolder, cntrepeats, 
-        colVec)
-
