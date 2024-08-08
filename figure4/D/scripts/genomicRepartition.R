@@ -49,7 +49,7 @@ biomartconnection <- "hsapiens_gene_ensembl"
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 queryfilevec <- "data/union_glcPolII_sept2023.gff" # nolint
-repeatfilesvec <- c("/g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/human/hg38/repeatmasker/classes/LINE.gff", # nolint
+repeatfilesvec <- c("data/LINEhg38repeatmasker.gff", # nolint
         "/g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/human/hg38/repeatmasker/classes/LTR.gff", # nolint
         "/g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/human/hg38/repeatmasker/classes/SINE.gff", # nolint
         "/g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/human/hg38/repeatmasker/classes/Satellite.gff", # nolint
@@ -410,7 +410,7 @@ message("Building list of repeats (this might take a while)")
 start_time <- Sys.time()
 repeatslist <- lapply(repeatfilesvec, buildgr, chromvec)
 annotationsgrlist <- buildrepeatstarget(txdb, repeatslist, enhancerspath,
-    repeatsnamevec)
+    repeatsnamevec, chromvec)
 end_time <- Sys.time()
 duration <- end_time - start_time
 message("The list was built in:")
