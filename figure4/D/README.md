@@ -35,3 +35,46 @@ conda env create -n fig4d --file ./fig4D.yml
 conda activate fig4d
 ```
 
+## Figure generation
+
+Run the script:
+
+```
+Rscript enrichmentanalysis.R
+```
+
+The script should output:
+
+***!!!!!!!!!!!!!!!!!!! TO MODIFY NB OF ANNOTATIONS REMOVED !!!!!!!!!!!!!!!!!!!!!!!***
+```
+Reading gff files and return conversion table
+Defining background
+### No background provided
+Retrieving info from biomart
+Connecting to biomart
+# Attempt 1/5 # Connection to Ensembl ... 
+Connected with success.
+	 Retrieving gene info
+# Attempt 1/5 # Retrieving information about genes from biomaRt ...
+Information retrieved with success.
+Filtering out non-canonical chromosomes from genesinfo
+
+!!!!!!!!!!!!!!!!!!! TO MODIFY !!!!!!!!!!!!!!!!!!!!!!!
+
+
+	 Removing 70/57186 annotations with non canonical chromosomes
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+Creating the input list of entrezID
+Creating the entrezID-symbol table
+Performing clusters comparison on molecular function
+Output the dotplot of the comparison into results/
+```
+
+You should obtain the raw figure:
+
+***!!!!!!!!!!!!!!!!!!!!!!!!!!!! TO DO !!!!!!!!!!!!!!!!!!!***
+
+
