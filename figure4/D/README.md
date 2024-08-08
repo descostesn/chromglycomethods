@@ -33,6 +33,9 @@ wget https://zenodo.org/records/12793186/files/union_OGlcNac_noauxaux-fig4C.bed 
 ## The repeatmasker annotations used for preprocessing
 wget https://zenodo.org/records/12793186/files/repeatshg38.tar.gz -P data/
 cd data/ && tar -xvzf repeatshg38.tar.gz && cd ..
+
+## The DLD1 enhancer coordinates used for preprocessing
+wget https://zenodo.org/records/12793186/files/enhancerAtlas2_DLD1.gff -P data/
 ```
 
 ## Installation
