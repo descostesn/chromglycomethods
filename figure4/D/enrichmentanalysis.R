@@ -25,7 +25,7 @@ gffvec <- c("data/fig4D_genes_cluster1.gff",
 "data/fig4D_genes_cluster5.gff")
 expnamesvec <- c("cluster1", "cluster2", "cluster3", "cluster4", "cluster5")
 species_name <- "human"
-output_folder <- c("results")
+output_folder <- c("../results")
 output_format <- "png"
 database_name <- "org.Hs.eg.db"
 kegg_name <- "hsa"
