@@ -140,11 +140,37 @@ buildrepeatstarget <- function(txdb, repeatslist, enhancerspath,
     otherlocations <- gaps(newannord, end = GenomeInfoDb::seqlengths(txdb))
     otherlocations <-  otherlocations[strand(otherlocations) != "*"]
     names(otherlocations) <- NULL
-    annoitationsgrlist$otherlocations <- otherlocations
+    annotationsgrlist$otherlocations <- otherlocations
 
-    return(annoitationsgrlist)
+    return(annotationsgrlist)
 }
 
+
+performoverlap <- function(annotationsgrlist, querygr) {
+
+    #############
+    ## Performing the overlap and determining preferencce order
+    ## The order of repeats matters since a peak could overlap two different
+    ## repeats if they are close enough. Note the repeats in mouse do not
+    ## overlap between them.
+    #############
+
+    annonamesvec <- names(annotationsgrlist)
+    mcols(querygr) <- NULL
+    resultoverlap <- findOverlaps(querygr, annotationsgrlist, ignore.strand=FALSE)
+    idxKeep <- which(!duplicated(queryHits(resultoverlap)))
+    resultoverlapPriority <- resultoverlap[idxKeep,]
+    
+    if(isTRUE(all.equal(length(resultoverlapPriority),0)) || 
+		    length(resultoverlapPriority) > length(resultoverlap))
+	    stop("Pb in the script.")
+    
+    if(!isTRUE(all.equal(length(resultoverlapPriority), length(querygr))))
+	    stop("All peaks of query should have a unique mapping location, pb in ",
+			    "the script")
+    
+    return(list(resultoverlapPriority, resultoverlap, annonamesvec))
+}
 
 ################
 # MAIN
@@ -165,17 +191,17 @@ seqlevels(txdb) <- chromvec
 ## Building the GRanges of annotations to which query is compared to
 message("Building list of repeats")
 repeatslist <- lapply(repeatfilesvec, buildgr, chromvec)
-annoitationsgrlist <- buildrepeatstarget(txdb, repeatslist, enhancerspath,
+annotationsgrlist <- buildrepeatstarget(txdb, repeatslist, enhancerspath,
     repeatsnamevec)
 
 ## Calculate number of annotations
-cntRepeats <- lengths(annoitationsgrlist)
-percentageRepVec <- 100 * cntRepeats / sum(cntRepeats)
+cntrepeats <- lengths(annotationsgrlist)
+percentagerepvec <- 100 * cntrepeats / sum(cntrepeats)
 
 ## Building colors for piechart
-pieColorVec <- c(brewer.pal(n = 12, name = "Paired"), "aliceblue", "azure4", 
+piecolorvec <- c(brewer.pal(n = 12, name = "Paired"), "aliceblue", "azure4",
         "darkgoldenrod1", "slategray")
-names(pieColorVec) <- names(annoitationsgrlist)
+names(piecolorvec) <- names(annotationsgrlist)
 
 message("Connecting to biomart")
 ensembl <- tryUseMart(biomart = "ENSEMBL_MART_ENSEMBL",
@@ -183,44 +209,46 @@ ensembl <- tryUseMart(biomart = "ENSEMBL_MART_ENSEMBL",
     alternativeMirror = TRUE)
 
 ## Determining proportions on each target category for each query file
+message("Determining proportions on each target category for each query file")
 numbersPieList <- list()
 percentagesList <- list()
 
-for(i in seq_len(length(queryfilevec))){
-    
+for (i in seq_len(length(queryfilevec))) {
+
     ## Processing query files
-    queryFile <- queryfilevec[i]
-    nameQuery <- pietitlevec[i]
-    outFold <- file.path(outputfolder, nameQuery)
-    if(!file.exists(outFold))
-        dir.create(outFold, recursive=TRUE)
-    
-    message("Processing ", nameQuery)
-    
-    message("\t Building GR with query file")
-    queryGR <- unique(buildgr(queryFile))
-    
+    queryfile <- queryfilevec[i]
+    namequery <- pietitlevec[i]
+    outfold <- file.path(outputfolder, namequery)
+    if (!file.exists(outfold))
+        dir.create(outfold, recursive = TRUE)
+
+    message("\t Processing ", namequery)
+
+    message("\t\t Building GR with query file")
+    querygr <- unique(buildgr(queryfile))
+
     ## Performing overlap on the different categories
-    res <- performOverlap(annoitationsgrlist, queryGR)
+    message("\t\t Performing overlap on the different categories")
+    res <- performoverlap(annotationsgrlist, querygr)
     overlapPriority <- res[[1]]
     overlap <- res[[2]]
-    annoNamesVec <- res[[3]]
-    res <- performPieChart(annoNamesVec, overlapPriority, pieColorVec, outFold, 
-            nameQuery,percentageRepVec)
+    annonamesvec <- res[[3]]
+    res <- performPieChart(annonamesvec, overlapPriority, piecolorvec, outfold, 
+            namequery,percentagerepvec)
     numbersPieList <- c(numbersPieList, res[1])
     percentagesList <- c(percentagesList, res[2])
     subjectHitsNamesPriority <- res[[3]]
     
     ## Perform an upset diagram
-    performUpset(annoNamesVec, overlap, nameQuery, outFold)
+    performUpset(annonamesvec, overlap, namequery, outfold)
     
-    ## Output the gff of queryGR per category defined by overlapPriority
+    ## Output the gff of querygr per category defined by overlapPriority
     peaksIdxByCatPriorList <- savingPeaksPerCategory(overlapPriority, 
-            subjectHitsNamesPriority, queryGR, outFold)
+            subjectHitsNamesPriority, querygr, outfold)
     
     ## Output the gff of the promoters
-    outputGFFProm(annoitationsgrlist, queryGR, peaksIdxByCatPriorList, 
-            symbolsTab, ensembl, outFold)
+    outputGFFProm(annotationsgrlist, querygr, peaksIdxByCatPriorList, 
+            symbolsTab, ensembl, outfold)
 }
 
 names(numbersPieList) <- names(percentagesList) <- pietitlevec
@@ -232,8 +260,8 @@ colVec <- c("antiquewhite1", "antiquewhite2", "antiquewhite3",
         "cadetblue2", "cadetblue3", "cadetblue4", 
         "chocolate1", "chocolate2", "chocolate3", "chocolate4",
         "black")
-groupedBarplot(percentagesList, "overlap proportions", outputfolder, percentageRepVec, 
+groupedBarplot(percentagesList, "overlap proportions", outputfolder, percentagerepvec, 
         colVec)
-groupedBarplot(numbersPieList, "Nb_of_overlap", outputfolder, cntRepeats, 
+groupedBarplot(numbersPieList, "Nb_of_overlap", outputfolder, cntrepeats, 
         colVec)
 
