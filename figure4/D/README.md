@@ -23,6 +23,10 @@ wget https://zenodo.org/records/12793186/files/fig4D_genes_cluster2.gff  -P data
 wget https://zenodo.org/records/12793186/files/fig4D_genes_cluster3.gff  -P data/
 wget https://zenodo.org/records/12793186/files/fig4D_genes_cluster4.gff -P data/
 wget https://zenodo.org/records/12793186/files/fig4D_genes_cluster5.gff  -P data/
+
+## The coordinates of the peaks sorted in 5 groups
+wget https://zenodo.org/records/12793186/files/peakscoord-fig4C.bed
+
 ```
 
 ## Installation
@@ -40,7 +44,7 @@ conda activate fig4d
 Run the script:
 
 ```
-Rscript enrichmentanalysis.R
+Rscript scripts/enrichmentanalysis.R
 ```
 
 The script should output:
@@ -78,3 +82,12 @@ You should obtain the raw figure:
 ***!!!!!!!!!!!!!!!!!!!!!!!!!!!! TO DO !!!!!!!!!!!!!!!!!!!***
 
 
+### Pre-processing
+
+The steps are:
+
+src/R/conf_generation/genomicRepartition_RepClasses_Grouping/glcsept2023_polII_human_enhancers_unionofpeaks.R
+src/R/tools/detailsGroupsHeatmapHumanSept2023.R
+src/R/conf_generation/venndiagrams_twoexp/glcpolIIhumansept2023/humanpolIIglcnac_heatmapclusters.R
+
+The files with the ordered peaks coordinates `peakscoord-fig4C.bed` was obtained following the methods of [fig4C](../C/README.md).
