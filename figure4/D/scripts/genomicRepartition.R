@@ -48,19 +48,19 @@ biomartconnection <- "hsapiens_gene_ensembl"
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-queryfilevec <- "data/union_glcPolII_sept2023.gff" # nolint
-repeatfilesvec <- c("data/LINEhg38repeatmasker.gff", # nolint
-        "/g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/human/hg38/repeatmasker/classes/LTR.gff", # nolint
-        "/g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/human/hg38/repeatmasker/classes/SINE.gff", # nolint
-        "/g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/human/hg38/repeatmasker/classes/Satellite.gff", # nolint
-        "/g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/human/hg38/repeatmasker/classes/DNA.gff", # nolint
-        "/g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/human/hg38/repeatmasker/classes/Simple_repeat.gff", # nolint
-        "/g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/human/hg38/repeatmasker/classes/RNA.gff", # nolint
-        "/g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/human/hg38/repeatmasker/classes/Low_complexity.gff") # nolint
+queryfilevec <- "data/union_glcPolII_sept2023.gff"
+repeatfilesvec <- c("data/LINEhg38repeatmasker.gff",
+        "data/LTRhg38repeatmasker.gff",
+        "data/SINEhg38repeatmasker.gff",
+        "data/Satellitehg38repeatmasker.gff",
+        "data/DNAhg38repeatmasker.gff",
+        "data/SimpleRepeatshg38repeatmasker.gff",
+        "data/RNAhg38repeatmasker.gff",
+        "data/LowComplexityhg38repeatmasker.gff")
 repeatsnamevec <- c("LINE", "LTR", "SINE", "Satellite", "DNA", "Simple_repeat", "RNA", "Low_complexity") # nolint
-pietitlevec <- "unionPeaksPolIIGlc" # nolint
-outputfolder <- "/g/boulard/Projects/O-N-acetylglucosamine/analysis/genomicDistribution/Sept2023_glcPolII_enhancers_unionofpeaks/test" # nolint
-enhancerspath <- "/g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/human/hg38/enhancerAtlas2/DLD1.gff" # nolint
+pietitlevec <- "unionPeaksPolIIGlc"
+outputfolder <- "results/"
+enhancerspath <- "data/enhancerAtlas2_DLD1.gff"
 species <- "human"
 txdb <- TxDb.Hsapiens.UCSC.hg38.knownGene
 chromvec <- c("chr1", "chr2", "chr3", "chr4", "chr5", "chr6", "chr7",
@@ -496,5 +496,3 @@ for (i in seq_len(length(queryfilevec))) {
     outputgffprom(annotationsgrlist, querygr, peaksidxbycatpriorlist,
             symbolstab, ensembl, outfold)
 }
-
-names(numberspielist) <- names(percentageslist) <- pietitlevec
