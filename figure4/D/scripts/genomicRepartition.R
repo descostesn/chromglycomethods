@@ -321,6 +321,22 @@ performupset <- function(annonamesvec, overlap, namequery, outfold){
     return(symbolstab)
 }
 
+.writepromwithunique <- function(idvec, startvec, endvec, symbolstab, idxtable,
+        outfold, filename) {
+
+    gff <- data.frame(seqname = symbolstab$chromosome_name[idxtable],
+            source = symbolstab$external_gene_name[idxtable],
+            feature = idvec, start=startvec, end=endvec,
+            score = 0, strand = symbolstab$strand[idxtable], frame = ".",
+            group = ".")
+    gffunique <- gff[-which(duplicated(gff$feature)), ]
+    write.table(gff, file = file.path(outfold, paste0(filename, ".gff")),
+            quote = FALSE, sep = "\t", row.names = FALSE, col.names = FALSE)
+    write.table(gffunique, file = file.path(outfold,
+                    paste0(filename, "-unique.gff")), quote = FALSE, sep = "\t",
+            row.names = FALSE, col.names = FALSE)
+}
+
 outputgffprom <- function(annotationsgrlist, querygr, peaksidxbycatpriorlist,
         symbolstab, ensembl, outfold) {
 
@@ -328,22 +344,24 @@ outputgffprom <- function(annotationsgrlist, querygr, peaksidxbycatpriorlist,
     currentannogr <- .restrictannooverlap(querygr, peaksidxbycatpriorlist,
             currentannogr)
     symbolstab <- .retrievegeneinfo(ensembl, currentannogr)
-    idxTable <- match(names(currentannogr), 
+    idxtable <- match(names(currentannogr),
             symbolstab$ensembl_transcript_id_version)
-    idxNA <- which(is.na(idxTable))
-    currentannogr <- currentannogr[-idxNA,]
-    idxTable <- idxTable[-idxNA]
+    idxna <- which(is.na(idxtable))
+    currentannogr <- currentannogr[-idxna, ]
+    idxtable <- idxtable[-idxna]
+
     ## Transcripts
-    writePromWithUnique(IDVec = symbolstab$ensembl_transcript_id_version[idxTable],
-            startvec = symbolstab$transcript_start[idxTable],
-            endvec = symbolstab$transcript_end[idxTable], 
-            symbolstab = symbolstab, idxTable = idxTable, outfold = outfold, 
-            filename = "transcripts_fromProm")
+    # .writepromwithunique(idvec = symbolstab$ensembl_transcript_id_version[idxtable],
+    #         startvec = symbolstab$transcript_start[idxtable],
+    #         endvec = symbolstab$transcript_end[idxtable], 
+    #         symbolstab = symbolstab, idxtable = idxtable, outfold = outfold, 
+    #         filename = "transcripts_fromProm")
+
     ## Genes
-    writePromWithUnique(IDVec = symbolstab$ensembl_gene_id[idxTable],
-            startvec = symbolstab$start_position[idxTable],
-            endvec = symbolstab$end_position[idxTable], symbolstab = symbolstab,
-            idxTable =  idxTable, outfold = outfold, filename = "genes_fromProm")
+    .writepromwithunique(idvec = symbolstab$ensembl_gene_id[idxtable],
+            startvec = symbolstab$start_position[idxtable],
+            endvec = symbolstab$end_position[idxtable], symbolstab = symbolstab,
+            idxtable =  idxtable, outfold = outfold, filename = "genes_fromProm")
 }
 
 
