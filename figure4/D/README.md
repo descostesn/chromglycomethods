@@ -101,7 +101,7 @@ You should obtain the raw figure:
 Perform the genomic repartition of the union of the glc peaks for each replicate. For details on the union of peaks see [fig4C](../C/README.md#peak-union).
 
 ```
-Rscript genomicRepartition.R
+Rscript scripts/genomicRepartition.R
 ```
 
 The script should output:
@@ -153,7 +153,7 @@ You should obtain the raw figures:
 The files produced in the results folder are then used to determine the genomic repartition of the peaks of each cluster:
 
 ```
-Rscript genomicRepartitionClusters.R
+Rscript scripts/genomicRepartitionClusters.R
 ```
 
 The script should output:
@@ -242,7 +242,7 @@ For each cluster group in coordgrouplist, retrieve the genomic compartment
 By performing an overlap of the promoter coordinates of each cluster with the Ensembl gene annotations, we retrieve the input files of cluster profiler to generate the main figure:
 
 ```
-Rscript overlapClustersEnsemblGenes.R
+Rscript scripts/overlapClustersEnsemblGenes.R
 ```
 
 
