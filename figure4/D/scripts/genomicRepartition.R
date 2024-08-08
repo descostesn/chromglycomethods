@@ -250,13 +250,56 @@ performupset <- function(annonamesvec, overlap, namequery, outfold){
     return(currentannogr)
 }
 
-outputgffprom <- function(annotationsgrlist, querygr, peaksIdxbycatPriorList,
+
+## Function by Ilyess Rachedi
+.trygetbm <- function(attributes, ensembl, values = NULL, filters = NULL) {
+    c <- 1
+    repeat {
+        message("# Attempt ", c, "/5 # ",
+                "Retrieving information about genes from biomaRt ...")
+        if (is.null(values) && is.null(filters))
+            res <- try(biomaRt::getBM(attributes = attributes, mart = ensembl),
+                silent = TRUE)
+        else
+            res <- try(biomaRt::getBM(attributes = attributes, mart = ensembl,
+                values = values, filters = filters), silent = TRUE)
+
+        if( isTRUE(is(res, "try-error"))) {
+            c <- c + 1
+            error_type <- attr(res, "condition")
+            message(error_type$message)
+            if (c > 5)
+                stop("There is a problem of connexion to Ensembl for ",
+                        "now. Please retry later.")
+        } else {
+            message("Information retrieved with success.")
+            return(res)
+        }
+    }
+}
+
+.retrievegeneinfo  <- function(ensembl, currentannogr) {
+
+    attributes <- c("chromosome_name", "ensembl_gene_id",
+            "ensembl_transcript_id_version", "external_gene_name",
+            "start_position", "end_position", "strand", "transcript_start",
+            "transcript_end", "transcription_start_site")
+    symbolstab <- .trygetbm(attributes, ensembl, values=names(currentannogr), 
+            filters="ensembl_transcript_id_version")
+    symbolstab$strand[which(symbolstab$strand == 1)] <- "+"
+    symbolstab$chromosome_name <- paste0("chr",symbolstab$chromosome_name)
+    if(!isTRUE(all.equal(length(which(symbolstab$strand == -1)),0)))
+        symbolstab$strand[which(symbolstab$strand == -1)] <- "-"
+    return(symbolstab)
+}
+
+outputgffprom <- function(annotationsgrlist, querygr, peaksidxbycatpriorlist,
         symbolstab, ensembl, outfold) {
 
     currentannogr <- annotationsgrlist$promoters
-    currentannogr <- .restrictannooverlap(querygr, peaksIdxbycatPriorList, 
+    currentannogr <- .restrictannooverlap(querygr, peaksidxbycatpriorlist,
             currentannogr)
-    symbolstab <- retrieveGeneInfo(ensembl, currentannogr)
+    symbolstab <- .retrievegeneinfo(ensembl, currentannogr)
     idxTable <- match(names(currentannogr), 
             symbolstab$ensembl_transcript_id_version)
     idxNA <- which(is.na(idxTable))
