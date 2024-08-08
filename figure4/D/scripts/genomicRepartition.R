@@ -14,7 +14,7 @@ library("RColorBrewer")
 library("ggplot2")
 library("biomaRt")
 library("reshape2")
-
+library("TxDb.Hsapiens.UCSC.hg38.knownGene")
 
 
 ################
@@ -31,10 +31,10 @@ repeatfilesvec <- c("/g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/
         "/g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/human/hg38/repeatmasker/classes/RNA.gff", # nolint
         "/g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/human/hg38/repeatmasker/classes/Low_complexity.gff") # nolint
 pietitlevec <- "unionPeaksPolIIGlc" # nolint
-outputfolder <- "/g/boulard/Projects/O-N-acetylglucosamine/analysis/genomicDistribution/Sept2023_glcPolII_enhancers_unionofpeaks" # nolint
+outputfolder <- "/g/boulard/Projects/O-N-acetylglucosamine/analysis/genomicDistribution/Sept2023_glcPolII_enhancers_unionofpeaks/test" # nolint
 enhancerspath <- "/g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/human/hg38/enhancerAtlas2/DLD1.gff" # nolint
 species <- "human"
-
+txdb <- TxDb.Hsapiens.UCSC.hg38.knownGene
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 
@@ -60,14 +60,6 @@ if (!file.exists(outputfolder))
 if (!isTRUE(all.equal(species, "mouse")) &&
     !isTRUE(all.equal(species, "human")))
     stop("species should be mouse or human")
-
-if (isTRUE(all.equal(species, "mouse"))) {
-    library("TxDb.Mmusculus.UCSC.mm10.knownGene")
-    txdb <- TxDb.Mmusculus.UCSC.mm10.knownGene
-} else {
-    library("TxDb.Hsapiens.UCSC.hg38.knownGene")
-    txdb <- TxDb.Hsapiens.UCSC.hg38.knownGene
-}
 
 ## Building GR with repeats
 message("Building list of repeats")
