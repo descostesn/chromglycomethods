@@ -97,7 +97,8 @@ buildgr <- function(currentpath, chromvec) {
     return(firstexongr)
 }
 
-buildrepeatstarget <- function(txdb, repeatslist, enhancerspath) {
+buildrepeatstarget <- function(txdb, repeatslist, enhancerspath,
+    repeatsnamevec) {
 
     ## Retrieving Promoter, 5' UTR, 3' UTR, Exon, Intron, Downstream
     message("\t Retrieving genomic features: Promoter, 5' UTR, 3' UTR, Exon,",
@@ -164,7 +165,8 @@ seqlevels(txdb) <- chromvec
 ## Building the GRanges of annotations to which query is compared to
 message("Building list of repeats")
 repeatslist <- lapply(repeatfilesvec, buildgr, chromvec)
-annotationsgrlist <- buildrepeatstarget(txdb, repeatslist, enhancerspath)
+annotationsgrlist <- buildrepeatstarget(txdb, repeatslist, enhancerspath,
+    repeatsnamevec)
 
 ## Calculate number of annotations
 cntRepeats <- lengths(annotationsgrlist)
