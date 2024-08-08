@@ -6,7 +6,6 @@
 #################
 
 
-library("Rargs")
 library("GenomicRanges")
 library("ChIPpeakAnno")
 
@@ -16,14 +15,22 @@ library("ChIPpeakAnno")
 ################
 
 
-#parameters defined from the command line using RIO
-paramsDefinition <- list() #nolint
-paramsDefinition[["--gffFileVec"]] <- list(variableName="gff_file_vec", numeric=F, mandatory=T, description="Vector containing file path in gff to the exp to compare.") #nolint
-paramsDefinition[["--outputFolder"]] <- list(variableName="output_folder", numeric=F, mandatory=T, description="single path to the output folder.") #nolint
-paramsDefinition[["--expnameVec"]] <- list(variableName="expname_vec", numeric=F, mandatory=T, description="Vector containing name of each experiment given as gff files.") #nolint
+clusterpathvec <- c("/g/boulard/Projects/O-N-acetylglucosamine/analysis/heatmapsandprofiles/sept2023Glc/human/polIIGlc/unionpeaks/cluster_1-compartmentsgff/promoters.gff", # nolint
+        "/g/boulard/Projects/O-N-acetylglucosamine/analysis/heatmapsandprofiles/sept2023Glc/human/polIIGlc/unionpeaks/cluster_2-compartmentsgff/promoters.gff", # nolint
+        "/g/boulard/Projects/O-N-acetylglucosamine/analysis/heatmapsandprofiles/sept2023Glc/human/polIIGlc/unionpeaks/cluster_3-compartmentsgff/promoters.gff", # nolint
+        "/g/boulard/Projects/O-N-acetylglucosamine/analysis/heatmapsandprofiles/sept2023Glc/human/polIIGlc/unionpeaks/cluster_4-compartmentsgff/promoters.gff", # nolint
+        "/g/boulard/Projects/O-N-acetylglucosamine/analysis/heatmapsandprofiles/sept2023Glc/human/polIIGlc/unionpeaks/cluster_5-compartmentsgff/promoters.gff") # nolint
+ensemblpath <- "/g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/human/hg38/ensembl/Homo_sapiens_GRCh38110_chrfiltered_genes.gff" # nolint
+output_folder <- c("/g/boulard/Projects/O-N-acetylglucosamine/analysis/heatmapsandprofiles/sept2023Glc/human/polIIGlc/unionpeaks/cluster_1-compartmentsgff/promoters_vs_ensemblgenes/test",
+        "/g/boulard/Projects/O-N-acetylglucosamine/analysis/heatmapsandprofiles/sept2023Glc/human/polIIGlc/unionpeaks/cluster_2-compartmentsgff/promoters_vs_ensemblgenes/test",
+        "/g/boulard/Projects/O-N-acetylglucosamine/analysis/heatmapsandprofiles/sept2023Glc/human/polIIGlc/unionpeaks/cluster_3-compartmentsgff/promoters_vs_ensemblgenes/test",
+        "/g/boulard/Projects/O-N-acetylglucosamine/analysis/heatmapsandprofiles/sept2023Glc/human/polIIGlc/unionpeaks/cluster_4-compartmentsgff/promoters_vs_ensemblgenes/test",
+        "/g/boulard/Projects/O-N-acetylglucosamine/analysis/heatmapsandprofiles/sept2023Glc/human/polIIGlc/unionpeaks/cluster_5-compartmentsgff/promoters_vs_ensemblgenes/test")
+expname <- "promspeaks_ensemblgenes"
+extractensemblgenename <- "TRUE"
 
-#Optional argument
-paramsDefinition[["--extractensemblgenename"]] <- list(variableName="extractensemblgenename", numeric=F, mandatory=F, description="Logical indicating if ensembl gene names should be extracted.", postConversion=as.logical, default=FALSE) #nolint
+!!!!!!!!!!!!!!!!!!! NEED TO ADAPT THE SCRIPT
+
 
 
 #############
@@ -97,7 +104,6 @@ buildgffrangeslist <- function(gff_file_vec, extractensemblgenename) {
 ##############
 
 # Retreives the parameters
-getParams(paramsDefinition)
 checkparams(gff_file_vec, expname_vec, output_folder)
 
 message("Reading gff input and converting to rangedData")
