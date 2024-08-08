@@ -17,7 +17,7 @@ library("reshape2")
 library("TxDb.Hsapiens.UCSC.hg38.knownGene")
 library("GenomicRanges")
 library("IRanges")
-
+library("GenomeInfoDb")
 
 ################
 # PARAMETERS
@@ -132,17 +132,17 @@ buildrepeatstarget <- function(txdb, repeatslist, enhancerspath,
     annotationslist <- lapply(annotationslist,
             function(.anno) { mcols(.anno) <- NULL; .anno} )
     names(annotationslist) <- c(repeatsnamevec, gffnamesvec)
-    annotationsGRList <- GRangesList(annotationslist)
-    
+    annotationsgrlist <- GenomicRanges::GRangesList(annotationslist)
+
     ## Computing the other locations
-    newAnno <- c(unlist(annotationsGRList))
-    newAnno.rd <- reduce(trim(newAnno))
-    otherLocations <- gaps(newAnno.rd, end=seqlengths(txdb))
-    otherLocations <-  otherLocations[strand(otherLocations)!="*"]
-    names(otherLocations) <- NULL
-    annotationsGRList$otherLocations <- otherLocations
+    newanno <- c(unlist(annotationsgrlist))
+    newannord <- reduce(trim(newanno))
+    otherlocations <- gaps(newannord, end = GenomeInfoDb::seqlengths(txdb))
+    otherlocations <-  otherlocations[strand(otherlocations)!="*"]
+    names(otherlocations) <- NULL
+    annoitationsgrlist$otherlocations <- otherlocations
     
-    return(annotationsGRList)
+    return(annoitationsgrlist)
 }
 
 
@@ -165,17 +165,17 @@ seqlevels(txdb) <- chromvec
 ## Building the GRanges of annotations to which query is compared to
 message("Building list of repeats")
 repeatslist <- lapply(repeatfilesvec, buildgr, chromvec)
-annotationsgrlist <- buildrepeatstarget(txdb, repeatslist, enhancerspath,
+annoitationsgrlist <- buildrepeatstarget(txdb, repeatslist, enhancerspath,
     repeatsnamevec)
 
 ## Calculate number of annotations
-cntRepeats <- lengths(annotationsgrlist)
+cntRepeats <- lengths(annoitationsgrlist)
 percentageRepVec <- 100 * cntRepeats / sum(cntRepeats)
 
 ## Building colors for piechart
 pieColorVec <- c(brewer.pal(n = 12, name = "Paired"), "aliceblue", "azure4", 
         "darkgoldenrod1", "slategray")
-names(pieColorVec) <- names(annotationsgrlist)
+names(pieColorVec) <- names(annoitationsgrlist)
 
 message("Connecting to biomart")
 ensembl <- tryUseMart(biomart = "ENSEMBL_MART_ENSEMBL",
@@ -201,7 +201,7 @@ for(i in seq_len(length(queryfilevec))){
     queryGR <- unique(buildgr(queryFile))
     
     ## Performing overlap on the different categories
-    res <- performOverlap(annotationsgrlist, queryGR)
+    res <- performOverlap(annoitationsgrlist, queryGR)
     overlapPriority <- res[[1]]
     overlap <- res[[2]]
     annoNamesVec <- res[[3]]
@@ -219,7 +219,7 @@ for(i in seq_len(length(queryfilevec))){
             subjectHitsNamesPriority, queryGR, outFold)
     
     ## Output the gff of the promoters
-    outputGFFProm(annotationsgrlist, queryGR, peaksIdxByCatPriorList, 
+    outputGFFProm(annoitationsgrlist, queryGR, peaksIdxByCatPriorList, 
             symbolsTab, ensembl, outFold)
 }
 
