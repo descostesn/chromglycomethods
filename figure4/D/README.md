@@ -27,10 +27,12 @@ wget https://zenodo.org/records/12793186/files/fig4D_genes_cluster5.gff  -P data
 ## The coordinates of the peaks sorted in 5 groups
 wget https://zenodo.org/records/12793186/files/peakscoord-fig4C.bed
 
-## The file of the union of the peaks
+## The file of the union of the peaks used for preprocessing
 wget https://zenodo.org/records/12793186/files/union_OGlcNac_noauxaux-fig4C.bed -P data
 
-repeatshg38.tar.gz
+## The repeatmasker annotations used for preprocessing
+wget https://zenodo.org/records/12793186/files/repeatshg38.tar.gz -P data/
+cd data/ && tar -xvzf repeatshg38.tar.gz && cd ..
 ```
 
 ## Installation
