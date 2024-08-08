@@ -27,4 +27,11 @@ wget https://zenodo.org/records/12793186/files/fig4D_genes_cluster5.gff  -P data
 
 ## Installation
 
+***!!!!!! TO FINISH !!!!! ***
+Install conda following the instructions [here](https://conda.io/projects/conda/en/latest/user-guide/install/index.html). Using the recipe [fig4D.yml](fig4D.yml), run:
+
+```
+conda env create -n fig4d --file ./fig4D.yml
+conda activate fig4d
+```
 
