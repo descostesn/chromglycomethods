@@ -15,6 +15,8 @@ library("ggplot2")
 library("biomaRt")
 library("reshape2")
 library("TxDb.Hsapiens.UCSC.hg38.knownGene")
+library("GenomicRanges")
+library("IRanges")
 
 
 ################
@@ -48,6 +50,32 @@ biomartconnection <- "hsapiens_gene_ensembl"
 #############
 
 
+checkchromosomes <- function(fi, chromvec) {
+
+    idxna <- which(is.na(match(fi$V1, chromvec)))
+
+    if (!isTRUE(all.equal(length(idxna), 0)))
+        return(fi[-idxna,])
+    else
+        return(fi)
+}
+
+buildgr <- function(currentpath, chromvec) {
+
+    message("\t Processing ", currentpath)
+    fi <- read.table(currentpath, stringsAsFactors = FALSE)
+    fi <- checkchromosomes(fi, chromvec) # nolint
+    gr <- GenomicRanges::GRanges(seqnames = fi$V1,
+            ranges = IRanges::IRanges(start = fi$V4, end = fi$V5,
+                names = fi$V9),
+            strand = fi$V7)
+    return(gr)
+}
+
+.retrieveElementsListOfGR <- function(lEx, f, f2){
+    return(f(f2(lEx)))
+}
+
 
 ################
 # MAIN
@@ -60,20 +88,18 @@ if (!isTRUE(all.equal(length(enhancerspath), 1)))
     stop("Only one list of enhancers is supported.")
 
 if (!file.exists(outputfolder))
-        dir.create(outputfolder, recursive=TRUE)
+        dir.create(outputfolder, recursive = TRUE)
 
 message("Filtering database chromosomes")
 seqlevels(txdb) <- chromvec
 
 ## Building GR with repeats
 message("Building list of repeats")
-repeatsList <- lapply(repeatfilesvec, buildGR)
-#save(repeatsList, file="/g/boulard/Projects/O-N-acetylglucosamine/analysis/tmp/repeatsList.Rdat")
-#load("/g/boulard/Projects/O-N-acetylglucosamine/analysis/tmp/repeatsList.Rdat")
+repeatslist <- lapply(repeatfilesvec, buildgr, chromvec)
 
 
 ## Building the GRanges of annotations to which query is compared to
-annotationsGRList <- buildRepeatsTarget(txdb, repeatsList, enhancerspath)
+annotationsGRList <- buildRepeatsTarget(txdb, repeatslist, enhancerspath)
 #save(annotationsGRList, file="/g/boulard/Projects/O-N-acetylglucosamine/analysis/tmp/annotationsGRList.Rdat")
 #load("/g/boulard/Projects/O-N-acetylglucosamine/analysis/tmp/annotationsGRList.Rdat")
 
@@ -107,7 +133,7 @@ for(i in seq_len(length(queryfilevec))){
     message("Processing ", nameQuery)
     
     message("\t Building GR with query file")
-    queryGR <- unique(buildGR(queryFile))
+    queryGR <- unique(buildgr(queryFile))
     
     ## Performing overlap on the different categories
     res <- performOverlap(annotationsGRList, queryGR)
