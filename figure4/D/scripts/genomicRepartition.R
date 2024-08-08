@@ -19,7 +19,7 @@ library("GenomicRanges")
 library("IRanges")
 library("GenomeInfoDb")
 library("S4Vectors")
-
+library("tibble")
 
 
 ################
@@ -205,6 +205,38 @@ performpiechart <- function(annonamesvec, overlappriority, piecolorvec, outfold,
 }
 
 
+performupset <- function(annonamesvec, overlap, namequery, outfold){
+
+    message("Plotting upset")
+    subjecthitsnames <- annonamesvec[subjectHits(overlap)]
+    regionsperpeaklist <- split(subjecthitsnames, queryHits(overlap))
+    regionslist <- lapply(regionsperpeaklist, function(currentpeakregions,
+        namescategories) {
+            isvec <- rep(FALSE, length(namescategories))
+            names(isvec) <- namescategories
+            currentpeakregions <- unique(currentpeakregions)
+            isvec[currentpeakregions] <- TRUE
+            return(isvec)
+        }, annonamesvec)
+    regionsmatrix <- do.call(rbind, regionslist)
+
+    if (!isTRUE(all.equal(nrow(regionsmatrix), length(regionsperpeaklist))) ||
+            !isTRUE(all.equal(ncol(regionsmatrix), length(annonamesvec))))
+        stop("regionsmatrix does not have the correction dimensions.")
+
+    namescolregions <- colnames(regionsmatrix)
+    res <- tibble::tibble(anno = lapply(seq_len(nrow(regionsmatrix)),
+                    function(i) namescolregions[regionsmatrix[i, ]]))
+
+    g <- ggplot2::ggplot(res, aes_(x = ~anno)) + geom_bar() +
+            xlab(NULL) + ylab(NULL) + theme_minimal() +
+            ggupset::scale_x_upset(n_intersections = 20, order_by = "freq")
+    
+    ggsave(filename=paste0(namequery, "-priorityUpSet.pdf"), plot=g, 
+            device=pdf(), path=outfold)
+}
+
+
 
 ################
 # MAIN
@@ -244,8 +276,8 @@ ensembl <- tryUseMart(biomart = "ENSEMBL_MART_ENSEMBL",
 
 ## Determining proportions on each target category for each query file
 message("Determining proportions on each target category for each query file")
-numbersPieList <- list()
-percentagesList <- list()
+numberspielist <- list()
+percentageslist <- list()
 
 for (i in seq_len(length(queryfilevec))) {
 
@@ -268,15 +300,15 @@ for (i in seq_len(length(queryfilevec))) {
     overlap <- res[[2]]
     annonamesvec <- res[[3]]
     message("\t\t Plotting piechart")
-    res <- performpiechart(annonamesvec, overlappriority, piecolorvec, outfold, 
-            namequery,percentagerepvec, querygr)
-    numbersPieList <- c(numbersPieList, res[1])
-    percentagesList <- c(percentagesList, res[2])
+    res <- performpiechart(annonamesvec, overlappriority, piecolorvec, outfold,
+            namequery, percentagerepvec, querygr)
+    numberspielist <- c(numberspielist, res[1])
+    percentageslist <- c(percentageslist, res[2])
     subjecthitsnamespriority <- res[[3]]
-    
+
     ## Perform an upset diagram
-    performUpset(annonamesvec, overlap, namequery, outfold)
-    
+    performupset(annonamesvec, overlap, namequery, outfold)
+
     ## Output the gff of querygr per category defined by overlappriority
     peaksIdxByCatPriorList <- savingPeaksPerCategory(overlappriority, 
             subjecthitsnamespriority, querygr, outfold)
@@ -286,7 +318,7 @@ for (i in seq_len(length(queryfilevec))) {
             symbolsTab, ensembl, outfold)
 }
 
-names(numbersPieList) <- names(percentagesList) <- pietitlevec
+names(numberspielist) <- names(percentageslist) <- pietitlevec
 
 ## Perform barplot of all exp
 message("Generating barplot for all experiments")
@@ -295,8 +327,8 @@ colVec <- c("antiquewhite1", "antiquewhite2", "antiquewhite3",
         "cadetblue2", "cadetblue3", "cadetblue4", 
         "chocolate1", "chocolate2", "chocolate3", "chocolate4",
         "black")
-groupedBarplot(percentagesList, "overlap proportions", outputfolder, percentagerepvec, 
+groupedBarplot(percentageslist, "overlap proportions", outputfolder, percentagerepvec, 
         colVec)
-groupedBarplot(numbersPieList, "Nb_of_overlap", outputfolder, cntrepeats, 
+groupedBarplot(numberspielist, "Nb_of_overlap", outputfolder, cntrepeats, 
         colVec)
 
