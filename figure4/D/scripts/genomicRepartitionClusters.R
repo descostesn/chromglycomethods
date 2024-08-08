@@ -35,6 +35,19 @@ peakspathvec <- c(
 
 unionfilepath <- "/g/boulard/Projects/O-N-acetylglucosamine/analysis/makeunion/sept2023/human/glcPolII_samples1-2-3-4/union_glcPolII_sept2023.gff"
 
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+coordpath <- "data/peakscoord-fig4C.bed"
+
+peakspathvec <- c("results/peaks-DNA.gff", "results/peaks-enhancers.gff",
+    "results/peaks-firstExons.gff", "results/peaks-introns.gff",
+    "results/peaks-LINE.gff", "results/peaks-Low_complexity.gff",
+    "results/peaks-LTR.gff", "results/peaks-otherExons.gff",
+    "results/peaks-otherLocations.gff", "results/peaks-promoters.gff",
+    "results/peaks-Satellite.gff", "results/peaks-Simple_repeat.gff",
+    "results/peaks-SINE.gff")
+
+unionfilepath <- "data/union_OGlcNac_noauxaux-fig4C.bed"
 
 
 ##################
@@ -128,10 +141,8 @@ colnames(comptab) <- c(
 
 ## Reading the union of peaks file
 uniontab <- read.table(unionfilepath, header = FALSE, stringsAsFactors = FALSE)
-colnames(uniontab) <- c(
-    "chrom", "source", "compartment", "start", "end",
-    "score", "strand", "group", "frame"
-)
+colnames(uniontab) <- c("chrom", "start", "end", "source", "score", "strand",
+    "start2", "end2", "itemrgb", "blockcount", "blocksize")
 
 ## For each cluster group in coordgrouplist, retrieve the genomic compartment
 frqcomplist <- lapply(coordgrouplist, function(
