@@ -32,6 +32,7 @@ repeatfilesvec <- c("/g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/
         "/g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/human/hg38/repeatmasker/classes/Simple_repeat.gff", # nolint
         "/g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/human/hg38/repeatmasker/classes/RNA.gff", # nolint
         "/g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/human/hg38/repeatmasker/classes/Low_complexity.gff") # nolint
+repeatsnamevec <- c("LINE", "LTR", "SINE", "Satellite", "DNA", "Simple_repeat", "RNA", "Low_complexity") # nolint
 pietitlevec <- "unionPeaksPolIIGlc" # nolint
 outputfolder <- "/g/boulard/Projects/O-N-acetylglucosamine/analysis/genomicDistribution/Sept2023_glcPolII_enhancers_unionofpeaks/test" # nolint
 enhancerspath <- "/g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/human/hg38/enhancerAtlas2/DLD1.gff" # nolint
@@ -113,25 +114,24 @@ buildrepeatstarget <- function(txdb, repeatslist, enhancerspath) {
     allexonsbygenegr <- GenomicFeatures::exonsBy(txdb, by = "gene")
     firstexonlist <- lapply(allexonsbygenegr, function(x) x[1, ])
     firstexongr <- .retrievefirstexongr(firstexonlist)
-    
-    !!!!!!!!!!!!
 
     ## Removing firstexongr from exonsgr
     exonsgr <- GenomicRanges::setdiff(exonsgr, firstexongr)
-    
+
     ## Retrieving enhancers
-    enhancersGR <- buildGR(enhancerspath)
-    
+    message("\t Retrieving enhancers")
+    enhancersgr <- buildgr(enhancerspath)
+
     ## Building list of annotations. The order of elements define the priorities
-    message("Building list of annotations")
-    gfNamesVec <- c("promoters", "introns", "firstExons", "otherExons", 
+    message("\t Building list of annotations")
+    gffnamesvec <- c("promoters", "introns", "firstExons", "otherExons",
             "fiveUTR", "threeUTR", "enhancers")
-    annotationsList <- c(repeatslist, promotersgr, intronsgr, firstexongr, 
-            exonsgr, fiveutrsgr, threeutrsgr, enhancersGR)
-    annotationsList <- lapply(annotationsList, 
-            function(.anno){mcols(.anno)<-NULL; .anno})
-    names(annotationsList) <- c(repeatsNameVec, gfNamesVec)
-    annotationsGRList <- GRangesList(annotationsList)
+    annotationslist <- c(repeatslist, promotersgr, intronsgr, firstexongr,
+            exonsgr, fiveutrsgr, threeutrsgr, enhancersgr)
+    annotationslist <- lapply(annotationslist,
+            function(.anno) { mcols(.anno) <- NULL; .anno} )
+    names(annotationslist) <- c(repeatsNameVec, gffnamesvec)
+    annotationsGRList <- GRangesList(annotationslist)
     
     ## Computing the other locations
     newAnno <- c(unlist(annotationsGRList))
