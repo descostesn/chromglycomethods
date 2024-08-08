@@ -72,8 +72,76 @@ buildgr <- function(currentpath, chromvec) {
     return(gr)
 }
 
-.retrieveElementsListOfGR <- function(lEx, f, f2){
-    return(f(f2(lEx)))
+
+
+.retrieveelementslistofgr <- function(lex, f, f2) {
+    return(f(f2(lex)))
+}
+
+.retrievefirstexongr <- function(firstexonlist){
+
+    chrvec <- unlist(lapply(firstexonlist, function (x) {
+                        .retrieveelementslistofgr(x, as.character, seqnames)}))
+    startvec <- unlist(lapply(firstexonlist, function(x) {
+                        .retrieveelementslistofgr(x, as.numeric, start)}))
+    endvec <- unlist(lapply(firstexonlist, function(x) {
+                        .retrieveelementslistofgr(x, as.numeric, end)}))
+    strandvec <- unlist(lapply(firstexonlist, function(x) {
+                        .retrieveelementslistofgr(x, as.character, strand)}))
+    exonidvec <- unlist(lapply(firstexonlist, function(x) mcols(x)$exon_id))
+    firstexongr <- GRanges(seqnames = chrvec,
+        ranges = IRanges::IRanges(start = startvec, end = endvec),
+        strand = strandvec, exonID = exonidvec) # nolint
+
+    return(firstexongr)
+}
+
+buildrepeatstarget <- function(txdb, repeatslist, enhancerspath) {
+
+    ## Retrieving Promoter, 5' UTR, 3' UTR, Exon, Intron, Downstream
+    message("\t Retrieving genomic features: Promoter, 5' UTR, 3' UTR, Exon,",
+        " Intron, Downstream")
+    promotersgr <- unique(GenomicFeatures::promoters(txdb, upstream = 1000,
+                    downstream = 1000))
+    intronsgr <- unique(unlist(GenomicFeatures::intronsByTranscript(txdb)))
+    exonsgr <- GenomicFeatures::exons(txdb, columns = NULL)
+    fiveutrsgr <- unique(unlist(GenomicFeatures::fiveUTRsByTranscript(txdb)))
+    threeutrsgr <- unique(unlist(GenomicFeatures::threeUTRsByTranscript(txdb)))
+
+    ## Retrieving the first exons and subtracting it to exons
+    message("\t Retrieving first exons")
+    allexonsbygenegr <- GenomicFeatures::exonsBy(txdb, by = "gene")
+    firstexonlist <- lapply(allexonsbygenegr, function(x) x[1, ])
+    firstexongr <- .retrievefirstexongr(firstexonlist)
+    
+    !!!!!!!!!!!!
+
+    ## Removing firstexongr from exonsgr
+    exonsgr <- GenomicRanges::setdiff(exonsgr, firstexongr)
+    
+    ## Retrieving enhancers
+    enhancersGR <- buildGR(enhancerspath)
+    
+    ## Building list of annotations. The order of elements define the priorities
+    message("Building list of annotations")
+    gfNamesVec <- c("promoters", "introns", "firstExons", "otherExons", 
+            "fiveUTR", "threeUTR", "enhancers")
+    annotationsList <- c(repeatslist, promotersgr, intronsgr, firstexongr, 
+            exonsgr, fiveutrsgr, threeutrsgr, enhancersGR)
+    annotationsList <- lapply(annotationsList, 
+            function(.anno){mcols(.anno)<-NULL; .anno})
+    names(annotationsList) <- c(repeatsNameVec, gfNamesVec)
+    annotationsGRList <- GRangesList(annotationsList)
+    
+    ## Computing the other locations
+    newAnno <- c(unlist(annotationsGRList))
+    newAnno.rd <- reduce(trim(newAnno))
+    otherLocations <- gaps(newAnno.rd, end=seqlengths(txdb))
+    otherLocations <-  otherLocations[strand(otherLocations)!="*"]
+    names(otherLocations) <- NULL
+    annotationsGRList$otherLocations <- otherLocations
+    
+    return(annotationsGRList)
 }
 
 
@@ -93,24 +161,19 @@ if (!file.exists(outputfolder))
 message("Filtering database chromosomes")
 seqlevels(txdb) <- chromvec
 
-## Building GR with repeats
+## Building the GRanges of annotations to which query is compared to
 message("Building list of repeats")
 repeatslist <- lapply(repeatfilesvec, buildgr, chromvec)
-
-
-## Building the GRanges of annotations to which query is compared to
-annotationsGRList <- buildRepeatsTarget(txdb, repeatslist, enhancerspath)
-#save(annotationsGRList, file="/g/boulard/Projects/O-N-acetylglucosamine/analysis/tmp/annotationsGRList.Rdat")
-#load("/g/boulard/Projects/O-N-acetylglucosamine/analysis/tmp/annotationsGRList.Rdat")
+annotationsgrlist <- buildrepeatstarget(txdb, repeatslist, enhancerspath)
 
 ## Calculate number of annotations
-cntRepeats <- lengths(annotationsGRList)
+cntRepeats <- lengths(annotationsgrlist)
 percentageRepVec <- 100 * cntRepeats / sum(cntRepeats)
 
 ## Building colors for piechart
 pieColorVec <- c(brewer.pal(n = 12, name = "Paired"), "aliceblue", "azure4", 
         "darkgoldenrod1", "slategray")
-names(pieColorVec) <- names(annotationsGRList)
+names(pieColorVec) <- names(annotationsgrlist)
 
 message("Connecting to biomart")
 ensembl <- tryUseMart(biomart = "ENSEMBL_MART_ENSEMBL",
@@ -136,7 +199,7 @@ for(i in seq_len(length(queryfilevec))){
     queryGR <- unique(buildgr(queryFile))
     
     ## Performing overlap on the different categories
-    res <- performOverlap(annotationsGRList, queryGR)
+    res <- performOverlap(annotationsgrlist, queryGR)
     overlapPriority <- res[[1]]
     overlap <- res[[2]]
     annoNamesVec <- res[[3]]
@@ -154,7 +217,7 @@ for(i in seq_len(length(queryfilevec))){
             subjectHitsNamesPriority, queryGR, outFold)
     
     ## Output the gff of the promoters
-    outputGFFProm(annotationsGRList, queryGR, peaksIdxByCatPriorList, 
+    outputGFFProm(annotationsgrlist, queryGR, peaksIdxByCatPriorList, 
             symbolsTab, ensembl, outFold)
 }
 
