@@ -33,7 +33,7 @@ peakspathvec <- c(
     "/g/boulard/Projects/O-N-acetylglucosamine/analysis/genomicDistribution/Sept2023_glcPolII_enhancers_unionofpeaks/unionPeaksPolIIGlc/peaks-SINE.gff"
 ) # nolint
 
-unionfilepath <- "/g/boulard/Projects/O-N-acetylglucosamine/analysis/makeunion/sept2023/human/glcPolII_samples1-2-3-4/union_glcPolII_sept2023.gff"
+unionfilepath <- "/g/boulard/Projects/O-N-acetylglucosamine/analysis/makeunion/sept2023/human/glcPolII_samples1-2-3-4/test/union_OGlcNac_noauxaux-fig4C.bed"
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
