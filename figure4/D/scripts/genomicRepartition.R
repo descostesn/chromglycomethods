@@ -239,6 +239,45 @@ performupset <- function(annonamesvec, overlap, namequery, outfold){
 
 
 
+.restrictannooverlap <- function(querygr, peaksidxbycatpriorlist,
+    currentannogr) {
+
+    result <- GenomicRanges::findOverlaps(
+        querygr[peaksidxbycatpriorlist$promoters, ],
+            currentannogr, ignore.strand = FALSE)
+    result <- result[which(!duplicated(queryHits(result))), ]
+    currentannogr <- currentannogr[subjectHits(result), ]
+    return(currentannogr)
+}
+
+outputgffprom <- function(annotationsgrlist, querygr, peaksIdxbycatPriorList,
+        symbolstab, ensembl, outfold) {
+
+    currentannogr <- annotationsgrlist$promoters
+    currentannogr <- .restrictannooverlap(querygr, peaksIdxbycatPriorList, 
+            currentannogr)
+    symbolstab <- retrieveGeneInfo(ensembl, currentannogr)
+    idxTable <- match(names(currentannogr), 
+            symbolstab$ensembl_transcript_id_version)
+    idxNA <- which(is.na(idxTable))
+    currentannogr <- currentannogr[-idxNA,]
+    idxTable <- idxTable[-idxNA]
+    ## Transcripts
+    writePromWithUnique(IDVec = symbolstab$ensembl_transcript_id_version[idxTable],
+            startvec = symbolstab$transcript_start[idxTable],
+            endvec = symbolstab$transcript_end[idxTable], 
+            symbolstab = symbolstab, idxTable = idxTable, outfold = outfold, 
+            filename = "transcripts_fromProm")
+    ## Genes
+    writePromWithUnique(IDVec = symbolstab$ensembl_gene_id[idxTable],
+            startvec = symbolstab$start_position[idxTable],
+            endvec = symbolstab$end_position[idxTable], symbolstab = symbolstab,
+            idxTable =  idxTable, outfold = outfold, filename = "genes_fromProm")
+}
+
+
+
+
 ################
 # MAIN
 ################
@@ -311,12 +350,12 @@ for (i in seq_len(length(queryfilevec))) {
     performupset(annonamesvec, overlap, namequery, outfold)
 
     ## Output the gff of querygr per category defined by overlappriority
-    peaksIdxByCatPriorList <- savingPeaksPerCategory(overlappriority, 
+    peaksidxbycatpriorlist <- savingPeaksPerCategory(overlappriority,
             subjecthitsnamespriority, querygr, outfold)
-    
+
     ## Output the gff of the promoters
-    outputGFFProm(annotationsgrlist, querygr, peaksIdxByCatPriorList, 
-            symbolsTab, ensembl, outfold)
+    outputgffprom(annotationsgrlist, querygr, peakidxbycatpriorlist,
+            symbolstab, ensembl, outfold)
 }
 
 names(numberspielist) <- names(percentageslist) <- pietitlevec
