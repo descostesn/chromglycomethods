@@ -242,8 +242,7 @@ performpiechart <- function(annonamesvec, overlappriority, piecolorvec, outfold,
     piecolorvechits <-  piecolorvec[names(percentagevec)]
 
     ## Plotting the priority piechart
-    png(file = file.path(outfold, paste0(namequery, "priorityPiechart.png")),
-            width = 10, height = 10)
+    png(file = file.path(outfold, paste0(namequery, "priorityPiechart.png")))
     par(mfrow = c(1, 2))
     pie(percentagevec, labels = names(percentagevec), col = piecolorvechits,
             main = namequery)
@@ -428,7 +427,7 @@ names(piecolorvec) <- names(annotationsgrlist)
 message("Connecting to biomart")
 ensembl <- tryusemart(biomart = "ENSEMBL_MART_ENSEMBL",
     biomartconnection, host = "https://nov2020.archive.ensembl.org",
-    alternativeMirror = TRUE)
+    alternativemirror = TRUE)
 
 ## Determining proportions on each target category for each query file
 message("Determining proportions on each target category for each query file")
