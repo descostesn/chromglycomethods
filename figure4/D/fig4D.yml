@@ -18,4 +18,5 @@ library("TxDb.Hsapiens.UCSC.hg38.knownGene")
 library("GenomicRanges")
 library("IRanges")
 library("GenomeInfoDb")
+library("S4Vectors")
 

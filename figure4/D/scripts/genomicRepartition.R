@@ -18,6 +18,9 @@ library("TxDb.Hsapiens.UCSC.hg38.knownGene")
 library("GenomicRanges")
 library("IRanges")
 library("GenomeInfoDb")
+library("S4Vectors")
+
+
 
 ################
 # PARAMETERS
@@ -157,9 +160,10 @@ performoverlap <- function(annotationsgrlist, querygr) {
 
     annonamesvec <- names(annotationsgrlist)
     mcols(querygr) <- NULL
-    resultoverlap <- findOverlaps(querygr, annotationsgrlist, ignore.strand=FALSE)
-    idxKeep <- which(!duplicated(queryHits(resultoverlap)))
-    resultoverlapPriority <- resultoverlap[idxKeep,]
+    resultoverlap <- GenomicRanges::findOverlaps(querygr, annotationsgrlist,
+        ignore.strand = FALSE)
+    idxkeep <- which(!duplicated(S4Vectors::queryHits(resultoverlap)))
+    resultoverlapPriority <- resultoverlap[idxkeep,]
     
     if(isTRUE(all.equal(length(resultoverlapPriority),0)) || 
 		    length(resultoverlapPriority) > length(resultoverlap))
