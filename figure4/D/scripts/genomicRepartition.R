@@ -177,6 +177,34 @@ performoverlap <- function(annotationsgrlist, querygr) {
 }
 
 
+performpiechart <- function(annonamesvec, overlappriority, piecolorvec, outfold,
+    namequery, percentagerepvec, querygr) {
+
+    ## Calculate number of overlaps
+    subjecthitsnamespriority <- annonamesvec[subjectHits(overlappriority)]
+    counts <- table(subjecthitsnamespriority)
+    percentagevec <- 100 * counts / length(querygr)
+
+    if (!isTRUE(all.equal(sum(percentagevec), 100)))
+        stop("For the priority piechart, the percentages sum is not equal to ",
+                "100: ", sum(percentagevec))
+
+    piecolorvechits <-  piecolorvec[names(percentagevec)]
+
+    ## Plotting the priority piechart
+    pdf(file = file.path(outfold, paste0(namequery, "priorityPiechart.pdf")),
+            width = 10, height = 10)
+    par(mfrow = c(1, 2))
+    pie(percentagevec, labels = names(percentagevec), col = piecolorvechits,
+            main = namequery)
+    pie(percentagerepvec, labels = names(percentagerepvec), col = piecolorvec,
+            main = "Proportions")
+    dev.off()
+
+    return(list(counts, percentagevec, subjecthitsnamespriority))
+}
+
+
 
 ################
 # MAIN
@@ -236,22 +264,22 @@ for (i in seq_len(length(queryfilevec))) {
     ## Performing overlap on the different categories
     message("\t\t Performing overlap on the different categories")
     res <- performoverlap(annotationsgrlist, querygr)
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    overlapPriority <- res[[1]]
+    overlappriority <- res[[1]]
     overlap <- res[[2]]
     annonamesvec <- res[[3]]
-    res <- performPieChart(annonamesvec, overlapPriority, piecolorvec, outfold, 
-            namequery,percentagerepvec)
+    message("\t\t Plotting piechart")
+    res <- performpiechart(annonamesvec, overlappriority, piecolorvec, outfold, 
+            namequery,percentagerepvec, querygr)
     numbersPieList <- c(numbersPieList, res[1])
     percentagesList <- c(percentagesList, res[2])
-    subjectHitsNamesPriority <- res[[3]]
+    subjecthitsnamespriority <- res[[3]]
     
     ## Perform an upset diagram
     performUpset(annonamesvec, overlap, namequery, outfold)
     
-    ## Output the gff of querygr per category defined by overlapPriority
-    peaksIdxByCatPriorList <- savingPeaksPerCategory(overlapPriority, 
-            subjectHitsNamesPriority, querygr, outfold)
+    ## Output the gff of querygr per category defined by overlappriority
+    peaksIdxByCatPriorList <- savingPeaksPerCategory(overlappriority, 
+            subjecthitsnamespriority, querygr, outfold)
     
     ## Output the gff of the promoters
     outputGFFProm(annotationsgrlist, querygr, peaksIdxByCatPriorList, 
