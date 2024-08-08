@@ -233,8 +233,8 @@ performupset <- function(annonamesvec, overlap, namequery, outfold){
             ggplot2::theme_minimal() +
             ggupset::scale_x_upset(n_intersections = 20, order_by = "freq")
 
-    ggsave(filename=paste0(namequery, "-priorityUpSet.pdf"), plot=g, 
-            device=pdf(), path=outfold)
+    ggsave(filename = paste0(namequery, "-priorityUpSet.png"), plot = g,
+            device = png(), path = outfold)
 }
 
 
