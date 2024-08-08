@@ -53,6 +53,33 @@ biomartconnection <- "hsapiens_gene_ensembl"
 ## FUNCTIONS
 #############
 
+## Function by Ilyess Rachedi
+tryusemart <- function(biomart = "ensembl", dataset, host, alternativemirror) {
+    c <- 1
+    repeat {
+        message("# Attempt ", c, "/5 # Connection to Ensembl ... ")
+        if (!alternativemirror)
+            ensembl <- try(biomaRt::useMart(biomart, dataset = dataset,
+                host = host), silent = TRUE)
+        else
+            ensembl <- try(biomaRt::useEnsembl(biomart, dataset = dataset,
+                host = host, mirror = "useast"), silent = TRUE)
+
+        if (isTRUE(is(ensembl, "try-error"))) {
+            c <- c + 1
+            error_type <- attr(ensembl, "condition")
+            message(error_type$message)
+
+            if (c > 5)
+                stop("There is a problem of connexion to Ensembl for now. ",
+                "Please retry later or set alternativemirror=TRUE.")
+        }else {
+            message("Connected with success.")
+            return(ensembl)
+        }
+    }
+}
+
 
 checkchromosomes <- function(fi, chromvec) {
 
@@ -63,6 +90,7 @@ checkchromosomes <- function(fi, chromvec) {
     else
         return(fi)
 }
+
 
 buildgr <- function(currentpath, chromvec) {
 
@@ -353,7 +381,7 @@ piecolorvec <- c(brewer.pal(n = 12, name = "Paired"), "aliceblue", "azure4",
 names(piecolorvec) <- names(annotationsgrlist)
 
 message("Connecting to biomart")
-ensembl <- tryUseMart(biomart = "ENSEMBL_MART_ENSEMBL",
+ensembl <- .tryusemart(biomart = "ENSEMBL_MART_ENSEMBL",
     biomartconnection, host = "https://nov2020.archive.ensembl.org",
     alternativeMirror = TRUE)
 
