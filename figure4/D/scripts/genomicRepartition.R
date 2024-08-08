@@ -493,7 +493,7 @@ for (i in seq_len(length(queryfilevec))) {
             subjecthitsnamespriority, querygr, outfold)
 
     ## Output the gff of the promoters
-    outputgffprom(annotationsgrlist, querygr, peakidxbycatpriorlist,
+    outputgffprom(annotationsgrlist, querygr, peaksidxbycatpriorlist,
             symbolstab, ensembl, outfold)
 }
 
