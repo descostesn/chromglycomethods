@@ -138,10 +138,10 @@ buildrepeatstarget <- function(txdb, repeatslist, enhancerspath,
     newanno <- c(unlist(annotationsgrlist))
     newannord <- reduce(trim(newanno))
     otherlocations <- gaps(newannord, end = GenomeInfoDb::seqlengths(txdb))
-    otherlocations <-  otherlocations[strand(otherlocations)!="*"]
+    otherlocations <-  otherlocations[strand(otherlocations) != "*"]
     names(otherlocations) <- NULL
     annoitationsgrlist$otherlocations <- otherlocations
-    
+
     return(annoitationsgrlist)
 }
 
