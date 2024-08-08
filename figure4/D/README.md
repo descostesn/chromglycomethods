@@ -5,8 +5,8 @@ II. [Data](#data)
 III. [Installation](#installation)  
 IV. [Figure Generation](#figure-generation)  
 V. [Pre-processing](#pre-processing)  
-&nbsp;&nbsp; V.I. [Genomic Repartition](#genomic-repartition)
-&nbsp;&nbsp; V.I. [Genomic Repartition by Clusters](#genomic-repartition)
+&nbsp;&nbsp; V.I. [Genomic Repartition](#genomic-repartition)  
+&nbsp;&nbsp; V.II. [Genomic Repartition by Clusters](#genomic-repartition)  
 
 
 ## Description
@@ -155,6 +155,32 @@ The files produced in the results folder are then used to determine the genomic 
 ```
 Rscript genomicRepartitionClusters.R
 ```
+
+The script should output:
+
+```
+Reading the peaks coordinates of the heatmap and spliting by clusters
+Reading peaks coord for each compartment of the genomic repartition generated previously
+Reading the coordinates of the union of the replicate peaks
+For each cluster group in coordgrouplist, retrieve the genomic compartment
+	 Processing cluster_1
+	 Writing files to results/cluster_1-compartmentsgff
+	 Processing cluster_2
+	 Writing files to results/cluster_2-compartmentsgff
+	 Processing cluster_3
+1 peaks do not have a ref in the union
+	 Writing files to results/cluster_3-compartmentsgff
+	 Processing cluster_4
+	 Writing files to results/cluster_4-compartmentsgff
+	 Processing cluster_5
+	 Writing files to results/cluster_5-compartmentsgff
+```
+
+
+
+
+
+
 
 
 The steps are:
