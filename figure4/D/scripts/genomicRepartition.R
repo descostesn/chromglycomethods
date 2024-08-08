@@ -151,7 +151,7 @@ buildgr <- function(currentpath, chromvec) {
 }
 
 buildrepeatstarget <- function(txdb, repeatslist, enhancerspath,
-    repeatsnamevec) {
+    repeatsnamevec, chromvec) {
 
     ## Retrieving Promoter, 5' UTR, 3' UTR, Exon, Intron, Downstream
     message("\t Retrieving genomic features: Promoter, 5' UTR, 3' UTR, Exon,",
@@ -174,7 +174,7 @@ buildrepeatstarget <- function(txdb, repeatslist, enhancerspath,
 
     ## Retrieving enhancers
     message("\t Retrieving enhancers")
-    enhancersgr <- buildgr(enhancerspath)
+    enhancersgr <- buildgr(enhancerspath, chromvec)
 
     ## Building list of annotations. The order of elements define the priorities
     message("\t Building list of annotations")
@@ -447,7 +447,7 @@ for (i in seq_len(length(queryfilevec))) {
     message("\t Processing ", namequery)
 
     message("\t\t Building GR with query file")
-    querygr <- unique(buildgr(queryfile))
+    querygr <- unique(buildgr(queryfile, chromvec))
 
     ## Performing overlap on the different categories
     message("\t\t Performing overlap on the different categories")
