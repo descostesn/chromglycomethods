@@ -145,31 +145,17 @@ Bigwig files normalized by the genome size were generated with deeptools v3.0.2:
 
 ### Peak Union
 
+Generate the bed file of the union of peaks by running:
 
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+```
+Rscript union.R
+```
 
+The script should give the output:
 
-To retrieve the genes associated to promoters in each cluster of the heatmap, the script src\R\tools\vennDiagram_twoExp.R has been updated. The conf for overlap is src\R\conf_generation\venndiagrams_twoexp\glcpolIIhumansept2023\humanpolIIglcnac_heatmapclusters.R
-
-The results are in /g/boulard/Projects/O-N-acetylglucosamine/analysis/heatmapsandprofiles/sept2023Glc/human/polIIGlc/unionpeaks/cluster_*-compartmentsgff/promoters_vs_ensemblgenes/
-
-‌The files to perform the union of peaks are: /home/descostes/vscode/o-n-acetylglucosamine/src/R/conf_generation/make_union/sept2023_glcPolII_human.R
-
-For the heatmaps, the galaxy histories are:
-- human glc polII heatmaps
-
-The matrices, heatmaps, and coordinates are in:
-- Human: /g/boulard/Projects/O-N-acetylglucosamine/analysis/heatmapsandprofiles/sept2023Glc/human/polIIGlc/unionpeaks/5groups
-
-With the division in 5 groups, of 6544 peaks, the number of peaks per cluster is:
-
-cluster_1: 284
-cluster_2: 584
-cluster_3: 1490
-cluster_4: 1200
-cluster_5 : 2986
-
-The script to compute the genomic repartition of each cluster of the human heatmap is src/R/tools/detailsGroupsHeatmapHumanSept2023.R and the results are written in the heatmap folder (/g/boulard/Projects/O-N-acetylglucosamine/analysis/heatmapsandprofiles/sept2023Glc/human/polIIGlc/unionpeaks)
-
-
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+```
+Reading peak files
+Reducing intervals
+The union returned 6,544 peaks
+Writing results/union_OGlcNac_noauxaux-fig4C.bed
+```
