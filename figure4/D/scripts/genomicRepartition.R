@@ -312,11 +312,11 @@ performupset <- function(annonamesvec, overlap, namequery, outfold){
             "ensembl_transcript_id_version", "external_gene_name",
             "start_position", "end_position", "strand", "transcript_start",
             "transcript_end", "transcription_start_site")
-    symbolstab <- .trygetbm(attributes, ensembl, values=names(currentannogr), 
-            filters="ensembl_transcript_id_version")
+    symbolstab <- .trygetbm(attributes, ensembl, values = names(currentannogr),
+            filters = "ensembl_transcript_id_version")
     symbolstab$strand[which(symbolstab$strand == 1)] <- "+"
     symbolstab$chromosome_name <- paste0("chr",symbolstab$chromosome_name)
-    if(!isTRUE(all.equal(length(which(symbolstab$strand == -1)),0)))
+    if (!isTRUE(all.equal(length(which(symbolstab$strand == -1)), 0)))
         symbolstab$strand[which(symbolstab$strand == -1)] <- "-"
     return(symbolstab)
 }
@@ -381,7 +381,7 @@ piecolorvec <- c(brewer.pal(n = 12, name = "Paired"), "aliceblue", "azure4",
 names(piecolorvec) <- names(annotationsgrlist)
 
 message("Connecting to biomart")
-ensembl <- .tryusemart(biomart = "ENSEMBL_MART_ENSEMBL",
+ensembl <- tryusemart(biomart = "ENSEMBL_MART_ENSEMBL",
     biomartconnection, host = "https://nov2020.archive.ensembl.org",
     alternativeMirror = TRUE)
 
