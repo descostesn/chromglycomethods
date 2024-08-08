@@ -15,4 +15,6 @@ library("ChIPpeakAnno")
 library("RColorBrewer")
 library("reshape2")
 library("TxDb.Hsapiens.UCSC.hg38.knownGene")
+library("GenomicRanges")
+library("IRanges")
 
