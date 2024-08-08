@@ -48,6 +48,28 @@ biomartconnection <- "hsapiens_gene_ensembl"
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
+queryfilevec <- "data/union_glcPolII_sept2023.gff" # nolint
+repeatfilesvec <- c("/g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/human/hg38/repeatmasker/classes/LINE.gff", # nolint
+        "/g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/human/hg38/repeatmasker/classes/LTR.gff", # nolint
+        "/g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/human/hg38/repeatmasker/classes/SINE.gff", # nolint
+        "/g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/human/hg38/repeatmasker/classes/Satellite.gff", # nolint
+        "/g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/human/hg38/repeatmasker/classes/DNA.gff", # nolint
+        "/g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/human/hg38/repeatmasker/classes/Simple_repeat.gff", # nolint
+        "/g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/human/hg38/repeatmasker/classes/RNA.gff", # nolint
+        "/g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/human/hg38/repeatmasker/classes/Low_complexity.gff") # nolint
+repeatsnamevec <- c("LINE", "LTR", "SINE", "Satellite", "DNA", "Simple_repeat", "RNA", "Low_complexity") # nolint
+pietitlevec <- "unionPeaksPolIIGlc" # nolint
+outputfolder <- "/g/boulard/Projects/O-N-acetylglucosamine/analysis/genomicDistribution/Sept2023_glcPolII_enhancers_unionofpeaks/test" # nolint
+enhancerspath <- "/g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/human/hg38/enhancerAtlas2/DLD1.gff" # nolint
+species <- "human"
+txdb <- TxDb.Hsapiens.UCSC.hg38.knownGene
+chromvec <- c("chr1", "chr2", "chr3", "chr4", "chr5", "chr6", "chr7",
+        "chr8", "chr9", "chr10", "chr11", "chr12", "chr13", "chr14", "chr15",
+        "chr16", "chr17", "chr18", "chr19", "chr20", "chr21", "chrX", "chrY")
+biomartconnection <- "hsapiens_gene_ensembl"
+
+
+
 
 #############
 ## FUNCTIONS
@@ -385,9 +407,14 @@ seqlevels(txdb) <- chromvec
 
 ## Building the GRanges of annotations to which query is compared to
 message("Building list of repeats (this might take a while)")
+start_time <- Sys.time()
 repeatslist <- lapply(repeatfilesvec, buildgr, chromvec)
 annotationsgrlist <- buildrepeatstarget(txdb, repeatslist, enhancerspath,
     repeatsnamevec)
+end_time <- Sys.time()
+duration <- end_time - start_time
+message("The list was built in:")
+print(duration)
 
 ## Calculate number of annotations
 cntrepeats <- lengths(annotationsgrlist)
