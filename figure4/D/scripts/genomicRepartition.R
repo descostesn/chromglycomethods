@@ -22,6 +22,8 @@ library("S4Vectors")
 library("tibble")
 library("ggupset")
 
+
+
 ################
 # PARAMETERS
 ################
@@ -219,7 +221,8 @@ performpiechart <- function(annonamesvec, overlappriority, piecolorvec, outfold,
     piecolorvechits <-  piecolorvec[names(percentagevec)]
 
     ## Plotting the priority piechart
-    png(file = file.path(outfold, paste0(namequery, "priorityPiechart.png")))
+    png(file = file.path(outfold, paste0(namequery, "priorityPiechart.png")),
+        width = 1000, height = 1000)
     par(mfrow = c(1, 2))
     pie(percentagevec, labels = names(percentagevec), col = piecolorvechits,
             main = namequery)
