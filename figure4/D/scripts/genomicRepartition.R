@@ -35,6 +35,11 @@ outputfolder <- "/g/boulard/Projects/O-N-acetylglucosamine/analysis/genomicDistr
 enhancerspath <- "/g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/human/hg38/enhancerAtlas2/DLD1.gff" # nolint
 species <- "human"
 txdb <- TxDb.Hsapiens.UCSC.hg38.knownGene
+chromvec <- c("chr1", "chr2", "chr3", "chr4", "chr5", "chr6", "chr7",
+        "chr8", "chr9", "chr10", "chr11", "chr12", "chr13", "chr14", "chr15",
+        "chr16", "chr17", "chr18", "chr19", "chr20", "chr21", "chrX", "chrY")
+biomartconnection <- "hsapiens_gene_ensembl"
+
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 
@@ -57,9 +62,8 @@ if (!isTRUE(all.equal(length(enhancerspath), 1)))
 if (!file.exists(outputfolder))
         dir.create(outputfolder, recursive=TRUE)
 
-if (!isTRUE(all.equal(species, "mouse")) &&
-    !isTRUE(all.equal(species, "human")))
-    stop("species should be mouse or human")
+message("Filtering database chromosomes")
+seqlevels(txdb) <- chromvec
 
 ## Building GR with repeats
 message("Building list of repeats")
@@ -67,17 +71,6 @@ repeatsList <- lapply(repeatfilesvec, buildGR)
 #save(repeatsList, file="/g/boulard/Projects/O-N-acetylglucosamine/analysis/tmp/repeatsList.Rdat")
 #load("/g/boulard/Projects/O-N-acetylglucosamine/analysis/tmp/repeatsList.Rdat")
 
-## Filtering chromosomes
-message("Filtering chromosomes")
-if (isTRUE(all.equal(species, "mouse"))) {
-    seqlevels(txdb) <- c("chr1", "chr2", "chr3", "chr4", "chr5", "chr6", "chr7",
-        "chr8", "chr9", "chr10", "chr11", "chr12", "chr13", "chr14", "chr15",
-        "chr16", "chr17", "chr18", "chr19", "chrX", "chrY")
-} else {
-    seqlevels(txdb) <- c("chr1", "chr2", "chr3", "chr4", "chr5", "chr6", "chr7",
-        "chr8", "chr9", "chr10", "chr11", "chr12", "chr13", "chr14", "chr15",
-        "chr16", "chr17", "chr18", "chr19", "chr20", "chr21", "chrX", "chrY")
-}
 
 ## Building the GRanges of annotations to which query is compared to
 annotationsGRList <- buildRepeatsTarget(txdb, repeatsList, enhancerspath)
@@ -94,16 +87,9 @@ pieColorVec <- c(brewer.pal(n = 12, name = "Paired"), "aliceblue", "azure4",
 names(pieColorVec) <- names(annotationsGRList)
 
 message("Connecting to biomart")
-if (isTRUE(all.equal(species, "mouse"))){
-    ensembl <- tryUseMart(biomart = "ENSEMBL_MART_ENSEMBL",
-    "mmusculus_gene_ensembl", host = "https://nov2020.archive.ensembl.org",
+ensembl <- tryUseMart(biomart = "ENSEMBL_MART_ENSEMBL",
+    biomartconnection, host = "https://nov2020.archive.ensembl.org",
     alternativeMirror = TRUE)
-} else {
-    ensembl <- tryUseMart(biomart="ENSEMBL_MART_ENSEMBL",
-    "hsapiens_gene_ensembl", host="https://nov2020.archive.ensembl.org",
-    alternativeMirror = TRUE)
-}
-
 
 ## Determining proportions on each target category for each query file
 numbersPieList <- list()
