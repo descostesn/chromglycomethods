@@ -236,6 +236,7 @@ for (i in seq_len(length(queryfilevec))) {
     ## Performing overlap on the different categories
     message("\t\t Performing overlap on the different categories")
     res <- performoverlap(annotationsgrlist, querygr)
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     overlapPriority <- res[[1]]
     overlap <- res[[2]]
     annonamesvec <- res[[3]]
