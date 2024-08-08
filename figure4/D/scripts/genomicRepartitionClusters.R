@@ -15,7 +15,7 @@ library(RColorBrewer)
 ##################
 
 
-coordpath <- "/g/boulard/Projects/O-N-acetylglucosamine/analysis/heatmapsandprofiles/sept2023Glc/human/polIIGlc/unionpeaks/coordheatmapunion5groups.bed" # nolint
+coordpath <- "/g/boulard/Projects/O-N-acetylglucosamine/analysis/heatmapsandprofiles/sept2023Glc/human/polIIGlc/unionpeaks/5groups/test/coordheatmapunion5groups.bed" # nolint
 
 peakspathvec <- c(
     "/g/boulard/Projects/O-N-acetylglucosamine/analysis/genomicDistribution/Sept2023_glcPolII_enhancers_unionofpeaks/unionPeaksPolIIGlc/peaks-DNA.gff",
@@ -50,13 +50,19 @@ peakspathvec <- c("results/peaks-DNA.gff", "results/peaks-enhancers.gff",
 unionfilepath <- "data/union_OGlcNac_noauxaux-fig4C.bed"
 
 
+
+
 ##################
 # FUNCTIONS
 ##################
 
+
+
 computecompfreq <- function(clustcoord, unioncoord, compcoord, outfold) {
+
+
     clustername <- unique(clustcoord$cluster)
-    message("Processing ", clustername)
+    message("\t Processing ", clustername)
 
     ## Retrieving the rows in the union file that was used to build the
     ## heatmap. The row number is indicated in the string of the source
@@ -72,36 +78,35 @@ computecompfreq <- function(clustcoord, unioncoord, compcoord, outfold) {
     ## Makes the row of the union file corresponding with the compartment file
     res <- unionclust %>% left_join(compcoord, by = c("chrom", "start", "end"))
 
-    if (!isTRUE(all.equal(nrow(res), nrow(clustcoord) - length(idxunionna)))) {
+    if (!isTRUE(all.equal(nrow(res), nrow(clustcoord) - length(idxunionna))))
         stop("Missing rows in the results")
-    }
 
     idxna <- which(is.na(res$compartment.y))
     nbna <- length(idxna)
-
     if (!isTRUE(all.equal(nbna, 0))) {
         message("There are ", nbna, "/", nrow(res), " peaks without comp")
         res <- res[-idxna, ]
     }
 
     ## Splitting coord by compartment
-    resbycomplist <- split(res, as.factor(res$compartment.y))
+    resbycomplist <- split(res, as.factor(res$compartment))
 
     ## Formatting each element to gff
     resbycompgfflist <- lapply(resbycomplist, function(currentref) {
         return(data.frame(seqname = currentref$chrom,
         source = "detailsGroupsHeatmapHumanSept2023",
-        feature = currentref$compartment.y,
+        feature = currentref$compartment,
         start = currentref$start,
         end = currentref$end,
         score = currentref$score.y, strand = currentref$strand.y,
-        frame = currentref$frame.x, group = currentref$group.y))
+        frame = currentref$frame, group = currentref$group))
     })
 
     ## Write the peak coord associated to its compartment in the heatmap folder
     outfoldtmp <- file.path(outfold, paste0(clustername, "-compartmentsgff"))
     if (!file.exists(outfoldtmp))
         dir.create(outfoldtmp, recursive = TRUE)
+    message("\t Writing files to ", outfoldtmp)
     invisible(mapply(function(clustergff, namecomp, clustername, outfoldtmp) {
         write.table(clustergff, file = file.path(outfoldtmp,
             paste0(namecomp, ".gff")), sep = "\t", quote = FALSE,
@@ -114,12 +119,15 @@ computecompfreq <- function(clustcoord, unioncoord, compcoord, outfold) {
     return(frqcomp)
 }
 
+
+
 ##################
 # MAIN
 ##################
 
 
 ## Reading the peaks coordinates of the heatmap and spliting by clusters
+message("Reading the peaks coordinates of the heatmap and spliting by clusters")
 coord <- read.table(coordpath, header = FALSE, stringsAsFactors = FALSE)
 colnames(coord) <- c(
     "chrom", "start", "end", "source", "score", "strand",
@@ -129,6 +137,8 @@ coordgrouplist <- split(coord, as.factor(coord$cluster))
 output_folder <- dirname(coordpath)
 
 ## Reading peaks coord for each compartment of the genomic repartition
+message("Reading peaks coord for each compartment of the genomic repartition",
+    " generated previously")
 complist <- lapply(peakspathvec, read.table,
     header = FALSE,
     stringsAsFactors = FALSE
@@ -140,11 +150,14 @@ colnames(comptab) <- c(
 )
 
 ## Reading the union of peaks file
+message("Reading the coordinates of the union of the replicate peaks")
 uniontab <- read.table(unionfilepath, header = FALSE, stringsAsFactors = FALSE)
 colnames(uniontab) <- c("chrom", "start", "end", "source", "score", "strand",
-    "start2", "end2", "itemrgb", "blockcount", "blocksize")
+    "start2", "end2", "itemrgb", "blockcount", "blocksize", "blockstart")
 
 ## For each cluster group in coordgrouplist, retrieve the genomic compartment
+message("For each cluster group in coordgrouplist, retrieve the genomic ",
+    "compartment")
 frqcomplist <- lapply(coordgrouplist, function(
     clustcoord, compcoord,
     unioncoord, outfold) {
