@@ -136,6 +136,13 @@ Saving 6.67 x 6.67 in image
 Information retrieved with success.
 ```
 
+You should obtain the raw figures:
+
+<img src="pictures/piechart.png" alt="piecharts" width="400"/>
+<img src="pictures/priorityUpset.png" alt="upset" width="400"/>
+
+
+
 
 The steps are:
 
