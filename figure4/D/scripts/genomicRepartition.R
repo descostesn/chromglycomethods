@@ -384,7 +384,7 @@ message("Filtering database chromosomes")
 seqlevels(txdb) <- chromvec
 
 ## Building the GRanges of annotations to which query is compared to
-message("Building list of repeats")
+message("Building list of repeats (this might take a while)")
 repeatslist <- lapply(repeatfilesvec, buildgr, chromvec)
 annotationsgrlist <- buildrepeatstarget(txdb, repeatslist, enhancerspath,
     repeatsnamevec)
