@@ -1,0 +1,10 @@
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - r-base=4.3.3
+  - r-ggplot2=3.5.1
+  - bioconductor-clusterprofiler=4.8.1
+  - bioconductor-annotationdbi=1.62.2
+  - bioconductor-biomart=2.56.1
+  !! org.Hs.eg.db
