@@ -131,7 +131,7 @@ buildrepeatstarget <- function(txdb, repeatslist, enhancerspath,
             exonsgr, fiveutrsgr, threeutrsgr, enhancersgr)
     annotationslist <- lapply(annotationslist,
             function(.anno) { mcols(.anno) <- NULL; .anno} )
-    names(annotationslist) <- c(repeatsNameVec, gffnamesvec)
+    names(annotationslist) <- c(repeatsnamevec, gffnamesvec)
     annotationsGRList <- GRangesList(annotationslist)
     
     ## Computing the other locations
