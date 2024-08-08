@@ -12,7 +12,6 @@ library("GenomicFeatures")
 library("ChIPpeakAnno")
 library("RColorBrewer")
 library("ggplot2")
-library("Rargs")
 library("biomaRt")
 library("reshape2")
 
@@ -22,52 +21,22 @@ library("reshape2")
 # PARAMETERS
 ################
 
-paramsDefinition <- list()
-
-paramsDefinition[["--queryFileVec"]] <- list(variableName="queryFileVec", numeric=F, mandatory=T, description="Path to the GFF file containing the peaks.")
-paramsDefinition[["--repeatFilesVec"]] <- list(variableName="repeatFilesVec", numeric=F, mandatory=T, description="Vector containg the GFF paths of the repeats.")
-paramsDefinition[["--repeatsNameVec"]] <- list(variableName="repeatsNameVec", numeric=F, mandatory=T, description="Vector containing the corresponding names of the repeats.")
-paramsDefinition[["--pieTitleVec"]] <- list(variableName="pieTitleVec", numeric=F, mandatory=T, description="Title to display for the peaks on the piechart.")
-paramsDefinition[["--outputFolder"]] <- list(variableName="outputFolder", numeric=F, mandatory=T, description="Path to the output folder.")
-paramsDefinition[["--enhancerspath"]] <- list(variableName="enhancerspath", numeric=F, mandatory=T, description="Path to the file containing the enhancer coordinates. GFF format.")
-## Optional
-paramsDefinition[["--species"]] <- list(variableName="species", numeric=F, mandatory=F, description="Should be mouse or human.", default = "mouse")
-
-
-queryFileVec <- "/g/boulard/Projects/O-N-acetylglucosamine/analysis/makeunion/sept2023/human/glcPolII_samples1-2-3-4/union_glcPolII_sept2023.gff"
-
-repeatFilesVec <- paste("/g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/human/hg38/repeatmasker/classes/LINE.gff", 
-		"/g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/human/hg38/repeatmasker/classes/LTR.gff",
-		"/g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/human/hg38/repeatmasker/classes/SINE.gff", 
-		"/g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/human/hg38/repeatmasker/classes/Satellite.gff",
-		"/g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/human/hg38/repeatmasker/classes/DNA.gff",
-		"/g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/human/hg38/repeatmasker/classes/Simple_repeat.gff",
-		"/g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/human/hg38/repeatmasker/classes/RNA.gff",
-		"/g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/human/hg38/repeatmasker/classes/Low_complexity.gff", sep=" ")
-
-repeatsNameVec <- paste("LINE", "LTR", "SINE", "Satellite", "DNA", "Simple_repeat", "RNA", "Low_complexity", sep=" ")
-
+queryFileVec <- "/g/boulard/Projects/O-N-acetylglucosamine/analysis/makeunion/sept2023/human/glcPolII_samples1-2-3-4/union_glcPolII_sept2023.gff" # nolint
+repeatFilesVec <- c("/g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/human/hg38/repeatmasker/classes/LINE.gff", 
+        "/g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/human/hg38/repeatmasker/classes/LTR.gff",
+        "/g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/human/hg38/repeatmasker/classes/SINE.gff", 
+        "/g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/human/hg38/repeatmasker/classes/Satellite.gff",
+        "/g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/human/hg38/repeatmasker/classes/DNA.gff",
+        "/g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/human/hg38/repeatmasker/classes/Simple_repeat.gff",
+        "/g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/human/hg38/repeatmasker/classes/RNA.gff",
+        "/g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/human/hg38/repeatmasker/classes/Low_complexity.gff")
+repeatsNameVec <- c("LINE", "LTR", "SINE", "Satellite", "DNA", "Simple_repeat", "RNA", "Low_complexity")
 pieTitleVec <- "unionPeaksPolIIGlc"
-
-
 outputFolder <- "/g/boulard/Projects/O-N-acetylglucosamine/analysis/genomicDistribution/Sept2023_glcPolII_enhancers_unionofpeaks"
-
+enhancerspath <- "/g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/human/hg38/enhancerAtlas2/DLD1.gff"
 species <- "human"
 
-enhancerspath <- "/g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/human/hg38/enhancerAtlas2/DLD1.gff"
-
-towrite <- paste(queryFileVec, repeatFilesVec, repeatsNameVec, pieTitleVec, outputFolder, enhancerspath, species, sep=";")
-
-message("Nb of lines should be: ", length(queryFileVec))
-
-write(towrite, file="../../../conf/genomicRepartition_RepClasses_Grouping/Sept2023_glcPolII_enhancers_unionofpeaks.conf")
-
-
-
-
-# Retreives the parameters
-getParams(paramsDefinition)
-
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 
 #############
@@ -113,12 +82,12 @@ repeatsList <- lapply(repeatFilesVec, buildGR)
 message("Filtering chromosomes")
 if (isTRUE(all.equal(species, "mouse"))) {
     seqlevels(txdb) <- c("chr1", "chr2", "chr3", "chr4", "chr5", "chr6", "chr7",
-		"chr8", "chr9", "chr10", "chr11", "chr12", "chr13", "chr14", "chr15",
-		"chr16", "chr17", "chr18", "chr19", "chrX", "chrY")
+        "chr8", "chr9", "chr10", "chr11", "chr12", "chr13", "chr14", "chr15",
+        "chr16", "chr17", "chr18", "chr19", "chrX", "chrY")
 } else {
     seqlevels(txdb) <- c("chr1", "chr2", "chr3", "chr4", "chr5", "chr6", "chr7",
-		"chr8", "chr9", "chr10", "chr11", "chr12", "chr13", "chr14", "chr15",
-		"chr16", "chr17", "chr18", "chr19", "chr20", "chr21", "chrX", "chrY")
+        "chr8", "chr9", "chr10", "chr11", "chr12", "chr13", "chr14", "chr15",
+        "chr16", "chr17", "chr18", "chr19", "chr20", "chr21", "chrX", "chrY")
 }
 
 ## Building the GRanges of annotations to which query is compared to
@@ -132,7 +101,7 @@ percentageRepVec <- 100 * cntRepeats / sum(cntRepeats)
 
 ## Building colors for piechart
 pieColorVec <- c(brewer.pal(n = 12, name = "Paired"), "aliceblue", "azure4", 
-		"darkgoldenrod1", "slategray")
+        "darkgoldenrod1", "slategray")
 names(pieColorVec) <- names(annotationsGRList)
 
 message("Connecting to biomart")
