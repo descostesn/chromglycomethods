@@ -21,19 +21,18 @@ library("reshape2")
 # PARAMETERS
 ################
 
-queryFileVec <- "/g/boulard/Projects/O-N-acetylglucosamine/analysis/makeunion/sept2023/human/glcPolII_samples1-2-3-4/union_glcPolII_sept2023.gff" # nolint
-repeatFilesVec <- c("/g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/human/hg38/repeatmasker/classes/LINE.gff", 
-        "/g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/human/hg38/repeatmasker/classes/LTR.gff",
-        "/g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/human/hg38/repeatmasker/classes/SINE.gff", 
-        "/g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/human/hg38/repeatmasker/classes/Satellite.gff",
-        "/g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/human/hg38/repeatmasker/classes/DNA.gff",
-        "/g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/human/hg38/repeatmasker/classes/Simple_repeat.gff",
-        "/g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/human/hg38/repeatmasker/classes/RNA.gff",
-        "/g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/human/hg38/repeatmasker/classes/Low_complexity.gff")
-repeatsNameVec <- c("LINE", "LTR", "SINE", "Satellite", "DNA", "Simple_repeat", "RNA", "Low_complexity")
-pieTitleVec <- "unionPeaksPolIIGlc"
-outputFolder <- "/g/boulard/Projects/O-N-acetylglucosamine/analysis/genomicDistribution/Sept2023_glcPolII_enhancers_unionofpeaks"
-enhancerspath <- "/g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/human/hg38/enhancerAtlas2/DLD1.gff"
+queryfilevec <- "/g/boulard/Projects/O-N-acetylglucosamine/analysis/makeunion/sept2023/human/glcPolII_samples1-2-3-4/union_glcPolII_sept2023.gff" # nolint
+repeatfilesvec <- c("/g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/human/hg38/repeatmasker/classes/LINE.gff", # nolint
+        "/g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/human/hg38/repeatmasker/classes/LTR.gff", # nolint
+        "/g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/human/hg38/repeatmasker/classes/SINE.gff", # nolint
+        "/g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/human/hg38/repeatmasker/classes/Satellite.gff", # nolint
+        "/g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/human/hg38/repeatmasker/classes/DNA.gff", # nolint
+        "/g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/human/hg38/repeatmasker/classes/Simple_repeat.gff", # nolint
+        "/g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/human/hg38/repeatmasker/classes/RNA.gff", # nolint
+        "/g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/human/hg38/repeatmasker/classes/Low_complexity.gff") # nolint
+pietitlevec <- "unionPeaksPolIIGlc" # nolint
+outputfolder <- "/g/boulard/Projects/O-N-acetylglucosamine/analysis/genomicDistribution/Sept2023_glcPolII_enhancers_unionofpeaks" # nolint
+enhancerspath <- "/g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/human/hg38/enhancerAtlas2/DLD1.gff" # nolint
 species <- "human"
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -43,22 +42,20 @@ species <- "human"
 ## FUNCTIONS
 #############
 
-source("/g/boulard/Projects/O-N-acetylglucosamine/src/R/genomicRepartion/grouping_utils_enhancers.R")
-#source("grouping_utils.R")
 
 
 ################
 # MAIN
 ################
 
-if (!isTRUE(all.equal(length(queryFileVec), length(pieTitleVec))))
+if (!isTRUE(all.equal(length(queryfilevec), length(pietitlevec))))
     stop("One title per experiment should be given.")
 
 if (!isTRUE(all.equal(length(enhancerspath), 1)))
     stop("Only one list of enhancers is supported.")
 
-if (!file.exists(outputFolder))
-        dir.create(outputFolder, recursive=TRUE)
+if (!file.exists(outputfolder))
+        dir.create(outputfolder, recursive=TRUE)
 
 if (!isTRUE(all.equal(species, "mouse")) &&
     !isTRUE(all.equal(species, "human")))
@@ -74,7 +71,7 @@ if (isTRUE(all.equal(species, "mouse"))) {
 
 ## Building GR with repeats
 message("Building list of repeats")
-repeatsList <- lapply(repeatFilesVec, buildGR)
+repeatsList <- lapply(repeatfilesvec, buildGR)
 #save(repeatsList, file="/g/boulard/Projects/O-N-acetylglucosamine/analysis/tmp/repeatsList.Rdat")
 #load("/g/boulard/Projects/O-N-acetylglucosamine/analysis/tmp/repeatsList.Rdat")
 
@@ -120,12 +117,12 @@ if (isTRUE(all.equal(species, "mouse"))){
 numbersPieList <- list()
 percentagesList <- list()
 
-for(i in seq_len(length(queryFileVec))){
+for(i in seq_len(length(queryfilevec))){
     
     ## Processing query files
-    queryFile <- queryFileVec[i]
-    nameQuery <- pieTitleVec[i]
-    outFold <- file.path(outputFolder, nameQuery)
+    queryFile <- queryfilevec[i]
+    nameQuery <- pietitlevec[i]
+    outFold <- file.path(outputfolder, nameQuery)
     if(!file.exists(outFold))
         dir.create(outFold, recursive=TRUE)
     
@@ -157,7 +154,7 @@ for(i in seq_len(length(queryFileVec))){
             symbolsTab, ensembl, outFold)
 }
 
-names(numbersPieList) <- names(percentagesList) <- pieTitleVec
+names(numbersPieList) <- names(percentagesList) <- pietitlevec
 
 ## Perform barplot of all exp
 message("Generating barplot for all experiments")
@@ -166,8 +163,8 @@ colVec <- c("antiquewhite1", "antiquewhite2", "antiquewhite3",
         "cadetblue2", "cadetblue3", "cadetblue4", 
         "chocolate1", "chocolate2", "chocolate3", "chocolate4",
         "black")
-groupedBarplot(percentagesList, "overlap proportions", outputFolder, percentageRepVec, 
+groupedBarplot(percentagesList, "overlap proportions", outputfolder, percentageRepVec, 
         colVec)
-groupedBarplot(numbersPieList, "Nb_of_overlap", outputFolder, cntRepeats, 
+groupedBarplot(numbersPieList, "Nb_of_overlap", outputfolder, cntRepeats, 
         colVec)
 
