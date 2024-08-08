@@ -386,6 +386,30 @@ outputgffprom <- function(annotationsgrlist, querygr, peaksidxbycatpriorlist,
 }
 
 
+savingpeakspercategory <- function(overlappriority, subjecthitsnamespriority,
+        querygr, outfold) {
+
+    message("\t Saving peaks per category")
+    peaksidxbycatpriorlist <- split(queryHits(overlappriority),
+            subjecthitsnamespriority)
+
+    catvec <- names(peaksidxbycatpriorlist)
+    invisible(mapply(function(currentidxvec, currentcat, queryobj,
+        outputfold) {
+            selectquerygr <- queryobj[currentidxvec, ]
+            towrite <- data.frame(seqname = seqnames(selectquerygr),
+                source = "genomicRepartition", feature = currentcat,
+                start = start(selectquerygr), end = end(selectquerygr),
+                score = 0, strand = strand(selectquerygr), frame = ".",
+                group = ".")
+                filename <- paste0("peaks-", currentcat, ".gff")
+                write.table(towrite, file = file.path(outputfold, filename),
+                    quote=FALSE, sep = "\t", row.names = FALSE,
+                    col.names = FALSE)
+                }, peaksidxbycatpriorlist, catvec, MoreArgs = list(querygr,
+                    outfold)))
+    return(peaksidxbycatpriorlist)
+}
 
 
 ################
@@ -465,7 +489,7 @@ for (i in seq_len(length(queryfilevec))) {
     performupset(annonamesvec, overlap, namequery, outfold)
 
     ## Output the gff of querygr per category defined by overlappriority
-    peaksidxbycatpriorlist <- savingPeaksPerCategory(overlappriority,
+    peaksidxbycatpriorlist <- savingpeakspercategory(overlappriority,
             subjecthitsnamespriority, querygr, outfold)
 
     ## Output the gff of the promoters
