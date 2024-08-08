@@ -8,3 +8,9 @@ dependencies:
   - bioconductor-annotationdbi=1.62.2
   - bioconductor-biomart=2.56.1
   !! org.Hs.eg.db
+
+
+library("GenomicFeatures")
+library("ChIPpeakAnno")
+library("RColorBrewer")
+library("reshape2")
