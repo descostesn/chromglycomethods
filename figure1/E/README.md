@@ -62,7 +62,7 @@ conda activate fig1e
 
 ### Union of peaks
 
-Generate the gff file of the union of peaks by running:
+Generate the bed file of the union of peaks by running:
 
 ```
 Rscript union.R
