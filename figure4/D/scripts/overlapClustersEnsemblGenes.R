@@ -96,7 +96,7 @@ buildgffrangeslist <- function(clusterpathvec) {
 }
 
 
-buildgr <- function(currentpath, chromvec) {
+buildgrensembl <- function(currentpath, chromvec) {
 
     message("\t Processing ", currentpath)
 
@@ -126,7 +126,7 @@ checkparams(clusterpathvec, expnamevec, outputfolder)
 
 message("Reading gff input and converting to rangedData")
 grlist <- buildgffrangeslist(clusterpathvec)
-grensemble <- 
+grensemble <- buildgrensembl()
 mapply(function(currentgr, currentname, enstab))
 
 
