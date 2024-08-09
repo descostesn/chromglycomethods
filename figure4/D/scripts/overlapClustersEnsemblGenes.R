@@ -29,7 +29,6 @@ outputfoldervec <- c("/g/boulard/Projects/O-N-acetylglucosamine/analysis/heatmap
         "/g/boulard/Projects/O-N-acetylglucosamine/analysis/heatmapsandprofiles/sept2023Glc/human/polIIGlc/unionpeaks/cluster_4-compartmentsgff/promoters_vs_ensemblgenes/test", # nolint
         "/g/boulard/Projects/O-N-acetylglucosamine/analysis/heatmapsandprofiles/sept2023Glc/human/polIIGlc/unionpeaks/cluster_5-compartmentsgff/promoters_vs_ensemblgenes/test") # nolint
 expname <- "promspeaks_ensemblgenes"
-extractensemblgenename <- "TRUE"
 
 !!!!!!!!!!!!!!!!!!! NEED TO ADAPT THE SCRIPT
 
@@ -126,7 +125,7 @@ buildgr <- function(currentpath, chromvec) {
 checkparams(clusterpathvec, expnamevec, outputfolder)
 
 message("Reading gff input and converting to rangedData")
-grlist <- buildgffrangeslist(clusterpathvec, extractensemblgenename)
+grlist <- buildgffrangeslist(clusterpathvec)
 grensemble <- 
 mapply(function(currentgr, currentname, enstab))
 
