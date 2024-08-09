@@ -37,7 +37,7 @@ expname <- "promspeaks_ensemblgenes"
 #############
 
 
-checkingoutputfolder <- function(output_path) {
+.checkingoutputfolder <- function(output_path) {
     if (!file.exists(output_path))
         dir.create(output_path, recursive = TRUE)
 }
@@ -57,7 +57,7 @@ checkparams <- function(clusterpathvec, expnamevec, outputfoldervec) {
     if (!isTRUE(all.equal(length(clusterpathvec), length(outputfoldervec))))
         stop("One output folder should be given by cluster file") # nolint
 
-    invisible(lapply(outputfoldervec, checkingoutputfolder))
+    invisible(lapply(outputfoldervec, .checkingoutputfolder))
 }
 
 
@@ -115,6 +115,7 @@ buildgrensembl <- function(currentpath) {
     return(gr)
 }
 
+
 removeduplicatedens <- function(gff2) {
     featuregff2 <- gff2$feature
     if (!isTRUE(all.equal(length(featuregff2), length(unique(featuregff2))))) {
@@ -125,6 +126,7 @@ removeduplicatedens <- function(gff2) {
     }
     return(gff2)
 }
+
 
 buildgff <- function(resoverlap, idxvec) {
 
