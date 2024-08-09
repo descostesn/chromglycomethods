@@ -119,21 +119,19 @@ buildgrensembl <- function(currentpath) {
 # Retreives the parameters
 checkparams(clusterpathvec, expnamevec, outputfolder)
 
-message("Reading gff input and converting to rangedData")
+message("Reading gff input and converting to genomicranges Data")
 grlist <- buildgffrangeslist(clusterpathvec)
 grensembl <- buildgrensembl(ensemblpath)
 
-mapply(function(currentgr, currentname, enstab))
+message("Performing overlap of each cluster with ensembl annotations")
+reslist <- mapply(function(currentgr, currentname, outfold, grens,
+    ensemblname) {
 
+    message("\t Performing overlap for ", currentname)
+    resoverlap <- ChIPpeakAnno::findOverlapsOfPeaks(currentgr, grens)
 
-
-
-message("Performing the overlap")
-resoverlap <- ChIPpeakAnno::findOverlapsOfPeaks(grlist[[1]],
-                        grlist[[2]])
-
-message("Writting the overlapping peaks")
-gff1 <- data.frame(
+    message("\t Converting result to gff format")
+    gff1 <- data.frame(
     seqname = as.character(resoverlap$overlappingPeaks[[1]][, 2]),
     source = "vennDiagram_overlapGFF",
     feature = resoverlap$overlappingPeaks[[1]][, 1],
@@ -143,7 +141,7 @@ gff1 <- data.frame(
     strand = as.character(resoverlap$overlappingPeaks[[1]][, 6]),
     frame = ".", group = ".")
 
-gff2 <- data.frame(
+    gff2 <- data.frame(
     seqname = as.character(resoverlap$overlappingPeaks[[1]][, 8]),
     source = "vennDiagram_overlapGFF",
     feature = resoverlap$overlappingPeaks[[1]][, 7],
@@ -153,12 +151,18 @@ gff2 <- data.frame(
     strand = resoverlap$overlappingPeaks[[1]][, 12],
     frame = ".", group = ".")
 
-message("Writing output files")
-write.table(gff1,
-    file = file.path(outputfolder, paste0(expnamevec[1], ".gff")),
+!!!!!!!!!! make the results unique
+    message("\t The number of genes for ", currentname, " is ", nrow(gff2))
+    message("\t Writing coordinates to ", outfold)
+    message("Writing output files")
+    write.table(gff1,
+    file = file.path(outputfolder, paste0(currentname, ".gff")),
     sep = "\t", quote = FALSE, row.names = FALSE, col.names = FALSE)
-write.table(gff2,
-    file = file.path(outputfolder, paste0(ensemblname, ".gff")),
-    sep = "\t", quote = FALSE, row.names = FALSE, col.names = FALSE)
+    write.table(gff2,
+    file = file.path(outputfolder, paste0(ensemblname, "-", currentname,
+        ".gff")), sep = "\t", quote = FALSE, row.names = FALSE,
+        col.names = FALSE)
 
-message("Done.")
+}, grlist, expnamevec, outputfoldervec,
+    MoreArgs = list(grensembl), SIMPLIFY = FALSE)
+
