@@ -30,7 +30,7 @@ Download the following data:
 mkdir data
 
 # O-GlcNac peaks
-wget XXX/ESCHGGlcNAc_rep1.gff -P data/
+wget https://www.ebi.ac.uk/biostudies/files/E-MTAB-14308/ESCHGGlcNAc_rep1_peaks.gff -P data/
 
 # RNA-seq counts and feature lengths
 wget https://zenodo.org/records/12793186/files/ESCRNAseq_SRR11294181counts.txt -P data/
