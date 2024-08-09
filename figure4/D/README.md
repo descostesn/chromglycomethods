@@ -245,4 +245,41 @@ By performing an overlap of the promoter coordinates of each cluster with the En
 Rscript scripts/overlapClustersEnsemblGenes.R
 ```
 
+The script should output:
 
+```
+Reading gff input and converting to genomicranges Data
+	Removing 2/21519 duplicated ranges
+Performing overlap of each cluster with ensembl annotations
+         Performing overlap for cluster1
+         Converting result to gff format
+                 Removing 5/112 duplicated ensembl genes.
+         The number of genes for cluster1 is 107
+         Writing coordinates to results/cluster_1-compartmentsgff/promoters_vs_ensemblgenes
+         Performing overlap for cluster2
+         Converting result to gff format
+                 Removing 27/305 duplicated ensembl genes.
+         The number of genes for cluster2 is 278
+         Writing coordinates to results/cluster_2-compartmentsgff/promoters_vs_ensemblgenes/
+         Performing overlap for cluster3
+         Converting result to gff format
+                 Removing 14/549 duplicated ensembl genes.
+         The number of genes for cluster3 is 535
+         Writing coordinates to results/cluster_3-compartmentsgff/promoters_vs_ensemblgenes
+         Performing overlap for cluster4
+         Converting result to gff format
+                 Removing 10/418 duplicated ensembl genes.
+         The number of genes for cluster4 is 408
+         Writing coordinates to results/cluster_4-compartmentsgff/promoters_vs_ensemblgenes
+         Performing overlap for cluster5
+         Converting result to gff format
+                 Removing 36/875 duplicated ensembl genes.
+         The number of genes for cluster5 is 839
+         Writing coordinates to resuls/cluster_5-compartmentsgff/promoters_vs_ensemblgenes
+```
+
+The number of genes for cluster1 is 107
+The number of genes for cluster2 is 278
+The number of genes for cluster3 is 535
+The number of genes for cluster4 is 408
+The number of genes for cluster5 is 839
