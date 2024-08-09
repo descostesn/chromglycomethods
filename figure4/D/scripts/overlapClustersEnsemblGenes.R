@@ -173,17 +173,13 @@ reslist <- mapply(function(currentgr, currentname, outfold, grens,
     frame = ".", group = ".")
     gff2 <- removeduplicatedens(gff2)
 
-
-
-!!!!!!!!!! make the results unique
     message("\t The number of genes for ", currentname, " is ", nrow(gff2))
     message("\t Writing coordinates to ", outfold)
-    message("Writing output files")
     write.table(gff1,
-    file = file.path(outputfolder, paste0(currentname, ".gff")),
+    file = file.path(outfold, paste0(currentname, ".gff")),
     sep = "\t", quote = FALSE, row.names = FALSE, col.names = FALSE)
     write.table(gff2,
-    file = file.path(outputfolder, paste0(ensemblname, "-", currentname,
+    file = file.path(outfold, paste0(ensemblname, "-", currentname,
         ".gff")), sep = "\t", quote = FALSE, row.names = FALSE,
         col.names = FALSE)
 
