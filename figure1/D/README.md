@@ -37,8 +37,8 @@ If one whishes to obtain results with the updated database, the O-GlcNac peaks c
 mkdir data
 
 # O-GlcNac peaks
-wget XXX/ESCHGGlcNAc_rep1.gff -P data/
-wget XXX/ESCHGGlcNAc_rep2.gff -P data/
+wget https://www.ebi.ac.uk/biostudies/files/E-MTAB-14308/ESCHGGlcNAc_rep1_peaks.gff -P data/
+wget https://www.ebi.ac.uk/biostudies/files/E-MTAB-14308/ESCHGGlcNAc_rep2_peaks.gff -P data/
 ```
 
 ## Installation
