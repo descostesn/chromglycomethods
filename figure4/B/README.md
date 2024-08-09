@@ -22,8 +22,8 @@ The heatmap of binding values of RNA Polymerase II and O-GlcNac shows a global c
 mkdir data
 
 ## The bigwig files of RNAPol II and O-GlcNac before and after induction
-wget XXX/DLD1GlcNAcDoxAux_rep1.bw -P data/
-wget XXX/DLD1GlcNAcNoDoxAux_rep1.bw -P data/
+wget https://www.ebi.ac.uk/biostudies/files/E-MTAB-14307/DLD1GlcNAcDoxAux_rep1.bw -P data/
+wget https://www.ebi.ac.uk/biostudies/files/E-MTAB-14307/DLD1GlcNAcNoDoxAux_rep1.bw -P data/
 wget https://zenodo.org/records/12793186/files/RNApolymeraseII_SRX10580013.bw -P data/
 
 ## The gene annotations Homo_sapiens.GRCh38.110.chr_march2024_filtered.bed
