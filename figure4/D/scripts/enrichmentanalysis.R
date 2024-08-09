@@ -140,14 +140,8 @@ tryUseMart <- function(biomart = "ensembl", dataset, version, #nolint
             message(error_type$message)
 
             if (c > 5) {
-                stop(
-                    "There is a problem of connexion to Ensembl for ",
-                    "now. Please retry later or set ",
-                    "alternativeMirror=TRUE. ATTENTION: If you use the ",
-                    "alternative mirror at a time a more recent version ",
-                    "of FVB or mm39 is availablde, the alternative mirror ",
-                    "will pick the more recent version."
-                )
+                stop("There is a problem of connexion to Ensembl for now. ",
+                    "Please retry later or set altmirror=TRUE")
             }
         } else {
             message("Connected with success.")
