@@ -30,8 +30,6 @@ outputfoldervec <- c("/g/boulard/Projects/O-N-acetylglucosamine/analysis/heatmap
         "/g/boulard/Projects/O-N-acetylglucosamine/analysis/heatmapsandprofiles/sept2023Glc/human/polIIGlc/unionpeaks/cluster_5-compartmentsgff/promoters_vs_ensemblgenes/test") # nolint
 expname <- "promspeaks_ensemblgenes"
 
-!!!!!!!!!!!!!!!!!!! NEED TO ADAPT THE SCRIPT
-
 
 
 #############
@@ -46,20 +44,20 @@ checkingoutputfolder <- function(output_path) {
 
 checkparams <- function(clusterpathvec, expnamevec, outputfoldervec) {
 
-    if (length(clusterpathvec) != 2 || length(expnamevec) != 2)
-        stop("\n This script takes only two exp as input\n")
+    if (!isTRUE(all.equal(length(clusterpathvec), length(expnamevec))))
+        stop("One name should be given to each cluster") # nolint
 
     extsuffix <- unique(sapply(basename(clusterpathvec),
         function(x) strsplit(x, "\\.")[[1]][2]))
 
     if (!isTRUE(all.equal(length(extsuffix), 1)) &&
         !isTRUE(all.equal(extsuffix, "gff")))
-            stop("The files should be in gff format.")
+            stop("The files should be in gff format.") # nolint
 
     if (!isTRUE(all.equal(length(clusterpathvec), length(outputfoldervec))))
-        stop("One output folder should be given by cluster file")
+        stop("One output folder should be given by cluster file") # nolint
 
-    checkingoutputfolder(outputfolder)
+    invisible(lapply(outputfoldervec, checkingoutputfolder))
 }
 
 
@@ -117,7 +115,7 @@ buildgrensembl <- function(currentpath) {
 ##############
 
 # Retreives the parameters
-checkparams(clusterpathvec, expnamevec, outputfolder)
+checkparams(clusterpathvec, expnamevec, outputfoldervec)
 
 message("Reading gff input and converting to genomicranges Data")
 grlist <- buildgffrangeslist(clusterpathvec)
