@@ -61,34 +61,40 @@ checkparams <- function(clusterpathvec, expnamevec, outputfoldervec) {
 }
 
 
+.checkduplicatedranges <- function(currentgff) {
+
+    ## Check for duplicated ranges
+    tmp <- paste(currentgff[, 1], currentgff[, 4], currentgff[, 5], sep="-")
+    idxdup <- which(duplicated(tmp))
+    if (!isTRUE(all.equal(length(idxdup), 0))) {
+        message("\t\t Removing ", length(idxdup), "/", nrow(currentgff), # nolint
+            " duplicated ranges")
+        currentgff <- currentgff[-idxdup, ]
+    }
+    return(currentgff)
+}
+
 buildgffrangeslist <- function(clusterpathvec) {
     grlist <- list()
 
     for (i in seq_len(length(clusterpathvec))) {
 
-        current_gff <- read.delim(clusterpathvec[i], stringsAsFactors = FALSE,
+        currentgff <- read.delim(clusterpathvec[i], stringsAsFactors = FALSE,
             header = FALSE)
+        currentgff <- .checkduplicatedranges(currentgff)
 
         ## Check for duplicated names
-        genenamevec <- current_gff[, 3]
+        genenamevec <- currentgff[, 3]
         if (length(genenamevec) != length(unique(genenamevec)))
             genenamevec <- make.unique(genenamevec, sep = "-")
 
-        ## Check for duplicated ranges
-        tmp <- paste(current_gff[, 1], current_gff[, 4], current_gff[, 5])
-        idxdup <- which(duplicated(tmp))
-        if (!isTRUE(all.equal(length(idxdup), 0))) {
-            message("Removing ", length(idxdup), "/", nrow(current_gff))
-            current_gff <- current_gff[-idxdup, ]
-            genenamevec <- genenamevec[-idxdup]
-        }
-
+        ## Building genomicranges object
         grlist[[i]] <- GenomicRanges::GRanges(
-            seqnames = current_gff[, 1],
-            ranges = IRanges::IRanges(start = current_gff[, 4],
-                                  end = current_gff[, 5],
+            seqnames = currentgff[, 1],
+            ranges = IRanges::IRanges(start = currentgff[, 4],
+                                  end = currentgff[, 5],
                                   names = genenamevec),
-            strand = current_gff[, 7])
+            strand = currentgff[, 7])
     }
     return(grlist)
 }
@@ -97,6 +103,7 @@ buildgffrangeslist <- function(clusterpathvec) {
 buildgrensembl <- function(currentpath) {
 
     fi <- read.delim(currentpath, stringsAsFactors = FALSE, header = FALSE)
+    fi <- .checkduplicatedranges(fi)
     genenamevec <- unlist(lapply(strsplit(unlist(lapply(
                 strsplit(fi$V9, ";"), "[", 2)), "="), "[", 2))
     if (length(genenamevec) != length(unique(genenamevec)))
