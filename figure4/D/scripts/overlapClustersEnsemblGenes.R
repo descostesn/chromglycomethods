@@ -23,7 +23,7 @@ clusterpathvec <- c("/g/boulard/Projects/O-N-acetylglucosamine/analysis/heatmaps
 expnamevec <- paste0("cluster", seq_len(5))
 ensemblpath <- "/g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/human/hg38/ensembl/Homo_sapiens_GRCh38110_chrfiltered_genes.gff" # nolint
 ensemblname <- "Homo_sapiens_GRCh38110genes"
-outputfolder <- c("/g/boulard/Projects/O-N-acetylglucosamine/analysis/heatmapsandprofiles/sept2023Glc/human/polIIGlc/unionpeaks/cluster_1-compartmentsgff/promoters_vs_ensemblgenes/test", # nolint
+outputfoldervec <- c("/g/boulard/Projects/O-N-acetylglucosamine/analysis/heatmapsandprofiles/sept2023Glc/human/polIIGlc/unionpeaks/cluster_1-compartmentsgff/promoters_vs_ensemblgenes/test", # nolint
         "/g/boulard/Projects/O-N-acetylglucosamine/analysis/heatmapsandprofiles/sept2023Glc/human/polIIGlc/unionpeaks/cluster_2-compartmentsgff/promoters_vs_ensemblgenes/test", # nolint
         "/g/boulard/Projects/O-N-acetylglucosamine/analysis/heatmapsandprofiles/sept2023Glc/human/polIIGlc/unionpeaks/cluster_3-compartmentsgff/promoters_vs_ensemblgenes/test", # nolint
         "/g/boulard/Projects/O-N-acetylglucosamine/analysis/heatmapsandprofiles/sept2023Glc/human/polIIGlc/unionpeaks/cluster_4-compartmentsgff/promoters_vs_ensemblgenes/test", # nolint
@@ -45,7 +45,7 @@ checkingoutputfolder <- function(output_path) {
         dir.create(output_path, recursive = TRUE)
 }
 
-checkparams <- function(clusterpathvec, expnamevec, outputfolder) {
+checkparams <- function(clusterpathvec, expnamevec, outputfoldervec) {
 
     if (length(clusterpathvec) != 2 || length(expnamevec) != 2)
         stop("\n This script takes only two exp as input\n")
@@ -56,6 +56,9 @@ checkparams <- function(clusterpathvec, expnamevec, outputfolder) {
     if (!isTRUE(all.equal(length(extsuffix), 1)) &&
         !isTRUE(all.equal(extsuffix, "gff")))
             stop("The files should be in gff format.")
+
+    if (!isTRUE(all.equal(length(clusterpathvec), length(outputfoldervec))))
+        stop("One output folder should be given by cluster file")
 
     checkingoutputfolder(outputfolder)
 }
