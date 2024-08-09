@@ -9,14 +9,14 @@ dependencies:
   - r-rcolorbrewer=1.1_3
   - r-dplyr=1.1.4
   - r-reshape2=1.4.4
-  - bioconductor-clusterprofiler=4.8.1
   - bioconductor-annotationdbi=1.62.2
   - bioconductor-biomart=2.56.1
+  - bioconductor-iranges=2.34.1
+  - bioconductor-genomicranges=1.52.0
   - bioconductor-genomicfeatures=1.52.1
-  - bioconductor-iranges=2.36.0
-  - bioconductor-genomicranges=1.54.1
+  - bioconductor-clusterprofiler=4.8.1
   - bioconductor-chippeakanno=3.34.1
-  - bioconductor-genomeinfodb=1.36.1
+  - bioconductor-genomeinfodb
   - bioconductor-s4vectors=0.38.1
-  - bioconductor-txdb.hsapiens.ucsc.hg38.knowngene=3.18.0
-  - bioconductor-org.hs.eg.db=3.18.0
+  - bioconductor-txdb.hsapiens.ucsc.hg38.knowngene=3.17.0
+  - bioconductor-org.hs.eg.db=3.17.0
