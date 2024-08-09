@@ -17,7 +17,7 @@ The bigwig files used in this figure can be obtained with:
 ```
 #!/bin/bash
 
-wget XXX/ESCHGGlcNAc_rep1.bw
+wget https://www.ebi.ac.uk/biostudies/files/E-MTAB-14308/ESCHGGlcNAc_rep1.bw
 wget https://zenodo.org/records/12793186/files/H3K27ac_SRX19148013.bw
 wget https://zenodo.org/records/12793186/files/H3K4me3_SRX5382140.bw
 ```
