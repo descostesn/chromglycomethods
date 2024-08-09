@@ -278,8 +278,16 @@ Performing overlap of each cluster with ensembl annotations
          Writing coordinates to resuls/cluster_5-compartmentsgff/promoters_vs_ensemblgenes
 ```
 
-The number of genes for cluster1 is 107
+One could have noticed that the numbers are different than what is described in the Description section. This is because some of the retrieved genes did not contribute to the enrichment of a gene set. Indeed, the numbers of the submitted list of genes to cluster profiler are higher than what is observed on the figure.
+
+```
+## Overlap output
 The number of genes for cluster2 is 278
-The number of genes for cluster3 is 535
 The number of genes for cluster4 is 408
 The number of genes for cluster5 is 839
+
+## Cluster profiler output
+Cluster 2 (239 genes/584 peaks)
+Cluster 4 (347 genes/1,200 peaks)
+Cluster 5 (751 genes/2,986 peaks)
+```
