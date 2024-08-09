@@ -98,18 +98,14 @@ buildgffrangeslist <- function(clusterpathvec) {
 
 buildgrensembl <- function(currentpath) {
 
-    message("\t Processing ", currentpath)
-
-    !!!!!!!!!
+    fi <- read.table(currentpath, stringsAsFactors = FALSE)
     genenamevec <- unlist(lapply(strsplit(unlist(lapply(
-                strsplit(current_gff$V9, ";"), "[", 2)), "="), "[", 2))
+                strsplit(fi$V9, ";"), "[", 2)), "="), "[", 2))
     if (length(genenamevec) != length(unique(genenamevec)))
             genenamevec <- make.unique(genenamevec, sep = "-")
-    !!!!!!!!!!
-    fi <- read.table(currentpath, stringsAsFactors = FALSE)
     gr <- GenomicRanges::GRanges(seqnames = fi$V1,
             ranges = IRanges::IRanges(start = fi$V4, end = fi$V5,
-                names = fi$V9),
+                names = genenamevec),
             strand = fi$V7)
     return(gr)
 }
@@ -125,7 +121,8 @@ checkparams(clusterpathvec, expnamevec, outputfolder)
 
 message("Reading gff input and converting to rangedData")
 grlist <- buildgffrangeslist(clusterpathvec)
-grensemble <- buildgrensembl()
+grensembl <- buildgrensembl(ensemblpath)
+
 mapply(function(currentgr, currentname, enstab))
 
 
