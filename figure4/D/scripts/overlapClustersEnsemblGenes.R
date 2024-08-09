@@ -126,6 +126,22 @@ removeduplicatedens <- function(gff2) {
     return(gff2)
 }
 
+buildgff <- function(resoverlap, idxvec) {
+
+    gffres <- data.frame(
+    seqname = as.character(resoverlap$overlappingPeaks[[1]][, idxvec[1]]),
+    source = "vennDiagram_overlapGFF",
+    feature = resoverlap$overlappingPeaks[[1]][, idxvec[2]],
+    start = resoverlap$overlappingPeaks[[1]][, idxvec[3]],
+    end = resoverlap$overlappingPeaks[[1]][, idxvec[4]],
+    score = resoverlap$overlappingPeaks[[1]][, idxvec[5]],
+    strand = as.character(resoverlap$overlappingPeaks[[1]][, idxvec[6]]),
+    frame = ".", group = ".")
+
+    return(gffres)
+}
+
+
 
 ##############
 # MAIN
@@ -151,26 +167,9 @@ reslist <- mapply(function(currentgr, currentname, outfold, grens,
     resoverlap <- ChIPpeakAnno::findOverlapsOfPeaks(currentgr, grens)
 
     message("\t Converting result to gff format")
-    gff1 <- data.frame(
-    seqname = as.character(resoverlap$overlappingPeaks[[1]][, 2]),
-    source = "vennDiagram_overlapGFF",
-    feature = resoverlap$overlappingPeaks[[1]][, 1],
-    start = resoverlap$overlappingPeaks[[1]][, 3],
-    end = resoverlap$overlappingPeaks[[1]][, 4],
-    score = resoverlap$overlappingPeaks[[1]][, 5],
-    strand = as.character(resoverlap$overlappingPeaks[[1]][, 6]),
-    frame = ".", group = ".")
+    gff1 <- buildgff(resoverlap, idxvec = c(2, 1, 3, 4, 5, 6))
     gff1$feature <-  gsub("-[0-9]+", "",gff1$feature)
-
-    gff2 <- data.frame(
-    seqname = as.character(resoverlap$overlappingPeaks[[1]][, 8]),
-    source = "vennDiagram_overlapGFF",
-    feature = resoverlap$overlappingPeaks[[1]][, 7],
-    start = resoverlap$overlappingPeaks[[1]][, 9],
-    end = resoverlap$overlappingPeaks[[1]][, 10],
-    score = resoverlap$overlappingPeaks[[1]][, 11],
-    strand = resoverlap$overlappingPeaks[[1]][, 12],
-    frame = ".", group = ".")
+    gff2 <- buildgff(resoverlap, idxvec = c(8, 7, 9, 10, 11, 12))
     gff2 <- removeduplicatedens(gff2)
 
     message("\t The number of genes for ", currentname, " is ", nrow(gff2))
