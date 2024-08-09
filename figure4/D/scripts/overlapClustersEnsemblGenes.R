@@ -117,11 +117,11 @@ buildgrensembl <- function(currentpath) {
 # Retreives the parameters
 checkparams(clusterpathvec, expnamevec, outputfoldervec)
 
-message("Reading gff input and converting to genomicranges Data")
+message("Reading gff input and converting to genomicranges Data") # nolint
 grlist <- buildgffrangeslist(clusterpathvec)
 grensembl <- buildgrensembl(ensemblpath)
 
-message("Performing overlap of each cluster with ensembl annotations")
+message("Performing overlap of each cluster with ensembl annotations")  # nolint
 reslist <- mapply(function(currentgr, currentname, outfold, grens,
     ensemblname) {
 
@@ -162,5 +162,5 @@ reslist <- mapply(function(currentgr, currentname, outfold, grens,
         col.names = FALSE)
 
 }, grlist, expnamevec, outputfoldervec,
-    MoreArgs = list(grensembl), SIMPLIFY = FALSE)
+    MoreArgs = list(grensembl, ensemblname), SIMPLIFY = FALSE)
 
