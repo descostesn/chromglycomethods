@@ -103,6 +103,19 @@ buildgffrangeslist <- function(clusterpathvec, extractensemblgenename) {
 }
 
 
+buildgr <- function(currentpath, chromvec) {
+
+    message("\t Processing ", currentpath)
+    fi <- read.table(currentpath, stringsAsFactors = FALSE)
+    fi <- checkchromosomes(fi, chromvec) # nolint
+    gr <- GenomicRanges::GRanges(seqnames = fi$V1,
+            ranges = IRanges::IRanges(start = fi$V4, end = fi$V5,
+                names = fi$V9),
+            strand = fi$V7)
+    return(gr)
+}
+
+
 
 ##############
 # MAIN
@@ -113,6 +126,11 @@ checkparams(clusterpathvec, expnamevec, outputfolder)
 
 message("Reading gff input and converting to rangedData")
 grlist <- buildgffrangeslist(clusterpathvec, extractensemblgenename)
+grensemble <- 
+mapply(function(currentgr, currentname, enstab))
+
+
+
 
 message("Performing the overlap")
 resoverlap <- ChIPpeakAnno::findOverlapsOfPeaks(grlist[[1]],
