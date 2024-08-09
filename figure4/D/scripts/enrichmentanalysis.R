@@ -6,11 +6,11 @@
 ##############
 
 
-library("org.Hs.eg.db")
-library("clusterProfiler")
-library("AnnotationDbi")
-library("ggplot2")
-library("biomaRt")
+suppressMessages(library("org.Hs.eg.db"))
+suppressMessages(library("clusterProfiler"))
+suppressMessages(library("AnnotationDbi"))
+suppressMessages(library("ggplot2"))
+suppressMessages(library("biomaRt"))
 
 
 ################
@@ -33,7 +33,7 @@ backgroundpath <- NA
 datasetname <- "hsapiens_gene_ensembl"
 ensemblversion <- "Ensembl Genes 109"
 levelnum <- 3
-altmirror <- FALSE
+altmirror <- TRUE
 
 ################
 
