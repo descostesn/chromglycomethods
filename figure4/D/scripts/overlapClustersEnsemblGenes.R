@@ -96,7 +96,7 @@ buildgffrangeslist <- function(clusterpathvec) {
 }
 
 
-buildgrensembl <- function(currentpath, chromvec) {
+buildgrensembl <- function(currentpath) {
 
     message("\t Processing ", currentpath)
 
@@ -107,7 +107,6 @@ buildgrensembl <- function(currentpath, chromvec) {
             genenamevec <- make.unique(genenamevec, sep = "-")
     !!!!!!!!!!
     fi <- read.table(currentpath, stringsAsFactors = FALSE)
-    fi <- checkchromosomes(fi, chromvec) # nolint
     gr <- GenomicRanges::GRanges(seqnames = fi$V1,
             ranges = IRanges::IRanges(start = fi$V4, end = fi$V5,
                 names = fi$V9),
