@@ -115,6 +115,16 @@ buildgrensembl <- function(currentpath) {
     return(gr)
 }
 
+removeduplicatedens <- function(gff2) {
+    featuregff2 <- gff2$feature
+    if (!isTRUE(all.equal(length(featuregff2), length(unique(featuregff2))))) {
+        idxdup <- which(duplicated(featuregff2))
+        message("\t\t Removing ", length(idxdup), "/", nrow(gff2), # nolint
+            " duplicated ensembl genes.") # nolint
+        gff2 <- gff2[-idxdup, ]
+    }
+    return(gff2)
+}
 
 
 ##############
@@ -130,6 +140,10 @@ names(grlist) <- expnamevec
 grensembl <- buildgrensembl(ensemblpath)
 
 message("Performing overlap of each cluster with ensembl annotations")  # nolint
+# currentgr=grlist[[1]]
+# currentname=expnamevec[1]
+# outfold=outputfoldervec[1]
+# grens=grensembl
 reslist <- mapply(function(currentgr, currentname, outfold, grens,
     ensemblname) {
 
@@ -146,6 +160,7 @@ reslist <- mapply(function(currentgr, currentname, outfold, grens,
     score = resoverlap$overlappingPeaks[[1]][, 5],
     strand = as.character(resoverlap$overlappingPeaks[[1]][, 6]),
     frame = ".", group = ".")
+    gff1$feature <-  gsub("-[0-9]+", "",gff1$feature)
 
     gff2 <- data.frame(
     seqname = as.character(resoverlap$overlappingPeaks[[1]][, 8]),
@@ -156,6 +171,9 @@ reslist <- mapply(function(currentgr, currentname, outfold, grens,
     score = resoverlap$overlappingPeaks[[1]][, 11],
     strand = resoverlap$overlappingPeaks[[1]][, 12],
     frame = ".", group = ".")
+    gff2 <- removeduplicatedens(gff2)
+
+
 
 !!!!!!!!!! make the results unique
     message("\t The number of genes for ", currentname, " is ", nrow(gff2))
