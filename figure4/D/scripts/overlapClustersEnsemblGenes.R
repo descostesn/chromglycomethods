@@ -20,12 +20,14 @@ clusterpathvec <- c("/g/boulard/Projects/O-N-acetylglucosamine/analysis/heatmaps
         "/g/boulard/Projects/O-N-acetylglucosamine/analysis/heatmapsandprofiles/sept2023Glc/human/polIIGlc/unionpeaks/cluster_3-compartmentsgff/promoters.gff", # nolint
         "/g/boulard/Projects/O-N-acetylglucosamine/analysis/heatmapsandprofiles/sept2023Glc/human/polIIGlc/unionpeaks/cluster_4-compartmentsgff/promoters.gff", # nolint
         "/g/boulard/Projects/O-N-acetylglucosamine/analysis/heatmapsandprofiles/sept2023Glc/human/polIIGlc/unionpeaks/cluster_5-compartmentsgff/promoters.gff") # nolint
+expnamevec <- paste0("cluster", seq_len(5))
 ensemblpath <- "/g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/human/hg38/ensembl/Homo_sapiens_GRCh38110_chrfiltered_genes.gff" # nolint
-output_folder <- c("/g/boulard/Projects/O-N-acetylglucosamine/analysis/heatmapsandprofiles/sept2023Glc/human/polIIGlc/unionpeaks/cluster_1-compartmentsgff/promoters_vs_ensemblgenes/test",
-        "/g/boulard/Projects/O-N-acetylglucosamine/analysis/heatmapsandprofiles/sept2023Glc/human/polIIGlc/unionpeaks/cluster_2-compartmentsgff/promoters_vs_ensemblgenes/test",
-        "/g/boulard/Projects/O-N-acetylglucosamine/analysis/heatmapsandprofiles/sept2023Glc/human/polIIGlc/unionpeaks/cluster_3-compartmentsgff/promoters_vs_ensemblgenes/test",
-        "/g/boulard/Projects/O-N-acetylglucosamine/analysis/heatmapsandprofiles/sept2023Glc/human/polIIGlc/unionpeaks/cluster_4-compartmentsgff/promoters_vs_ensemblgenes/test",
-        "/g/boulard/Projects/O-N-acetylglucosamine/analysis/heatmapsandprofiles/sept2023Glc/human/polIIGlc/unionpeaks/cluster_5-compartmentsgff/promoters_vs_ensemblgenes/test")
+ensemblname <- "Homo_sapiens_GRCh38110genes"
+outputfolder <- c("/g/boulard/Projects/O-N-acetylglucosamine/analysis/heatmapsandprofiles/sept2023Glc/human/polIIGlc/unionpeaks/cluster_1-compartmentsgff/promoters_vs_ensemblgenes/test", # nolint
+        "/g/boulard/Projects/O-N-acetylglucosamine/analysis/heatmapsandprofiles/sept2023Glc/human/polIIGlc/unionpeaks/cluster_2-compartmentsgff/promoters_vs_ensemblgenes/test", # nolint
+        "/g/boulard/Projects/O-N-acetylglucosamine/analysis/heatmapsandprofiles/sept2023Glc/human/polIIGlc/unionpeaks/cluster_3-compartmentsgff/promoters_vs_ensemblgenes/test", # nolint
+        "/g/boulard/Projects/O-N-acetylglucosamine/analysis/heatmapsandprofiles/sept2023Glc/human/polIIGlc/unionpeaks/cluster_4-compartmentsgff/promoters_vs_ensemblgenes/test", # nolint
+        "/g/boulard/Projects/O-N-acetylglucosamine/analysis/heatmapsandprofiles/sept2023Glc/human/polIIGlc/unionpeaks/cluster_5-compartmentsgff/promoters_vs_ensemblgenes/test") # nolint
 expname <- "promspeaks_ensemblgenes"
 extractensemblgenename <- "TRUE"
 
@@ -43,28 +45,28 @@ checkingoutputfolder <- function(output_path) {
         dir.create(output_path, recursive = TRUE)
 }
 
-checkparams <- function(gff_file_vec, expname_vec, output_folder) {
+checkparams <- function(clusterpathvec, expnamevec, outputfolder) {
 
-    if (length(gff_file_vec) != 2 || length(expname_vec) != 2)
+    if (length(clusterpathvec) != 2 || length(expnamevec) != 2)
         stop("\n This script takes only two exp as input\n")
 
-    extsuffix <- unique(sapply(basename(gff_file_vec),
+    extsuffix <- unique(sapply(basename(clusterpathvec),
         function(x) strsplit(x, "\\.")[[1]][2]))
 
     if (!isTRUE(all.equal(length(extsuffix), 1)) &&
         !isTRUE(all.equal(extsuffix, "gff")))
             stop("The files should be in gff format.")
 
-    checkingoutputfolder(output_folder)
+    checkingoutputfolder(outputfolder)
 }
 
 
-buildgffrangeslist <- function(gff_file_vec, extractensemblgenename) {
-    gff_granges_list <- list()
+buildgffrangeslist <- function(clusterpathvec, extractensemblgenename) {
+    grlist <- list()
 
-    for (i in seq_len(length(gff_file_vec))) {
+    for (i in seq_len(length(clusterpathvec))) {
 
-        current_gff <- read.delim(gff_file_vec[i], stringsAsFactors = FALSE,
+        current_gff <- read.delim(clusterpathvec[i], stringsAsFactors = FALSE,
             header = FALSE)
 
         ## In case the overlap is done with ensembl genes, extract gene name
@@ -87,14 +89,14 @@ buildgffrangeslist <- function(gff_file_vec, extractensemblgenename) {
             genenamevec <- genenamevec[-idxdup]
         }
 
-        gff_granges_list[[i]] <- GenomicRanges::GRanges(
+        grlist[[i]] <- GenomicRanges::GRanges(
             seqnames = current_gff[, 1],
             ranges = IRanges::IRanges(start = current_gff[, 4],
                                   end = current_gff[, 5],
                                   names = genenamevec),
             strand = current_gff[, 7])
     }
-    return(gff_granges_list)
+    return(grlist)
 }
 
 
@@ -104,42 +106,42 @@ buildgffrangeslist <- function(gff_file_vec, extractensemblgenename) {
 ##############
 
 # Retreives the parameters
-checkparams(gff_file_vec, expname_vec, output_folder)
+checkparams(clusterpathvec, expnamevec, outputfolder)
 
 message("Reading gff input and converting to rangedData")
-gff_granges_list <- buildgffrangeslist(gff_file_vec, extractensemblgenename)
+grlist <- buildgffrangeslist(clusterpathvec, extractensemblgenename)
 
 message("Performing the overlap")
-result_overlap <- ChIPpeakAnno::findOverlapsOfPeaks(gff_granges_list[[1]],
-                        gff_granges_list[[2]])
+resoverlap <- ChIPpeakAnno::findOverlapsOfPeaks(grlist[[1]],
+                        grlist[[2]])
 
 message("Writting the overlapping peaks")
-gff_table_peak1 <- data.frame(
-    seqname = as.character(result_overlap$overlappingPeaks[[1]][, 2]),
+gff1 <- data.frame(
+    seqname = as.character(resoverlap$overlappingPeaks[[1]][, 2]),
     source = "vennDiagram_overlapGFF",
-    feature = result_overlap$overlappingPeaks[[1]][, 1],
-    start = result_overlap$overlappingPeaks[[1]][, 3],
-    end = result_overlap$overlappingPeaks[[1]][, 4],
-    score = result_overlap$overlappingPeaks[[1]][, 5],
-    strand = as.character(result_overlap$overlappingPeaks[[1]][, 6]),
+    feature = resoverlap$overlappingPeaks[[1]][, 1],
+    start = resoverlap$overlappingPeaks[[1]][, 3],
+    end = resoverlap$overlappingPeaks[[1]][, 4],
+    score = resoverlap$overlappingPeaks[[1]][, 5],
+    strand = as.character(resoverlap$overlappingPeaks[[1]][, 6]),
     frame = ".", group = ".")
 
-gff_table_peak2 <- data.frame(
-    seqname = as.character(result_overlap$overlappingPeaks[[1]][, 8]),
+gff2 <- data.frame(
+    seqname = as.character(resoverlap$overlappingPeaks[[1]][, 8]),
     source = "vennDiagram_overlapGFF",
-    feature = result_overlap$overlappingPeaks[[1]][, 7],
-    start = result_overlap$overlappingPeaks[[1]][, 9],
-    end = result_overlap$overlappingPeaks[[1]][, 10],
-    score = result_overlap$overlappingPeaks[[1]][, 11],
-    strand = result_overlap$overlappingPeaks[[1]][, 12],
+    feature = resoverlap$overlappingPeaks[[1]][, 7],
+    start = resoverlap$overlappingPeaks[[1]][, 9],
+    end = resoverlap$overlappingPeaks[[1]][, 10],
+    score = resoverlap$overlappingPeaks[[1]][, 11],
+    strand = resoverlap$overlappingPeaks[[1]][, 12],
     frame = ".", group = ".")
 
 message("Writing output files")
-write.table(gff_table_peak1,
-    file = file.path(output_folder, paste0(expname_vec[1], ".gff")),
+write.table(gff1,
+    file = file.path(outputfolder, paste0(expnamevec[1], ".gff")),
     sep = "\t", quote = FALSE, row.names = FALSE, col.names = FALSE)
-write.table(gff_table_peak2,
-    file = file.path(output_folder, paste0(expname_vec[2], ".gff")),
+write.table(gff2,
+    file = file.path(outputfolder, paste0(ensemblname, ".gff")),
     sep = "\t", quote = FALSE, row.names = FALSE, col.names = FALSE)
 
 message("Done.")
