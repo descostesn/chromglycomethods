@@ -15,28 +15,6 @@ library(RColorBrewer)
 ##################
 
 
-coordpath <- "/g/boulard/Projects/O-N-acetylglucosamine/analysis/heatmapsandprofiles/sept2023Glc/human/polIIGlc/unionpeaks/5groups/test/coordheatmapunion5groups.bed" # nolint
-
-peakspathvec <- c(
-    "/g/boulard/Projects/O-N-acetylglucosamine/analysis/genomicDistribution/Sept2023_glcPolII_enhancers_unionofpeaks/unionPeaksPolIIGlc/peaks-DNA.gff",
-    "/g/boulard/Projects/O-N-acetylglucosamine/analysis/genomicDistribution/Sept2023_glcPolII_enhancers_unionofpeaks/unionPeaksPolIIGlc/peaks-enhancers.gff",
-    "/g/boulard/Projects/O-N-acetylglucosamine/analysis/genomicDistribution/Sept2023_glcPolII_enhancers_unionofpeaks/unionPeaksPolIIGlc/peaks-firstExons.gff",
-    "/g/boulard/Projects/O-N-acetylglucosamine/analysis/genomicDistribution/Sept2023_glcPolII_enhancers_unionofpeaks/unionPeaksPolIIGlc/peaks-introns.gff",
-    "/g/boulard/Projects/O-N-acetylglucosamine/analysis/genomicDistribution/Sept2023_glcPolII_enhancers_unionofpeaks/unionPeaksPolIIGlc/peaks-LINE.gff",
-    "/g/boulard/Projects/O-N-acetylglucosamine/analysis/genomicDistribution/Sept2023_glcPolII_enhancers_unionofpeaks/unionPeaksPolIIGlc/peaks-Low_complexity.gff",
-    "/g/boulard/Projects/O-N-acetylglucosamine/analysis/genomicDistribution/Sept2023_glcPolII_enhancers_unionofpeaks/unionPeaksPolIIGlc/peaks-LTR.gff",
-    "/g/boulard/Projects/O-N-acetylglucosamine/analysis/genomicDistribution/Sept2023_glcPolII_enhancers_unionofpeaks/unionPeaksPolIIGlc/peaks-otherExons.gff",
-    "/g/boulard/Projects/O-N-acetylglucosamine/analysis/genomicDistribution/Sept2023_glcPolII_enhancers_unionofpeaks/unionPeaksPolIIGlc/peaks-otherLocations.gff",
-    "/g/boulard/Projects/O-N-acetylglucosamine/analysis/genomicDistribution/Sept2023_glcPolII_enhancers_unionofpeaks/unionPeaksPolIIGlc/peaks-promoters.gff",
-    "/g/boulard/Projects/O-N-acetylglucosamine/analysis/genomicDistribution/Sept2023_glcPolII_enhancers_unionofpeaks/unionPeaksPolIIGlc/peaks-Satellite.gff",
-    "/g/boulard/Projects/O-N-acetylglucosamine/analysis/genomicDistribution/Sept2023_glcPolII_enhancers_unionofpeaks/unionPeaksPolIIGlc/peaks-Simple_repeat.gff",
-    "/g/boulard/Projects/O-N-acetylglucosamine/analysis/genomicDistribution/Sept2023_glcPolII_enhancers_unionofpeaks/unionPeaksPolIIGlc/peaks-SINE.gff"
-) # nolint
-
-unionfilepath <- "/g/boulard/Projects/O-N-acetylglucosamine/analysis/makeunion/sept2023/human/glcPolII_samples1-2-3-4/test/union_OGlcNac_noauxaux-fig4C.bed"
-
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
 coordpath <- "data/peakscoord-fig4C.bed"
 
 peakspathvec <- c("results/peaks-DNA.gff", "results/peaks-enhancers.gff",
@@ -48,7 +26,6 @@ peakspathvec <- c("results/peaks-DNA.gff", "results/peaks-enhancers.gff",
     "results/peaks-SINE.gff")
 
 unionfilepath <- "data/union_OGlcNac_noauxaux-fig4C.bed"
-
 
 
 
