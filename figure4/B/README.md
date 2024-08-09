@@ -66,7 +66,7 @@ plotHeatmap --matrixFile results/polII.mat --outFileName results/$FILENAME --plo
 
 You should obtain the raw figure:
 
-<img src="pictures/heatmap_polII.png" alt="PolII heatmap" heigth="400"/>
+<img src="pictures/heatmap_polII.png" alt="PolII heatmap" width="400" heigth="400"/>
 
 Using the sorted peak coordinates `peakscoord-fig4B.bed`, generate a matrix of O-GlcNac signal before and after (Dox)/Auxin treatment:
 
@@ -84,7 +84,7 @@ plotHeatmap --matrixFile results/OGlcNac.mat --outFileName results/$FILENAME  --
 
 You should obtain the following heatmaps:
 
-<img src="pictures/heatmap_OGlcNac.png" alt="OGlcNac heatmap" heigth="400"/>
+<img src="pictures/heatmap_OGlcNac.png" alt="OGlcNac heatmap" width="400" heigth="400"/>
 
 
 
