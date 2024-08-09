@@ -60,7 +60,6 @@ Rscript scripts/enrichmentanalysis.R
 
 The script should output:
 
-***!!!!!!!!!!!!!!!!!!! TO MODIFY NB OF ANNOTATIONS REMOVED !!!!!!!!!!!!!!!!!!!!!!!***
 ```
 Reading gff files and return conversion table
 'select()' returned 1:many mapping between keys and columns
