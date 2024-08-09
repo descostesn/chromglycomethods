@@ -156,10 +156,6 @@ names(grlist) <- expnamevec
 grensembl <- buildgrensembl(ensemblpath)
 
 message("Performing overlap of each cluster with ensembl annotations")  # nolint
-# currentgr=grlist[[1]]
-# currentname=expnamevec[1]
-# outfold=outputfoldervec[1]
-# grens=grensembl
 reslist <- mapply(function(currentgr, currentname, outfold, grens,
     ensemblname) {
 
@@ -168,7 +164,7 @@ reslist <- mapply(function(currentgr, currentname, outfold, grens,
 
     message("\t Converting result to gff format")
     gff1 <- buildgff(resoverlap, idxvec = c(2, 1, 3, 4, 5, 6))
-    gff1$feature <-  gsub("-[0-9]+", "",gff1$feature)
+    gff1$feature <-  gsub("-[0-9]+", "", gff1$feature)
     gff2 <- buildgff(resoverlap, idxvec = c(8, 7, 9, 10, 11, 12))
     gff2 <- removeduplicatedens(gff2)
 
