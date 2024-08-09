@@ -33,7 +33,7 @@ wget https://zenodo.org/records/12793186/files/peakscoord-fig1E.bed -P data/
 wget https://zenodo.org/records/12793186/files/union_sept2023mouse_HG1-2.gff -P data/
 
 # The bigwig files of the experiments
-wget XXX/ESCHGGlcNAc_rep1.bw  -P data/
+wget https://www.ebi.ac.uk/biostudies/files/E-MTAB-14308/ESCHGGlcNAc_rep1.bw  -P data/
 wget https://zenodo.org/records/12793186/files/RNApolymeraseII_SRX8556273.bw  -P data/
 wget https://zenodo.org/records/12793186/files/Tbp_SRX9195301.bw  -P data/
 wget https://zenodo.org/records/12793186/files/Taf12_SRX11221932.bw  -P data/
@@ -45,8 +45,8 @@ wget https://zenodo.org/records/12793186/files/Med26_SRX4167136.bw  -P data/
 wget https://zenodo.org/records/12793186/files/Dr1_SRX2894853.bw  -P data/
 
 ## The peak files of each replicates
-wget XXX/ESCHGGlcNAc_rep1_peaks.gff -P data/
-wget XXX/ESCHGGlcNAc_rep2_peaks.gff -P data/
+wget https://www.ebi.ac.uk/biostudies/files/E-MTAB-14308/ESCHGGlcNAc_rep1_peaks.gff -P data/
+wget https://www.ebi.ac.uk/biostudies/files/E-MTAB-14308/ESCHGGlcNAc_rep2_peaks.gff -P data/
 ```
 
 ## Installation
