@@ -26,12 +26,12 @@ wget XXX/DLD1GlcNAcDoxAux_rep1.bw -P data/
 wget XXX/DLD1GlcNAcNoDoxAux_rep1.bw -P data/
 wget https://zenodo.org/records/12793186/files/RNApolymeraseII_SRX10580013.bw -P data/
 
-## The gene annotations
-wget https://zenodo.org/records/12793186/files/Homo_sapiens.GRCh38.110.chr_march2024_filtered.tar.gz
-tar -xvzf Homo_sapiens.GRCh38.110.chr_march2024_filtered.tar.gz
+## The gene annotations Homo_sapiens.GRCh38.110.chr_march2024_filtered.bed
+wget https://zenodo.org/records/12793186/files/Homo_sapiens.GRCh38.110.chr_march2024_filtered.tar.gz  -P data/
+cd data && tar -xvzf Homo_sapiens.GRCh38.110.chr_march2024_filtered.tar.gz && rm Homo_sapiens.GRCh38.110.chr_march2024_filtered.tar.gz && cd ..
 
 ## The peaks coordinates after decreasing sorting of RNAPol II
-wget https://zenodo.org/records/12793186/files/peakscoord-fig4B.bed
+wget https://zenodo.org/records/12793186/files/peakscoord-fig4B.bed -P data/
 ```
 
 ## Installation
@@ -56,7 +56,7 @@ mkdir results
 NBCPU=1
 
 ## Build the deeptools matrix
-computeMatrix scale-regions --regionsFileName Homo_sapiens.GRCh38.110.chr_march2024_filtered.bed --scoreFileName RNApolymeraseII_SRX10580013.bw --outFileName results/polII.mat --samplesLabel RNAPol_II --numberOfProcessors $NBCPU --regionBodyLength 2000 --beforeRegionStartLength 2000 --afterRegionStartLength 2000 --unscaled5prime 0 --unscaled3prime 0
+computeMatrix scale-regions --regionsFileName data/Homo_sapiens.GRCh38.110.chr_march2024_filtered.bed --scoreFileName data/RNApolymeraseII_SRX10580013.bw --outFileName results/polII.mat --samplesLabel RNAPol_II --numberOfProcessors $NBCPU --regionBodyLength 2000 --beforeRegionStartLength 2000 --afterRegionStartLength 2000 --unscaled5prime 0 --unscaled3prime 0
 
 ## Plot the RNAPol II signal using decreasing sorting
 FILENAME="heatmap_polII.png"
