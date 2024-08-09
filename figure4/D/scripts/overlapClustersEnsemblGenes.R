@@ -64,7 +64,7 @@ checkparams <- function(clusterpathvec, expnamevec, outputfoldervec) {
 }
 
 
-buildgffrangeslist <- function(clusterpathvec, extractensemblgenename) {
+buildgffrangeslist <- function(clusterpathvec) {
     grlist <- list()
 
     for (i in seq_len(length(clusterpathvec))) {
@@ -72,14 +72,8 @@ buildgffrangeslist <- function(clusterpathvec, extractensemblgenename) {
         current_gff <- read.delim(clusterpathvec[i], stringsAsFactors = FALSE,
             header = FALSE)
 
-        ## In case the overlap is done with ensembl genes, extract gene name
-        if (isTRUE(all.equal(i, 2)) && extractensemblgenename)
-            genenamevec <- unlist(lapply(strsplit(unlist(lapply(
-                strsplit(current_gff$V9, ";"), "[", 2)), "="), "[", 2))
-        else
-            genenamevec <- current_gff[, 3]
-
         ## Check for duplicated names
+        genenamevec <- current_gff[, 3]
         if (length(genenamevec) != length(unique(genenamevec)))
             genenamevec <- make.unique(genenamevec, sep = "-")
 
@@ -106,6 +100,13 @@ buildgffrangeslist <- function(clusterpathvec, extractensemblgenename) {
 buildgr <- function(currentpath, chromvec) {
 
     message("\t Processing ", currentpath)
+
+    !!!!!!!!!
+    genenamevec <- unlist(lapply(strsplit(unlist(lapply(
+                strsplit(current_gff$V9, ";"), "[", 2)), "="), "[", 2))
+    if (length(genenamevec) != length(unique(genenamevec)))
+            genenamevec <- make.unique(genenamevec, sep = "-")
+    !!!!!!!!!!
     fi <- read.table(currentpath, stringsAsFactors = FALSE)
     fi <- checkchromosomes(fi, chromvec) # nolint
     gr <- GenomicRanges::GRanges(seqnames = fi$V1,
