@@ -42,7 +42,7 @@ wget https://zenodo.org/records/12793186/files/enhancerAtlas2_DLD1.gff -P data/
 
 ## Installation
 
-***!!!!!! TO FINISH !!!!! ***
+
 Install conda following the instructions [here](https://conda.io/projects/conda/en/latest/user-guide/install/index.html). Using the recipe [fig4D.yml](fig4D.yml), run:
 
 ```
