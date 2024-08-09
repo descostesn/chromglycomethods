@@ -63,6 +63,22 @@ The script should output:
 ***!!!!!!!!!!!!!!!!!!! TO MODIFY NB OF ANNOTATIONS REMOVED !!!!!!!!!!!!!!!!!!!!!!!***
 ```
 Reading gff files and return conversion table
+'select()' returned 1:many mapping between keys and columns
+'select()' returned 1:many mapping between keys and columns
+'select()' returned 1:many mapping between keys and columns
+'select()' returned 1:many mapping between keys and columns
+'select()' returned 1:many mapping between keys and columns
+Warning messages:
+1: In clusterProfiler::bitr(fi[, 3], fromType = "SYMBOL", toType = c("SYMBOL",  :
+  9.35% of input gene IDs are fail to map...
+2: In clusterProfiler::bitr(fi[, 3], fromType = "SYMBOL", toType = c("SYMBOL",  :
+  6.47% of input gene IDs are fail to map...
+3: In clusterProfiler::bitr(fi[, 3], fromType = "SYMBOL", toType = c("SYMBOL",  :
+  5.79% of input gene IDs are fail to map...
+4: In clusterProfiler::bitr(fi[, 3], fromType = "SYMBOL", toType = c("SYMBOL",  :
+  7.35% of input gene IDs are fail to map...
+5: In clusterProfiler::bitr(fi[, 3], fromType = "SYMBOL", toType = c("SYMBOL",  :
+  5.6% of input gene IDs are fail to map...
 Defining background
 ### No background provided
 Retrieving info from biomart
@@ -73,24 +89,16 @@ Connected with success.
 # Attempt 1/5 # Retrieving information about genes from biomaRt ...
 Information retrieved with success.
 Filtering out non-canonical chromosomes from genesinfo
-
-!!!!!!!!!!!!!!!!!!! TO MODIFY !!!!!!!!!!!!!!!!!!!!!!!
-
-
-	 Removing 70/57186 annotations with non canonical chromosomes
-
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-
+Removing 7557/70606 annotations with non canonical chromosomes
 Creating the input list of entrezID
 Creating the entrezID-symbol table
 Performing clusters comparison on molecular function
-Output the dotplot of the comparison into results/
+Output the dotplot of the comparison into ../results/
 ```
 
 You should obtain the raw figure:
 
-***!!!!!!!!!!!!!!!!!!!!!!!!!!!! TO DO !!!!!!!!!!!!!!!!!!!***
+<img src="pictures/dotplot_top10.png" alt="GOMF" width="400"/>
 
 
 ### Pre-processing
