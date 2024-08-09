@@ -33,6 +33,7 @@ backgroundpath <- NA
 datasetname <- "hsapiens_gene_ensembl"
 ensemblversion <- "Ensembl Genes 109"
 levelnum <- 3
+altmirror <- FALSE
 
 ################
 
@@ -193,7 +194,7 @@ checkparams(species_name, gffvec, expnamesvec, output_folder)
 message("Reading gff files and return conversion table")
 different_id_list <- lapply(gffvec, function(currentgff, dbname) {
     fi <- read.delim(currentgff, header = FALSE)
-    return(clusterProfiler::bitr(fi[, 3], fromType = "ENSEMBL",
+    return(clusterProfiler::bitr(fi[, 3], fromType = "SYMBOL",
                                     toType = c("SYMBOL", "ENTREZID",
                                             "ENSEMBL", "UNIPROT",
                                             "ENSEMBLPROT"), OrgDb = dbname))
@@ -208,7 +209,7 @@ background_id_vec <- backgrounddef(different_id_list, backgroundpath,
 message("Retrieving info from biomart")
 res <- retrieveInfo(biomartname = "ENSEMBL_MART_ENSEMBL",
         datasetname =  datasetname,
-        versionname = ensemblversion, alternativemirrorchoice = TRUE)
+        versionname = ensemblversion, alternativemirrorchoice = altmirror)
 ensembl <- res[[1]]
 genesinfo <- res[[2]]
 
