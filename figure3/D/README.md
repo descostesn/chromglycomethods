@@ -22,20 +22,20 @@ This experiment uses a transgenic cell line expressing bacterial OGA BtGH84 fuse
 mkdir data
 
 ## The bam files of ATAC-seq before and after doxocyclin induction
-wget XXX/ESC_1b_atac_NoDox_rep1.bam -P data/
-wget XXX/ESC_1b_atac_NoDox_rep2.bam -P data/
-wget XXX/ESC_1b_atac_NoDox_rep3.bam -P data/
-wget XXX/ESC_1b_atac_Dox_rep1.bam -P data/
-wget XXX/ESC_1b_atac_Dox_rep2.bam -P data/
-wget XXX/ESC_1b_atac_Dox_rep3.bam -P data/
+wget https://www.ebi.ac.uk/biostudies/files/E-MTAB-14350/ESC_1b_atac_NoDox_rep1.bam -P data/
+wget https://www.ebi.ac.uk/biostudies/files/E-MTAB-14350/ESC_1b_atac_NoDox_rep2.bam -P data/
+wget https://www.ebi.ac.uk/biostudies/files/E-MTAB-14350/ESC_1b_atac_NoDox_rep3.bam -P data/
+wget https://www.ebi.ac.uk/biostudies/files/E-MTAB-14350/ESC_1b_atac_Dox_rep1.bam -P data/
+wget https://www.ebi.ac.uk/biostudies/files/E-MTAB-14350/ESC_1b_atac_Dox_rep2.bam -P data/
+wget https://www.ebi.ac.uk/biostudies/files/E-MTAB-14350/ESC_1b_atac_Dox_rep3.bam -P data/
 
 ## The peak annotations (not necessary to generate the MA plot, see union file hereafter)
-wget XXX/ESC_1b_atac_NoDox_rep1_peaks.bed -P data/
-wget XXX/ESC_1b_atac_NoDox_rep2_peaks.bed -P data/
-wget XXX/ESC_1b_atac_Dox_rep3_peaks.bed -P data/
-wget XXX/ESC_1b_atac_Dox_rep1_peaks.bed -P data/
-wget XXX/ESC_1b_atac_Dox_rep2_peaks.bed -P data/
-wget XXX/ESC_1b_atac_NoDox_rep3_peaks.bed -P data/
+wget https://www.ebi.ac.uk/biostudies/files/E-MTAB-14350/ESC_1b_atac_NoDox_rep1_peaks.bed -P data/
+wget https://www.ebi.ac.uk/biostudies/files/E-MTAB-14350/ESC_1b_atac_NoDox_rep2_peaks.bed -P data/
+wget https://www.ebi.ac.uk/biostudies/files/E-MTAB-14350/ESC_1b_atac_NoDox_rep3_peaks.bed -P data/
+wget https://www.ebi.ac.uk/biostudies/files/E-MTAB-14350/ESC_1b_atac_Dox_rep1_peaks.bed -P data/
+wget https://www.ebi.ac.uk/biostudies/files/E-MTAB-14350/ESC_1b_atac_Dox_rep2_peaks.bed -P data/
+wget https://www.ebi.ac.uk/biostudies/files/E-MTAB-14350/ESC_1b_atac_Dox_rep3_peaks.bed -P data/
 
 ## Annotations of the union of ATAC-seq peaks
 wget https://zenodo.org/api/records/12793186/files/ESC1bNoDox_vs_Dox.gtf -P data/
