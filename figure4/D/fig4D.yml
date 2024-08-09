@@ -4,21 +4,19 @@ channels:
 dependencies:
   - r-base=4.3.3
   - r-ggplot2=3.5.1
+  - r-tibble=3.2.1
+  - r-ggupset=0.3.0
+  - r-rcolorbrewer=1.1_3
+  - r-dplyr=1.1.4
+  - r-reshape2=1.4.4
   - bioconductor-clusterprofiler=4.8.1
   - bioconductor-annotationdbi=1.62.2
   - bioconductor-biomart=2.56.1
-  !! org.Hs.eg.db
-
-
-library("GenomicFeatures")
-library("ChIPpeakAnno")
-library("RColorBrewer")
-library("reshape2")
-library("TxDb.Hsapiens.UCSC.hg38.knownGene")
-library("GenomicRanges")
-library("IRanges")
-library("GenomeInfoDb")
-library("S4Vectors")
-library("tibble")
-library("ggupset")
-library(dplyr)
+  - bioconductor-genomicfeatures=1.52.1
+  - bioconductor-iranges=2.36.0
+  - bioconductor-genomicranges=1.54.1
+  - bioconductor-chippeakanno=3.34.1
+  - bioconductor-genomeinfodb=1.36.1
+  - bioconductor-s4vectors=0.38.1
+  - bioconductor-txdb.hsapiens.ucsc.hg38.knowngene=3.18.0
+  - bioconductor-org.hs.eg.db=3.18.0
