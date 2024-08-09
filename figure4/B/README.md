@@ -64,6 +64,10 @@ FILENAME="heatmap_polII.png"
 plotHeatmap --matrixFile results/polII.mat --outFileName results/$FILENAME --plotFileFormat 'png' --outFileSortedRegions results/peakscoord-fig4B.bed --dpi '200' --sortRegions 'descend' --sortUsing 'mean' --averageTypeSummaryPlot 'mean' --plotType 'lines' --missingDataColor 'black' --alpha '1.0' --colorList white,blue --xAxisLabel 'distance from TSS (bp)' --yAxisLabel 'genes' --heatmapWidth 7.5 --heatmapHeight 25.0 --whatToShow 'plot, heatmap and colorbar' --startLabel 'TSS' --endLabel 'TES' --refPointLabel 'TSS' --samplesLabel RNAPolII --legendLocation 'best' --labelRotation '0'
 ```
 
+You should obtain the raw figure:
+
+<img src="pictures/heatmap_polII.png" alt="PolII heatmap" width="400"/>
+
 Using the sorted peak coordinates `peakscoord-fig4B.bed`, generate a matrix of O-GlcNac signal before and after (Dox)/Auxin treatment:
 
 ```
@@ -80,7 +84,7 @@ plotHeatmap --matrixFile results/OGlcNac.mat --outFileName results/$FILENAME  --
 
 You should obtain the following heatmaps:
 
-!!!!!!! TO DO
+<img src="pictures/" alt="OGlcNac heatmap" width="400"/>
 
 
 
