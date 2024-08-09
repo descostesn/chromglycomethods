@@ -96,7 +96,7 @@ buildgffrangeslist <- function(clusterpathvec) {
 
 buildgrensembl <- function(currentpath) {
 
-    fi <- read.table(currentpath, stringsAsFactors = FALSE)
+    fi <- read.delim(currentpath, stringsAsFactors = FALSE, header = FALSE)
     genenamevec <- unlist(lapply(strsplit(unlist(lapply(
                 strsplit(fi$V9, ";"), "[", 2)), "="), "[", 2))
     if (length(genenamevec) != length(unique(genenamevec)))
@@ -119,6 +119,7 @@ checkparams(clusterpathvec, expnamevec, outputfoldervec)
 
 message("Reading gff input and converting to genomicranges Data") # nolint
 grlist <- buildgffrangeslist(clusterpathvec)
+names(grlist) <- expnamevec
 grensembl <- buildgrensembl(ensemblpath)
 
 message("Performing overlap of each cluster with ensembl annotations")  # nolint
