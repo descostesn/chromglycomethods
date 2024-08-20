@@ -19,6 +19,8 @@ Processed data were also deposited on Zenodo: [DOI 10.5281/zenodo.12793185](http
 
 All codes and conda environments are provided along with the figures in the corresponding folders.
 
+The complete list of data used for the article can be found [here](alldata.csv)
+
 
 ## Acknowledgements
 
