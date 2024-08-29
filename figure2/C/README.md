@@ -17,12 +17,13 @@ The bigwig files used in this figure can be obtained with:
 ```
 #!/bin/bash
 
-wget https://zenodo.org/records/13444099/files/TPMbw_sictrl_rep1.bw
-wget https://zenodo.org/records/13444099/files/TPMbw_siogt_rep1.bw
-
-## Replicate 2 is also provided
+## The screenshots were performed with rep 2
 wget https://zenodo.org/records/13444099/files/TPMbw_sictrl_rep2.bw
 wget https://zenodo.org/records/13444099/files/TPMbw_siogt_rep2.bw
+
+## Replicate 1 is also provided
+wget https://zenodo.org/records/13444099/files/TPMbw_sictrl_rep1.bw
+wget https://zenodo.org/records/13444099/files/TPMbw_siogt_rep1.bw
 ```
 
 
