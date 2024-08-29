@@ -17,11 +17,11 @@ The bigwig files used in this figure can be obtained with:
 ```
 #!/bin/bash
 
-wget https://zenodo.org/records/13444099/files/
-wget https://zenodo.org/records/13444099/files/
-wget https://zenodo.org/records/13444099/files/
+wget https://zenodo.org/records/13444099/files/ESCHGGlcNAc1_lane1sample12_multik10.bw
+wget https://zenodo.org/records/13444099/files/H3K4me3_SRX5382140_multik10.bw
+wget https://zenodo.org/records/13444099/files/H3K9me3_SRR925652_multik10.bw
 ```
-
+ 
 ## Figure Generation
 
 The bw files were uploaded to [IGV](https://igv.org/) v2.13.0 selecting the mouse mm10 genome.
