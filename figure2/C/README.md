@@ -12,3 +12,17 @@ Genome browser view of O-GlcNac and RNA-seq signal in control and siOgt Knock-Do
 
 ## Data
 
+The bigwig files used in this figure can be obtained with:
+
+```
+#!/bin/bash
+
+wget https://zenodo.org/records/13444099/files/TPMbw_sictrl_rep1.bw
+wget https://zenodo.org/records/13444099/files/TPMbw_siogt_rep1.bw
+
+## Replicate 2 is also provided
+wget https://zenodo.org/records/13444099/files/TPMbw_sictrl_rep2.bw
+wget https://zenodo.org/records/13444099/files/TPMbw_siogt_rep2.bw
+```
+
+
