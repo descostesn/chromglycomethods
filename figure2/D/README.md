@@ -35,11 +35,11 @@ wget https://zenodo.org/records/12793186/files/fig2C_clusterprofiler.txt -P resu
 ## Installation
 
 
-Install conda following the instructions [here](https://conda.io/projects/conda/en/latest/user-guide/install/index.html). Using the recipe [fig2C.yml](fig2C.yml), run:
+Install conda following the instructions [here](https://conda.io/projects/conda/en/latest/user-guide/install/index.html). Using the recipe [fig2D.yml](fig2D.yml), run:
 
 ```
-conda env create -n fig2c --file ./fig2C.yml
-conda activate fig2c
+conda env create -n fig2D --file ./fig2D.yml
+conda activate fig2D
 ```
 
 
