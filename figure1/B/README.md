@@ -17,9 +17,9 @@ The bigwig files used in this figure can be obtained with:
 ```
 #!/bin/bash
 
-wget 
-wget 
-wget 
+wget https://zenodo.org/records/13444099/files/
+wget https://zenodo.org/records/13444099/files/
+wget https://zenodo.org/records/13444099/files/
 ```
 
 ## Figure Generation
