@@ -64,7 +64,7 @@ conda activate fig4c
 
 ## Figure Generation
 
-Using the union of peaks as the reference loci, compute a matrix of O-GlcNac without and with Auxin treatment. This matrix is used to plot a heatmap with K-means clustering with 5 groups (deeptools v3.5.5):
+Because of possible differences in seeds to perform the clustering, the matrix is built on the already sorted regions. The following computes a matrix of O-GlcNac without and with Auxin treatment. This matrix is used to plot a heatmap with K-means clustering with 5 groups (deeptools v3.5.5):
 
 ```
 #!/bin/bash
@@ -74,28 +74,22 @@ mkdir results
 NBCPU=1
 FILENAME="heatmap_OGlcNac.png"
 
-computeMatrix reference-point --regionsFileName data/union_OGlcNac_noauxaux-fig4C.bed --scoreFileName data/DLD1GlcNAcNoDoxAux_rep1.bw data/DLD1GlcNAcDoxAux_rep1.bw --outFileName results/OGlcNacnoauxaux.mat --samplesLabel DLD1GlcNAcNoAux DLD1GlcNAcAux  --numberOfProcessors $NBCPU --referencePoint TSS  --beforeRegionStartLength 1000 --afterRegionStartLength 1000
+computeMatrix reference-point --regionsFileName data/peakscoord-fig4C.bed --scoreFileName data/DLD1GlcNAcNoDoxAux_rep1.bw data/DLD1GlcNAcDoxAux_rep1.bw --outFileName results/OGlcNacnoauxaux.mat --samplesLabel DLD1GlcNAcNoAux DLD1GlcNAcAux  --numberOfProcessors $NBCPU --referencePoint TSS  --beforeRegionStartLength 1000 --afterRegionStartLength 1000
 
-plotHeatmap --matrixFile results/OGlcNacnoauxaux.mat --outFileName $FILENAME --plotFileFormat 'png' --outFileSortedRegions results/peakscoord-fig4C.bed --dpi '200' --sortRegions 'descend' --sortUsing 'mean' --averageTypeSummaryPlot 'mean' --plotType 'lines' --missingDataColor 'black' --alpha '1.0' --colorList white,blue --xAxisLabel 'distance from peak (bp)' --yAxisLabel 'peaks' --heatmapWidth 7.5 --heatmapHeight 25.0 --whatToShow 'plot, heatmap and colorbar' --startLabel 'start' --endLabel 'TES' --refPointLabel 'start'     --legendLocation 'best' --labelRotation '0' --kmeans 5
+plotHeatmap --matrixFile results/OGlcNacnoauxaux.mat --outFileName $FILENAME --plotFileFormat 'png' --dpi '200' --sortRegions 'keep' --sortUsing 'mean' --averageTypeSummaryPlot 'mean' --plotType 'lines' --missingDataColor 'black' --alpha '1.0' --colorList white,blue --xAxisLabel 'distance from peak (bp)' --yAxisLabel 'peaks' --heatmapWidth 7.5 --heatmapHeight 25.0 --whatToShow 'plot, heatmap and colorbar' --startLabel 'start' --endLabel 'TES' --refPointLabel 'start' --legendLocation 'best' --labelRotation '0'
 ```
 
 You should obtain the raw figure:
-!! TODO
 
-Replace the groups 'cluster_2/3/4/5' in results/peakscoord-fig4C.bed to avoid visual separation of the groups:
+<img src="pictures/heatmap_OGlcNac.png" alt="heatmap_OGlcNac" width="400"/>
 
-```
-sed "s/cluster_[2-5]/cluster_1/" results/peakscoord-fig4C.bed > results/tmp.bed
-rm results/peakscoord-fig4C.bed
-mv results/tmp.bed results/peakscoord-fig4C.bed
-```
 
 Using the sorted peak coordinates `peakscoord-fig4C.bed`, generate a matrix of RNAPol II signal before and after (Dox)/Auxin treatment:
 
 ```
 FILENAME="heatmap_RNAPolII.png"
 
-computeMatrix  reference-point --regionsFileName results/peakscoord-fig4C.bed --scoreFileName RNAPolII_SRX11070611_control.bw RNAPolII_SRX11070613_auxin.bw --outFileName results/RNAPolIInoauxaux.mat --samplesLabel RNAPolIInoaux RNAPolIIaux --numberOfProcessors $NBCPU --referencePoint TSS --beforeRegionStartLength 1000 --afterRegionStartLength 1000
+computeMatrix  reference-point --regionsFileName data/peakscoord-fig4C.bed --scoreFileName data/RNAPolII_SRX11070611_control.bw data/RNAPolII_SRX11070613_auxin.bw --outFileName results/RNAPolIInoauxaux.mat --samplesLabel RNAPolIInoaux RNAPolIIaux --numberOfProcessors $NBCPU --referencePoint TSS --beforeRegionStartLength 1000 --afterRegionStartLength 1000
 
 plotHeatmap --matrixFile results/RNAPolIInoauxaux.mat --outFileName $FILENAME --plotFileFormat 'png' --dpi '200' --sortRegions 'no' --sortUsing 'mean' --averageTypeSummaryPlot 'mean' --plotType 'lines' --missingDataColor 'black' --alpha '1.0' --colorList white,blue --xAxisLabel 'distance from peak (bp)' --yAxisLabel 'peaks' --heatmapWidth 7.5 --heatmapHeight 25.0 --whatToShow 'plot, heatmap and colorbar' --startLabel 'start' --endLabel 'TES' --refPointLabel 'start' --legendLocation 'best' --labelRotation '0'
 ```
