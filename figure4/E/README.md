@@ -17,12 +17,16 @@ Examples of RNA Pol II and O-GlcNAc enrichment upon Dox-Aux treatment by genome 
 mkdir data
 
 ## The bigwigs of O-GlcNca before and after treatment by (Dox)/Auxin
-wget https://www.ebi.ac.uk/biostudies/files/E-MTAB-14307/DLD1GlcNAcNoDoxAux_rep1.bw -P data/
-wget https://www.ebi.ac.uk/biostudies/files/E-MTAB-14307/DLD1GlcNAcDoxAux_rep1.bw -P data/
+wget https://www.ebi.ac.uk/biostudies/files/E-MTAB-14307/DLD1GlcNAcNoDoxAux_rep2.bw -P data/
+wget https://www.ebi.ac.uk/biostudies/files/E-MTAB-14307/DLD1GlcNAcDoxAux_rep2.bw -P data/
 
 ## The bigwigs of RNAPol II before and after treatment by (Dox)/Auxin
 wget https://zenodo.org/records/12793186/files/RNAPolII_SRX11070611_control.bw -P data/
 wget https://zenodo.org/records/12793186/files/RNAPolII_SRX11070613_auxin.bw -P data/
+
+## The replicate 1 is also available
+wget https://www.ebi.ac.uk/biostudies/files/E-MTAB-14307/DLD1GlcNAcNoDoxAux_rep1.bw -P data/
+wget https://www.ebi.ac.uk/biostudies/files/E-MTAB-14307/DLD1GlcNAcDoxAux_rep1.bw -P data/
 ```
 
 ## Figure Generation
