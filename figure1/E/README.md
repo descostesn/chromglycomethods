@@ -27,22 +27,22 @@ Download the following data:
 mkdir data
 
 # The bed file containing the sorted peak coordinates:
-wget https://zenodo.org/records/12793186/files/peakscoord-fig1E.bed -P data/
+wget https://zenodo.org/records/13444099/files/peakscoord-fig1E.bed -P data/
 
 # The union of the O-GlcNac peaks
-wget https://zenodo.org/records/12793186/files/union_sept2023mouse_HG1-2.gff -P data/
+wget https://zenodo.org/records/13444099/files/union_sept2023mouse_HG1-2.gff -P data/
 
 # The bigwig files of the experiments
 wget https://www.ebi.ac.uk/biostudies/files/E-MTAB-14308/ESCHGGlcNAc_rep1.bw  -P data/
-wget https://zenodo.org/records/12793186/files/RNApolymeraseII_SRX8556273.bw  -P data/
-wget https://zenodo.org/records/12793186/files/Tbp_SRX9195301.bw  -P data/
-wget https://zenodo.org/records/12793186/files/Taf12_SRX11221932.bw  -P data/
-wget https://zenodo.org/records/12793186/files/Nelfa_SRX017058.bw  -P data/
-wget https://zenodo.org/records/12793186/files/Med1_SRX9195310.bw  -P data/
-wget https://zenodo.org/records/12793186/files/Med12_SRX1670201.bw  -P data/
-wget https://zenodo.org/records/12793186/files/Med24_SRX5926394.bw  -P data/
-wget https://zenodo.org/records/12793186/files/Med26_SRX4167136.bw  -P data/
-wget https://zenodo.org/records/12793186/files/Dr1_SRX2894853.bw  -P data/
+wget https://zenodo.org/records/13444099/files/RNApolymeraseII_SRX8556273.bw  -P data/
+wget https://zenodo.org/records/13444099/files/Tbp_SRX9195301.bw  -P data/
+wget https://zenodo.org/records/13444099/files/Taf12_SRX11221932.bw  -P data/
+wget https://zenodo.org/records/13444099/files/Nelfa_SRX017058.bw  -P data/
+wget https://zenodo.org/records/13444099/files/Med1_SRX9195310.bw  -P data/
+wget https://zenodo.org/records/13444099/files/Med12_SRX1670201.bw  -P data/
+wget https://zenodo.org/records/13444099/files/Med24_SRX5926394.bw  -P data/
+wget https://zenodo.org/records/13444099/files/Med26_SRX4167136.bw  -P data/
+wget https://zenodo.org/records/13444099/files/Dr1_SRX2894853.bw  -P data/
 
 ## The peak files of each replicates
 wget https://www.ebi.ac.uk/biostudies/files/E-MTAB-14308/ESCHGGlcNAc_rep1_peaks.gff -P data/

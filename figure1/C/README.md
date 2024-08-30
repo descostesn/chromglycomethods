@@ -33,8 +33,8 @@ mkdir data
 wget https://www.ebi.ac.uk/biostudies/files/E-MTAB-14308/ESCHGGlcNAc_rep1_peaks.gff -P data/
 
 # RNA-seq counts and feature lengths
-wget https://zenodo.org/records/12793186/files/ESCRNAseq_SRR11294181counts.txt -P data/
-wget https://zenodo.org/records/12793186/files/ESCRNAseq_SRR11294181countslength.txt -P data/
+wget https://zenodo.org/records/13444099/files/ESCRNAseq_SRR11294181counts.txt -P data/
+wget https://zenodo.org/records/13444099/files/ESCRNAseq_SRR11294181countslength.txt -P data/
 ```
 
 ## Installation
@@ -105,7 +105,7 @@ The peaks were obtained with Macs2 v2.2.7.1: `macs2 callpeak -t $input.bam -c $c
 
 The pre-processing was performed with the Galaxy workflows [Galaxy-Workflow-OGlcNac_RNASeqSE_mm10_STAR_bw](galaxy-workflow/Galaxy-Workflow-OGlcNac_RNASeqSE_mm10_STAR_bw.ga). The .ga file can be imported in your own galaxy account.
 
-The file to compute the count tables can be downloaded from `wget https://zenodo.org/records/12793186/files/Mus_musculus.GRCm38.102.chr.gtf.tar.gz`
+The file to compute the count tables can be downloaded from `wget https://zenodo.org/records/13444099/files/Mus_musculus.GRCm38.102.chr.gtf.tar.gz`
 
 
 

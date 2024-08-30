@@ -20,24 +20,24 @@ Geneset enrichment analysis of the 5 clusters defined in [fig4C](../C/README.md)
 
 mkdir data
 
-wget https://zenodo.org/records/12793186/files/fig4D_genes_cluster1.gff  -P data/
-wget https://zenodo.org/records/12793186/files/fig4D_genes_cluster2.gff  -P data/
-wget https://zenodo.org/records/12793186/files/fig4D_genes_cluster3.gff  -P data/
-wget https://zenodo.org/records/12793186/files/fig4D_genes_cluster4.gff -P data/
-wget https://zenodo.org/records/12793186/files/fig4D_genes_cluster5.gff  -P data/
+wget https://zenodo.org/records/13444099/files/fig4D_genes_cluster1.gff  -P data/
+wget https://zenodo.org/records/13444099/files/fig4D_genes_cluster2.gff  -P data/
+wget https://zenodo.org/records/13444099/files/fig4D_genes_cluster3.gff  -P data/
+wget https://zenodo.org/records/13444099/files/fig4D_genes_cluster4.gff -P data/
+wget https://zenodo.org/records/13444099/files/fig4D_genes_cluster5.gff  -P data/
 
 ## The coordinates of the peaks sorted in 5 groups
-wget https://zenodo.org/records/12793186/files/peakscoord-fig4C.bed -P data
+wget https://zenodo.org/records/13444099/files/peakscoord-fig4C.bed -P data
 
 ## The file of the union of the peaks used for preprocessing
-wget https://zenodo.org/records/12793186/files/union_OGlcNac_noauxaux-fig4C.bed -P data
+wget https://zenodo.org/records/13444099/files/union_OGlcNac_noauxaux-fig4C.bed -P data
 
 ## The repeatmasker annotations used for preprocessing
-wget https://zenodo.org/records/12793186/files/repeatshg38.tar.gz -P data/
+wget https://zenodo.org/records/13444099/files/repeatshg38.tar.gz -P data/
 cd data/ && tar -xvzf repeatshg38.tar.gz && rm repeatshg38.tar.gz && cd ..
 
 ## The DLD1 enhancer coordinates used for preprocessing
-wget https://zenodo.org/records/12793186/files/enhancerAtlas2_DLD1.gff -P data/
+wget https://zenodo.org/records/13444099/files/enhancerAtlas2_DLD1.gff -P data/
 ```
 
 ## Installation

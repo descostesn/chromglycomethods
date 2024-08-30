@@ -25,11 +25,11 @@ Volcano plot indicating the differentially expressed genes upon degradation of O
 mkdir data
 
 # The tabular file given by DEseq2
-wget https://zenodo.org/records/12793186/files/resultDeseq2_siogt.txt  -P data/
+wget https://zenodo.org/records/13444099/files/resultDeseq2_siogt.txt  -P data/
 
 ## The down- and up-regulated genes having an O-GlcNac peak
-wget https://zenodo.org/records/12793186/files/siogtdown_withOGlcNac.gff -P data/
-wget https://zenodo.org/records/12793186/files/siogtup_withOGlcNac.gff  -P data/
+wget https://zenodo.org/records/13444099/files/siogtdown_withOGlcNac.gff -P data/
+wget https://zenodo.org/records/13444099/files/siogtup_withOGlcNac.gff  -P data/
 
 # O-GlcNac peak replicates to perform merge
 wget https://www.ebi.ac.uk/biostudies/files/E-MTAB-14308/ESCHGGlcNAc_rep1.bw -P data/
@@ -105,7 +105,7 @@ The peaks were obtained with Macs2 v2.2.7.1: `macs2 callpeak -t $input.bam -c $c
 
 The pre-processing was performed with the Galaxy workflows [OGlcNac_RNASeqPE_mm10_STAR_bw](galaxy-workflows/Galaxy-Workflow-OGlcNac_RNASeqPE_mm10_STAR_bw.ga). The .ga file can be imported in your own galaxy account.
 
-The file to compute the count tables can be downloaded from `wget https://zenodo.org/records/12793186/files/Mus_musculus.GRCm38.102.chr.gtf.tar.gz`
+The file to compute the count tables can be downloaded from `wget https://zenodo.org/records/13444099/files/Mus_musculus.GRCm38.102.chr.gtf.tar.gz`
 
 FastQC 0.11.9 was used for quality control: `fastqc --outdir $outfolder --threads $nbcpu --quiet --extract --kmers 7 -f 'fastq' input.fastq.gz`.
 
@@ -119,7 +119,7 @@ Counts were obtained with subread v2.0.1: `featureCounts -a Mus_musculus.GRCm38.
 
 The analysis was done on Galaxy with the workflow [OGlcNac_ensembl_deseq2_4samplesmouse](galaxy-workflows/Galaxy-Workflow-OGlcNac_ensembl_deseq2_4samplesmouse.ga)
 
-If one wants to run the complete workflow, the file that was used to annotate the genes can be downloaded from `wget https://zenodo.org/records/12793186/files/Mus_musculus.GRCm38.102.chr.gtf.tar.gz`
+If one wants to run the complete workflow, the file that was used to annotate the genes can be downloaded from `wget https://zenodo.org/records/13444099/files/Mus_musculus.GRCm38.102.chr.gtf.tar.gz`
 
 Differentially expressed genes were determined with bioconductor-deseq2 v1.22.1 (see the Galaxy script [deseq2.R](others/deseq2.R)]): `Rscript deseq2.R --cores $nbcpu -o results_deseq2.txt -p results_deseq2.pdf -n countfiles -H  -f '[["condition2_vs_condition1", [{"ctrl": ["sictrl_rep2_counts.txt", "sictrl_rep1_counts.txt"]}, {"siogt": ["siogt_rep1_counts.txt", "siogt_rep2_counts.txt"]}]]]' -l '{"siogt_rep1_counts.txt": "siogt_rep1_counts.txt", "siogt_rep2_counts.txt": "siogt_rep2_counts.txt", "sictrl_rep2_counts.txt": "sictrl_rep2_counts.txt", "sictrl_rep1_counts.txt": "sictrl_rep1_counts.txt"}' -t 1`
 
@@ -132,8 +132,8 @@ The resulting files can be downloaded:
 ```
 #!/bin/bash
 
-wget https://zenodo.org/records/12793186/files/log0_siogtdown-ensembl.gff -P results/
-wget https://zenodo.org/records/12793186/files/log0_siogtup-ensembl.gff -P results/
+wget https://zenodo.org/records/13444099/files/log0_siogtdown-ensembl.gff -P results/
+wget https://zenodo.org/records/13444099/files/log0_siogtup-ensembl.gff -P results/
 ```
 
 ### Merging replicates

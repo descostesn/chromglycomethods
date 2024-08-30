@@ -24,14 +24,14 @@ mkdir data
 ## The bigwig files of RNAPol II and O-GlcNac before and after induction
 wget https://www.ebi.ac.uk/biostudies/files/E-MTAB-14307/DLD1GlcNAcDoxAux_rep1.bw -P data/
 wget https://www.ebi.ac.uk/biostudies/files/E-MTAB-14307/DLD1GlcNAcNoDoxAux_rep1.bw -P data/
-wget https://zenodo.org/records/12793186/files/RNApolymeraseII_SRX10580013.bw -P data/
+wget https://zenodo.org/records/13444099/files/RNApolymeraseII_SRX10580013.bw -P data/
 
 ## The gene annotations Homo_sapiens.GRCh38.110.chr_march2024_filtered.bed
-wget https://zenodo.org/records/12793186/files/Homo_sapiens.GRCh38.110.chr_march2024_filtered.tar.gz  -P data/
+wget https://zenodo.org/records/13444099/files/Homo_sapiens.GRCh38.110.chr_march2024_filtered.tar.gz  -P data/
 cd data && tar -xvzf Homo_sapiens.GRCh38.110.chr_march2024_filtered.tar.gz && rm Homo_sapiens.GRCh38.110.chr_march2024_filtered.tar.gz && cd ..
 
 ## The peaks coordinates after decreasing sorting of RNAPol II
-wget https://zenodo.org/records/12793186/files/peakscoord-fig4B.bed -P data/
+wget https://zenodo.org/records/13444099/files/peakscoord-fig4B.bed -P data/
 ```
 
 ## Installation

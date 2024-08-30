@@ -15,7 +15,7 @@ The data produced for this study can be found on ArrayExpress:
 | [E-MTAB-14313](https://www.ebi.ac.uk/biostudies/arrayexpress/studies/E-MTAB-14313) | Total RNA-seq upon degradation of OGT by siRNA |
 | [E-MTAB-14350](https://www.ebi.ac.uk/biostudies/arrayexpress/studies/E-MTAB-14350) | ATAC-seq in the differentiation system ESC to NPC upon O-GlcNAc removal |
 
-Processed data were also deposited on Zenodo: [DOI 10.5281/zenodo.12793185](https://zenodo.org/records/12793186)
+Processed data were also deposited on Zenodo: [DOI 10.5281/zenodo.12793185](https://zenodo.org/records/13444099)
 
 All codes and conda environments are provided along with the figures in the corresponding folders.
 
