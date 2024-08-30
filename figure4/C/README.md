@@ -49,7 +49,7 @@ wget https://zenodo.org/records/13444099/files/RNAPolII_SRX11070613_auxin.bw -P 
 wget https://zenodo.org/records/13444099/files/union_OGlcNac_noauxaux-fig4C.bed -P data
 
 ## The coordinates of the peaks sorted in 5 groups
-wget https://zenodo.org/records/13444099/files/peakscoord-fig4C.bed
+wget https://zenodo.org/records/13444099/files/peakscoord-fig4C.bed -P data
 ```
 
 
@@ -74,7 +74,7 @@ mkdir results
 NBCPU=1
 FILENAME="heatmap_OGlcNac.png"
 
-computeMatrix reference-point --regionsFileName data/union_OGlcNac_noauxaux-fig4C.bed --scoreFileName DLD1GlcNAcNoDoxAux_rep1.bw DLD1GlcNAcDoxAux_rep1.bw --outFileName results/OGlcNacnoauxaux.mat --samplesLabel DLD1GlcNAcNoAux DLD1GlcNAcAux  --numberOfProcessors $NBCPU --referencePoint TSS  --beforeRegionStartLength 1000 --afterRegionStartLength 1000
+computeMatrix reference-point --regionsFileName data/union_OGlcNac_noauxaux-fig4C.bed --scoreFileName data/DLD1GlcNAcNoDoxAux_rep1.bw data/DLD1GlcNAcDoxAux_rep1.bw --outFileName results/OGlcNacnoauxaux.mat --samplesLabel DLD1GlcNAcNoAux DLD1GlcNAcAux  --numberOfProcessors $NBCPU --referencePoint TSS  --beforeRegionStartLength 1000 --afterRegionStartLength 1000
 
 plotHeatmap --matrixFile results/OGlcNacnoauxaux.mat --outFileName $FILENAME --plotFileFormat 'png' --outFileSortedRegions results/peakscoord-fig4C.bed --dpi '200' --sortRegions 'descend' --sortUsing 'mean' --averageTypeSummaryPlot 'mean' --plotType 'lines' --missingDataColor 'black' --alpha '1.0' --colorList white,blue --xAxisLabel 'distance from peak (bp)' --yAxisLabel 'peaks' --heatmapWidth 7.5 --heatmapHeight 25.0 --whatToShow 'plot, heatmap and colorbar' --startLabel 'start' --endLabel 'TES' --refPointLabel 'start'     --legendLocation 'best' --labelRotation '0' --kmeans 5
 ```
