@@ -1,4 +1,4 @@
-# Genome Browser Screenshot
+# O-GlcNac occupies promoters and transposable elements
 
 I. [Description](#description)  
 II. [Data](#data)  
