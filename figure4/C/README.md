@@ -42,14 +42,14 @@ wget https://www.ebi.ac.uk/biostudies/files/E-MTAB-14307/DLD1GlcNAcDoxAux_rep1_p
 wget https://www.ebi.ac.uk/biostudies/files/E-MTAB-14307/DLD1GlcNAcDoxAux_rep2_peaks.gff -P data/
 
 ## The bigwigs of RNAPol II used as control
-wget https://zenodo.org/records/13444099/files/RNAPolII_SRX11070611_control.bw -P data/
-wget https://zenodo.org/records/13444099/files/RNAPolII_SRX11070613_auxin.bw -P data/
+wget https://zenodo.org/records/12793186/files/RNAPolII_SRX11070611_control.bw -P data/
+wget https://zenodo.org/records/12793186/files/RNAPolII_SRX11070613_auxin.bw -P data/
 
 ## The file of the union of the peaks
-wget https://zenodo.org/records/13444099/files/union_OGlcNac_noauxaux-fig4C.bed -P data
+wget https://zenodo.org/records/12793186/files/union_OGlcNac_noauxaux-fig4C.bed -P data
 
 ## The coordinates of the peaks sorted in 5 groups
-wget https://zenodo.org/records/13444099/files/peakscoord-fig4C.bed -P data
+wget https://zenodo.org/records/12793186/files/peakscoord-fig4C.bed -P data
 ```
 
 

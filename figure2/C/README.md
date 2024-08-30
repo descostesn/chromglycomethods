@@ -35,7 +35,7 @@ The bw files were uploaded to [IGV](https://igv.org/) v2.13.0 selecting the mous
 
 The pre-processing was performed with the Galaxy workflows [Galaxy-Workflow-OGlcNac_RNASeqPE_mm10_STAR_bw](../B/galaxy-workflows/Galaxy-Workflow-OGlcNac_RNASeqPE_mm10_STAR_bw.ga). The .ga file can be imported in your own galaxy account.
 
-The file to compute the count tables can be downloaded from `wget https://zenodo.org/records/13444099/files/Mus_musculus.GRCm38.102.chr.gtf.tar.gz`
+The file to compute the count tables can be downloaded from `wget https://zenodo.org/records/12793186/files/Mus_musculus.GRCm38.102.chr.gtf.tar.gz`
 
 FastQC 0.11.9 was used for quality control: `fastqc --outdir $outfolder --threads $nbcpu --quiet --extract --kmers 7 -f 'fastq' input.fastq.gz`.
 

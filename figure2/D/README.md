@@ -22,14 +22,14 @@ mkdir data
 mkdir results
 
 ## The down- and up-regulated genes obtained with DESeq2
-wget https://zenodo.org/records/13444099/files/log0_siogtdown-ensembl.gff -P data/
-wget https://zenodo.org/records/13444099/files/log0_siogtup-ensembl.gff -P data/
+wget https://zenodo.org/records/12793186/files/log0_siogtdown-ensembl.gff -P data/
+wget https://zenodo.org/records/12793186/files/log0_siogtup-ensembl.gff -P data/
 
 ## The down-regulated genes having an O-GlcNac peak
-wget https://zenodo.org/records/13444099/files/siogtdown_withOGlcNac.gff -P data/
+wget https://zenodo.org/records/12793186/files/siogtdown_withOGlcNac.gff -P data/
 
 ## The results given by cluster profiler (not needed to perform the analysis)
-wget https://zenodo.org/records/13444099/files/fig2C_clusterprofiler.txt -P results/
+wget https://zenodo.org/records/12793186/files/fig2C_clusterprofiler.txt -P results/
 ```
 
 ## Installation
