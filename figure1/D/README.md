@@ -27,7 +27,7 @@ See [replacement-rep1.txt](replacement-files/replacement-rep1.txt) and [replacem
 
 ## Data
 
-As explained in the description section, The online tool is rapidly evolving and new experiments submitted to [GEO](https://www.ncbi.nlm.nih.gov/geo/) are regularly added. We provide the results of the enrichment analysis in the folder [chipatlas_results](chipatlas_results/).
+As explained in the description section, The online tool is rapidly evolving and new experiments are regularly added [GEO](https://www.ncbi.nlm.nih.gov/geo/). We provide the results of the enrichment analysis in the folder [chipatlas_results](chipatlas_results/).
 
 If one whishes to obtain results with the updated database, the O-GlcNac peaks can be obtained at:
 
