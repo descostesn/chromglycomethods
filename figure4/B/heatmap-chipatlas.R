@@ -1,6 +1,128 @@
 #############################
 ## This script builds different heatmaps based on the chip-atlas results.
 ##
+## The list of sra to filter was determined manually looking at the sra records.
+## See the below and the function .buildreplacementvectors() for details.
+##
+## resultlistedld1sramerged[[1]][[1]] - nodox1hist (ok SRX7677731):
+## H3K27ac - SRX20436769: Treatment 2h H2O, _K27AcCST_BRD4AID
+##
+## resultlistedld1sramerged[[1]][[2]] - nodox1polTFs (ok SRX7677736, SRX7677721,
+## SRX7677723):
+## RNA polymerase II - SRX7748724: Treatment 2h Aux
+## BRD2 - SRX7748766: Treatment 2h H2O
+## GFP  - SRX20436833: Treatment 48h dox and 2h Aux for BRD4
+## INTS3 - SRX8699645: Treatment by shRNA
+## MED1 - SRX11555395: Treatment DMSO 3h
+## NELFA - SRX10333914: Treatment VCPiAuxin
+## NELFCD - SRX15147204: Treatment Aux 2h
+## SMARCA4 - SRX11555379: Treatment DMSO 3h
+## SUPT6H - SRX15147167: Treatment Vehcle 2h
+##
+## resultlistedld1sramerged[[2]][[2]] - nodox2polTFs (ok SRX7677736, SRX7677721,
+## SRX7677723):
+## RNA polymerase II - SRX7748724: Treatment 2h Aux
+## BRD2 - SRX7748766: Treatment 2h H2O
+## GFP  - SRX20436833: Treatment 48h dox and 2h Aux for BRD4
+## INTS3 - SRX8699645: Treatment by shRNA
+## MED1 - SRX11555395: Treatment DMSO 3h
+## NELFA - SRX10333914: Treatment VCPiAuxin
+## NELFCD - SRX15147204: Treatment Aux 2h
+## SMARCA4 - SRX11555379: Treatment DMSO 3h
+## SUPT6H - SRX15147167: Treatment Vehcle 2h
+##
+## resultlistedld1sramerged[[3]][[1]] - dox3hist (ok SRX7677731):
+## H3K27ac - SRX20436769: Treatment 2h H2O, _K27AcCST_BRD4AID
+##
+## resultlistedld1sramerged[[3]][[2]] - dox3polTFs (ok SRX7677736, SRX7677721,
+## SRX7677723):
+## RNA polymerase II - SRX7748724: Treatment 2h Aux
+## BRD2 - SRX7748766: Treatment 2h H2O
+## GFP  - SRX20436833: Treatment 48h dox and 2h Aux for BRD4
+## GTF2F1 - SRX13784679: Treatment with dTAG13 for 3 hours
+## INTS3 - SRX8699645: Treatment by shRNA
+## MED1 - SRX11555395: Treatment DMSO 3h
+## NELFA - SRX10333914: Treatment VCPiAuxin
+## NELFCD - SRX15147204: Treatment Aux 2h
+## PAF1 - SRX17152983: Treatment NUiPAF-22 20uM
+## SUPT6H - SRX15147167: Treatment Vehcle 2h
+## XRN2 - SRX7677759: Treatment Auxin
+##
+## resultlistedld1sramerged[[4]][[1]] - dox4hist (ok SRX7677731):
+## H3K27ac - SRX20436769: Treatment 2h H2O, _K27AcCST_BRD4AID
+##
+## resultlistedld1sramerged[[4]][[2]] - dox4polTFs (ok SRX7677736, SRX7677721,
+## SRX7677723):
+## RNA polymerase II - SRX7748724: Treatment 2h Aux
+## BRD2 - SRX7748766: Treatment 2h H2O
+## GFP  - SRX20436833: Treatment 48h dox and 2h Aux for BRD4
+## INTS3 - SRX8699645: Treatment by shRNA
+## MED1 - SRX11555395: Treatment DMSO 3h
+## NELFA - SRX10333914: Treatment VCPiAuxin
+## NELFCD - SRX15147204: Treatment Aux 2h
+## SUPT6H - SRX15147167: Treatment Vehcle 2h
+##
+## The replacement data are:
+##
+## resultlistedld1sramerged[[1]][[1]] - nodox1hist (ok SRX7677731):
+## H3K27ac - 72.000000 - SRX10580017
+##
+## resultlistedld1sramerged[[1]][[2]] - nodox1polTFs (ok SRX7677736, SRX7677721,
+## SRX7677723):
+## RNA polymerase II - 69.536232 - SRX10580013
+## NA (BRD2 - SRX7748767)
+## NA (GFP - SRX20436785)
+## NA (INTS3 - 12.3 - SRX8699710)
+## NA (MED1 - SRX11555394)
+## NA (NELFA - SRX10333912)
+## NELFCD - 55.623188 - SRX7677719
+## NA (SMARCA4 - SRX11555378, SRX11555381, SRX11555380)
+## NA (SUPT6H - SRX15147169)
+##
+## resultlistedld1sramerged[[2]][[2]] - nodox2polTFs (ok SRX7677736, SRX7677721,
+## SRX7677723):
+## RNA polymerase II - 70.816472 - SRX10580013
+## NA (BRD2 - SRX7748767)
+## NA (GFP - SRX20436785)
+## NA (INTS3 - 13.3 - SRX8699710)
+## NA (MED1 - SRX11555394)
+## NA (NELFA - SRX10333912)
+## NELFCD - 56.605570 -  SRX7677719
+## NA (SMARCA4 - SRX11555378, SRX11555381, SRX11555380)
+## NA (SUPT6H - SRX15147169)
+##
+## resultlistedld1sramerged[[3]][[1]] - dox3hist (ok SRX7677731):
+## H3K27ac - 79.885932 - SRX10580016
+##
+## resultlistedld1sramerged[[3]][[2]] - dox3polTFs (ok SRX7677736, SRX7677721,
+## SRX7677723):
+## RNA polymerase II - 83.384030 - SRX10580013
+## NA (BRD2 - SRX7748767)
+## NA (GFP - SRX20436785)
+## NA (GTF2F1 - 13.574144 SRX13784677)
+## INTS3 - 21.863118 - SRX8699710
+## NA (MED1 - SRX11555394)
+## NA (NELFA - SRX10333912)
+## NELFCD - 70.456274 - SRX7677719
+## NA (PAF1 - 15.931559 SRX15147184)
+## NA (SUPT6H - SRX15147169)
+## NA (XRN2 - 5.969582 SRX7677740)
+##
+## resultlistedld1sramerged[[4]][[1]] - dox4hist (ok SRX7677731):
+## H3K27ac - 74.783550 - SRX10580017
+##
+## resultlistedld1sramerged[[4]][[2]] - dox4polTFs (ok SRX7677736, SRX7677721,
+## SRX7677723):
+## RNA polymerase II - 82.900433 - SRX10580013
+## NA (BRD2 - SRX7748767)
+## NA (GFP - SRX20436785)
+## INTS3 - 19.372294 - SRX8699710
+## NA (MED1 - SRX11555394)
+## NA (NELFA - SRX10333912)
+## NELFCD - 68.019481 - SRX7677719
+## NA (SUPT6H - SRX15147169)
+##
+##
 ## Run on R 4.3.2
 ## Descostes June 2020 - modified jan 2023
 #############################
@@ -15,6 +137,32 @@ library("pheatmap")
 #############
 
 
+resultpathvec <- c("/g/boulard/Projects/O-N-acetylglucosamine/analysis/chipatlas/sept2023/human_polIIGlc/results/hdld1nodox1_histone_all.txt", #nolint
+"/g/boulard/Projects/O-N-acetylglucosamine/analysis/chipatlas/sept2023/human_polIIGlc/results/hdld1nodox1_pol_all.txt", #nolint
+"/g/boulard/Projects/O-N-acetylglucosamine/analysis/chipatlas/sept2023/human_polIIGlc/results/hdld1nodox1_TF_all.txt", #nolint
+"/g/boulard/Projects/O-N-acetylglucosamine/analysis/chipatlas/sept2023/human_polIIGlc/results/hdld1nodox2_pol_all.txt", #nolint
+"/g/boulard/Projects/O-N-acetylglucosamine/analysis/chipatlas/sept2023/human_polIIGlc/results/hdld1nodox2_TF_all.txt", #nolint
+"/g/boulard/Projects/O-N-acetylglucosamine/analysis/chipatlas/sept2023/human_polIIGlc/results/hdld1dox3_histone_all.txt", #nolint
+"/g/boulard/Projects/O-N-acetylglucosamine/analysis/chipatlas/sept2023/human_polIIGlc/results/hdld1dox3_pol_all.txt", #nolint
+"/g/boulard/Projects/O-N-acetylglucosamine/analysis/chipatlas/sept2023/human_polIIGlc/results/hdld1dox3_TF_all.txt", #nolint
+"/g/boulard/Projects/O-N-acetylglucosamine/analysis/chipatlas/sept2023/human_polIIGlc/results/hdld1dox4_histone_all.txt", #nolint
+"/g/boulard/Projects/O-N-acetylglucosamine/analysis/chipatlas/sept2023/human_polIIGlc/results/hdld1dox4_pol_all.txt", #nolint
+"/g/boulard/Projects/O-N-acetylglucosamine/analysis/chipatlas/sept2023/human_polIIGlc/results/hdld1dox4_TF_all.txt") #nolint
+
+resultnamevec <- c("nodox1_histone", "nodox1_pol", "nodox1_TF", "nodox2_pol", "nodox2_TF", "dox3_histone", #nolint
+"dox3_pol", "dox3_TF", "dox4_histone", "dox4_pol", "dox4_TF")
+
+repprefixvec <- c("nodox1", "nodox2", "dox3", "dox4")
+suffixmerged <- c("hist", "polTFs")
+experimentname <- c("peaksPolII")
+outputfolder <- c("/g/boulard/Projects/O-N-acetylglucosamine/analysis/chipatlas/sept2023/human_polIIGlc/heatmaps") #nolint
+percentthreshold <- c(20)
+ignoreqval <- FALSE
+
+
+
+
+
 resultpathvec <- c("chipatlas-results/hdld1nodox1_histone_all.txt",
 "chipatlas-results/hdld1nodox1_pol_all.txt",
 "chipatlas-results/hdld1nodox1_TF_all.txt",
@@ -27,17 +175,15 @@ resultpathvec <- c("chipatlas-results/hdld1nodox1_histone_all.txt",
 "chipatlas-results/hdld1dox2_pol_all.txt",
 "chipatlas-results/hdld1dox2_TF_all.txt")
 
-resultnamevec <- c("nodox1_histone", "nodox1_pol", "nodox1_TF", "nodox2_pol",
-"nodox2_TF", "dox1_histone", "dox1_pol", "dox1_TF", "dox2_histone", "dox2_pol",
-"dox2_TF")
+resultnamevec <- c("nodox1_histone", "nodox1_pol", "nodox1_TF", "nodox2_pol", "nodox2_TF", "dox3_histone", #nolint
+"dox3_pol", "dox3_TF", "dox4_histone", "dox4_pol", "dox4_TF")
 
-repprefixvec <- c("nodox1", "nodox2", "dox1", "dox2")
+repprefixvec <- c("nodox1", "nodox2", "dox3", "dox4")
 suffixmerged <- c("hist", "polTFs")
 experimentname <- c("peaksPolII")
 outputfolder <- c("results")
 percentthreshold <- c(20)
 ignoreqval <- FALSE
-
 
 #############
 ## FUNCTIONS
@@ -232,16 +378,8 @@ ignoreqval <- FALSE
                 else
                     return(idx)
             }, currentpref, reslistnames)
-
-        ## For dox2 histones, only one element. Create a matrix manually
-        if (is.list(idxres)) {
-            idx <- which(lengths(idxres) == 1)
-            idxres[[idx]] <- c(idxres[[idx]], NA)
-            idxres <- do.call("cbind", idxres)
-        }
-
         resnames <- c(paste0(currentpref,"hist"), paste0(currentpref, "polTFs"))
-        poltfdf <- rbind(reslist[[idxres[[2]]]], reslist[[idxres[3]]])
+        poltfdf <- rbind(reslist[[idxres[2]]], reslist[[idxres[3]]])
         if (isTRUE(all.equal(currentpref, "nodox2")))
             res <- list(NA, poltfdf)
         else
@@ -264,14 +402,14 @@ ignoreqval <- FALSE
             "nodox2polTFs" = c("SRX7748724", "SRX7748766", "SRX20436833",
                 "SRX8699645", "SRX11555395", "SRX10333914", "SRX15147204",
                 "SRX11555379", "SRX15147167")),
-        "dox1" = list(
-            "dox1hist" = c("SRX20436769"),
-            "dox1polTFs" = c("SRX7748724", "SRX7748766", "SRX20436833",
+        "dox3" = list(
+            "dox3hist" = c("SRX20436769"),
+            "dox3polTFs" = c("SRX7748724", "SRX7748766", "SRX20436833",
                 "SRX13784679", "SRX8699645", "SRX11555395", "SRX10333914",
                 "SRX15147204", "SRX17152983", "SRX15147167", "SRX7677759")),
-        "dox2" = list(
-            "dox2hist" = c("SRX20436769"),
-            "dox2polTFs" = c("SRX7748724", "SRX7748766", "SRX20436833",
+        "dox4" = list(
+            "dox4hist" = c("SRX20436769"),
+            "dox4polTFs" = c("SRX7748724", "SRX7748766", "SRX20436833",
                 "SRX8699645", "SRX11555395", "SRX10333914", "SRX15147204",
                 "SRX15147167")))
 
@@ -283,13 +421,13 @@ ignoreqval <- FALSE
         "nodox2" = list(
             "nodox2polTFs" = c(70.816472, NA, NA, NA, NA, NA, 56.605570, NA,
                 NA)),
-        "dox1" = list(
-            "dox1hist" = c(79.885932),
-            "dox1polTFs" = c(83.384030, NA, NA, NA, 21.863118, NA, NA,
+        "dox3" = list(
+            "dox3hist" = c(79.885932),
+            "dox3polTFs" = c(83.384030, NA, NA, NA, 21.863118, NA, NA,
                 70.456274, NA, NA, NA)),
-        "dox2" = list(
-            "dox2hist" = c(74.783550),
-            "dox2polTFs" = c(82.900433, NA, NA, 19.372294, NA, NA, 68.019481,
+        "dox4" = list(
+            "dox4hist" = c(74.783550),
+            "dox4polTFs" = c(82.900433, NA, NA, 19.372294, NA, NA, 68.019481,
                 NA)))
 
     sra_replace <- list(
@@ -300,13 +438,13 @@ ignoreqval <- FALSE
         "nodox2" = list(
             "nodox2polTFs" = c("SRX10580013", NA, NA, NA, NA, NA, "SRX7677719",
                 NA, NA)),
-        "dox1" = list(
-            "dox1hist" = c("SRX10580016"),
-            "dox1polTFs" = c("SRX10580013", NA, NA, NA, "SRX8699710", NA, NA,
+        "dox3" = list(
+            "dox3hist" = c("SRX10580016"),
+            "dox3polTFs" = c("SRX10580013", NA, NA, NA, "SRX8699710", NA, NA,
                 "SRX7677719", NA, NA, NA)),
-        "dox2"= list(
-            "dox2hist" = c("SRX10580017"),
-            "dox2polTFs" = c("SRX10580013", NA, NA, "SRX8699710", NA, NA,
+        "dox4"= list(
+            "dox4hist" = c("SRX10580017"),
+            "dox4polTFs" = c("SRX10580013", NA, NA, "SRX8699710", NA, NA,
                 "SRX7677719", NA)))
 
     antigen_replace <- list(
@@ -317,13 +455,13 @@ ignoreqval <- FALSE
         "nodox2" = list(
             "nodox2polTFs" = c("RNA polymerase II", NA, NA, NA, NA, NA,
                 "NELFCD", NA, NA)),
-        "dox1" = list(
-            "dox1hist" = c("H3K27ac"),
-            "dox1polTFs" = c("RNA polymerase II", NA, NA, NA, "INTS3", NA, NA,
+        "dox3" = list(
+            "dox3hist" = c("H3K27ac"),
+            "dox3polTFs" = c("RNA polymerase II", NA, NA, NA, "INTS3", NA, NA,
                 "NELFCD", NA, NA, NA)),
-        "dox2"= list(
-            "dox2hist" = c("H3K27ac"),
-            "dox2polTFs" = c("RNA polymerase II", NA, NA, "INTS3", NA, NA,
+        "dox4"= list(
+            "dox4hist" = c("H3K27ac"),
+            "dox4polTFs" = c("RNA polymerase II", NA, NA, "INTS3", NA, NA,
                 "NELFCD", NA)))
 
     return(list(sra_to_filter, perc_replace, sra_replace, antigen_replace))
@@ -617,9 +755,6 @@ ignoreqval <- FALSE
 ## PART 1: Preparing the data
 ####
 
-message("## PART 1: Preparing the data")
-
-
 ## Checking parameters
 .checkparams(outputfolder, resultpathvec, resultnamevec, experimentname,
     repprefixvec)
@@ -667,7 +802,6 @@ if (!isTRUE(all.equal(names(resultlistedld1sra),
     stop("The two lists do not contain the same elements.")
 
 ## Merging pol and TFs for each replicates
-message("Merging pol and TFs for each replicates")
 resultlistedld1sramerged <- .mergepolandtf(resultlistedld1sra, repprefixvec)
 completeresultlistedld1sramerged <- .mergepolandtf(completeresultlistedld1sra,
     repprefixvec)
@@ -679,13 +813,10 @@ names(completeresultlistedld1sramerged) <- repprefixvec
 ## PART 2: Filtering the data
 ####
 
-message("\n ## PART 2: Filtering the data")
-
 ## The list of sra to filter was determined manually looking at the sra records.
 ##
 ## See the top of the script and the function .buildreplacementvectors() for
 ## details
-message("Retrieve information from the manual curation")
 resultsreplacement <- .buildreplacementvectors()
 sra_to_filter <- resultsreplacement[[1]]
 perc_replace <- resultsreplacement[[2]]
