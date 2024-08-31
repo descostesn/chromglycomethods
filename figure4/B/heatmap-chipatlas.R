@@ -609,7 +609,10 @@ callheatmapgeneration <- function(res, rescomplete, sectionvec, sectiontype,
 ## PART 1: Preparing the data
 ####
 
+message("## PART 1: Preparing the data")
+
 ## Checking parameters
+message("Checking parameters")
 checkparams(outputfolder, resultpathvec, resultnamevec, experimentname,
     repprefixvec)
 
@@ -656,6 +659,7 @@ if (!isTRUE(all.equal(names(resultlistedld1sra),
     stop("The two lists do not contain the same elements.")
 
 ## Merging pol and TFs for each replicates
+message("Merging pol and TFs for each replicates")
 resultlistedld1sramerged <- mergepolandtf(resultlistedld1sra, repprefixvec)
 completeresultlistedld1sramerged <- mergepolandtf(completeresultlistedld1sra,
     repprefixvec)
@@ -666,6 +670,9 @@ names(completeresultlistedld1sramerged) <- repprefixvec
 ####
 ## PART 2: Filtering the data
 ####
+
+message("\n ## PART 2: Filtering the data")
+
 
 ## The list of sra to filter was determined manually looking at the sra records.
 ##
@@ -690,10 +697,15 @@ resultlistedld1sramerged <- replaceelementschipatlas(sra_to_filter,
 ## PART 3: Generating the heatmap
 ####
 
+message("\n ## PART 3: Generating the heatmap")
+
 ## Completing each element of the list with missing sra
+message("Completing each element of the list with missing sra")
 ## First retrieving all sra of the list
 histsections <- paste0(repprefixvec, suffixmerged[1])
 poltfsections <- paste0(repprefixvec, suffixmerged[2])
+
+message("Plotting")
 callheatmapgeneration(resultlistedld1sramerged,
     completeresultlistedld1sramerged, histsections, "Histones", outputfolder,
     experimentname, percentthreshold, ignoreqval)
