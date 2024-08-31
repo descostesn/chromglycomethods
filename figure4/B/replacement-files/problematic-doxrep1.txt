@@ -1,0 +1,12 @@
+H3K27ac - SRX20436769: Treatment 2h H2O, _K27AcCST_BRD4AID
+RNA polymerase II - SRX7748724: Treatment 2h Aux
+BRD2 - SRX7748766: Treatment 2h H2O
+GFP  - SRX20436833: Treatment 48h dox and 2h Aux for BRD4
+GTF2F1 - SRX13784679: Treatment with dTAG13 for 3 hours
+INTS3 - SRX8699645: Treatment by shRNA
+MED1 - SRX11555395: Treatment DMSO 3h
+NELFA - SRX10333914: Treatment VCPiAuxin
+NELFCD - SRX15147204: Treatment Aux 2h
+PAF1 - SRX17152983: Treatment NUiPAF-22 20uM
+SUPT6H - SRX15147167: Treatment Vehcle 2h
+XRN2 - SRX7677759: Treatment Auxin
