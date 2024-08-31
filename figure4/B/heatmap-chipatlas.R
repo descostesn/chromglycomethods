@@ -232,8 +232,16 @@ ignoreqval <- FALSE
                 else
                     return(idx)
             }, currentpref, reslistnames)
+
+        ## For dox2 histones, only one element. Create a matrix manually
+        if (is.list(idxres)) {
+            idx <- which(lengths(idxres) == 1)
+            idxres[[idx]] <- c(idxres[[idx]], NA)
+            idxres <- do.call("cbind", idxres)
+        }
+
         resnames <- c(paste0(currentpref,"hist"), paste0(currentpref, "polTFs"))
-        poltfdf <- rbind(reslist[[idxres[2]]], reslist[[idxres[3]]])
+        poltfdf <- rbind(reslist[[idxres[[2]]]], reslist[[idxres[3]]])
         if (isTRUE(all.equal(currentpref, "nodox2")))
             res <- list(NA, poltfdf)
         else
@@ -609,6 +617,9 @@ ignoreqval <- FALSE
 ## PART 1: Preparing the data
 ####
 
+message("## PART 1: Preparing the data")
+
+
 ## Checking parameters
 .checkparams(outputfolder, resultpathvec, resultnamevec, experimentname,
     repprefixvec)
@@ -656,6 +667,7 @@ if (!isTRUE(all.equal(names(resultlistedld1sra),
     stop("The two lists do not contain the same elements.")
 
 ## Merging pol and TFs for each replicates
+message("Merging pol and TFs for each replicates")
 resultlistedld1sramerged <- .mergepolandtf(resultlistedld1sra, repprefixvec)
 completeresultlistedld1sramerged <- .mergepolandtf(completeresultlistedld1sra,
     repprefixvec)
