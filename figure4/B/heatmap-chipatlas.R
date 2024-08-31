@@ -46,9 +46,8 @@ ignoreqval <- FALSE
 checkparams <- function(outputfolder, resultpathvec, resultnamevec,
         experimentname, repprefixvec) {
 
-            outfold <- file.path(outputfolder, experimentname)
-            if (!file.exists(outfold))
-                dir.create(outfold, recursive = TRUE)
+            if (!file.exists(outputfolder))
+                dir.create(outputfolder, recursive = TRUE)
 
             if (!isTRUE(all.equal(length(resultpathvec),
                 length(resultnamevec))))
