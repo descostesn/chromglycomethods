@@ -124,7 +124,7 @@ removeelements <- function(resultlist, idxremove) {
     return(resultlist)
 }
 
-.filteroncells <- function(resultlist, looktypespe = TRUE) {
+filteroncells <- function(resultlist, looktypespe = TRUE) {
 
     result <- mapply(function(currentdf, currentname, looktypespe) {
 
@@ -639,7 +639,7 @@ nbpeaksvec <- unlist(lapply(resultlist, function(currentcat){
 
 ## Retrieving DLD-1 and other cells
 message("\n\n Retrieving DLD-1 cells")
-resultlistedld1 <- .filteroncells(resultlist)
+resultlistedld1 <- filteroncells(resultlist)
 idxremove <- which(is.na(resultlistedld1))
 resultlistedld1 <- removeelements(resultlistedld1, idxremove)
 if (!isTRUE(all.equal(length(idxremove), 0)))
