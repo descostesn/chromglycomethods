@@ -15,31 +15,6 @@ library("pheatmap")
 #############
 
 
-resultpathvec <- c("/g/boulard/Projects/O-N-acetylglucosamine/analysis/chipatlas/sept2023/human_polIIGlc/results/hdld1nodox1_histone_all.txt", #nolint
-"/g/boulard/Projects/O-N-acetylglucosamine/analysis/chipatlas/sept2023/human_polIIGlc/results/hdld1nodox1_pol_all.txt", #nolint
-"/g/boulard/Projects/O-N-acetylglucosamine/analysis/chipatlas/sept2023/human_polIIGlc/results/hdld1nodox1_TF_all.txt", #nolint
-"/g/boulard/Projects/O-N-acetylglucosamine/analysis/chipatlas/sept2023/human_polIIGlc/results/hdld1nodox2_pol_all.txt", #nolint
-"/g/boulard/Projects/O-N-acetylglucosamine/analysis/chipatlas/sept2023/human_polIIGlc/results/hdld1nodox2_TF_all.txt", #nolint
-"/g/boulard/Projects/O-N-acetylglucosamine/analysis/chipatlas/sept2023/human_polIIGlc/results/hdld1dox3_histone_all.txt", #nolint
-"/g/boulard/Projects/O-N-acetylglucosamine/analysis/chipatlas/sept2023/human_polIIGlc/results/hdld1dox3_pol_all.txt", #nolint
-"/g/boulard/Projects/O-N-acetylglucosamine/analysis/chipatlas/sept2023/human_polIIGlc/results/hdld1dox3_TF_all.txt", #nolint
-"/g/boulard/Projects/O-N-acetylglucosamine/analysis/chipatlas/sept2023/human_polIIGlc/results/hdld1dox4_histone_all.txt", #nolint
-"/g/boulard/Projects/O-N-acetylglucosamine/analysis/chipatlas/sept2023/human_polIIGlc/results/hdld1dox4_pol_all.txt", #nolint
-"/g/boulard/Projects/O-N-acetylglucosamine/analysis/chipatlas/sept2023/human_polIIGlc/results/hdld1dox4_TF_all.txt") #nolint
-
-resultnamevec <- c("nodox1_histone", "nodox1_pol", "nodox1_TF", "nodox2_pol", "nodox2_TF", "dox3_histone", #nolint
-"dox3_pol", "dox3_TF", "dox4_histone", "dox4_pol", "dox4_TF")
-
-repprefixvec <- c("nodox1", "nodox2", "dox3", "dox4")
-suffixmerged <- c("hist", "polTFs")
-experimentname <- c("peaksPolII")
-outputfolder <- c("/g/boulard/Projects/O-N-acetylglucosamine/analysis/chipatlas/sept2023/human_polIIGlc/heatmaps") #nolint
-percentthreshold <- c(20)
-ignoreqval <- FALSE
-
-!!!!!!!!!!!!!!!!!!!!!!!
-
-
 resultpathvec <- c("chipatlas-results/hdld1nodox1_histone_all.txt",
 "chipatlas-results/hdld1nodox1_pol_all.txt",
 "chipatlas-results/hdld1nodox1_TF_all.txt",
