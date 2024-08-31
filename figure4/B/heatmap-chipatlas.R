@@ -350,7 +350,7 @@ buildreplacementvectors <- function() {
                 }
 }
 
-.testvaluesvec <- function(sra_to_filter, perc_replace, sra_replace,
+testvaluesvec <- function(sra_to_filter, perc_replace, sra_replace,
     antigen_replace) {
 
     invisible(mapply(function(repsra, reppercreplace, repsrareplace,
@@ -678,7 +678,7 @@ sra_replace <- resultsreplacement[[3]]
 antigen_replace <- resultsreplacement[[4]]
 
 ## Verifying elements of each vector that must be of same length
-.testvaluesvec(sra_to_filter, perc_replace, sra_replace, antigen_replace)
+testvaluesvec(sra_to_filter, perc_replace, sra_replace, antigen_replace)
 
 ## Replacing values for each vector
 message("Replacing values")
