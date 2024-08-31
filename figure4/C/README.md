@@ -30,17 +30,17 @@ wget https://zenodo.org/records/12793186/files/RNApolymeraseII_SRX10580013.bw -P
 wget https://zenodo.org/records/12793186/files/Homo_sapiens.GRCh38.110.chr_march2024_filtered.tar.gz  -P data/
 cd data && tar -xvzf Homo_sapiens.GRCh38.110.chr_march2024_filtered.tar.gz && rm Homo_sapiens.GRCh38.110.chr_march2024_filtered.tar.gz && cd ..
 
-## The peaks coordinates after decreasing sorting of RNAPol II
+## The peaks coordinates after decreasing sorting of RNAPol II (panel number has been change after submission)
 wget https://zenodo.org/records/12793186/files/peakscoord-fig4B.bed -P data/
 ```
 
 ## Installation
 
-Install conda following the instructions [here](https://conda.io/projects/conda/en/latest/user-guide/install/index.html). Using the recipe [fig4B.yml](fig4B.yml), run:
+Install conda following the instructions [here](https://conda.io/projects/conda/en/latest/user-guide/install/index.html). Using the recipe [fig4C.yml](fig4C.yml), run:
 
 ```
-conda env create -n fig4b --file ./fig4B.yml
-conda activate fig4b
+conda env create -n fig4C --file ./fig4C.yml
+conda activate fig4C
 ```
 
 ## Figure generation
