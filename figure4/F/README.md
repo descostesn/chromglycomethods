@@ -26,10 +26,10 @@ wget https://zenodo.org/records/12793186/files/fig4D_genes_cluster3.gff  -P data
 wget https://zenodo.org/records/12793186/files/fig4D_genes_cluster4.gff -P data/
 wget https://zenodo.org/records/12793186/files/fig4D_genes_cluster5.gff  -P data/
 
-## The coordinates of the peaks sorted in 5 groups
+## The coordinates of the peaks sorted in 5 groups (panel number has been change after submission)
 wget https://zenodo.org/records/12793186/files/peakscoord-fig4C.bed -P data
 
-## The file of the union of the peaks used for preprocessing
+## The file of the union of the peaks used for preprocessing (panel number has been change after submission)
 wget https://zenodo.org/records/12793186/files/union_OGlcNac_noauxaux-fig4C.bed -P data
 
 ## The repeatmasker annotations used for preprocessing
@@ -43,11 +43,11 @@ wget https://zenodo.org/records/12793186/files/enhancerAtlas2_DLD1.gff -P data/
 ## Installation
 
 
-Install conda following the instructions [here](https://conda.io/projects/conda/en/latest/user-guide/install/index.html). Using the recipe [fig4D.yml](fig4D.yml), run:
+Install conda following the instructions [here](https://conda.io/projects/conda/en/latest/user-guide/install/index.html). Using the recipe [fig4F.yml](fig4F.yml), run:
 
 ```
-conda env create -n fig4d --file ./fig4D.yml
-conda activate fig4d
+conda env create -n fig4F --file ./fig4F.yml
+conda activate fig4F
 ```
 
 ## Figure generation
