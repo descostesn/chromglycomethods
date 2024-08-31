@@ -27,3 +27,20 @@ These datasets were replaced by the following valid one which were found in the 
 
 See [replacement-nodoxrep1.txt](replacement-files/replacement-nodoxrep1.txt), [replacement-nodoxrep2.txt](replacement-files/replacement-nodoxrep2.txt), [replacement-doxrep1.txt](replacement-files/replacement-doxrep1.txt) and [replacement-doxrep2.txt](replacement-files/replacement-doxrep2.txt).
 
+## Data
+
+As explained in the description section, The online tool is rapidly evolving and new experiments are regularly added [GEO](https://www.ncbi.nlm.nih.gov/geo/). We provide the results of the enrichment analysis in the folder [chipatlas_results](chipatlas_results/).
+
+If one whishes to obtain results with the updated database, the O-GlcNac peaks can be obtained at:
+
+```
+#!/bin/bash
+
+mkdir data
+
+# O-GlcNac peaks
+wget https://www.ebi.ac.uk/biostudies/files/E-MTAB-14307/DLD1GlcNAcDoxAux_rep1_peaks.gff -P data/
+wget https://www.ebi.ac.uk/biostudies/files/E-MTAB-14307/DLD1GlcNAcDoxAux_rep2_peaks.gff -P data/
+wget https://www.ebi.ac.uk/biostudies/files/E-MTAB-14307/DLD1GlcNAcNoDoxAux_rep1_peaks.gff -P data/
+wget https://www.ebi.ac.uk/biostudies/files/E-MTAB-14307/DLD1GlcNAcNoDoxAux_rep2_peaks.gff -P data/
+```
