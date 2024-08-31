@@ -8,6 +8,8 @@ V. [Figure Generation](#figure-generation)
 VI. [Pre-processing](#pre-processing)  
 &nbsp;&nbsp; VI.I. [Workflows](#workflows)  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; VI.I.I. [CutnRun](#cutnrun)  
+&nbsp;&nbsp; VI.I. [Peak detection](#peak-detection)  
+
 
 ## Description
 
@@ -221,3 +223,11 @@ Reads not aligned to consensus chromosomes were excluded with samtools v1.9: `sa
 
 The peaks were obtained with Macs2 v2.2.7.1: `macs2 callpeak -t $input.bam -c $control.bam -n $expname --outdir $outfold -f BAM -g 1.87e9 -s 82 -q 0.04 --nomodel --extsize 150 --keep-dup 7`
 
+### Peak detection
+
+| Target | Broad | q-value | Duplicates Thres. | Tag size |
+|--------|-------|---------|-------------------|----------|
+| ESCHGGlcNAc_rep1 | NO | 0.04 | 7 | 82 |
+| ESCHGGlcNAc_rep2 | NO | 0.04 | 7 | 82 |
+
+* Macs2 v2.2.7.1 Narrow: `macs2 callpeak -t $input.bam -c $control.bam -n $expname --outdir $outfold -f BAM -g 1.87e9 -s $tagsize -q $qvalue --nomodel --extsize 150 --keep-dup $dupthres`
