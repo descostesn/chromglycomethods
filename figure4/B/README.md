@@ -7,7 +7,9 @@ IV. [Installation](#installation)
 V. [Figure Generation](#figure-generation)  
 VI. [Pre-processing](#pre-processing)  
 &nbsp;&nbsp; VI.I. [Workflows](#workflows)  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; VI.I.I. [CutnRun](#cutnrun)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; VI.I.I. [CutnRun](#cutnrun)   
+&nbsp;&nbsp; VI.I. [Peak detection](#peak-detection)  
+
 
 ## Description
 
@@ -267,3 +269,16 @@ The resulting bam file was sorted with samtools v1.9: `samtools sort -@ $nbcpu -
 Duplicates were removed with picard v2.18.2: `picard MarkDuplicates INPUT=$input.bam OUTPUT=$output.bam METRICS_FILE=$metrics.txt REMOVE_DUPLICATES='true' ASSUME_SORTED='true'  DUPLICATE_SCORING_STRATEGY='SUM_OF_BASE_QUALITIES' OPTICAL_DUPLICATE_PIXEL_DISTANCE='100' VALIDATION_STRINGENCY='LENIENT' QUIET=true VERBOSITY=ERROR`
 
 Bigwig files normalized by the genome size were generated with deeptools v3.0.2: `bamCoverage --numberOfProcessors $NBCPU --bam $input.bam --outFileName $output.bw --outFileFormat 'bigwig' --binSize 50 --normalizeUsing RPGC --effectiveGenomeSize 2701495761 --scaleFactor 1.0  --extendReads 150 --minMappingQuality '1'`
+
+
+### Peak Detection
+
+| Target | Broad | q-value | Duplicates Thres. | Tag size |
+|--------|-------|---------|-------------------|----------|
+| DLD1GlcNAcDoxAux_rep1 | NO | 0.04 | 7 | 82 |
+| DLD1GlcNAcDoxAux_rep2 | NO | 0.04 | 7 | 82 |
+| DLD1GlcNAcNoDoxAux_rep1 | NO | 0.04 | 6 | 82 |
+| DLD1GlcNAcNoDoxAux_rep2 | NO | 0.04 | 7 | 82 |
+
+
+* Macs2 v2.2.7.1 Narrow: `macs2 callpeak -t $input.bam -c NA -n $expname --outdir $outfold -f BAM -g 2.9e9 -s $tagsize -q $qvalue --nomodel --extsize 150 --keep-dup $dupthres`
