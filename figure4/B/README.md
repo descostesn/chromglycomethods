@@ -54,3 +54,153 @@ conda env create -n fig4B --file ./fig4B.yml
 conda activate fig4B
 ```
 
+
+
+## Figure Generation
+
+Run the command:
+
+```
+Rscript heatmap-chipatlas.R
+```
+
+The script should output:
+
+```
+## PART 1: Preparing the data
+Reading ChIP-Atlas results
+         Processing nodox1_histone
+         Keeping 32042/32418(99%)
+         Processing nodox1_pol
+         Keeping 3767/3780(100%)
+         Processing nodox1_TF
+         Keeping 29531/29807(99%)
+         Processing nodox2_pol
+         Keeping 3759/3780(99%)
+         Processing nodox2_TF
+         Keeping 29517/29803(99%)
+         Processing dox1_histone
+         Keeping 32037/32420(99%)
+         Processing dox1_pol
+         Keeping 3763/3779(100%)
+         Processing dox1_TF
+         Keeping 29520/29804(99%)
+         Processing dox2_histone
+         Keeping 32030/32419(99%)
+         Processing dox2_pol
+         Keeping 3757/3779(99%)
+         Processing dox2_TF
+         Keeping 29527/29805(99%)
+         Nothing to remove.
+ Retrieving DLD-1 cells
+         Number of results for nodox1_histone: 47
+         Number of results for nodox1_pol: 284
+         Number of results for nodox1_TF: 252
+         Number of results for nodox2_pol: 284
+         Number of results for nodox2_TF: 252
+         Number of results for dox1_histone: 47
+         Number of results for dox1_pol: 284
+         Number of results for dox1_TF: 252
+         Number of results for dox2_histone: 47
+         Number of results for dox2_pol: 284
+         Number of results for dox2_TF: 252
+         Nothing to remove.
+Building antigen unique lists for DLD-1 Cells:
+         Processing nodox1_histone
+                 Keeping 18/47
+                         Keeping max overlap by antigens
+                 Returning 2/18
+         Processing nodox1_pol
+                 Keeping 217/284
+                         Keeping max overlap by antigens
+                 Returning 1/217
+         Processing nodox1_TF
+                 Keeping 31/252
+                         Keeping max overlap by antigens
+                 Returning 11/31
+         Processing nodox2_pol
+                 Keeping 217/284
+                         Keeping max overlap by antigens
+                 Returning 1/217
+         Processing nodox2_TF
+                 Keeping 32/252
+                         Keeping max overlap by antigens
+                 Returning 11/32
+         Processing dox1_histone
+                 Keeping 19/47
+                         Keeping max overlap by antigens
+                 Returning 2/19
+         Processing dox1_pol
+                 Keeping 224/284
+                         Keeping max overlap by antigens
+                 Returning 1/224
+         Processing dox1_TF
+                 Keeping 34/252
+                         Keeping max overlap by antigens
+                 Returning 13/34
+         Processing dox2_histone
+                 Keeping 19/47
+                         Keeping max overlap by antigens
+                 Returning 2/19
+         Processing dox2_pol
+                 Keeping 222/284
+                         Keeping max overlap by antigens
+                 Returning 1/222
+         Processing dox2_TF
+                 Keeping 30/252
+                         Keeping max overlap by antigens
+                 Returning 10/30
+         Processing nodox1_histone
+                 Keeping 40/47
+                         Computing percentages only
+                 Returning 40/40
+         Processing nodox1_pol
+                 Keeping 284/284
+                         Computing percentages only
+                 Returning 284/284
+         Processing nodox1_TF
+                 Keeping 250/252
+                         Computing percentages only
+                 Returning 250/250
+         Processing nodox2_pol
+                 Keeping 284/284
+                         Computing percentages only
+                 Returning 284/284
+         Processing nodox2_TF
+                 Keeping 247/252
+                         Computing percentages only
+                 Returning 247/247
+         Processing dox1_histone
+                 Keeping 44/47
+                         Computing percentages only
+                 Returning 44/44
+         Processing dox1_pol
+                 Keeping 284/284
+                         Computing percentages only
+                 Returning 284/284
+         Processing dox1_TF
+                 Keeping 250/252
+                         Computing percentages only
+                 Returning 250/250
+         Processing dox2_histone
+                 Keeping 47/47
+                         Computing percentages only
+                 Returning 47/47
+         Processing dox2_pol
+                 Keeping 284/284
+                         Computing percentages only
+                 Returning 284/284
+         Processing dox2_TF
+                 Keeping 252/252
+                         Computing percentages only
+                 Returning 252/252
+Merging pol and TFs for each replicates
+Processing nodox1
+Processing nodox2
+Processing dox1
+Processing dox2
+Processing nodox1
+Processing nodox2
+Processing dox1
+Processing dox2
+    
