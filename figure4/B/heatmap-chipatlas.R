@@ -524,7 +524,7 @@ replaceelementschipatlas <- function(sra_to_filter, perc_replace, sra_replace,
 
         main_title <- if (!ignoreqval) experimentname else paste(experimentname,
                     "No Qval", sep = "-")
-        outfile <- file.path(outputfolder, experimentname, sectiontype,
+        outfile <- file.path(outputfolder,
                 paste0(experimentname, "-", percentthreshold,
                         if (ignoreqval) "-noQval", "-", scalemethod, ".pdf"))
 
