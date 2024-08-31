@@ -568,17 +568,6 @@ callheatmapgeneration <- function(res, rescomplete, sectionvec, sectiontype,
     resmerged <- resmerged[, -idxantigen[-1]]
     colnames(resmerged)[idxantigen[1]] <- "Antigen"
 
-    ## Writing the result table
-    message("Writing output table result")
-    outfold <- file.path(outputfolder, experimentname, sectiontype)
-    if (!file.exists(outfold))
-        dir.create(outfold, recursive = TRUE)
-    filename <- paste0(experimentname, "-", percentthreshold,
-        if (ignoreqval) "-noQval", ".txt")
-    outfile <- file.path(outfold, filename)
-    write.table(resmerged, file = outfile, sep = "\t", quote = FALSE,
-        row.names = FALSE, col.names = TRUE)
-
     ## Creating matrix for plotting
     idxsra <- grep("SRA", colnames(resmerged))
     if (isTRUE(all.equal(length(idxsra), 0)))
