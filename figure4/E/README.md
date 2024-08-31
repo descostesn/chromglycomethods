@@ -36,4 +36,4 @@ The bw files were uploaded to [IGV](https://igv.org/) v2.13.0 selecting the mous
 
 ## Pre-processing
 
-See [fig. 4C](../C/README.md#pre-processing)
+See [fig. 4D](../D/README.md#pre-processing)
