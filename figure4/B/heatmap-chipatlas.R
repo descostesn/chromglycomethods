@@ -416,7 +416,7 @@ testvaluesvec <- function(sra_to_filter, perc_replace, sra_replace,
 }
 
 
-.replaceelementschipatlas <- function(sra_to_filter, perc_replace, sra_replace,
+replaceelementschipatlas <- function(sra_to_filter, perc_replace, sra_replace,
     antigen_replace, resultlistedld1sramerged) {
 
         res <- mapply(function(currentrepname, sratofilter, percreplace,
@@ -682,7 +682,7 @@ testvaluesvec(sra_to_filter, perc_replace, sra_replace, antigen_replace)
 
 ## Replacing values for each vector
 message("Replacing values")
-resultlistedld1sramerged <- .replaceelementschipatlas(sra_to_filter,
+resultlistedld1sramerged <- replaceelementschipatlas(sra_to_filter,
     perc_replace, sra_replace, antigen_replace, resultlistedld1sramerged)
 
 
