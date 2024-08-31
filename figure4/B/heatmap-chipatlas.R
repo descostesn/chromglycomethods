@@ -64,7 +64,7 @@ checkparams <- function(outputfolder, resultpathvec, resultnamevec,
                 stop("This script was designed to handle four replicates.")
 }
 
-.readandfilter <- function(resultpathvec, resultnamevec, chipatlascolnames,
+readandfilter <- function(resultpathvec, resultnamevec, chipatlascolnames,
     ignoreqval) {
 
         resultlist <- mapply(function(currentpath, currentname, colnamevec) {
@@ -623,7 +623,7 @@ message("Reading ChIP-Atlas results")
 chipatlascolnames <- c("ID", "AntigenClass", "Antigen", "CellClass", "Cell",
         "NumOfPeaks", "OverlapQuery", "OverlapControl", "LogPVal", "LogQval",
         "FoldEnrichment")
-resultlist <- .readandfilter(resultpathvec, resultnamevec, chipatlascolnames,
+resultlist <- readandfilter(resultpathvec, resultnamevec, chipatlascolnames,
     ignoreqval)
 names(resultlist) <- resultnamevec
 idxremove <- which(is.na(resultlist))
