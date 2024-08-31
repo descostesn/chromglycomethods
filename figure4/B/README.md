@@ -239,3 +239,7 @@ Generating heatmap for PolII-TFs
 Merging replicates and create result table
          Plotting to results/peaksPolII-20-none.png
 ```
+
+You should obtain the raw figure:
+
+<img src="peaksPolII-20-none.png" alt="ChIP-Atlas Heatmap" width="400"/>
