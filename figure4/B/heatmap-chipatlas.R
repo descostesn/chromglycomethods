@@ -526,7 +526,7 @@ replaceelementschipatlas <- function(sra_to_filter, perc_replace, sra_replace,
                     "No Qval", sep = "-")
         outfile <- file.path(outputfolder,
                 paste0(experimentname, "-", percentthreshold,
-                        if (ignoreqval) "-noQval", "-", scalemethod, ".pdf"))
+                        if (ignoreqval) "-noQval", "-", scalemethod, ".png"))
 
         message("\t Plotting to ", outfile)
 
