@@ -111,7 +111,7 @@ readandfilter <- function(resultpathvec, resultnamevec, chipatlascolnames,
     return(resultlist)
 }
 
-.removeelements <- function(resultlist, idxremove) {
+removeelements <- function(resultlist, idxremove) {
 
     if (!isTRUE(all.equal(length(idxremove), 0))) {
         message("\t Removing the following categories because of lack of ",
@@ -627,7 +627,7 @@ resultlist <- readandfilter(resultpathvec, resultnamevec, chipatlascolnames,
     ignoreqval)
 names(resultlist) <- resultnamevec
 idxremove <- which(is.na(resultlist))
-resultlist <- .removeelements(resultlist, idxremove)
+resultlist <- removeelements(resultlist, idxremove)
 nbpeaksvec <- unlist(lapply(resultlist, function(currentcat){
                     nbpeaks <- unique(as.numeric(unlist(lapply(
                         strsplit(currentcat$OverlapQuery, "/"), "[", 2))))
@@ -641,7 +641,7 @@ nbpeaksvec <- unlist(lapply(resultlist, function(currentcat){
 message("\n\n Retrieving DLD-1 cells")
 resultlistedld1 <- .filteroncells(resultlist)
 idxremove <- which(is.na(resultlistedld1))
-resultlistedld1 <- .removeelements(resultlistedld1, idxremove)
+resultlistedld1 <- removeelements(resultlistedld1, idxremove)
 if (!isTRUE(all.equal(length(idxremove), 0)))
     nbpeaksvec <- nbpeaksvec[-idxremove]
 
