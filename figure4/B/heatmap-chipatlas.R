@@ -37,6 +37,31 @@ outputfolder <- c("/g/boulard/Projects/O-N-acetylglucosamine/analysis/chipatlas/
 percentthreshold <- c(20)
 ignoreqval <- FALSE
 
+!!!!!!!!!!!!!!!!!!!!!!!
+
+
+resultpathvec <- c("data/hdld1nodox1_histone_all.txt",
+"data/hdld1nodox1_pol_all.txt",
+"data/hdld1nodox1_TF_all.txt",
+"data/hdld1nodox2_pol_all.txt",
+"data/hdld1nodox2_TF_all.txt",
+"data/hdld1dox3_histone_all.txt",
+"data/hdld1dox3_pol_all.txt",
+"data/hdld1dox3_TF_all.txt",
+"data/hdld1dox4_histone_all.txt",
+"data/hdld1dox4_pol_all.txt",
+"data/hdld1dox4_TF_all.txt")
+
+resultnamevec <- c("nodox1_histone", "nodox1_pol", "nodox1_TF", "nodox2_pol",
+"nodox2_TF", "dox3_histone", "dox3_pol", "dox3_TF", "dox4_histone", "dox4_pol",
+"dox4_TF")
+
+repprefixvec <- c("nodox1", "nodox2", "dox3", "dox4")
+suffixmerged <- c("hist", "polTFs")
+experimentname <- c("peaksPolII")
+outputfolder <- c("results")
+percentthreshold <- c(20)
+ignoreqval <- FALSE
 
 
 #############
