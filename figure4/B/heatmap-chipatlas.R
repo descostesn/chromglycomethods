@@ -20,18 +20,18 @@ resultpathvec <- c("chipatlas-results/hdld1nodox1_histone_all.txt",
 "chipatlas-results/hdld1nodox1_TF_all.txt",
 "chipatlas-results/hdld1nodox2_pol_all.txt",
 "chipatlas-results/hdld1nodox2_TF_all.txt",
-"chipatlas-results/hdld1dox3_histone_all.txt",
-"chipatlas-results/hdld1dox3_pol_all.txt",
-"chipatlas-results/hdld1dox3_TF_all.txt",
-"chipatlas-results/hdld1dox4_histone_all.txt",
-"chipatlas-results/hdld1dox4_pol_all.txt",
-"chipatlas-results/hdld1dox4_TF_all.txt")
+"chipatlas-results/hdld1dox1_histone_all.txt",
+"chipatlas-results/hdld1dox1_pol_all.txt",
+"chipatlas-results/hdld1dox1_TF_all.txt",
+"chipatlas-results/hdld1dox2_histone_all.txt",
+"chipatlas-results/hdld1dox2_pol_all.txt",
+"chipatlas-results/hdld1dox2_TF_all.txt")
 
 resultnamevec <- c("nodox1_histone", "nodox1_pol", "nodox1_TF", "nodox2_pol",
-"nodox2_TF", "dox3_histone", "dox3_pol", "dox3_TF", "dox4_histone", "dox4_pol",
-"dox4_TF")
+"nodox2_TF", "dox1_histone", "dox1_pol", "dox1_TF", "dox2_histone", "dox2_pol",
+"dox2_TF")
 
-repprefixvec <- c("nodox1", "nodox2", "dox3", "dox4")
+repprefixvec <- c("nodox1", "nodox2", "dox1", "dox2")
 suffixmerged <- c("hist", "polTFs")
 experimentname <- c("peaksPolII")
 outputfolder <- c("results")
@@ -256,14 +256,14 @@ ignoreqval <- FALSE
             "nodox2polTFs" = c("SRX7748724", "SRX7748766", "SRX20436833",
                 "SRX8699645", "SRX11555395", "SRX10333914", "SRX15147204",
                 "SRX11555379", "SRX15147167")),
-        "dox3" = list(
-            "dox3hist" = c("SRX20436769"),
-            "dox3polTFs" = c("SRX7748724", "SRX7748766", "SRX20436833",
+        "dox1" = list(
+            "dox1hist" = c("SRX20436769"),
+            "dox1polTFs" = c("SRX7748724", "SRX7748766", "SRX20436833",
                 "SRX13784679", "SRX8699645", "SRX11555395", "SRX10333914",
                 "SRX15147204", "SRX17152983", "SRX15147167", "SRX7677759")),
-        "dox4" = list(
-            "dox4hist" = c("SRX20436769"),
-            "dox4polTFs" = c("SRX7748724", "SRX7748766", "SRX20436833",
+        "dox2" = list(
+            "dox2hist" = c("SRX20436769"),
+            "dox2polTFs" = c("SRX7748724", "SRX7748766", "SRX20436833",
                 "SRX8699645", "SRX11555395", "SRX10333914", "SRX15147204",
                 "SRX15147167")))
 
@@ -275,13 +275,13 @@ ignoreqval <- FALSE
         "nodox2" = list(
             "nodox2polTFs" = c(70.816472, NA, NA, NA, NA, NA, 56.605570, NA,
                 NA)),
-        "dox3" = list(
-            "dox3hist" = c(79.885932),
-            "dox3polTFs" = c(83.384030, NA, NA, NA, 21.863118, NA, NA,
+        "dox1" = list(
+            "dox1hist" = c(79.885932),
+            "dox1polTFs" = c(83.384030, NA, NA, NA, 21.863118, NA, NA,
                 70.456274, NA, NA, NA)),
-        "dox4" = list(
-            "dox4hist" = c(74.783550),
-            "dox4polTFs" = c(82.900433, NA, NA, 19.372294, NA, NA, 68.019481,
+        "dox2" = list(
+            "dox2hist" = c(74.783550),
+            "dox2polTFs" = c(82.900433, NA, NA, 19.372294, NA, NA, 68.019481,
                 NA)))
 
     sra_replace <- list(
@@ -292,13 +292,13 @@ ignoreqval <- FALSE
         "nodox2" = list(
             "nodox2polTFs" = c("SRX10580013", NA, NA, NA, NA, NA, "SRX7677719",
                 NA, NA)),
-        "dox3" = list(
-            "dox3hist" = c("SRX10580016"),
-            "dox3polTFs" = c("SRX10580013", NA, NA, NA, "SRX8699710", NA, NA,
+        "dox1" = list(
+            "dox1hist" = c("SRX10580016"),
+            "dox1polTFs" = c("SRX10580013", NA, NA, NA, "SRX8699710", NA, NA,
                 "SRX7677719", NA, NA, NA)),
-        "dox4"= list(
-            "dox4hist" = c("SRX10580017"),
-            "dox4polTFs" = c("SRX10580013", NA, NA, "SRX8699710", NA, NA,
+        "dox2"= list(
+            "dox2hist" = c("SRX10580017"),
+            "dox2polTFs" = c("SRX10580013", NA, NA, "SRX8699710", NA, NA,
                 "SRX7677719", NA)))
 
     antigen_replace <- list(
@@ -309,13 +309,13 @@ ignoreqval <- FALSE
         "nodox2" = list(
             "nodox2polTFs" = c("RNA polymerase II", NA, NA, NA, NA, NA,
                 "NELFCD", NA, NA)),
-        "dox3" = list(
-            "dox3hist" = c("H3K27ac"),
-            "dox3polTFs" = c("RNA polymerase II", NA, NA, NA, "INTS3", NA, NA,
+        "dox1" = list(
+            "dox1hist" = c("H3K27ac"),
+            "dox1polTFs" = c("RNA polymerase II", NA, NA, NA, "INTS3", NA, NA,
                 "NELFCD", NA, NA, NA)),
-        "dox4"= list(
-            "dox4hist" = c("H3K27ac"),
-            "dox4polTFs" = c("RNA polymerase II", NA, NA, "INTS3", NA, NA,
+        "dox2"= list(
+            "dox2hist" = c("H3K27ac"),
+            "dox2polTFs" = c("RNA polymerase II", NA, NA, "INTS3", NA, NA,
                 "NELFCD", NA)))
 
     return(list(sra_to_filter, perc_replace, sra_replace, antigen_replace))
