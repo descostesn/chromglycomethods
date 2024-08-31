@@ -244,7 +244,7 @@ mergepolandtf <- function(reslist, prefvec) {
     return(res)
 }
 
-.buildreplacementvectors <- function() {
+buildreplacementvectors <- function() {
 
     sra_to_filter <- list(
         "nodox1" = list(
@@ -669,9 +669,9 @@ names(completeresultlistedld1sramerged) <- repprefixvec
 
 ## The list of sra to filter was determined manually looking at the sra records.
 ##
-## See the top of the script and the function .buildreplacementvectors() for
+## See the top of the script and the function buildreplacementvectors() for
 ## details
-resultsreplacement <- .buildreplacementvectors()
+resultsreplacement <- buildreplacementvectors()
 sra_to_filter <- resultsreplacement[[1]]
 perc_replace <- resultsreplacement[[2]]
 sra_replace <- resultsreplacement[[3]]
