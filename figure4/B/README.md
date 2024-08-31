@@ -13,4 +13,4 @@ VI. [Pre-processing](#pre-processing)
 
 The 3450 (nodox rep1), 4201 (nodox rep2), 2630 (dox rep1), and 1848 (dox rep2) O-GlcNac peaks were submitted to the [ChIP-Atlas](https://chip-atlas.org/) database to find overlap with ChIP-seq experiments using the [enrichment analysis](https://chip-atlas.org/enrichment_analysis) tool. The online tool is rapidly evolving and new experiments regularly added to [GEO](https://www.ncbi.nlm.nih.gov/geo/). We provide the results of the enrichment analysis in the folder [chipatlas_results](chipatlas_results/).
 
-O-GlcNac peaks mainly overlap with RNA Polymerase II (RNAPol II) and associated factors:
+O-GlcNac peaks mainly overlap with RNA Polymerase II (RNAPol II) and associated factors: [Nelfcd](), [Supt5h](), [Ncbp1](), [Nelfe](), and [Ints3]().
