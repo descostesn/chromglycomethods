@@ -584,8 +584,6 @@ callheatmapgeneration <- function(res, rescomplete, sectionvec, sectiontype,
     ## Plotting heatmap
     .plotheatmap(mat, "none", ignoreqval, experimentname,
         percentthreshold, outputfolder, sectiontype)
-    .plotheatmap(mat, "row", ignoreqval, experimentname, percentthreshold,
-        outputfolder, sectiontype)
 }
 
 
