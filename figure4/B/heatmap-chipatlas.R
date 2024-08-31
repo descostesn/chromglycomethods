@@ -173,7 +173,7 @@ filteroncells <- function(resultlist, looktypespe = TRUE) {
     return(df)
 }
 
-.buildantigenlist <- function(resultlist, thres = 1, keepmaxonly = FALSE) {
+buildantigenlist <- function(resultlist, thres = 1, keepmaxonly = FALSE) {
 
     result <- mapply(function(df, dfname, thres) {
 
@@ -209,7 +209,7 @@ filteroncells <- function(resultlist, looktypespe = TRUE) {
     return(result)
 }
 
-.mergepolandtf <- function(reslist, prefvec) {
+mergepolandtf <- function(reslist, prefvec) {
 
     res <- lapply(prefvec, function(currentpref, reslist) {
 
@@ -647,17 +647,17 @@ if (!isTRUE(all.equal(length(idxremove), 0)))
 
 ## Building antigen unique list
 message("Building antigen unique lists for DLD-1 Cells:")
-resultlistedld1sra <- .buildantigenlist(resultlistedld1,
+resultlistedld1sra <- buildantigenlist(resultlistedld1,
     thres = percentthreshold, keepmaxonly = TRUE)
-completeresultlistedld1sra <- .buildantigenlist(resultlistedld1)
+completeresultlistedld1sra <- buildantigenlist(resultlistedld1)
 
 if (!isTRUE(all.equal(names(resultlistedld1sra),
     names(completeresultlistedld1sra))))
     stop("The two lists do not contain the same elements.")
 
 ## Merging pol and TFs for each replicates
-resultlistedld1sramerged <- .mergepolandtf(resultlistedld1sra, repprefixvec)
-completeresultlistedld1sramerged <- .mergepolandtf(completeresultlistedld1sra,
+resultlistedld1sramerged <- mergepolandtf(resultlistedld1sra, repprefixvec)
+completeresultlistedld1sramerged <- mergepolandtf(completeresultlistedld1sra,
     repprefixvec)
 names(resultlistedld1sramerged) <- repprefixvec
 names(completeresultlistedld1sramerged) <- repprefixvec
