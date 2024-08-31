@@ -1,4 +1,4 @@
-# Examples of genes from cluster 4 and 5
+# Genome browser view of genes from cluster 4 and 5
 
 I. [Description](#description)  
 II. [Data](#data)  

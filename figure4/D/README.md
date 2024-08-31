@@ -1,17 +1,22 @@
-# Geneset Enrichment of the three clusters presenting different O-GlcNac occupancy outcomes upon RNA Polymerase II degradation
+# Clustering of O-GlcNac before and after RNA Polymerase II removal reveals different functional categories
 
 I. [Description](#description)  
 II. [Data](#data)  
 III. [Installation](#installation)  
 IV. [Figure Generation](#figure-generation)  
 V. [Pre-processing](#pre-processing)  
-&nbsp;&nbsp; V.I. [Genomic Repartition](#genomic-repartition)  
-&nbsp;&nbsp; V.II. [Genomic Repartition by Clusters](#genomic-repartition)  
-&nbsp;&nbsp; V.III. [Genes from Compartments](#genomic-repartition)  
+&nbsp;&nbsp; V.I. [Workflows](#workflows)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; VI.I.I. [ChIP-seq and CutnRun](#chip-seq-and-cutnrun)  
+&nbsp;&nbsp; V.II. [Peak Detection](#peak-detection)  
+&nbsp;&nbsp; V.I. [Peak Union](#peak-union)  
+
+
+
 
 ## Description
 
-Geneset enrichment analysis of the 5 clusters defined in [fig4C](../C/README.md). Genes overlapping one or more O-GlcNac peaks were retrieved as input. Cluster 1 and 3 did not give any enrichment. Cluster 2 (239 genes/584 peaks) is mainly enriched for genes coding for histone methyltransferases and transcription co-activators. Cluster 4 (347 genes/1,200 peaks) gained O-GlcNac on genes coding for proteins linked to the RNA Polymerase II activity. Cluster 5 (751 genes/2,986 peaks) gave an enrichment for general transcription initiation factor activity. The alteration of O-GlcNac occupancy on hundreds of genes coding for proteins participating to the transcriptional activity of the cells is in line with our observation of the relocalization and alteration in numbers of transcription factories (fig3-FG). These observations suggest a role of O-GlcNac in a feedback loop mechanism important for regulating the transcriptional architecture of the genome.
+The comparison of O-GlcNac signal at 6,544 loci (union of replicate peaks) revealed 3 categories of loci (5 groups) in which the reponse of O-GlcNac occupancy to the removal of RNA Polymerase II (RNAPol II, see [fig4B](../B/README.md#description)) is different. Cluster 1-2-3 (284, 584, and 1490 peaks respectively) do not see major changes in O-GlcNac occupancy. The observed O-GlcNac signal is likely coming from other proteins than RNAPol II. Similarly, cluster 4 (1,200 peaks) is RNAPol II independent as poor signal is observed prior removal. However, the absence of RNAPol II enables the binding of proteins carrying O-GlcNac as an increase of signal is observed. It is tempting to speculate that this cluster has an actively transcribing RNAPol II, the absence of signal being explained by the lack of time for the antibody to catch O-GlcNac. Upon RNAPol II removal, the binding of repressing factors should decrease the production of RNAs. Strikingly, the figS3 shows a decrease in nascent rna signal at these loci. Cluster 5 (2,986 peaks) is the RNAPol II dependent one since it sees a decrease of O-GlcNac signal upon its removal. Overall, we can envision O-GlcNac as being a key component of transcription whether it is active or inactive. Perturbation of RNAPol II activity reveals a re-localization of O-GlcNac occupancy at thousands of loci.
+
 
 ## Data
 
@@ -20,281 +25,139 @@ Geneset enrichment analysis of the 5 clusters defined in [fig4C](../C/README.md)
 
 mkdir data
 
-wget https://zenodo.org/records/12793186/files/fig4D_genes_cluster1.gff  -P data/
-wget https://zenodo.org/records/12793186/files/fig4D_genes_cluster2.gff  -P data/
-wget https://zenodo.org/records/12793186/files/fig4D_genes_cluster3.gff  -P data/
-wget https://zenodo.org/records/12793186/files/fig4D_genes_cluster4.gff -P data/
-wget https://zenodo.org/records/12793186/files/fig4D_genes_cluster5.gff  -P data/
+## The bigwigs of O-GlcNca before and after treatment by (Dox)/Auxin
+wget https://www.ebi.ac.uk/biostudies/files/E-MTAB-14307/DLD1GlcNAcNoDoxAux_rep1.bw -P data/
+wget https://www.ebi.ac.uk/biostudies/files/E-MTAB-14307/DLD1GlcNAcDoxAux_rep1.bw -P data/
+
+## The bam files to perform the peak detection
+wget https://www.ebi.ac.uk/biostudies/files/E-MTAB-14307/DLD1GlcNAcDoxAux_rep1.bam -P data/
+wget https://www.ebi.ac.uk/biostudies/files/E-MTAB-14307/DLD1GlcNAcDoxAux_rep2.bam -P data/
+wget https://www.ebi.ac.uk/biostudies/files/E-MTAB-14307/DLD1GlcNAcNoDoxAux_rep1.bam -P data/
+wget https://www.ebi.ac.uk/biostudies/files/E-MTAB-14307/DLD1GlcNAcNoDoxAux_rep2.bam -P data/
+
+## The peaks to perform the union
+wget https://www.ebi.ac.uk/biostudies/files/E-MTAB-14307/DLD1GlcNAcNoDoxAux_rep1_peaks.gff -P data/
+wget https://www.ebi.ac.uk/biostudies/files/E-MTAB-14307/DLD1GlcNAcNoDoxAux_rep2_peaks.gff -P data/
+wget https://www.ebi.ac.uk/biostudies/files/E-MTAB-14307/DLD1GlcNAcDoxAux_rep1_peaks.gff -P data/
+wget https://www.ebi.ac.uk/biostudies/files/E-MTAB-14307/DLD1GlcNAcDoxAux_rep2_peaks.gff -P data/
+
+## The bigwigs of RNAPol II used as control
+wget https://zenodo.org/records/12793186/files/RNAPolII_SRX11070611_control.bw -P data/
+wget https://zenodo.org/records/12793186/files/RNAPolII_SRX11070613_auxin.bw -P data/
+
+## The file of the union of the peaks
+wget https://zenodo.org/records/12793186/files/union_OGlcNac_noauxaux-fig4C.bed -P data
 
 ## The coordinates of the peaks sorted in 5 groups
 wget https://zenodo.org/records/12793186/files/peakscoord-fig4C.bed -P data
-
-## The file of the union of the peaks used for preprocessing
-wget https://zenodo.org/records/12793186/files/union_OGlcNac_noauxaux-fig4C.bed -P data
-
-## The repeatmasker annotations used for preprocessing
-wget https://zenodo.org/records/12793186/files/repeatshg38.tar.gz -P data/
-cd data/ && tar -xvzf repeatshg38.tar.gz && rm repeatshg38.tar.gz && cd ..
-
-## The DLD1 enhancer coordinates used for preprocessing
-wget https://zenodo.org/records/12793186/files/enhancerAtlas2_DLD1.gff -P data/
 ```
+
 
 ## Installation
 
-
-Install conda following the instructions [here](https://conda.io/projects/conda/en/latest/user-guide/install/index.html). Using the recipe [fig4D.yml](fig4D.yml), run:
-
-```
-conda env create -n fig4d --file ./fig4D.yml
-conda activate fig4d
-```
-
-## Figure generation
-
-Run the script:
+Install conda following the instructions [here](https://conda.io/projects/conda/en/latest/user-guide/install/index.html). Using the recipe [fig4C.yml](fig4C.yml), run:
 
 ```
-Rscript scripts/enrichmentanalysis.R
+conda env create -n fig4c --file ./fig4C.yml
+conda activate fig4c
 ```
 
-The script should output:
+## Figure Generation
+
+Because of possible differences in seeds to perform the clustering, the matrix is built on the already sorted regions. The following computes a matrix of O-GlcNac without and with Auxin treatment. This matrix is used to plot a heatmap with K-means clustering with 5 groups (deeptools v3.5.5):
 
 ```
-Reading gff files and return conversion table
-'select()' returned 1:many mapping between keys and columns
-'select()' returned 1:many mapping between keys and columns
-'select()' returned 1:many mapping between keys and columns
-'select()' returned 1:many mapping between keys and columns
-'select()' returned 1:many mapping between keys and columns
-Warning messages:
-1: In clusterProfiler::bitr(fi[, 3], fromType = "SYMBOL", toType = c("SYMBOL",  :
-  9.35% of input gene IDs are fail to map...
-2: In clusterProfiler::bitr(fi[, 3], fromType = "SYMBOL", toType = c("SYMBOL",  :
-  6.47% of input gene IDs are fail to map...
-3: In clusterProfiler::bitr(fi[, 3], fromType = "SYMBOL", toType = c("SYMBOL",  :
-  5.79% of input gene IDs are fail to map...
-4: In clusterProfiler::bitr(fi[, 3], fromType = "SYMBOL", toType = c("SYMBOL",  :
-  7.35% of input gene IDs are fail to map...
-5: In clusterProfiler::bitr(fi[, 3], fromType = "SYMBOL", toType = c("SYMBOL",  :
-  5.6% of input gene IDs are fail to map...
-Defining background
-### No background provided
-Retrieving info from biomart
-Connecting to biomart
-# Attempt 1/5 # Connection to Ensembl ... 
-Connected with success.
-	 Retrieving gene info
-# Attempt 1/5 # Retrieving information about genes from biomaRt ...
-Information retrieved with success.
-Filtering out non-canonical chromosomes from genesinfo
-Removing 7557/70606 annotations with non canonical chromosomes
-Creating the input list of entrezID
-Creating the entrezID-symbol table
-Performing clusters comparison on molecular function
-Output the dotplot of the comparison into ../results/
+#!/bin/bash
+
+mkdir results
+
+NBCPU=1
+FILENAME="heatmap_OGlcNac.png"
+
+computeMatrix reference-point --regionsFileName data/peakscoord-fig4C.bed --scoreFileName data/DLD1GlcNAcNoDoxAux_rep1.bw data/DLD1GlcNAcDoxAux_rep1.bw --outFileName results/OGlcNacnoauxaux.mat --samplesLabel DLD1GlcNAcNoAux DLD1GlcNAcAux  --numberOfProcessors $NBCPU --referencePoint TSS  --beforeRegionStartLength 1000 --afterRegionStartLength 1000
+
+plotHeatmap --matrixFile results/OGlcNacnoauxaux.mat --outFileName $FILENAME --plotFileFormat 'png' --dpi '200' --sortRegions 'keep' --sortUsing 'mean' --averageTypeSummaryPlot 'mean' --plotType 'lines' --missingDataColor 'black' --alpha '1.0' --colorList white,blue --xAxisLabel 'distance from peak (bp)' --yAxisLabel 'peaks' --heatmapWidth 7.5 --heatmapHeight 25.0 --whatToShow 'plot, heatmap and colorbar' --startLabel 'start' --endLabel 'TES' --refPointLabel 'start' --legendLocation 'best' --labelRotation '0'
 ```
 
 You should obtain the raw figure:
 
-<img src="pictures/dotplot_top10.png" alt="GOMF" width="400"/>
+<img src="pictures/heatmap_OGlcNac.png" alt="heatmap_OGlcNac" width="400"/>
 
 
-### Pre-processing
 
-#### Genomic Repartition
-
-
-Perform the genomic repartition of the union of the glc peaks for each replicate. For details on the union of peaks see [fig4C](../C/README.md#peak-union).
+Replace the groups 'cluster_2/3/4/5' in data/peakscoord-fig4C.bed to avoid visual separation of the groups:
 
 ```
-Rscript scripts/genomicRepartition.R
+sed "s/cluster_[2-5]/cluster_1/" data/peakscoord-fig4C.bed > results/peakscoord-fig4C-modified.bed
 ```
 
-The script should output:
+Using the sorted peak coordinates `peakscoord-fig4C.bed`, generate a matrix of RNAPol II signal before and after (Dox)/Auxin treatment:
 
 ```
-Filtering database chromosomes
-Building list of repeats (this might take a while)
-	 Processing /g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/human/hg38/repeatmasker/classes/LINE.gff
-	 Processing /g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/human/hg38/repeatmasker/classes/LTR.gff
-	 Processing /g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/human/hg38/repeatmasker/classes/SINE.gff
-	 Processing /g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/human/hg38/repeatmasker/classes/Satellite.gff
-	 Processing /g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/human/hg38/repeatmasker/classes/DNA.gff
-	 Processing /g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/human/hg38/repeatmasker/classes/Simple_repeat.gff
-	 Processing /g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/human/hg38/repeatmasker/classes/RNA.gff
-	 Processing /g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/human/hg38/repeatmasker/classes/Low_complexity.gff
-	 Retrieving genomic features: Promoter, 5' UTR, 3' UTR, Exon, Intron, Downstream
-	 Retrieving first exons
-	 Retrieving enhancers
-	 Processing /g/boulard/Projects/O-N-acetylglucosamine/data/Annotations/human/hg38/enhancerAtlas2/DLD1.gff
-	 Building list of annotations
-The list was built in:
-Time difference of 4.017577 mins
-Connecting to biomart
-# Attempt 1/5 # Connection to Ensembl ... 
-Connected with success.
-Determining proportions on each target category for each query file
-     Processing unionPeaksPolIIGlc
-		 Building GR with query file
-	 Processing /g/boulard/Projects/O-N-acetylglucosamine/analysis/makeunion/sept2023/human/glcPolII_samples1-2-3-4/union_glcPolII_sept2023.gff
-		 Performing overlap on the different categories
-		 Plotting piechart
-Plotting upset
-Saving 6.67 x 6.67 in image
-	 Saving peaks per category
-# Attempt 1/5 # Retrieving information about genes from biomaRt ...
-Information retrieved with success.
+FILENAME="heatmap_RNAPolII.png"
+
+computeMatrix  reference-point --regionsFileName results/peakscoord-fig4C-modified.bed --scoreFileName data/RNAPolII_SRX11070611_control.bw data/RNAPolII_SRX11070613_auxin.bw --outFileName results/RNAPolIInoauxaux.mat --samplesLabel RNAPolIInoaux RNAPolIIaux --numberOfProcessors $NBCPU --referencePoint TSS --beforeRegionStartLength 1000 --afterRegionStartLength 1000
+
+plotHeatmap --matrixFile results/RNAPolIInoauxaux.mat --outFileName $FILENAME --plotFileFormat 'png' --dpi '200' --sortRegions 'no' --sortUsing 'mean' --averageTypeSummaryPlot 'mean' --plotType 'lines' --missingDataColor 'black' --alpha '1.0' --colorList white,blue --xAxisLabel 'distance from peak (bp)' --yAxisLabel 'peaks' --heatmapWidth 7.5 --heatmapHeight 25.0 --whatToShow 'plot, heatmap and colorbar' --startLabel 'start' --endLabel 'TES' --refPointLabel 'start' --legendLocation 'best' --labelRotation '0'
 ```
 
-You should obtain the raw figures:
+You should obtain the raw figure:
 
-<img src="pictures/piechart.png" alt="piecharts" width="400"/>
-<img src="pictures/priorityUpSet.png" alt="upset" width="400"/>
-
+<img src="pictures/heatmap_RNAPolII.png" alt="heatmap_RNAPolII" width="400"/>
 
 
-#### Genomic Repartition by Clusters
+
+## Pre-processing
+
+### Workflows
+
+#### ChIP-seq and CutnRun
+
+The pre-processing was performed with the Galaxy workflows [OGlcNac_ChIP-SeqSEhg38.ga](../B/galaxy-workflow/Galaxy-Workflow-OGlcNac_ChIP-SeqSEhg38.ga). The .ga files can be imported in one own galaxy account.
+
+Quality control was done with FastQC v0.11.9: `fastqc --outdir $outputfolder --threads $nbcpu --quiet --extract --kmers 7 -f 'fastq' $input.fastq.gz`.
+
+Adapters and low quality reads were removed with trim-galore v0.4.3: `trim_galore --phred33 --quality 20 --stringency 1 -e 0.1 --length 20 --output_dir ./ $input.fastq.gz`.
+
+Reads were aligned to hg38 with Bowtie 2.3.4.1 and the bam were sorted using samtools v1.9: `bowtie2 -p $nbcpu -x h.sapiens/hg38/hg38 -U $input.fastq.gz --sensitive --no-unal 2> $log |  samtools sort -@$nbcpu -O bam -o $output.bam`
+ 
+Only primary alignments were kept using samtools v1.8: `samtools view -o $output.bam -h -b -q 20 -F 0x800 $input.bam`.
+
+Reads not aligned to consensus chromosomes were excluded with samtools v1.9: `samtools view -o $output.bam -h -b $input.bam 'chr1' 'chr2' 'chr3' 'chr4' 'chr5' 'chr6' 'chr7' 'chr8' 'chr9' 'chr10' 'chr11' 'chr12' 'chr13' 'chr14' 'chr15' 'chr16' 'chr17' 'chr18' 'chr19' 'chr20' 'chr21' 'chr22' 'chrX' 'chrY'`.
+
+The resulting bam file was sorted with samtools v1.9: `samtools sort -@ $nbcpu -m $addmemory"M" -O bam -T sorttmp $input.bam > $output.bam`
+
+Duplicates were removed with picard v2.18.2: `picard MarkDuplicates INPUT=$input.bam OUTPUT=$output.bam METRICS_FILE=$metrics.txt REMOVE_DUPLICATES='true' ASSUME_SORTED='true'  DUPLICATE_SCORING_STRATEGY='SUM_OF_BASE_QUALITIES' OPTICAL_DUPLICATE_PIXEL_DISTANCE='100' VALIDATION_STRINGENCY='LENIENT' QUIET=true VERBOSITY=ERROR`
+
+Bigwig files normalized by the genome size were generated with deeptools v3.0.2: `bamCoverage --numberOfProcessors $NBCPU --bam $input.bam --outFileName $output.bw --outFileFormat 'bigwig' --binSize 50 --normalizeUsing RPGC --effectiveGenomeSize 2701495761 --scaleFactor 1.0  --extendReads 150 --minMappingQuality '1'`
 
 
-The files produced in the results folder are then used to determine the genomic repartition of the peaks of each cluster:
+### Peak Detection
 
-```
-Rscript scripts/genomicRepartitionClusters.R
-```
-
-The script should output:
-
-```
-Reading the peaks coordinates of the heatmap and spliting by clusters
-Reading peaks coord for each compartment of the genomic repartition generated previously
-Reading the coordinates of the union of the replicate peaks
-For each cluster group in coordgrouplist, retrieve the genomic compartment
-	 Processing cluster_1
-	 Writing files to results/cluster_1-compartmentsgff
-		DNA: 2 elements
-		enhancers: 2 elements
-		introns: 21 elements
-		LINE: 6 elements
-		Low_complexity: 6 elements
-		LTR: 3 elements
-		otherLocations: 87 elements
-		promoters: 106 elements
-		Satellite: 7 elements
-		Simple_repeat: 19 elements
-		SINE: 17 elements
-	 Processing cluster_2
-	 Writing files to results/cluster_2-compartmentsgff
-		DNA: 5 elements
-		enhancers: 14 elements
-		firstExons: 1 elements
-		introns: 36 elements
-		LINE: 12 elements
-		Low_complexity: 7 elements
-		LTR: 8 elements
-		otherExons: 3 elements
-		otherLocations: 112 elements
-		promoters: 302 elements
-		Satellite: 2 elements
-		Simple_repeat: 37 elements
-		SINE: 32 elements
-	 Processing cluster_3
-1 peaks do not have a ref in the union
-	 Writing files to results/cluster_3-compartmentsgff
-		DNA: 19 elements
-		enhancers: 27 elements
-		introns: 119 elements
-		LINE: 56 elements
-		Low_complexity: 22 elements
-		LTR: 34 elements
-		otherExons: 7 elements
-		otherLocations: 379 elements
-		promoters: 585 elements
-		Satellite: 7 elements
-		Simple_repeat: 91 elements
-		SINE: 57 elements
-	 Processing cluster_4
-	 Writing files to results/cluster_4-compartmentsgff
-		DNA: 13 elements
-		enhancers: 11 elements
-		introns: 86 elements
-		LINE: 46 elements
-		Low_complexity: 25 elements
-		LTR: 20 elements
-		otherExons: 13 elements
-		otherLocations: 327 elements
-		promoters: 473 elements
-		Satellite: 4 elements
-		Simple_repeat: 69 elements
-		SINE: 44 elements
-	 Processing cluster_5
-	 Writing files to results/cluster_5-compartmentsgff
-		DNA: 31 elements
-		enhancers: 64 elements
-		introns: 333 elements
-		LINE: 111 elements
-		Low_complexity: 46 elements
-		LTR: 96 elements
-		otherExons: 19 elements
-		otherLocations: 780 elements
-		promoters: 1023 elements
-		Satellite: 20 elements
-		Simple_repeat: 148 elements
-		SINE: 126 elements
-```
+| Target | Broad | q-value | Duplicates Thres. | Tag size |
+|--------|-------|---------|-------------------|----------|
+| DLD1GlcNAcDoxAux_rep1 | NO | 0.04 | 7 | 82 |
+| DLD1GlcNAcDoxAux_rep2 | NO | 0.04 | 7 | 82 |
+| DLD1GlcNAcNoDoxAux_rep1 | NO | 0.04 | 6 | 82 |
+| DLD1GlcNAcNoDoxAux_rep2 | NO | 0.04 | 7 | 82 |
 
 
-#### Genes from Compartments
+* Macs2 v2.2.7.1 Narrow: `macs2 callpeak -t $input.bam -c NA -n $expname --outdir $outfold -f BAM -g 2.9e9 -s $tagsize -q $qvalue --nomodel --extsize 150 --keep-dup $dupthres`
 
-By performing an overlap of the promoter coordinates of each cluster with the Ensembl gene annotations, we retrieve the input files of cluster profiler to generate the main figure:
+
+### Peak Union
+
+Generate the bed file of the union of peaks by running:
 
 ```
-Rscript scripts/overlapClustersEnsemblGenes.R
+Rscript union.R
 ```
 
-The script should output:
+The script should give the output:
 
 ```
-Reading gff input and converting to genomicranges Data
-	Removing 2/21519 duplicated ranges
-Performing overlap of each cluster with ensembl annotations
-         Performing overlap for cluster1
-         Converting result to gff format
-                 Removing 5/112 duplicated ensembl genes.
-         The number of genes for cluster1 is 107
-         Writing coordinates to results/cluster_1-compartmentsgff/promoters_vs_ensemblgenes
-         Performing overlap for cluster2
-         Converting result to gff format
-                 Removing 27/305 duplicated ensembl genes.
-         The number of genes for cluster2 is 278
-         Writing coordinates to results/cluster_2-compartmentsgff/promoters_vs_ensemblgenes/
-         Performing overlap for cluster3
-         Converting result to gff format
-                 Removing 14/549 duplicated ensembl genes.
-         The number of genes for cluster3 is 535
-         Writing coordinates to results/cluster_3-compartmentsgff/promoters_vs_ensemblgenes
-         Performing overlap for cluster4
-         Converting result to gff format
-                 Removing 10/418 duplicated ensembl genes.
-         The number of genes for cluster4 is 408
-         Writing coordinates to results/cluster_4-compartmentsgff/promoters_vs_ensemblgenes
-         Performing overlap for cluster5
-         Converting result to gff format
-                 Removing 36/875 duplicated ensembl genes.
-         The number of genes for cluster5 is 839
-         Writing coordinates to resuls/cluster_5-compartmentsgff/promoters_vs_ensemblgenes
-```
-
-One could have noticed that the numbers are different than what is described in the Description section. This is because some of the retrieved genes did not contribute to the enrichment of a gene set. Indeed, the numbers of the submitted list of genes to cluster profiler are higher than what is observed on the figure.
-
-```
-## Overlap output
-The number of genes for cluster2 is 278
-The number of genes for cluster4 is 408
-The number of genes for cluster5 is 839
-
-## Cluster profiler output
-Cluster 2 (239 genes/584 peaks)
-Cluster 4 (347 genes/1,200 peaks)
-Cluster 5 (751 genes/2,986 peaks)
+Reading peak files
+Reducing intervals
+The union returned 6,544 peaks
+Writing results/union_OGlcNac_noauxaux-fig4C.bed
 ```

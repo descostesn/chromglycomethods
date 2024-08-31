@@ -1,4 +1,4 @@
-# Clustering of O-GlcNac before and after RNA Polymerase II removal reveals different functional categories
+# RNA Polymerase II and O-GlcNac co-localize at gene promoters in human DLD-1 cells
 
 I. [Description](#description)  
 II. [Data](#data)  
@@ -6,17 +6,13 @@ III. [Installation](#installation)
 IV. [Figure Generation](#figure-generation)  
 V. [Pre-processing](#pre-processing)  
 &nbsp;&nbsp; V.I. [Workflows](#workflows)  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; VI.I.I. [ChIP-seq and CutnRun](#chip-seq-and-cutnrun)  
-&nbsp;&nbsp; V.II. [Peak Detection](#peak-detection)  
-&nbsp;&nbsp; V.I. [Peak Union](#peak-union)  
-
-
-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; VI.I.I. [ChIP-seq and CutnRun](#cutnrun)  
 
 ## Description
 
-The comparison of O-GlcNac signal at 6,544 loci (union of replicate peaks) revealed 3 categories of loci (5 groups) in which the reponse of O-GlcNac occupancy to the removal of RNA Polymerase II (RNAPol II, see [fig4B](../B/README.md#description)) is different. Cluster 1-2-3 (284, 584, and 1490 peaks respectively) do not see major changes in O-GlcNac occupancy. The observed O-GlcNac signal is likely coming from other proteins than RNAPol II. Similarly, cluster 4 (1,200 peaks) is RNAPol II independent as poor signal is observed prior removal. However, the absence of RNAPol II enables the binding of proteins carrying O-GlcNac as an increase of signal is observed. It is tempting to speculate that this cluster has an actively transcribing RNAPol II, the absence of signal being explained by the lack of time for the antibody to catch O-GlcNac. Upon RNAPol II removal, the binding of repressing factors should decrease the production of RNAs. Strikingly, the figS3 shows a decrease in nascent rna signal at these loci. Cluster 5 (2,986 peaks) is the RNAPol II dependent one since it sees a decrease of O-GlcNac signal upon its removal. Overall, we can envision O-GlcNac as being a key component of transcription whether it is active or inactive. Perturbation of RNAPol II activity reveals a re-localization of O-GlcNac occupancy at thousands of loci.
+In [fig1](../../figure1/E/README.md), we observed that the potential candidates underlying the O-GlcNac signal are related to the RNA Polymerase II (RNA Pol II). We thought investigating further the relationship between O-GlcNac and the transcriptional machinery by removing RNA Pol II. We took advantage of an existing system in Human colon adenocarcinoma DLD-1 cells. These cells express OsTIR and a cassette encoding mini-AID (mAID) and fluorescent protein mClover (mAID+mClover) at the initiation site of the endogenous Rpb1 gene locus (POLR2A) (Nagashima 2019). Stimulation by doxocyclin enables to remove RNAPol II.
 
+The heatmap of binding values of RNA Polymerase II and O-GlcNac shows a global colocalization at the 21,519 GRCh38 Ensembl genes. Note that upon RNAPol II removal by doxocyclin induction, O-GlcNac signal remains globally unaffected. As conveyed in the following analysis, we hypothetize that O-GlcNac might be maintained by the recruitment of other O-GlcNacylated proteins at gene promoters.
 
 ## Data
 
@@ -25,85 +21,70 @@ The comparison of O-GlcNac signal at 6,544 loci (union of replicate peaks) revea
 
 mkdir data
 
-## The bigwigs of O-GlcNca before and after treatment by (Dox)/Auxin
-wget https://www.ebi.ac.uk/biostudies/files/E-MTAB-14307/DLD1GlcNAcNoDoxAux_rep1.bw -P data/
+## The bigwig files of RNAPol II and O-GlcNac before and after induction
 wget https://www.ebi.ac.uk/biostudies/files/E-MTAB-14307/DLD1GlcNAcDoxAux_rep1.bw -P data/
+wget https://www.ebi.ac.uk/biostudies/files/E-MTAB-14307/DLD1GlcNAcNoDoxAux_rep1.bw -P data/
+wget https://zenodo.org/records/12793186/files/RNApolymeraseII_SRX10580013.bw -P data/
 
-## The bam files to perform the peak detection
-wget https://www.ebi.ac.uk/biostudies/files/E-MTAB-14307/DLD1GlcNAcDoxAux_rep1.bam -P data/
-wget https://www.ebi.ac.uk/biostudies/files/E-MTAB-14307/DLD1GlcNAcDoxAux_rep2.bam -P data/
-wget https://www.ebi.ac.uk/biostudies/files/E-MTAB-14307/DLD1GlcNAcNoDoxAux_rep1.bam -P data/
-wget https://www.ebi.ac.uk/biostudies/files/E-MTAB-14307/DLD1GlcNAcNoDoxAux_rep2.bam -P data/
+## The gene annotations Homo_sapiens.GRCh38.110.chr_march2024_filtered.bed
+wget https://zenodo.org/records/12793186/files/Homo_sapiens.GRCh38.110.chr_march2024_filtered.tar.gz  -P data/
+cd data && tar -xvzf Homo_sapiens.GRCh38.110.chr_march2024_filtered.tar.gz && rm Homo_sapiens.GRCh38.110.chr_march2024_filtered.tar.gz && cd ..
 
-## The peaks to perform the union
-wget https://www.ebi.ac.uk/biostudies/files/E-MTAB-14307/DLD1GlcNAcNoDoxAux_rep1_peaks.gff -P data/
-wget https://www.ebi.ac.uk/biostudies/files/E-MTAB-14307/DLD1GlcNAcNoDoxAux_rep2_peaks.gff -P data/
-wget https://www.ebi.ac.uk/biostudies/files/E-MTAB-14307/DLD1GlcNAcDoxAux_rep1_peaks.gff -P data/
-wget https://www.ebi.ac.uk/biostudies/files/E-MTAB-14307/DLD1GlcNAcDoxAux_rep2_peaks.gff -P data/
-
-## The bigwigs of RNAPol II used as control
-wget https://zenodo.org/records/12793186/files/RNAPolII_SRX11070611_control.bw -P data/
-wget https://zenodo.org/records/12793186/files/RNAPolII_SRX11070613_auxin.bw -P data/
-
-## The file of the union of the peaks
-wget https://zenodo.org/records/12793186/files/union_OGlcNac_noauxaux-fig4C.bed -P data
-
-## The coordinates of the peaks sorted in 5 groups
-wget https://zenodo.org/records/12793186/files/peakscoord-fig4C.bed -P data
+## The peaks coordinates after decreasing sorting of RNAPol II
+wget https://zenodo.org/records/12793186/files/peakscoord-fig4B.bed -P data/
 ```
-
 
 ## Installation
 
-Install conda following the instructions [here](https://conda.io/projects/conda/en/latest/user-guide/install/index.html). Using the recipe [fig4C.yml](fig4C.yml), run:
+Install conda following the instructions [here](https://conda.io/projects/conda/en/latest/user-guide/install/index.html). Using the recipe [fig4B.yml](fig4B.yml), run:
 
 ```
-conda env create -n fig4c --file ./fig4C.yml
-conda activate fig4c
+conda env create -n fig4b --file ./fig4B.yml
+conda activate fig4b
 ```
 
-## Figure Generation
+## Figure generation
 
-Because of possible differences in seeds to perform the clustering, the matrix is built on the already sorted regions. The following computes a matrix of O-GlcNac without and with Auxin treatment. This matrix is used to plot a heatmap with K-means clustering with 5 groups (deeptools v3.5.5):
+Generate a matrix with the RNAPol II bigwig using the coordinates of the Ensembl genes and plot a heatmap in descending order (deeptools v3.5.5):
 
 ```
 #!/bin/bash
 
 mkdir results
 
+## Define the number of CPUs
 NBCPU=1
+
+## Build the deeptools matrix
+computeMatrix scale-regions --regionsFileName data/Homo_sapiens.GRCh38.110.chr_march2024_filtered.bed --scoreFileName data/RNApolymeraseII_SRX10580013.bw --outFileName results/polII.mat --samplesLabel RNAPol_II --numberOfProcessors $NBCPU --regionBodyLength 2000 --beforeRegionStartLength 2000 --afterRegionStartLength 2000 --unscaled5prime 0 --unscaled3prime 0
+
+## Plot the RNAPol II signal using decreasing sorting
+FILENAME="heatmap_polII.png"
+
+plotHeatmap --matrixFile results/polII.mat --outFileName results/$FILENAME --plotFileFormat 'png' --outFileSortedRegions results/peakscoord-fig4B.bed --dpi '200' --sortRegions 'descend' --sortUsing 'mean' --averageTypeSummaryPlot 'mean' --plotType 'lines' --missingDataColor 'black' --alpha '1.0' --colorList white,blue --xAxisLabel 'distance from TSS (bp)' --yAxisLabel 'genes' --heatmapWidth 7.5 --heatmapHeight 25.0 --whatToShow 'plot, heatmap and colorbar' --startLabel 'TSS' --endLabel 'TES' --refPointLabel 'TSS' --samplesLabel RNAPolII --legendLocation 'best' --labelRotation '0'
+```
+
+You should obtain the raw figure:
+
+<img src="pictures/heatmap_polII.png" alt="PolII heatmap" width="200" heigth="200"/>
+
+Using the sorted peak coordinates `peakscoord-fig4B.bed`, generate a matrix of O-GlcNac signal before and after (Dox)/Auxin treatment:
+
+```
+computeMatrix scale-regions --regionsFileName results/peakscoord-fig4B.bed --scoreFileName data/DLD1GlcNAcNoDoxAux_rep1.bw data/DLD1GlcNAcDoxAux_rep1.bw --outFileName results/OGlcNac.mat --samplesLabel GlcNAcNoDox GlcNAcDox --numberOfProcessors $NBCPU --regionBodyLength 2000 --beforeRegionStartLength 2000 --afterRegionStartLength 2000  --unscaled5prime 0 --unscaled3prime 0
+```
+
+The matrix is already sorted because it followed the order of `peakscoord-fig4B.bed`. Remains plotting the signal without performing sorting:
+
+```
 FILENAME="heatmap_OGlcNac.png"
 
-computeMatrix reference-point --regionsFileName data/peakscoord-fig4C.bed --scoreFileName data/DLD1GlcNAcNoDoxAux_rep1.bw data/DLD1GlcNAcDoxAux_rep1.bw --outFileName results/OGlcNacnoauxaux.mat --samplesLabel DLD1GlcNAcNoAux DLD1GlcNAcAux  --numberOfProcessors $NBCPU --referencePoint TSS  --beforeRegionStartLength 1000 --afterRegionStartLength 1000
-
-plotHeatmap --matrixFile results/OGlcNacnoauxaux.mat --outFileName $FILENAME --plotFileFormat 'png' --dpi '200' --sortRegions 'keep' --sortUsing 'mean' --averageTypeSummaryPlot 'mean' --plotType 'lines' --missingDataColor 'black' --alpha '1.0' --colorList white,blue --xAxisLabel 'distance from peak (bp)' --yAxisLabel 'peaks' --heatmapWidth 7.5 --heatmapHeight 25.0 --whatToShow 'plot, heatmap and colorbar' --startLabel 'start' --endLabel 'TES' --refPointLabel 'start' --legendLocation 'best' --labelRotation '0'
+plotHeatmap --matrixFile results/OGlcNac.mat --outFileName results/$FILENAME  --plotFileFormat 'png' --dpi '200' --sortRegions 'no' --sortUsing 'mean' --averageTypeSummaryPlot 'mean' --plotType 'lines' --missingDataColor 'black' --alpha '1.0' --colorList white,blue --xAxisLabel 'distance from TSS (bp)' --yAxisLabel 'genes' --heatmapWidth 7.5 --heatmapHeight 25.0 --whatToShow 'plot, heatmap and colorbar' --startLabel 'TSS' --endLabel 'TES' --refPointLabel 'TSS' --samplesLabel NoDox Dox --legendLocation 'best' --labelRotation '0'
 ```
 
-You should obtain the raw figure:
+You should obtain the following heatmaps:
 
-<img src="pictures/heatmap_OGlcNac.png" alt="heatmap_OGlcNac" width="400"/>
-
-
-
-Replace the groups 'cluster_2/3/4/5' in data/peakscoord-fig4C.bed to avoid visual separation of the groups:
-
-```
-sed "s/cluster_[2-5]/cluster_1/" data/peakscoord-fig4C.bed > results/peakscoord-fig4C-modified.bed
-```
-
-Using the sorted peak coordinates `peakscoord-fig4C.bed`, generate a matrix of RNAPol II signal before and after (Dox)/Auxin treatment:
-
-```
-FILENAME="heatmap_RNAPolII.png"
-
-computeMatrix  reference-point --regionsFileName results/peakscoord-fig4C-modified.bed --scoreFileName data/RNAPolII_SRX11070611_control.bw data/RNAPolII_SRX11070613_auxin.bw --outFileName results/RNAPolIInoauxaux.mat --samplesLabel RNAPolIInoaux RNAPolIIaux --numberOfProcessors $NBCPU --referencePoint TSS --beforeRegionStartLength 1000 --afterRegionStartLength 1000
-
-plotHeatmap --matrixFile results/RNAPolIInoauxaux.mat --outFileName $FILENAME --plotFileFormat 'png' --dpi '200' --sortRegions 'no' --sortUsing 'mean' --averageTypeSummaryPlot 'mean' --plotType 'lines' --missingDataColor 'black' --alpha '1.0' --colorList white,blue --xAxisLabel 'distance from peak (bp)' --yAxisLabel 'peaks' --heatmapWidth 7.5 --heatmapHeight 25.0 --whatToShow 'plot, heatmap and colorbar' --startLabel 'start' --endLabel 'TES' --refPointLabel 'start' --legendLocation 'best' --labelRotation '0'
-```
-
-You should obtain the raw figure:
-
-<img src="pictures/heatmap_RNAPolII.png" alt="heatmap_RNAPolII" width="400"/>
+<img src="pictures/heatmap_OGlcNac.png" alt="OGlcNac heatmap" width="400" heigth="400"/>
 
 
 
@@ -113,7 +94,7 @@ You should obtain the raw figure:
 
 #### ChIP-seq and CutnRun
 
-The pre-processing was performed with the Galaxy workflows [OGlcNac_ChIP-SeqSEhg38.ga](../B/galaxy-workflow/Galaxy-Workflow-OGlcNac_ChIP-SeqSEhg38.ga). The .ga files can be imported in one own galaxy account.
+The pre-processing was performed with the Galaxy workflows [OGlcNac_ChIP-SeqSEhg38.ga](galaxy-workflow/Galaxy-Workflow-OGlcNac_ChIP-SeqSEhg38.ga). The .ga files can be imported in one own galaxy account.
 
 Quality control was done with FastQC v0.11.9: `fastqc --outdir $outputfolder --threads $nbcpu --quiet --extract --kmers 7 -f 'fastq' $input.fastq.gz`.
 
@@ -130,34 +111,3 @@ The resulting bam file was sorted with samtools v1.9: `samtools sort -@ $nbcpu -
 Duplicates were removed with picard v2.18.2: `picard MarkDuplicates INPUT=$input.bam OUTPUT=$output.bam METRICS_FILE=$metrics.txt REMOVE_DUPLICATES='true' ASSUME_SORTED='true'  DUPLICATE_SCORING_STRATEGY='SUM_OF_BASE_QUALITIES' OPTICAL_DUPLICATE_PIXEL_DISTANCE='100' VALIDATION_STRINGENCY='LENIENT' QUIET=true VERBOSITY=ERROR`
 
 Bigwig files normalized by the genome size were generated with deeptools v3.0.2: `bamCoverage --numberOfProcessors $NBCPU --bam $input.bam --outFileName $output.bw --outFileFormat 'bigwig' --binSize 50 --normalizeUsing RPGC --effectiveGenomeSize 2701495761 --scaleFactor 1.0  --extendReads 150 --minMappingQuality '1'`
-
-
-### Peak Detection
-
-| Target | Broad | q-value | Duplicates Thres. | Tag size |
-|--------|-------|---------|-------------------|----------|
-| DLD1GlcNAcDoxAux_rep1 | NO | 0.04 | 7 | 82 |
-| DLD1GlcNAcDoxAux_rep2 | NO | 0.04 | 7 | 82 |
-| DLD1GlcNAcNoDoxAux_rep1 | NO | 0.04 | 6 | 82 |
-| DLD1GlcNAcNoDoxAux_rep2 | NO | 0.04 | 7 | 82 |
-
-
-* Macs2 v2.2.7.1 Narrow: `macs2 callpeak -t $input.bam -c NA -n $expname --outdir $outfold -f BAM -g 2.9e9 -s $tagsize -q $qvalue --nomodel --extsize 150 --keep-dup $dupthres`
-
-
-### Peak Union
-
-Generate the bed file of the union of peaks by running:
-
-```
-Rscript union.R
-```
-
-The script should give the output:
-
-```
-Reading peak files
-Reducing intervals
-The union returned 6,544 peaks
-Writing results/union_OGlcNac_noauxaux-fig4C.bed
-```
