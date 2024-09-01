@@ -15,9 +15,9 @@ library("ChIPpeakAnno")
 ################
 
 
-gfffilevec <- c("ESCHGGlcNAc_rep1.gff",
-"ESCHGGlcNAc_rep2.gff")
-outputfolder <- "results"
+gfffilevec <- c("../data/ESCHGGlcNAc_rep1.gff",
+    "../data/ESCHGGlcNAc_rep2.gff")
+outputfolder <- "../results"
 expnamevec <- c("Glc1", "Glc2")
 
 
