@@ -6,9 +6,9 @@ III. [Installation](#installation)
 IV. [Figure Generation](#figure-generation)  
 V. [Pre-processing](#pre-processing)  
 &nbsp;&nbsp; V.I. [Data](#data)  
-&nbsp;&nbsp; V.I. [Workflow](#workflow)  
-&nbsp;&nbsp; V.II. [Peak Detection](#peak-detection)  
-&nbsp;&nbsp; V.I. [Peak Union](#peak-union)  
+&nbsp;&nbsp; V.II. [Workflow](#workflow)  
+&nbsp;&nbsp; V.III. [Peak Detection](#peak-detection)  
+&nbsp;&nbsp; V.IV. [Peak Union](#peak-union)  
 
 
 
