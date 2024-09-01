@@ -5,9 +5,10 @@ II. [Data](#data)
 III. [Installation](#installation)  
 IV. [Figure Generation](#figure-generation)  
 V. [Pre-processing](#pre-processing)  
-&nbsp;&nbsp; V.I. [Workflows](#workflows)  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; V.I.I. [CutnRun](#cutnrun)  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; V.I.II. [RNA-seq](#rna-seq)  
+&nbsp;&nbsp; V.I. [Data](#data)  
+&nbsp;&nbsp; V.II. [Workflows](#workflows)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; V.II.I. [CutnRun](#cutnrun)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; V.II.II. [RNA-seq](#rna-seq)  
 
 
 ## Description
@@ -83,9 +84,17 @@ You should obtain the raw figure:
 
 ## Pre-processing
 
+### Data
+
+| Target | ID | library layout | link |
+|--------|----|----------------|------|
+| O-GlcNAc rep1 | E-MTAB-14308 | single | ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR134/033/ERR13430733/ERR13430733.fastq.gz |
+| RNA-seq rep 1 | SRR11294181 | single | see the provided [snakemake](snakemake/Snakefile) |
+
+
 ### Workflows
 
-### CutnRun
+#### CutnRun
 
 The pre-processing was performed with the Galaxy workflows [OGlcNac_ChIP-SeqSEmm10](../A/galaxy-workflows/Galaxy-Workflow-OGlcNac_ChIP-SeqSEmm10.ga). The .ga file can be imported in your own galaxy account.
 
@@ -101,7 +110,7 @@ Reads not aligned to consensus chromosomes were excluded with samtools v1.9: `sa
 
 The peaks were obtained with Macs2 v2.2.7.1: `macs2 callpeak -t $input.bam -c $control.bam -n $expname --outdir $outfold -f BAM -g 1.87e9 -s 82 -q 0.04 --nomodel --extsize 150 --keep-dup 7`
 
-### RNA-seq
+#### RNA-seq
 
 The pre-processing was performed with the Galaxy workflows [Galaxy-Workflow-OGlcNac_RNASeqSE_mm10_STAR_bw](galaxy-workflow/Galaxy-Workflow-OGlcNac_RNASeqSE_mm10_STAR_bw.ga). The .ga file can be imported in your own galaxy account.
 

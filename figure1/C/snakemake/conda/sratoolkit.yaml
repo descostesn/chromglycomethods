@@ -1,0 +1,4 @@
+channels:
+  - bioconda/linux-64
+dependencies:
+  - sra-tools=3.0.3=h87f3376_0

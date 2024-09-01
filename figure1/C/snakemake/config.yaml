@@ -1,0 +1,5 @@
+samples:
+  summaryFile: "data.csv"
+
+outputfolder_root: "results"
+
