@@ -78,6 +78,9 @@ You should obtain the raw figure:
 mkdir data
 
 # O-GlcNac peak replicates to perform merge
+wget https://www.ebi.ac.uk/biostudies/files/E-MTAB-14308/ESCHGGlcNAc_rep1_peaks.gff -P data/
+wget https://www.ebi.ac.uk/biostudies/files/E-MTAB-14308/ESCHGGlcNAc_rep2_peaks.gff -P data/
+
 ## DEseq2 ensembl gene results
 wget https://zenodo.org/records/12793186/files/log0_siogtdown-ensembl.gff -P results/
 wget https://zenodo.org/records/12793186/files/log0_siogtup-ensembl.gff -P results/
