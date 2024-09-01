@@ -17,9 +17,10 @@ library("VennDiagram")
 
 ## results/Glc1.gff is obtained by merging the peaks of each replicates. See
 ## merge_OGlcNac_rep1-2.R
-gff_file_vec <- c("results/Glc1.gff", "results/log0_siogtdown-ensembl.gff",
-"results/log0_siogtup-ensembl.gff")
-outfolder <- "results"
+gff_file_vec <- c("../results/Glc1.gff",
+    "../results/log0_siogtdown-ensembl.gff",
+    "../results/log0_siogtup-ensembl.gff")
+outfolder <- "../results"
 comparisonname <- "glcrep1-2_vs_degsiogt"
 expnamevec <- c("glcrep1-2", "Down", "Up")
 colvec <- c("#E69F00", "#56B4E9", "#E95680")
