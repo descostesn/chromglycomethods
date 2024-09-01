@@ -5,8 +5,8 @@ II. [Data](#data)
 III. [Installation](#installation)  
 IV. [Figure Generation](#figure-generation)  
 V. [Pre-processing](#pre-processing)  
-&nbsp;&nbsp; V.I. [Workflows](#workflows)  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; VI.I.I. [ChIP-seq and CutnRun](#chip-seq-and-cutnrun)  
+&nbsp;&nbsp; V.I. [Data](#data)  
+&nbsp;&nbsp; V.I. [Workflow](#workflow)  
 &nbsp;&nbsp; V.II. [Peak Detection](#peak-detection)  
 &nbsp;&nbsp; V.I. [Peak Union](#peak-union)  
 
@@ -116,9 +116,7 @@ wget https://www.ebi.ac.uk/biostudies/files/E-MTAB-14307/DLD1GlcNAcDoxAux_rep2_p
 wget https://zenodo.org/records/12793186/files/peakscoord-fig4C.bed -P data
 ```
 
-### Workflows
-
-#### ChIP-seq and CutnRun
+### Workflow
 
 The pre-processing was performed with the Galaxy workflows [OGlcNac_ChIP-SeqSEhg38.ga](../B/galaxy-workflow/Galaxy-Workflow-OGlcNac_ChIP-SeqSEhg38.ga). The .ga files can be imported in one own galaxy account.
 
@@ -157,7 +155,7 @@ Bigwig files normalized by the genome size were generated with deeptools v3.0.2:
 Generate the bed file of the union of peaks by running:
 
 ```
-Rscript union.R
+Rscript script/union.R
 ```
 
 The script should give the output:
