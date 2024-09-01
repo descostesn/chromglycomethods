@@ -8,8 +8,8 @@ IV. [Figure Generation](#figure-generation)
 &nbsp;&nbsp; IV.II. [RNAPol II clustering](#rnapol-ii-clustering)  
 &nbsp;&nbsp; IV.III. [Heatmaps](#heatmaps)  
 V. [Pre-processing](#pre-processing)  
-&nbsp;&nbsp; V.I. [Workflows](#workflows)  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; VI.I.I. [ChIP-seq and CutnRun](#cutnrun)  
+&nbsp;&nbsp; V.I. [Data](#data)  
+&nbsp;&nbsp; V.II. [Workflow](#workflow)  
 &nbsp;&nbsp; V.I. [Peak detection](#peak-detection)  
 
 
@@ -189,9 +189,23 @@ The script should output:
 
 ## Pre-processing
 
-### Workflows
+### Data
 
-#### ChIP-seq and CutnRun
+| Target | ID | library layout | link |
+|--------|----|----------------|------|
+| O-GlcNAc rep1 | E-MTAB-14308 | single | ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR134/033/ERR13430733/ERR13430733.fastq.gz |
+| RNApolymeraseII | SRX8556273 | single | see the provided [snakemake](snakemake/Snakefile) (technical replicates) | 
+| Tbp | SRR12716556 | single | see the provided [snakemake](snakemake/Snakefile) |
+| Taf12 | SRR14907447 | single | see the provided [snakemake](snakemake/Snakefile) |
+| Nelfa | SRR036737 | single | see the provided [snakemake](snakemake/Snakefile) |
+| Med1 | SRR12716565 | single | see the provided [snakemake](snakemake/Snakefile) |
+| Med12 | SRR3313261 | single | see the provided [snakemake](snakemake/Snakefile) |
+| Med24 | SRR9153306 | single | see the provided [snakemake](snakemake/Snakefile) |
+| Med26 | SRR7262971 | single | see the provided [snakemake](snakemake/Snakefile) |
+| Dr1 | SRR5658441 | single | see the provided [snakemake](snakemake/Snakefile) |
+
+
+### Workflow
 
 The pre-processing was performed with the Galaxy workflows [OGlcNac_ChIP-SeqPEmm10](../A/galaxy-workflows/Galaxy-Workflow-OGlcNac_ChIP-SeqPEmm10.ga) and [OGlcNac_ChIP-SeqSEmm10](../A/galaxy-workflows/Galaxy-Workflow-OGlcNac_ChIP-SeqSEmm10.ga) for paired-end and single-end data respectively. The .ga files can be imported in one own galaxy account.
 
