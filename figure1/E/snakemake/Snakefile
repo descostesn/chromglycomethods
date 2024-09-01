@@ -1,0 +1,192 @@
+######################
+# Download of public chip-seq data based on ChIP-Atlas analysis of the
+# sept2023 mouse HG Glc.
+#
+# April 2023 - updated Feb 2024
+# Ran with snakemake 7.32.4
+######################
+
+
+__author__  = "Nicolas Descostes"
+__license__ = "MIT"
+
+## Create conda env only
+## snakemake --profile profile/ --use-conda --conda-create-envs-only --cores 1
+
+
+###############################################################################
+# Imports
+###############################################################################
+
+import pandas
+import os
+
+
+###############################################################################
+# Functions
+###############################################################################
+
+onstart:
+    print("##### DOWNLOAD PUBLIC CHIP-SEQ #####\n") 
+    print("\t Reading samples and metadata....\n")
+    print("\t Creating jobs output subfolders...\n")
+    shell("mkdir -p jobs/fasterqdumpSingle")
+    shell("mkdir -p jobs/fasterqdumpPaired")
+    shell("mkdir -p jobs/gzipSingle")
+    shell("mkdir -p jobs/gzipPaired")
+   
+
+    
+
+###############################################################################
+# Functions
+###############################################################################
+
+
+def read_samplesTable(inputTable):
+    data = pandas.read_csv(inputTable)
+    # Verify column names
+    if not {'srxname', 'sraname', 'samples', 'library_layout'}.issubset(data.columns.values):
+      raise KeyError("The samples file must contain the following named columns: srxname, sraname, samples, library_layout")
+    return data
+
+
+###############################################################################
+# Config Variables
+###############################################################################
+
+try:
+  input_table = config["samples"]["summaryFile"]
+except KeyError:
+  print("The parameter \"summaryFile\" in section \"samples\" has not been defined. The pipeline cannot start.")
+
+if not os.path.isfile(input_table):
+        raise IOError("File \"" + input_table + "\" (defined in " + config["samples"]["summaryFile"] + ") not found.")
+
+
+###############################################################################
+# Reading input table
+###############################################################################
+
+samplesData = read_samplesTable(input_table)
+
+
+###############################################################################
+# Parameters checking
+###############################################################################
+
+
+# Checking the library layout
+
+tablelayout = samplesData['library_layout'].unique()
+testlayoutsingle = ['single']
+testlayoutpaired = ['paired']
+
+if (testlayoutpaired == tablelayout).all():
+    print("\n\n ## The table is only composed of paired-end experiments ##\n")
+elif (testlayoutsingle == tablelayout).all():
+    print("\n\n ## The table is only composed of single-end experiments ##\n")
+elif ((testlayoutsingle == tablelayout) | \
+  (testlayoutpaired == tablelayout)).all():
+    print("\n\n ## The table is composed of single-end and paired-end \
+      experiments ##\n")
+else:
+    raise KeyError("All samples should be single or paired end, check your \
+      summaryFile.")
+
+
+
+###############################################################################
+# Variables definition
+###############################################################################
+
+# Splitting the table into single or paired end experiments
+
+index_single = samplesData['library_layout'] == 'single'
+index_paired = samplesData['library_layout'] == 'paired'
+samplesData_single = samplesData[index_single]
+samplesData_paired = samplesData[index_paired]
+
+# Output files names
+
+SINGLESAMPLES = samplesData_single['samples'].tolist()
+PAIREDSAMPLES = samplesData_paired['samples'].tolist()
+
+# SRR Ids
+
+SINGLESRR = samplesData_single['sraname'].tolist()
+PAIREDSRR = samplesData_paired['sraname'].tolist()
+
+single_df = pandas.DataFrame(samplesData_single).set_index("samples",drop=False)
+paired_df = pandas.DataFrame(samplesData_paired).set_index("samples",drop=False)
+
+PAIREDNUMBER = ["1", "2"]
+
+# Defining output folder paths
+OUTFOLDERPREFIX = config["outputfolder_root"]
+
+
+###############################################################################
+# Rules
+###############################################################################
+
+rule all:
+  input:
+    expand("{outprefix}/single/{singleEndName}.fastq.gz", outprefix = OUTFOLDERPREFIX, singleEndName = SINGLESAMPLES),
+    expand("{outprefix}/paired/{pairedEndName}_{pairedNumber}.fastq.gz", outprefix = OUTFOLDERPREFIX, pairedEndName = PAIREDSAMPLES, pairedNumber = PAIREDNUMBER)
+
+
+rule fasterqdumpSingle:
+  output:
+    temp("{outprefix}/single/{singleEndName}.fastq")
+  conda: "conda/sratoolkit.yaml"
+  threads: 20
+  params:
+    srrid = lambda wildcards: single_df.loc[wildcards.singleEndName, "sraname"],
+    outfold = config["outputfolder_root"]
+  shell:
+    """
+    echo "Downloading and converting {params.srrid} to fastq"
+    fasterq-dump -o {wildcards.singleEndName}.fastq -O {params.outfold}/single -t /scratch/descoste -p --threads {threads} {params.srrid}
+    echo "Done"
+    """
+
+rule fasterqdumpPaired:
+  output:
+    temp("{outprefix}/paired/{pairedEndName}_1.fastq"),
+    temp("{outprefix}/paired/{pairedEndName}_2.fastq")
+  conda: "conda/sratoolkit.yaml"
+  threads: 20
+  params:
+    srrid = lambda wildcards: paired_df.loc[wildcards.pairedEndName, "sraname"],
+    outfold = config["outputfolder_root"]
+  shell:
+    """
+    echo "Downloading and converting {params.srrid} to fastq"
+    fasterq-dump -o {wildcards.pairedEndName} -O {params.outfold}/paired -t /scratch/descoste -p --threads {threads} --split-files {params.srrid}
+    echo "Done"
+    """
+
+rule gzipSingle:
+  input:
+    rules.fasterqdumpSingle.output
+  output:
+    "{outprefix}/single/{singleEndName}.fastq.gz"
+  threads: 1
+  shell:
+    """
+    echo "Compressing files"
+    gzip {input}
+    """
+
+rule gzipPaired:
+  input:
+    "{outprefix}/paired/{pairedEndName}_{pairedNumber}.fastq",
+  output:
+    "{outprefix}/paired/{pairedEndName}_{pairedNumber}.fastq.gz"
+  threads: 1
+  shell:
+    """
+    echo "Compressing files"
+    gzip {input}
+    """
