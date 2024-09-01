@@ -4,6 +4,8 @@ I. [Description](#description)
 II. [Data](#data)  
 III. [Figure Generation](#figure-generation)  
 IV. [Pre-processing](#pre-processing)  
+&nbsp;&nbsp; IV.I. [Data](#data)  
+&nbsp;&nbsp; IV.II. [Workflows](#workflows)  
 
 
 ## Description
@@ -28,6 +30,17 @@ The bw files were uploaded to [IGV](https://igv.org/) v2.13.0 selecting the mous
 
 
 ## Pre-processing
+
+### Data
+
+| Target | ID | library layout | link |
+|--------|----|----------------|------|
+| O-GlcNAc rep1 | E-MTAB-14308 | single | ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR134/033/ERR13430733/ERR13430733.fastq.gz |
+| H3K4me3 | SRR8581420 | paired | see the provided [snakemake](../A/snakemake/Snakefile) |
+| H3K9me3 | SRR925652 | single | see the provided [snakemake](../A/snakemake/Snakefile) |
+
+
+### Workflows
 
 The ESCHGGlcNAc and H3K9me3 data was processed with [Galaxy-Workflow-ChIP-SeqSEmm10_multi10](galaxy-workflows/Galaxy-Workflow-ChIP-SeqSEmm10_multi10.ga) and H3K4me3 with [Galaxy-Workflow-ChIP-SeqPEmm10_multi10](galaxy-workflows/Galaxy-Workflow-ChIP-SeqPEmm10_multi10.ga) allowing a maximum of 10 matches for multireads. The multiread mode allowed retrieving signal on LINE1 elements.
 
