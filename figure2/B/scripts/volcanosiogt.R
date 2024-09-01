@@ -15,10 +15,10 @@ library("ggrepel")
 ##################
 
 
-deseq2paths <- c("data/resultDeseq2_siogt.txt")
-overdownpeakspath <- "data/siogtdown_withOGlcNac.gff"
-overuppeakspath <- "data/siogtup_withOGlcNac.gff"
-outfold <- "results/"
+deseq2paths <- c("../data/resultDeseq2_siogt.txt")
+overdownpeakspath <- "../data/siogtdown_withOGlcNac.gff"
+overuppeakspath <- "../data/siogtup_withOGlcNac.gff"
+outfold <- "../results/"
 
 ##################
 #FUNCTIONS
