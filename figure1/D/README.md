@@ -6,7 +6,7 @@ III. [Data](#data)
 IV. [Installation](#installation)  
 V. [Figure Generation](#figure-generation)  
 VI. [Pre-processing](#pre-processing)  
-&nbsp;&nbsp; VI.I. [Data](#data)  
+&nbsp;&nbsp; VI.I. [Data](#data-1)  
 &nbsp;&nbsp; VI.II. [Workflow](#workflow)  
 &nbsp;&nbsp; VI.III. [Peak detection](#peak-detection)  
 
