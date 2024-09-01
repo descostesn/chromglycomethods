@@ -1,0 +1,4 @@
+#!/usr/bin/sh
+
+cat RNApolymeraseII_SRX8556273_tech1.fastq.gz RNApolymeraseII_SRX8556273_tech2.fastq.gz RNApolymeraseII_SRX8556273_tech3.fastq.gz RNApolymeraseII_SRX8556273_tech4.fastq.gz RNApolymeraseII_SRX8556273_tech5.fastq.gz RNApolymeraseII_SRX8556273_tech6.fastq.gz RNApolymeraseII_SRX8556273_tech7.fastq.gz RNApolymeraseII_SRX8556273_tech8.fastq.gz > RNApolymeraseII_SRX8556273.fastq.gz
+rm RNApolymeraseII_SRX8556273_tech*
