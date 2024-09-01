@@ -1,0 +1,5 @@
+samples:
+  summaryFile: "/g/romebioinfo/Projects/glucnac/data/input_table/public_data_sept2023_chipatlas_mouseHG.csv"
+
+outputfolder_root: "/g/boulard/Projects/O-N-acetylglucosamine/data/public_data/mouse/mm10/sept2023/chipatlas-candidates/fastq"
+

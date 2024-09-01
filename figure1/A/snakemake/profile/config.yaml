@@ -1,0 +1,54 @@
+---
+
+# Snakemake options
+
+snakefile: Snakefile
+latency-wait: 60
+printshellcmds: True
+local-cores: 2
+configfile: "./config.yaml"
+keep-going: True
+rerun-incomplete: True
+reason: True
+restart-times: 1
+show-failed-logs: True
+notemp: True
+use-conda: True
+
+
+
+# cluster options
+max-jobs-per-second: 1
+max-status-checks-per-second: 10
+jobs: 400
+jobname: "{rule}.{jobid}"
+cluster: "sbatch --output=\"jobs/{rule}/slurm_%x_%j.out\" --error=\"jobs/{rule}/slurm_%x_%j.log\" --cpus-per-task={threads} --time={resources.runtime} --mem-per-cpu={resources.mem_cpu_mb} --ntasks=1 --parsable" # --parsable added for handling the timeout exception
+cluster-status: "./profile/status-sacct.sh" #  Use to handle timeout exception, do not forget to chmod +x
+
+
+#useful to increase/decrease nb of threads for a specific rule (threads HAS to be defined in the rule too)
+set-threads:
+  - fasterqdumpSingle=20
+  - fasterqdumpPaired=20
+  - gzipSingle=1
+  - gzipPaired=1
+   
+
+
+#useful to increase/decrease resources of a specific rule (these resources DO NOT need to be defined in the rule)
+# Note that time is not in quote
+set-resources:
+  - fasterqdumpSingle:mem_cpu_mb=2000
+  - fasterqdumpSingle:runtime=12h
+  - fasterqdumpPaired:mem_cpu_mb=500
+  - fasterqdumpPaired:runtime=3h
+  - gzipSingle:mem_cpu_mb=2000
+  - gzipSingle:runtime=5h
+  - gzipPaired:mem_cpu_mb=2000
+  - gzipPaired:runtime=5h
+
+
+# For some reasons time needs quotes to be read by snakemake
+default-resources:
+  - mem_cpu_mb=950
+  - runtime="20m"
