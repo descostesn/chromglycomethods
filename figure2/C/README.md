@@ -35,7 +35,6 @@ wget https://zenodo.org/records/13444099/files/TPMbw_siogt_rep1.bw
 The bw files were uploaded to [IGV](https://igv.org/) v2.13.0 selecting the mouse mm10 genome.
 
 
-## Pre-processing
 
 ## Pre-processing
 
