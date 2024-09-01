@@ -72,6 +72,17 @@ You should obtain the raw figure:
 
 ### Data
 
+| Target | ID | library layout | link 1| link 2 |
+|--------|----|----------------|------|
+| O-GlcNAc rep1 | E-MTAB-14308 | single | ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR134/033/ERR13430733/ERR13430733.fastq.gz ||
+| O-GlcNAc rep2 | E-MTAB-14308 | single | ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR134/034/ERR13430734/ERR13430734.fastq.gz ||
+| sictrl rep 1 | E-MTAB-14313 | ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR134/070/ERR13430770/ERR13430770_1.fastq.gz | ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR134/070/ERR13430770/ERR13430770_2.fastq.gz |
+| sictrl rep 2 | E-MTAB-14313 | ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR134/071/ERR13430771/ERR13430771_1.fastq.gz | ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR134/071/ERR13430771/ERR13430771_2.fastq.gz |
+| siogt rep 1 | E-MTAB-14313 | ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR134/072/ERR13430772/ERR13430772_1.fastq.gz | ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR134/072/ERR13430772/ERR13430772_2.fastq.gz |
+| siogt rep 2 | E-MTAB-14313 | ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR134/073/ERR13430773/ERR13430773_1.fastq.gz | ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR134/073/ERR13430773/ERR13430773_2.fastq.gz |
+
+To download the data run:
+
 ```
 #!/bin/bash
 
@@ -98,16 +109,21 @@ wget https://zenodo.org/records/12793186/files/log0_siogtup-ensembl.gff -P resul
 
 ## All 'countslength' files contain the same information
 mv sictrl_rep1_countslength.txt sictrlogt_featurelength.txt
-```
 
-| Target | ID | library layout | link 1| link 2 |
-|--------|----|----------------|------|
-| O-GlcNAc rep1 | E-MTAB-14308 | single | ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR134/033/ERR13430733/ERR13430733.fastq.gz ||
-| O-GlcNAc rep2 | E-MTAB-14308 | single | ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR134/034/ERR13430734/ERR13430734.fastq.gz ||
-| sictrl rep 1 | E-MTAB-14313 | ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR134/070/ERR13430770/ERR13430770_1.fastq.gz | ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR134/070/ERR13430770/ERR13430770_2.fastq.gz |
-| sictrl rep 2 | E-MTAB-14313 | ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR134/071/ERR13430771/ERR13430771_1.fastq.gz | ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR134/071/ERR13430771/ERR13430771_2.fastq.gz |
-| siogt rep 1 | E-MTAB-14313 | ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR134/072/ERR13430772/ERR13430772_1.fastq.gz | ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR134/072/ERR13430772/ERR13430772_2.fastq.gz |
-| siogt rep 2 | E-MTAB-14313 | ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR134/073/ERR13430773/ERR13430773_1.fastq.gz | ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR134/073/ERR13430773/ERR13430773_2.fastq.gz |
+mkdir data/fastq
+
+## Fastq files
+wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR134/033/ERR13430733/ERR13430733.fastq.gz -P data/ESCHGGlcNAc_rep1.fastq.gz
+wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR134/034/ERR13430734/ERR13430734.fastq.gz -P data/ESCHGGlcNAc_rep2.fastq.gz
+wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR134/070/ERR13430770/ERR13430770_1.fastq.gz -P data/sictrl_rep1_fwd.fastq.gz
+wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR134/070/ERR13430770/ERR13430770_2.fastq.gz -P data/sictrl_rep1_rev.fastq.gz
+wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR134/071/ERR13430771/ERR13430771_1.fastq.gz -P data/sictrl_rep2_fwd.fastq.gz
+wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR134/071/ERR13430771/ERR13430771_2.fastq.gz -P data/sictrl_rep2_rev.fastq.gz
+wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR134/072/ERR13430772/ERR13430772_1.fastq.gz -P data/siogt_rep1_fwd.fastq.gz
+wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR134/072/ERR13430772/ERR13430772_2.fastq.gz -P data/siogt_rep1_rev.fastq.gz
+wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR134/073/ERR13430773/ERR13430773_1.fastq.gz -P data/siogt_rep2_fwd.fastq.gz
+wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR134/073/ERR13430773/ERR13430773_2.fastq.gz -P data/siogt_rep2_rev.fastq.gz
+```
 
 
 ### Workflows
