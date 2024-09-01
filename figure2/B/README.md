@@ -65,7 +65,7 @@ Plotting volcano
 
 You should obtain the raw figure:
 
-<img src="volcano-siogt.png" alt="volcano plot DEG siOgt" width="400"/>
+<img src="pictures/volcano-siogt.png" alt="volcano plot DEG siOgt" width="400"/>
 
 
 ## Pre-processing
@@ -223,6 +223,6 @@ The files of coorinates of genes having an O-GlcNac peak are glcrep1-2_Up.gff an
 
 You should obtain the raw figure:
 
-<img src="mergedrep1-2_vs_DEGsiogt.png" alt="venn DEG siOgt vs OGlcNac" width="400"/>
+<img src="pictures/mergedrep1-2_vs_DEGsiogt.png" alt="venn DEG siOgt vs OGlcNac" width="400"/>
 
 Note the three common genes between up and down which are due to intertwined genes.
