@@ -6,10 +6,11 @@ III. [Data](#data)
 IV. [Installation](#installation)  
 V. [Figure Generation](#figure-generation)  
 VI. [Pre-processing](#pre-processing)  
-&nbsp;&nbsp; VI.I. [Workflows](#workflows)  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; VI.I.I. [ChIP-seq and CutnRun](#chip-seq-and-cutnrun)  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; VI.I.II. [ATAC-seq](#atac-seq)  
-&nbsp;&nbsp; VI.II. [Peak Detection](#peak-detection)  
+&nbsp;&nbsp; VI.I. [Data](#data)  
+&nbsp;&nbsp; VI.II. [Workflows](#workflows)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; VI.II.I. [ChIP-seq and CutnRun](#chip-seq-and-cutnrun)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; VI.II.II. [ATAC-seq](#atac-seq)  
+&nbsp;&nbsp; VI.III. [Peak Detection](#peak-detection)  
 
 
 
@@ -140,6 +141,24 @@ You should obtain the raw figure:
 <img src="complexUpset.png" alt="Upset plot" width="400"/>
 
 ## Pre-processing
+
+### Data
+
+| Target | ID | library layout | link |
+|--------|----|----------------|------|
+| O-GlcNAc rep1 | E-MTAB-14308 | single | ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR134/033/ERR13430733/ERR13430733.fastq.gz |
+| O-GlcNAc rep2 | E-MTAB-14308 | single | ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR134/034/ERR13430734/ERR13430734.fastq.gz |
+| H3K27me3 | SRR10032683 | paired | see the provided [snakemake](snakemake/Snakefile) |
+| H3K27ac | SRR23199099 | single | see the provided [snakemake](snakemake/Snakefile) |
+| H3K4me1 | SRR5466745 | single | see the provided [snakemake](snakemake/Snakefile) |
+| H3K4me3 | SRR8581420 | paired | see the provided [snakemake](snakemake/Snakefile) |
+| Suz12   | SRR034190 | single | see the provided [snakemake](snakemake/Snakefile) |
+| RING1B | SRR10095137 | single | see the provided [snakemake](snakemake/Snakefile) |
+| H3K9me3 | SRR925652 | single | see the provided [snakemake](snakemake/Snakefile) |
+| Ser5P | SRR391050 | single | see the provided [snakemake](snakemake/Snakefile) |
+| Ser2P | SRR391039 | single | see the provided [snakemake](snakemake/Snakefile) |
+| ATAC-seq | SRR5466767 | paired | see the provided [snakemake](snakemake/Snakefile) |
+
 
 ### Workflows
 
