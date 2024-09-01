@@ -49,7 +49,7 @@ conda activate fig2b
 Run the command:
 
 ```
-Rscript volcanosiogt.R
+Rscript scripts/volcanosiogt.R
 ```
 
 The script should output:
@@ -160,7 +160,7 @@ The lists of down- and up-regulated genes were separated to their respective fil
 Run the script:
 
 ```
-Rscript merge_OGlcNac_rep1-2.R
+Rscript scripts/merge_OGlcNac_rep1-2.R
 ```
 
 The script should output:
@@ -179,7 +179,7 @@ Done.
 Run the command:
 
 ```
-Rscript overlapOGlcNacDEG.R
+Rscript scripts/overlapOGlcNacDEG.R
 ```
 
 The script should output:
