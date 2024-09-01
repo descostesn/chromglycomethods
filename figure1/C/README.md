@@ -13,7 +13,7 @@ V. [Pre-processing](#pre-processing)
 
 ## Description
 
-Violin plot showing the mouse ESC RNA-seq expression levels of O-GlcNAc enriched gene promoters (236 genes). The median expression of genes having O-GlcNac at promoters is higher when compared to 236 randomly selected promoters without O-GlcNac, 236 randomly selected promoters, and 21,085 promoters. The three groups to which O-GlcNac promoters are compared to have at least 1 RNA-seq read.
+Violin plot showing the mouse ESC RNA-seq expression levels of O-GlcNAc enriched gene promoters (236 genes). The median expression of genes having O-GlcNac at promoters is higher when compared to 236 randomly selected promoters without O-GlcNac, 236 randomly selected promoters, and 21,085 promoters. The three comparison groups have at least 1 RNA-seq read.
 
 The statistical test used is a two-sided Mann-Whitney (mu = 0, paired = FALSE) giving the p-values:
 
