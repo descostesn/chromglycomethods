@@ -66,7 +66,7 @@ conda activate fig4B
 Run the command:
 
 ```
-Rscript heatmap-chipatlas.R
+Rscript script/heatmap-chipatlas.R
 ```
 
 The script should output:
