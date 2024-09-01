@@ -15,17 +15,17 @@ library("pheatmap")
 #############
 
 
-resultpathvec <- c("chipatlas-results/hdld1nodox1_histone_all.txt",
-"chipatlas-results/hdld1nodox1_pol_all.txt",
-"chipatlas-results/hdld1nodox1_TF_all.txt",
-"chipatlas-results/hdld1nodox2_pol_all.txt",
-"chipatlas-results/hdld1nodox2_TF_all.txt",
-"chipatlas-results/hdld1dox1_histone_all.txt",
-"chipatlas-results/hdld1dox1_pol_all.txt",
-"chipatlas-results/hdld1dox1_TF_all.txt",
-"chipatlas-results/hdld1dox2_histone_all.txt",
-"chipatlas-results/hdld1dox2_pol_all.txt",
-"chipatlas-results/hdld1dox2_TF_all.txt")
+resultpathvec <- c("../chipatlas-results/hdld1nodox1_histone_all.txt",
+"../chipatlas-results/hdld1nodox1_pol_all.txt",
+"../chipatlas-results/hdld1nodox1_TF_all.txt",
+"../chipatlas-results/hdld1nodox2_pol_all.txt",
+"../chipatlas-results/hdld1nodox2_TF_all.txt",
+"../chipatlas-results/hdld1dox1_histone_all.txt",
+"../chipatlas-results/hdld1dox1_pol_all.txt",
+"../chipatlas-results/hdld1dox1_TF_all.txt",
+"../chipatlas-results/hdld1dox2_histone_all.txt",
+"../chipatlas-results/hdld1dox2_pol_all.txt",
+"../chipatlas-results/hdld1dox2_TF_all.txt")
 
 resultnamevec <- c("nodox1_histone", "nodox1_pol", "nodox1_TF", "nodox2_pol", "nodox2_TF", "dox3_histone", #nolint
 "dox3_pol", "dox3_TF", "dox4_histone", "dox4_pol", "dox4_TF")
@@ -33,7 +33,7 @@ resultnamevec <- c("nodox1_histone", "nodox1_pol", "nodox1_TF", "nodox2_pol", "n
 repprefixvec <- c("nodox1", "nodox2", "dox3", "dox4")
 suffixmerged <- c("hist", "polTFs")
 experimentname <- c("peaksPolII")
-outputfolder <- c("results")
+outputfolder <- c("../results")
 percentthreshold <- c(20)
 ignoreqval <- FALSE
 
