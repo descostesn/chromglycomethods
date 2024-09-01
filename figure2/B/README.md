@@ -31,19 +31,6 @@ wget https://zenodo.org/records/12793186/files/resultDeseq2_siogt.txt  -P data/
 wget https://zenodo.org/records/12793186/files/siogtdown_withOGlcNac.gff -P data/
 wget https://zenodo.org/records/12793186/files/siogtup_withOGlcNac.gff  -P data/
 
-# O-GlcNac peak replicates to perform merge
-wget https://www.ebi.ac.uk/biostudies/files/E-MTAB-14308/ESCHGGlcNAc_rep1.bw -P data/
-wget https://www.ebi.ac.uk/biostudies/files/E-MTAB-14308/ESCHGGlcNAc_rep2.bw -P data/
-
-## Counts and feature length files for DESeq2
-wget https://www.ebi.ac.uk/biostudies/files/E-MTAB-14313/sictrl_rep1_countslength.txt -P data/
-wget https://www.ebi.ac.uk/biostudies/files/E-MTAB-14313/sictrl_rep1_counts.txt -P data/
-wget https://www.ebi.ac.uk/biostudies/files/E-MTAB-14313/sictrl_rep2_counts.txt -P data/
-wget https://www.ebi.ac.uk/biostudies/files/E-MTAB-14313/siogt_rep1_counts.txt -P data/
-wget https://www.ebi.ac.uk/biostudies/files/E-MTAB-14313/siogt_rep2_counts.txt -P data/
-
-## All 'countslength' files contain the same information
-mv sictrl_rep1_countslength.txt sictrlogt_featurelength.txt
 ```
 
 
@@ -82,6 +69,43 @@ You should obtain the raw figure:
 
 
 ## Pre-processing
+
+### Data
+
+```
+#!/bin/bash
+
+mkdir data
+
+# O-GlcNac peak replicates to perform merge
+## DEseq2 ensembl gene results
+wget https://zenodo.org/records/12793186/files/log0_siogtdown-ensembl.gff -P results/
+wget https://zenodo.org/records/12793186/files/log0_siogtup-ensembl.gff -P results/
+
+## Counts and feature length files for DESeq2
+wget https://www.ebi.ac.uk/biostudies/files/E-MTAB-14313/sictrl_rep1_countslength.txt -P data/
+wget https://www.ebi.ac.uk/biostudies/files/E-MTAB-14313/sictrl_rep1_counts.txt -P data/
+wget https://www.ebi.ac.uk/biostudies/files/E-MTAB-14313/sictrl_rep2_counts.txt -P data/
+wget https://www.ebi.ac.uk/biostudies/files/E-MTAB-14313/siogt_rep1_counts.txt -P data/
+wget https://www.ebi.ac.uk/biostudies/files/E-MTAB-14313/siogt_rep2_counts.txt -P data/
+
+## DEseq2 ensembl gene results
+wget https://zenodo.org/records/12793186/files/log0_siogtdown-ensembl.gff -P results/
+wget https://zenodo.org/records/12793186/files/log0_siogtup-ensembl.gff -P results/
+
+## All 'countslength' files contain the same information
+mv sictrl_rep1_countslength.txt sictrlogt_featurelength.txt
+```
+
+| Target | ID | library layout | link 1| link 2 |
+|--------|----|----------------|------|
+| O-GlcNAc rep1 | E-MTAB-14308 | single | ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR134/033/ERR13430733/ERR13430733.fastq.gz ||
+| O-GlcNAc rep2 | E-MTAB-14308 | single | ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR134/034/ERR13430734/ERR13430734.fastq.gz ||
+| sictrl rep 1 | E-MTAB-14313 | ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR134/070/ERR13430770/ERR13430770_1.fastq.gz | ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR134/070/ERR13430770/ERR13430770_2.fastq.gz |
+| sictrl rep 2 | E-MTAB-14313 | ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR134/071/ERR13430771/ERR13430771_1.fastq.gz | ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR134/071/ERR13430771/ERR13430771_2.fastq.gz |
+| siogt rep 1 | E-MTAB-14313 | ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR134/072/ERR13430772/ERR13430772_1.fastq.gz | ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR134/072/ERR13430772/ERR13430772_2.fastq.gz |
+| siogt rep 2 | E-MTAB-14313 | ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR134/073/ERR13430773/ERR13430773_1.fastq.gz | ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR134/073/ERR13430773/ERR13430773_2.fastq.gz |
+
 
 ### Workflows
 
@@ -127,14 +151,6 @@ The deseq2 table was then filtered on columns 3 (fold-change) and 7 (adj p-val) 
 
 The lists of down- and up-regulated genes were separated to their respective files using the third column: `c3<0` for down and `c3>0` for up.
 
-The resulting files can be downloaded:
-
-```
-#!/bin/bash
-
-wget https://zenodo.org/records/12793186/files/log0_siogtdown-ensembl.gff -P results/
-wget https://zenodo.org/records/12793186/files/log0_siogtup-ensembl.gff -P results/
-```
 
 ### Merging replicates
 
