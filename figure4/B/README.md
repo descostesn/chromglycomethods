@@ -247,7 +247,7 @@ Merging replicates and create result table
 
 You should obtain the raw figure:
 
-<img src="peaksPolII-20-none.png" alt="ChIP-Atlas Heatmap" width="400"/>
+<img src="picture/peaksPolII-20-none.png" alt="ChIP-Atlas Heatmap" width="400"/>
 
 ## Pre-processing
 
