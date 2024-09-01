@@ -15,19 +15,8 @@ library("VennDiagram")
 ################
 
 
-gff_file_vec <- c("/g/boulard/Projects/O-N-acetylglucosamine/analysis/venndiagrams/Sofia_polIIGlc_sept2023/mouse/glucose-levels/glcHGPeaksRep1_vs_Rep2/Glc1.gff", # nolint
-"/g/boulard/Projects/O-N-acetylglucosamine/analysis/differential_analysis/deseq2/RNASeq_siogt_formichetti/lfc0/upanddown/log0_down-ensembl.gff", # nolint
-"/g/boulard/Projects/O-N-acetylglucosamine/analysis/differential_analysis/deseq2/RNASeq_siogt_formichetti/lfc0/upanddown/log0_up-ensembl.gff")  # nolint
-outfolder <- "/g/boulard/Projects/O-N-acetylglucosamine/analysis/venndiagrams/Sofia_polIIGlc_sept2023/mouse/glucose-levels/glcHG_vs_DEGsiogt/mergedrep1-2/test" # nolint
-comparisonname <- "mergedrep1-2_vs_DEGsiogt"
-expnamevec <- c("mergedrep1-2", "Down", "Up")
-genome_version <- "mm10"
-colvec <- c("#E69F00", "#56B4E9", "#E95680")
-outformat <- "png"
-
-
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
+## results/Glc1.gff is obtained by merging the peaks of each replicates. See
+## merge_OGlcNac_rep1-2.R
 gff_file_vec <- c("results/Glc1.gff", "results/log0_siogtdown-ensembl.gff",
 "results/log0_siogtup-ensembl.gff")
 outfolder <- "results"
