@@ -8,7 +8,7 @@ IV. [Figure Generation](#figure-generation)
 &nbsp;&nbsp; IV.II. [RNAPol II clustering](#rnapol-ii-clustering)  
 &nbsp;&nbsp; IV.III. [Heatmaps](#heatmaps)  
 V. [Pre-processing](#pre-processing)  
-&nbsp;&nbsp; V.I. [Data](#data)  
+&nbsp;&nbsp; V.I. [Data](#data-1)  
 &nbsp;&nbsp; V.II. [Workflow](#workflow)  
 &nbsp;&nbsp; V.I. [Peak detection](#peak-detection)  
 
