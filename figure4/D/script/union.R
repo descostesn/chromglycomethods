@@ -13,14 +13,15 @@ library("GenomicRanges")
 # PARAMETERS
 ################
 
-filepathvec <- c("data/DLD1GlcNAcNoDoxAux_rep1.gff",
-"data/DLD1GlcNAcNoDoxAux_rep2.gff",
-"data/DLD1GlcNAcDoxAux_rep1_peaks.gff",
-"data/DLD1GlcNAcDoxAux_rep2_peaks.gff")
+filepathvec <- c("../data/DLD1GlcNAcNoDoxAux_rep1.gff",
+"../data/DLD1GlcNAcNoDoxAux_rep2.gff",
+"../data/DLD1GlcNAcDoxAux_rep1_peaks.gff",
+"../data/DLD1GlcNAcDoxAux_rep2_peaks.gff")
 
-outputfile <- "results/union_OGlcNac_noauxaux-fig4C.bed"
+outputfile <- "../results/union_OGlcNac_noauxaux-fig4C.bed"
 inputformat <- "gff"
 featurename <- "union-glc-noauxaux"
+
 
 ##############
 # MAIN
