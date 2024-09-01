@@ -6,9 +6,9 @@ III. [Data](#data)
 IV. [Installation](#installation)  
 V. [Figure Generation](#figure-generation)  
 VI. [Pre-processing](#pre-processing)  
-&nbsp;&nbsp; VI.I. [Workflows](#workflows)  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; VI.I.I. [CutnRun](#cutnrun)  
-&nbsp;&nbsp; VI.I. [Peak detection](#peak-detection)  
+&nbsp;&nbsp; VI.I. [Data](#data)  
+&nbsp;&nbsp; VI.II. [Workflow](#workflow)  
+&nbsp;&nbsp; VI.III. [Peak detection](#peak-detection)  
 
 
 ## Description
@@ -205,9 +205,15 @@ You should obtain the raw figure:
 
 ## Pre-processing
 
-### Workflows
+### Data
 
-#### CutnRun
+| Target | ID | library layout | link |
+|--------|----|----------------|------|
+| O-GlcNAc rep1 | E-MTAB-14308 | single | ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR134/033/ERR13430733/ERR13430733.fastq.gz |
+| O-GlcNAc rep2 | E-MTAB-14308 | single | ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR134/034/ERR13430734/ERR13430734.fastq.gz |
+
+
+### Workflow
 
 The pre-processing was performed with the Galaxy workflows [OGlcNac_ChIP-SeqSEmm10](../A/galaxy-workflows/Galaxy-Workflow-OGlcNac_ChIP-SeqSEmm10.ga). The .ga file can be imported in your own galaxy account.
 
