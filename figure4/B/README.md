@@ -242,7 +242,7 @@ Generating heatmap for PolII-TFs
                  The missing data are INTS3 having sra SRX8699710
                          Complementary sra found
 Merging replicates and create result table
-         Plotting to results/peaksPolII-20-none.png
+         Plotting to ../results/peaksPolII-20-none.png
 ```
 
 You should obtain the raw figure:
