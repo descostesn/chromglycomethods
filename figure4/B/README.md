@@ -6,9 +6,9 @@ III. [Data](#data)
 IV. [Installation](#installation)  
 V. [Figure Generation](#figure-generation)  
 VI. [Pre-processing](#pre-processing)  
-&nbsp;&nbsp; VI.I. [Workflows](#workflows)  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; VI.I.I. [CutnRun](#cutnrun)   
-&nbsp;&nbsp; VI.I. [Peak detection](#peak-detection)  
+&nbsp;&nbsp; VI.I. [Data](#data-1)  
+&nbsp;&nbsp; VI.II. [Workflow](#workflow)  
+&nbsp;&nbsp; VI.III. [Peak detection](#peak-detection)  
 
 
 ## Description
@@ -46,11 +46,6 @@ wget https://www.ebi.ac.uk/biostudies/files/E-MTAB-14307/DLD1GlcNAcDoxAux_rep2_p
 wget https://www.ebi.ac.uk/biostudies/files/E-MTAB-14307/DLD1GlcNAcNoDoxAux_rep1_peaks.gff -P data/
 wget https://www.ebi.ac.uk/biostudies/files/E-MTAB-14307/DLD1GlcNAcNoDoxAux_rep2_peaks.gff -P data/
 
-## The bam files to perform the peak detection
-wget https://www.ebi.ac.uk/biostudies/files/E-MTAB-14307/DLD1GlcNAcDoxAux_rep1.bam -P data/
-wget https://www.ebi.ac.uk/biostudies/files/E-MTAB-14307/DLD1GlcNAcDoxAux_rep2.bam -P data/
-wget https://www.ebi.ac.uk/biostudies/files/E-MTAB-14307/DLD1GlcNAcNoDoxAux_rep1.bam -P data/
-wget https://www.ebi.ac.uk/biostudies/files/E-MTAB-14307/DLD1GlcNAcNoDoxAux_rep2.bam -P data/
 ```
 
 
@@ -256,9 +251,29 @@ You should obtain the raw figure:
 
 ## Pre-processing
 
-### Workflows
+### Data
 
-#### CutnRun
+| Target | ID | library layout | link |
+|--------|----|----------------|------|
+| O-GlcNAc rep1 dox | E-MTAB-14307 | single | ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR134/028/ERR13430728/ERR13430728.fastq.gz |
+| O-GlcNAc rep2 dox | E-MTAB-14307 | single | ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR134/029/ERR13430729/ERR13430729.fastq.gz |
+| O-GlcNAc rep1 nodox | E-MTAB-14307 | single | ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR134/030/ERR13430730/ERR13430730.fastq.gz |
+| O-GlcNAc rep2 nodox | E-MTAB-14307 | single | ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR134/031/ERR13430731/ERR13430731.fastq.gz |
+
+To download the data run:
+```
+#!/bin/bash
+
+mkdir data/fastq
+
+wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR134/028/ERR13430728/ERR13430728.fastq.gz -P data/fastq/DLD1GlcNAcDoxAux_rep1.fastq.gz
+wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR134/029/ERR13430729/ERR13430729.fastq.gz -P data/fastq/DLD1GlcNAcDoxAux_rep2.fastq.gz
+wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR134/030/ERR13430730/ERR13430730.fastq.gz -P data/fastq/DLD1GlcNAcNoDoxAux_rep1.fastq.gz
+wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR134/031/ERR13430731/ERR13430731.fastq.gz -P data/fastq/DLD1GlcNAcNoDoxAux_rep2.fastq.gz
+```
+
+
+### Workflow
 
 The pre-processing was performed with the Galaxy workflows [OGlcNac_ChIP-SeqSEhg38.ga](galaxy-workflow/Galaxy-Workflow-OGlcNac_ChIP-SeqSEhg38.ga). The .ga files can be imported in one own galaxy account.
 
