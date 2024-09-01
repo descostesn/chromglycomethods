@@ -5,8 +5,8 @@ II. [Data](#data)
 III. [Installation](#installation)  
 IV. [Figure Generation](#figure-generation)  
 V. [Pre-processing](#pre-processing)  
-&nbsp;&nbsp; V.I. [Workflows](#workflows)  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; VI.I.I. [ChIP-seq and CutnRun](#cutnrun)  
+&nbsp;&nbsp; V.I. [Data](#data-1)  
+&nbsp;&nbsp; V.II. [Workflow](#workflow)  
 
 
 ## Description
@@ -91,9 +91,12 @@ You should obtain the following heatmaps:
 
 ## Pre-processing
 
-### Workflows
+### Data
 
-#### ChIP-seq and CutnRun
+See [Fig. 4B](../B/README.md#data-1)
+
+
+### Workflows
 
 The pre-processing was performed with the Galaxy workflows [OGlcNac_ChIP-SeqSEhg38.ga](galaxy-workflow/Galaxy-Workflow-OGlcNac_ChIP-SeqSEhg38.ga). The .ga files can be imported in one own galaxy account.
 
