@@ -28,3 +28,10 @@ wget https://zenodo.org/records/12793186/files/refGeneUCSC-mm10-March2021.gff -P
 ```
 
 ## Installation
+
+Install conda following the instructions [here](https://conda.io/projects/conda/en/latest/user-guide/install/index.html). Using the recipe [fig1E.yml](fig1E.yml), run:
+
+```
+conda env create -n fig1E --file ./fig1E.yml
+conda activate fig1E
+```
