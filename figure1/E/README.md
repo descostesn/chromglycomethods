@@ -26,6 +26,10 @@ wget https://zenodo.org/records/12793186/files/RNApolymeraseII_SRX8556273.bw  -P
 ## Ensembl annotations
 wget https://github.com/descostesn/chromglycomethods/blob/main/figure1/E/annotations/ensemblmm10.tar.gz -P data/
 tar -xvzf data/ensemblmm10.tar.gz
+
+
+ wget https://github.com/descostesn/chromglycomethods/raw/main/figure1/E/annotations/ensemblmm10.tar.gz -P data/ &&
+ cd data/ && tar -xvzf ensemblmm10.tar.gz && rm ensemblmm10.tar.gz && cd ..
 ```
 
 ## Installation
@@ -50,7 +54,7 @@ mkdir results
 NBCPU=1
 
 ## Build the deeptools matrix
-computeMatrix scale-regions --regionsFileName data/ensembl_mm10_Sept2020-chrfiltered.gff --scoreFileName data/RNApolymeraseII_SRX8556273.bw --outFileName results/polII.mat --samplesLabel RNAPol_II --numberOfProcessors $NBCPU --regionBodyLength 2000 --beforeRegionStartLength 2000 --afterRegionStartLength 2000 --unscaled5prime 0 --unscaled3prime 0
+computeMatrix scale-regions --regionsFileName data/ensemblmm10.bed --scoreFileName data/RNApolymeraseII_SRX8556273.bw --outFileName results/polII.mat --samplesLabel RNAPol_II --numberOfProcessors $NBCPU --regionBodyLength 2000 --beforeRegionStartLength 2000 --afterRegionStartLength 2000 --unscaled5prime 0 --unscaled3prime 0
 
 ## Plot the RNAPol II signal using decreasing sorting
 FILENAME="heatmap_polII.png"
