@@ -57,5 +57,26 @@ FILENAME="heatmap_polII.png"
 plotHeatmap --matrixFile results/polII.mat --outFileName results/$FILENAME --plotFileFormat 'png' --outFileSortedRegions results/peakscoord-fig1E.bed --dpi '200' --sortRegions 'descend' --sortUsing 'mean' --averageTypeSummaryPlot 'mean' --plotType 'lines' --missingDataColor 'black' --alpha '1.0' --colorList white,blue --xAxisLabel 'distance from TSS (bp)' --yAxisLabel 'genes' --heatmapWidth 7.5 --heatmapHeight 25.0 --whatToShow 'plot, heatmap and colorbar' --startLabel 'TSS' --endLabel 'TES' --refPointLabel 'TSS' --samplesLabel RNAPolII --legendLocation 'best' --labelRotation '0'
 ```
 
+You should obtain the raw figure:
+
+<img src="pictures/heatmap_polII.png" alt="PolII heatmap" width="200" heigth="200"/>
+
+Using the sorted peak coordinates `peakscoord-fig1E.bed`, generate a matrix of O-GlcNac signal:
+
+```
+computeMatrix scale-regions --regionsFileName results/peakscoord-fig1E.bed --scoreFileName data/ESCHGGlcNAc_rep1.bw --outFileName results/OGlcNac.mat --samplesLabel Glc --numberOfProcessors $NBCPU --regionBodyLength 2000 --beforeRegionStartLength 2000 --afterRegionStartLength 2000  --unscaled5prime 0 --unscaled3prime 0
+```
+
+The matrix is already sorted because it followed the order of `peakscoord-fig1E.bed`. Remains plotting the signal without performing sorting:
+
+```
+FILENAME="heatmap_OGlcNac.png"
+
+plotHeatmap --matrixFile results/OGlcNac.mat --outFileName results/$FILENAME  --plotFileFormat 'png' --dpi '200' --sortRegions 'no' --sortUsing 'mean' --averageTypeSummaryPlot 'mean' --plotType 'lines' --missingDataColor 'black' --alpha '1.0' --colorList white,blue --xAxisLabel 'distance from TSS (bp)' --yAxisLabel 'genes' --heatmapWidth 7.5 --heatmapHeight 25.0 --whatToShow 'plot, heatmap and colorbar' --startLabel 'TSS' --endLabel 'TES' --refPointLabel 'TSS' --samplesLabel NoDox Dox --legendLocation 'best' --labelRotation '0'
+```
+
+You should obtain the following heatmaps:
+
+<img src="pictures/heatmap_OGlcNac.png" alt="OGlcNac heatmap" width="400" heigth="400"/>
 
 
