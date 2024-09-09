@@ -26,7 +26,7 @@ Download the following data:
 
 mkdir data
 
-# The bed file containing the sorted peak coordinates:
+# The bed file containing the sorted peak coordinates (file is correct, panel letter changed):
 wget https://zenodo.org/records/12793186/files/peakscoord-fig1E.bed -P data/
 
 # The union of the O-GlcNac peaks
@@ -51,11 +51,11 @@ wget https://www.ebi.ac.uk/biostudies/files/E-MTAB-14308/ESCHGGlcNAc_rep2_peaks.
 
 ## Installation
 
-Install conda following the instructions [here](https://conda.io/projects/conda/en/latest/user-guide/install/index.html). Using the recipe [fig1E.yml](fig1E.yml), run:
+Install conda following the instructions [here](https://conda.io/projects/conda/en/latest/user-guide/install/index.html). Using the recipe [fig1F.yml](fig1F.yml), run:
 
 ```
-conda env create -n fig1e --file ./fig1E.yml
-conda activate fig1e
+conda env create -n fig1f --file ./fig1f.yml
+conda activate fig1f
 ```
 
 ## Figure Generation
