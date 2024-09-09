@@ -25,6 +25,8 @@ wget https://zenodo.org/records/12793186/files/RNApolymeraseII_SRX8556273.bw  -P
 
 ## Refseq annotations
 wget https://zenodo.org/records/12793186/files/refGeneUCSC-mm10-March2021.gff -P annotations/
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!ensembl_mm10_Sept2020-chrfiltered.bed
 ```
 
 ## Installation
@@ -49,7 +51,7 @@ mkdir results
 NBCPU=1
 
 ## Build the deeptools matrix
-computeMatrix scale-regions --regionsFileName data/refGeneUCSC-mm10-March2021.gff --scoreFileName data/RNApolymeraseII_SRX8556273.bw --outFileName results/polII.mat --samplesLabel RNAPol_II --numberOfProcessors $NBCPU --regionBodyLength 2000 --beforeRegionStartLength 2000 --afterRegionStartLength 2000 --unscaled5prime 0 --unscaled3prime 0
+computeMatrix scale-regions --regionsFileName data/ensembl_mm10_Sept2020-chrfiltered.gff --scoreFileName data/RNApolymeraseII_SRX8556273.bw --outFileName results/polII.mat --samplesLabel RNAPol_II --numberOfProcessors $NBCPU --regionBodyLength 2000 --beforeRegionStartLength 2000 --afterRegionStartLength 2000 --unscaled5prime 0 --unscaled3prime 0
 
 ## Plot the RNAPol II signal using decreasing sorting
 FILENAME="heatmap_polII.png"
