@@ -23,10 +23,9 @@ mkdir data
 wget https://www.ebi.ac.uk/biostudies/files/E-MTAB-14308/ESCHGGlcNAc_rep1.bw  -P data/
 wget https://zenodo.org/records/12793186/files/RNApolymeraseII_SRX8556273.bw  -P data/
 
-## Refseq annotations
-wget https://zenodo.org/records/12793186/files/refGeneUCSC-mm10-March2021.gff -P annotations/
-
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!ensembl_mm10_Sept2020-chrfiltered.bed
+## Ensembl annotations
+wget https://github.com/descostesn/chromglycomethods/blob/main/figure1/E/annotations/ensemblmm10.tar.gz -P data/
+tar -xvzf data/ensemblmm10.tar.gz
 ```
 
 ## Installation
