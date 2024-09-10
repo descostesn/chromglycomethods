@@ -15,7 +15,7 @@ V. [Pre-processing](#pre-processing)
 
 ## Description
 
-Heatmap of CuntRun O-GlcNac signal and ChIP-Seq ChIP-Atlas selected candidates signal 1 kb around the start of 702 O-GlcNac peaks. The list of peaks was obtained computing the union of the replicate peaks. Three groups were defined and highlight the RNA Polymerase II (RNAPol II) before, at, and after the O-GlcNac peaks. For the groups I and II, RNAPol II describes a double peak signal overlapping O-GlcNac independently of its position. Other selected candidates follow a similar pattern. It indicates that a sub-category of these proteins might carry O-GlcNac in a transient state. The description of the function of each protein can be found in [fig1D](../D/README.md).
+Heatmap of CuntRun O-GlcNAc signal and ChIP-Seq ChIP-Atlas selected candidates signal 1 kb around the start of 702 O-GlcNAc peaks. The list of peaks was obtained computing the union of the replicate peaks. Three groups were defined and highlight the RNA Polymerase II (RNA Pol II) before, at, and after the O-GlcNac peaks. For the groups I and II, RNA Pol II shows a double peak overlapping O-GlcNac independently of its position. Other selected candidates follow a similar pattern. It indicates that a sub-category of these proteins might carry O-GlcNac in a transient state. The description of the function of each protein can be found in [fig1D](../D/README.md).
 
 ## Data
 
@@ -77,9 +77,9 @@ The union returned 702 peaks
 Writing results/union_sept2023mouse_HG1-2.bed
 ```
 
-### RNAPol II clustering
+### RNA Pol II clustering
 
-Generate a matrix with the RNAPolII bigwig using the coordinates of the union of peaks:
+Generate a matrix with the RNA Pol II bigwig using the coordinates of the union of peaks:
 
 ```
 #!/bin/bash
@@ -91,7 +91,7 @@ NBCPU=1
 computeMatrix  reference-point --regionsFileName results/union_sept2023mouse_HG1-2.bed --scoreFileName data/RNApolymeraseII_SRX8556273.bw --outFileName results/polIImatrix.mat --samplesLabel RNAPolII --numberOfProcessors $NBCPU --referencePoint TSS --beforeRegionStartLength 1000 --afterRegionStartLength 1000 --sortRegions 'keep' --sortUsing 'mean' --averageTypeBins 'mean' --binSize 50 --transcriptID transcript --exonID exon --transcript_id_designator transcript_id
 ```
 
-Generate a heatmap of RNAPol II performing a k-means clustering on 3 groups to retrieve the peak coordinates:
+Generate a heatmap of RNA Pol II performing a k-means clustering on 3 groups to retrieve the peak coordinates:
 
 ```
 #!/bin/bash
@@ -111,7 +111,7 @@ rm results/peakscoord-fig1E.bed
 mv results/tmp.bed results/peakscoord-fig1E.bed
 ```
 
-Regenerate the RNAPol II matrix with the new coordinates and plot the signal without changing the coordinate order:
+Regenerate the RNA Pol II matrix with the new coordinates and plot the signal without changing the coordinate order:
 
 ```
 #!/bin/bash
@@ -213,9 +213,9 @@ Quality control was done with FastQC v0.11.9: `fastqc --outdir $outputfolder --t
 
 Adapters and low quality reads were removed with trim-galore v0.4.3: `trim_galore --phred33 --quality 20 --stringency 1 -e 0.1 --length 20 --output_dir ./ $input.fastq.gz`.
 
-Reads were aligned to mm10 with Bowtie 2.3.4.1 and the bam were sorted using samtools v1.9:
-single: `bowtie2 -p $nbcpu -x m.musculus/mm10/mm10 -U $input.fastq.gz --sensitive --no-unal 2> $log |  samtools sort -@$nbcpu -O bam -o $output.bam`
-paired: `bowtie2 -p $nbcpu -x m.musculus/mm10/mm10 -1 $input1.fastq.gz -2 $input2.fastq.gz -I 0 -X 500 --fr --dovetail --sensitive --no-unal 2> $log  | samtools sort -@$nbcpu -O bam -o $output.bam`.
+Reads were aligned to mm10 with Bowtie 2.3.4.1 and the bam were sorted using samtools v1.9:  
+single: `bowtie2 -p $nbcpu -x m.musculus/mm10/mm10 -U $input.fastq.gz --sensitive --no-unal 2> $log |  samtools sort -@$nbcpu -O bam -o $output.bam`  
+paired: `bowtie2 -p $nbcpu -x m.musculus/mm10/mm10 -1 $input1.fastq.gz -2 $input2.fastq.gz -I 0 -X 500 --fr --dovetail --sensitive --no-unal 2> $log  | samtools sort -@$nbcpu -O bam -o $output.bam`.  
 
 Only primary alignments were kept using samtools v1.9: `samtools view -o $output.bam -h -b -q 20 -F 0x800 $input.bam`.
 
