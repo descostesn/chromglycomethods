@@ -13,7 +13,7 @@ V. [Pre-processing](#pre-processing)
 
 In [fig1](../../figure1/E/README.md), we observed that the potential candidates underlying the O-GlcNac signal are related to the RNA Polymerase II (RNA Pol II). We thought investigating further the relationship between O-GlcNac and the transcriptional machinery by removing RNA Pol II. We took advantage of an existing system in Human colon adenocarcinoma DLD-1 cells. These cells express OsTIR and a cassette encoding mini-AID (mAID) and fluorescent protein mClover (mAID+mClover) at the initiation site of the endogenous Rpb1 gene locus (POLR2A) (Nagashima 2019). Stimulation by doxocyclin enables to remove RNAPol II.
 
-The heatmap of binding values of RNA Polymerase II and O-GlcNac shows a global colocalization at the 21,519 GRCh38 Ensembl genes. Note that upon RNAPol II removal by doxocyclin induction, O-GlcNac signal remains globally unaffected. As conveyed in the following analysis, we hypothetize that O-GlcNac might be maintained by the recruitment of other O-GlcNacylated proteins at gene promoters.
+The heatmap of binding values of RNA Pol II and O-GlcNac shows a global colocalization at the 21,519 GRCh38 Ensembl genes. Note that upon RNA Pol II removal by auxin/doxocyclin induction, O-GlcNAc signal remains globally unaffected. As conveyed in the following analysis, we hypothetize that O-GlcNAc might be maintained by the recruitment of other O-GlcNAcylated proteins at gene promoters.
 
 ## Data
 
@@ -40,13 +40,13 @@ wget https://zenodo.org/records/12793186/files/peakscoord-fig4B.bed -P data/
 Install conda following the instructions [here](https://conda.io/projects/conda/en/latest/user-guide/install/index.html). Using the recipe [fig4C.yml](fig4C.yml), run:
 
 ```
-conda env create -n fig4C --file ./fig4C.yml
-conda activate fig4C
+conda env create -n fig4c --file ./fig4C.yml
+conda activate fig4c
 ```
 
 ## Figure generation
 
-Generate a matrix with the RNAPol II bigwig using the coordinates of the Ensembl genes and plot a heatmap in descending order (deeptools v3.5.5):
+Generate a matrix with the RNA Pol II bigwig using the coordinates of the Ensembl genes and plot a heatmap in descending order (deeptools v3.5.5):
 
 ```
 #!/bin/bash
@@ -69,7 +69,7 @@ You should obtain the raw figure:
 
 <img src="pictures/heatmap_polII.png" alt="PolII heatmap" width="200" heigth="200"/>
 
-Using the sorted peak coordinates `peakscoord-fig4B.bed`, generate a matrix of O-GlcNac signal before and after (Dox)/Auxin treatment:
+Using the sorted peak coordinates `peakscoord-fig4B.bed`, generate a matrix of O-GlcNAc signal before and after (Dox)/Auxin treatment:
 
 ```
 computeMatrix scale-regions --regionsFileName results/peakscoord-fig4B.bed --scoreFileName data/DLD1GlcNAcNoDoxAux_rep1.bw data/DLD1GlcNAcDoxAux_rep1.bw --outFileName results/OGlcNac.mat --samplesLabel GlcNAcNoDox GlcNAcDox --numberOfProcessors $NBCPU --regionBodyLength 2000 --beforeRegionStartLength 2000 --afterRegionStartLength 2000  --unscaled5prime 0 --unscaled3prime 0
