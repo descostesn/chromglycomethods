@@ -1,4 +1,4 @@
-# Heatmap of O-GlcNac peaks along with ChIP-Atlas candidates
+# Heatmap of O-GlcNAc peaks along with ChIP-Atlas candidates
 
 I. [Description](#description)  
 II. [Data](#data)  
