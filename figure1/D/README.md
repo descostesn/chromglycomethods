@@ -1,4 +1,4 @@
-# Heatmap of the percentage of overlap of the ChIP-Atlas candidates with O-GlcNac peaks in mouse ESC
+# Heatmap of the percentages of overlap of the ChIP-Atlas candidates with O-GlcNac peaks in mouse ESC
 
 I. [Description](#description)  
 II. [Details](#details)  
@@ -15,7 +15,7 @@ VI. [Pre-processing](#pre-processing)
 
 The 527 and 523 O-GlcNac peaks were submitted to the [ChIP-Atlas](https://chip-atlas.org/) database to find overlap with ChIP-seq experiments using the [enrichment analysis](https://chip-atlas.org/enrichment_analysis) tool. The online tool is rapidly evolving and new experiments regularly added to [GEO](https://www.ncbi.nlm.nih.gov/geo/). We provide the results of the enrichment analysis in the folder [chipatlas_results](chipatlas_results/).
 
-O-GlcNac peaks mainly overlap with RNA Polymerase II (RNAPol II) and associated factors: [TBP](https://www.genecards.org/cgi-bin/carddisp.pl?gene=TBP), [Taf12](https://www.genecards.org/cgi-bin/carddisp.pl?gene=TAF12&keywords=Taf12), [NelfA](https://www.genecards.org/cgi-bin/carddisp.pl?gene=NELFA&keywords=nelfa), [Med1](https://genecards.org/cgi-bin/carddisp.pl?gene=MED1&keywords=Med1), [Med12](https://www.genecards.org/cgi-bin/carddisp.pl?gene=MED12&keywords=med12), [Med24](https://www.genecards.org/cgi-bin/carddisp.pl?gene=MED24&keywords=med24), [Med26](https://www.genecards.org/cgi-bin/carddisp.pl?gene=MED26&keywords=med26), and [Dr1](https://www.genecards.org/cgi-bin/carddisp.pl?gene=DR1&keywords=dr1). TBP (TATA-binding proteins) is part of the General Transcription Factor IID that coordinates the binding of RNAPol II to the core promoter. Taf12 directly interacts with TBP. NelfA (Negative Elongation Factor Complex Member A) is part of the NELF complex that regulates transcription elongation by RNAPol II. Med1, Med12, Med24, and Med26 are subunits of the Mediator Complex which, after its recruitment to the promoters, serves as a scaffold for the assembly of the RNA PolII pre-initiation complex. Dr1 (Down-Regulator Of Transcription 1) represses both basal and activated levels of transcription by RNAPol II via its interaction with TBP. Other proteins that are known to carry O-GlcNac are highlighted in green.
+O-GlcNac peaks mainly overlap with RNA Polymerase II (RNA Pol II) and associated factors: [TBP](https://www.genecards.org/cgi-bin/carddisp.pl?gene=TBP), [Taf12](https://www.genecards.org/cgi-bin/carddisp.pl?gene=TAF12&keywords=Taf12), [NelfA](https://www.genecards.org/cgi-bin/carddisp.pl?gene=NELFA&keywords=nelfa), [Med1](https://genecards.org/cgi-bin/carddisp.pl?gene=MED1&keywords=Med1), [Med12](https://www.genecards.org/cgi-bin/carddisp.pl?gene=MED12&keywords=med12), [Med24](https://www.genecards.org/cgi-bin/carddisp.pl?gene=MED24&keywords=med24), [Med26](https://www.genecards.org/cgi-bin/carddisp.pl?gene=MED26&keywords=med26), and [Dr1](https://www.genecards.org/cgi-bin/carddisp.pl?gene=DR1&keywords=dr1). TBP (TATA-binding proteins) is part of the General Transcription Factor IID that coordinates the binding of RNA Pol II to the core promoter. Taf12 directly interacts with TBP. NelfA (Negative Elongation Factor Complex Member A) is part of the NELF complex that regulates transcription elongation by RNA Pol II. Med1, Med12, Med24, and Med26 are subunits of the Mediator Complex which, after its recruitment to the promoters, serves as a scaffold for the assembly of the RNA Pol II pre-initiation complex. Dr1 (Down-Regulator Of Transcription 1) represses both basal and activated levels of transcription by RNAPol II via its interaction with TBP. Other proteins that are known to carry O-GlcNac are highlighted in green.
 
 ## Details
 
@@ -227,7 +227,6 @@ Only primary alignments were kept using samtools v1.9: `samtools view -o $output
 
 Reads not aligned to consensus chromosomes were excluded with samtools v1.9: `samtools view -o $output.bam -h -b $input.bam 'chr1' 'chr2' 'chr3' 'chr4' 'chr5' 'chr6' 'chr7' 'chr8' 'chr9' 'chr10' 'chr11' 'chr12' 'chr13' 'chr14' 'chr15' 'chr16' 'chr17' 'chr18' 'chr19' 'chrX' 'chrY'`.
 
-The peaks were obtained with Macs2 v2.2.7.1: `macs2 callpeak -t $input.bam -c $control.bam -n $expname --outdir $outfold -f BAM -g 1.87e9 -s 82 -q 0.04 --nomodel --extsize 150 --keep-dup 7`
 
 ### Peak detection
 
