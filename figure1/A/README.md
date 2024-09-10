@@ -1,4 +1,4 @@
-# Genome-wide O-GlcNac Cut&Run peaks distribution in functional genomic compartments in mouse ES cells
+# Genome-wide O-GlcNac Cut&Run occupancy in mouse ES cells
 
 I. [Description](#description)  
 II. [Details](#details)  
