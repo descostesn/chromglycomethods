@@ -10,7 +10,7 @@ V. [Pre-processing](#pre-processing)
 
 ## Description
 
-The heatmap of binding values of RNA Polymerase II and O-GlcNac shows a global colocalization at the 55,634 Refseq genes.
+The heatmap of binding values of RNA Polymerase II and O-GlcNac shows a global colocalization at the 55,634 Ensembl genes.
 
 ## Data
 
@@ -24,11 +24,7 @@ wget https://www.ebi.ac.uk/biostudies/files/E-MTAB-14308/ESCHGGlcNAc_rep1.bw  -P
 wget https://zenodo.org/records/12793186/files/RNApolymeraseII_SRX8556273.bw  -P data/
 
 ## Ensembl annotations
-wget https://github.com/descostesn/chromglycomethods/blob/main/figure1/E/annotations/ensemblmm10.tar.gz -P data/
-tar -xvzf data/ensemblmm10.tar.gz
-
-
- wget https://github.com/descostesn/chromglycomethods/raw/main/figure1/E/annotations/ensemblmm10.tar.gz -P data/ &&
+wget https://github.com/descostesn/chromglycomethods/raw/main/figure1/E/annotations/ensemblmm10.tar.gz -P data/ &&
  cd data/ && tar -xvzf ensemblmm10.tar.gz && rm ensemblmm10.tar.gz && cd ..
 ```
 
@@ -37,13 +33,13 @@ tar -xvzf data/ensemblmm10.tar.gz
 Install conda following the instructions [here](https://conda.io/projects/conda/en/latest/user-guide/install/index.html). Using the recipe [fig1E.yml](fig1E.yml), run:
 
 ```
-conda env create -n fig1E --file ./fig1E.yml
-conda activate fig1E
+conda env create -n fig1e --file ./fig1E.yml
+conda activate fig1e
 ```
 
 ## Figure generation
 
-Generate a matrix with the RNAPol II bigwig using the coordinates of the Refseq genes and plot a heatmap in descending order (deeptools v3.5.5):
+Generate a matrix with the RNAPol II bigwig using the coordinates of the Ensembl genes and plot a heatmap in descending order (deeptools v3.5.5):
 
 ```
 #!/bin/bash
@@ -82,7 +78,7 @@ plotHeatmap --matrixFile results/OGlcNac.mat --outFileName results/$FILENAME  --
 
 You should obtain the following heatmaps:
 
-<img src="pictures/heatmap_OGlcNac.png" alt="OGlcNac heatmap" width="400" heigth="400"/>
+<img src="pictures/heatmap_OGlcNac.png" alt="OGlcNac heatmap" width="200" heigth="200"/>
 
 
 ## Pre-processing
