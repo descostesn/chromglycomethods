@@ -83,8 +83,6 @@ Duplicates were removed with picard v2.18.2: `picard MarkDuplicates INPUT=$input
 Bigwig files normalized by the genome size were generated with deeptools v3.0.2:
 `bamCoverage --numberOfProcessors $NBCPU --bam $input.bam --outFileName $output.bw --outFileFormat 'bigwig' --binSize 50 --normalizeUsing RPGC --effectiveGenomeSize 2308125349 --scaleFactor 1.0  --extendReads 150 --minMappingQuality '1'`
 
-The peaks were obtained with Macs2 v2.2.7.1: `macs2 callpeak -t $input.bam -c $control.bam -n $expname --outdir $outfold -f BAM -g 1.87e9 -s 82 -q 0.04 --nomodel --extsize 150 --keep-dup 7`
-
 #### RNA-seq
 
 The pre-processing was performed with the Galaxy workflows [OGlcNac_RNASeqPE_mm10_STAR_bw](../B/galaxy-workflows/Galaxy-Workflow-OGlcNac_RNASeqPE_mm10_STAR_bw.ga). The .ga file can be imported in your own galaxy account.
