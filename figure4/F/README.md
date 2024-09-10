@@ -12,6 +12,8 @@ V. [Pre-processing](#pre-processing)
 ## Description
 
 Geneset enrichment analysis of the 5 clusters defined in [fig4D](../D/README.md). Genes overlapping one or more O-GlcNac peaks were retrieved as input. Cluster 1 and 3 did not give any enrichment. Cluster 2 (239 genes/584 peaks) is mainly enriched for genes coding for histone methyltransferases and transcription co-activators. Cluster 4 (347 genes/1,200 peaks) gained O-GlcNac on genes coding for proteins linked to the RNA Polymerase II activity. Cluster 5 (751 genes/2,986 peaks) gave an enrichment for general transcription initiation factor activity.
+
+
 ## Data
 
 ```
@@ -45,8 +47,8 @@ wget https://zenodo.org/records/12793186/files/enhancerAtlas2_DLD1.gff -P data/
 Install conda following the instructions [here](https://conda.io/projects/conda/en/latest/user-guide/install/index.html). Using the recipe [fig4F.yml](fig4F.yml), run:
 
 ```
-conda env create -n fig4F --file ./fig4F.yml
-conda activate fig4F
+conda env create -n fig4f --file ./fig4F.yml
+conda activate fig4f
 ```
 
 ## Figure generation
