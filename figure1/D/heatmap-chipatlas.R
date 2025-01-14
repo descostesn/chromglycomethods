@@ -238,13 +238,13 @@ mergepolandtf <- function(reslist, prefvec) {
 buildreplacementvectors <- function() {
 
     sra_to_filter <- list(
-        "mHG13" = list(
-            "mHG13hist" = c("SRX16815323", "SRX10304465", "SRX4681571",
+        "mHG1" = list(
+            "mHG1hist" = c("SRX16815323", "SRX10304465", "SRX4681571",
                 "SRX2245482", "SRX1560890", "SRX1560888", "SRX13332952",
                 "SRX12382446", "SRX2955747", "SRX185848", "SRX10445814",
                 "SRX14210149", "SRX13332963", "SRX298193", "ERX245530",
                 "SRX10424671"),
-            "mHG13polTFs" = c("SRX9486380", "SRX5371695", "SRX2762171",
+            "mHG1polTFs" = c("SRX9486380", "SRX5371695", "SRX2762171",
             "SRX5371690", "SRX11677010", "SRX404068", "SRX11221956",
             "SRX5600782", "SRX9486383", "SRX4178816", "SRX5850150",
             "SRX2486173", "SRX2486173", "SRX2486173", "SRX2486173",
@@ -264,13 +264,13 @@ buildreplacementvectors <- function() {
             "SRX8754229", "SRX128354", "SRX9101843", "SRX191946", "SRX11525492",
             "SRX19028417", "SRX5817869", "SRX19028478", "SRX4980239",
             "SRX186548", "SRX3581849")),
-        "mHG14" = list(
-            "mHG14hist" = c("SRX10304465", "SRX16815323", "SRX13332952",
+        "mHG2" = list(
+            "mHG2hist" = c("SRX10304465", "SRX16815323", "SRX13332952",
                 "SRX4681571", "SRX1560890", "SRX1560888", "SRX2245482",
                 "SRX185848", "SRX2955747", "SRX12382446", "SRX10445814",
                 "SRX14210149", "SRX13332963", "SRX298193", "ERX245530",
                 "SRX10424671"),
-            "mHG14polTFs" = c("SRX9486380", "SRX2762171", "SRX5371695",
+            "mHG2polTFs" = c("SRX9486380", "SRX2762171", "SRX5371695",
                 "SRX11677010", "SRX19391748", "SRX9486383", "SRX5600782",
                 "SRX5371688", "SRX404068", "SRX11221956", "SRX9450269",
                 "SRX13439109", "SRX11677018", "SRX385377", "SRX385377",
@@ -292,11 +292,11 @@ buildreplacementvectors <- function() {
                 "SRX19028417", "SRX19028478", "SRX8754229")))
 
     perc_replace <- list(
-        "mHG13" = list(
-            "mHG13hist" = c(78.776291, 74.569790, 55.066922, NA, 20.65010,
+        "mHG1" = list(
+            "mHG1hist" = c(78.776291, 74.569790, 55.066922, NA, 20.65010,
                 23.326960, NA, 34.416826, 41.682600, 38.814532, NA, NA, NA, NA,
                 NA, NA),
-            "mHG13polTFs" = c(85.468451, NA, 76.099426, NA, 68.068834, NA,
+            "mHG1polTFs" = c(85.468451, NA, 76.099426, NA, 68.068834, NA,
                 56.40535, 64.24474, 68.068834, 71.892925, 47.227533, 72.275335,
                 40.726577, 39.579350, 36.520076, 33.078394, 30.019120,
                 29.827916, 56.787763, 22.944551, NA, NA, NA, 66.347992,
@@ -305,10 +305,10 @@ buildreplacementvectors <- function() {
                 21.032505, NA, NA, NA, 49.521989, NA, NA, NA, 56.59656,
                 41.873805, NA, 20.650096, NA, NA, NA, 23.900574, 26.959847,
                 27.91587, rep(NA, 28))),
-        "mHG14" = list(
-            "mHG14hist" = c(73.556797, 75.698324, NA, 60.893855, NA, 22.998138,
+        "mHG2" = list(
+            "mHG2hist" = c(73.556797, 75.698324, NA, 60.893855, NA, 22.998138,
                 NA, 34.078212, 36.312849, 26.163873, NA, NA, NA, NA, NA, NA),
-            "mHG14polTFs" = c(84.823091, 76.536313, NA, 66.945996, 75.884544,
+            "mHG2polTFs" = c(84.823091, 76.536313, NA, 66.945996, 75.884544,
                 68.156425, 59.86965, NA, NA, 57.35568, 63.314711, NA, NA,
                 65.921788, 64.990689, 59.124767, 57.728119, 54.748603,
                 46.461825, 34.264432, 33.240223, 25.884544, NA, NA, NA,
@@ -319,11 +319,11 @@ buildreplacementvectors <- function() {
                 NA, NA, NA, NA, 21.042831, NA, NA, NA, NA, NA, NA)))
 
     sra_replace <- list(
-        "mHG13" = list(
-            "mHG13hist" = c("SRX16815331", "SRX5382140", "SRX8818318", NA,
+        "mHG1" = list(
+            "mHG1hist" = c("SRX16815331", "SRX5382140", "SRX8818318", NA,
                 "SRX4090625", "SRX4090627", NA, "SRX12382379", "SRX7568534",
                 "SRX13341956", NA, NA, NA, NA, NA, NA),
-            "mHG13polTFs" = c("SRX9486378", NA, "SRX2762151", NA, "SRX9195301",
+            "mHG1polTFs" = c("SRX9486378", NA, "SRX2762151", NA, "SRX9195301",
                 NA, "SRX11221932", "SRX2762152", "SRX9486379", "SRX8556273",
                 "SRX2873907", "SRX15888978", "SRX147771", "SRX15888985",
                 "SRX8832797", "SRX191070", "SRX9195280", "SRX5247634",
@@ -333,11 +333,11 @@ buildreplacementvectors <- function() {
                 NA, NA, "SRX9195310", "SRX8873444", NA, NA, NA, "SRX4506780",
                 NA, NA, NA, "SRX5926394", "SRX14134855", NA, "SRX8994331", NA,
                 NA, NA, "SRX022697", "SRX9107990", "SRX15464336", rep(NA, 28))),
-        "mHG14" = list(
-            "mHG14hist" = c("SRX5382140", "SRX16815331", NA, "SRX8818318", NA,
+        "mHG2" = list(
+            "mHG2hist" = c("SRX5382140", "SRX16815331", NA, "SRX8818318", NA,
                 "SRX4090627", NA, "SRX13341956", "SRX7568534", "SRX12382379",
                 NA, NA, NA, NA, NA, NA),
-            "mHG14polTFs" = c("SRX9486378", "SRX2762151", NA, "SRX9195301",
+            "mHG2polTFs" = c("SRX9486378", "SRX2762151", NA, "SRX9195301",
                 "SRX8556273", "SRX9486379", "SRX2762152", NA, NA, "SRX11221932",
                 "SRX4403317", NA, NA, "SRX11417001", "SRX373167", "SRX11416997",
                 "SRX11417015", "SRX11416999", "SRX11417014", "SRX11417005",
@@ -350,21 +350,21 @@ buildreplacementvectors <- function() {
                 "SRX5276471", NA, NA, NA, NA, NA, NA)))
 
     antigen_replace <- list(
-        "mHG13" = list(
-            "mHG13hist" = c("H4", "H3K4me3", "H3K4me2", NA, "H3K64ac",
+        "mHG1" = list(
+            "mHG1hist" = c("H4", "H3K4me3", "H3K4me2", NA, "H3K64ac",
                 "H3K122ac", NA, "H3K36me3", "H2A.Z", "H3K9ac", NA, NA, NA, NA,
                 NA, NA),
-            "mHG13polTFs" = c("Nanog", NA, "Kmt2d", NA, "Tbp", NA, "Taf12",
+            "mHG1polTFs" = c("Nanog", NA, "Kmt2d", NA, "Tbp", NA, "Taf12",
                 "Setd1a", "Sox2", "RNA polymerase II", "Yy1", "Ascl1", "FBXL10",
                 "Ngn2", "Chd8", "Kdm2b", "Taf1", "Zbtb11", "Sin3a", "Smad2", NA,
                 NA, NA, "Ash2L", "RPB3", "RPB10", "RPB1", "RPB2", "RPB9",
                 "RPB8", "RPB5", "RPB6", NA, NA, NA, "Med1", "Banp", NA, NA, NA,
                 "Brd4", NA, NA, NA, "Med24", "Nelfe", NA, "Ctcf", NA, NA, NA,
                 "Nipbl", "Rad21", "Brca2", rep(NA, 28))),
-        "mHG14" = list(
-            "mHG14hist" = c("H3K4me3", "H4", NA, "H3K4me2", NA, "H3K122ac", NA,
+        "mHG2" = list(
+            "mHG2hist" = c("H3K4me3", "H4", NA, "H3K4me2", NA, "H3K122ac", NA,
                 "H3K9ac", "H2A.Z", "H3K36me3", NA, NA, NA, NA, NA, NA),
-            "mHG14polTFs" = c("Nanog", "Kmt2d", NA, "Tbp", "RNApolII", "Sox2",
+            "mHG2polTFs" = c("Nanog", "Kmt2d", NA, "Tbp", "RNApolII", "Sox2",
                 "Setd1a", NA, NA, "Taf12", "Sin3a", NA, NA, "RPB3", "Ash2L",
                 "RPB1", "RPB10", "RPB2", "RPB9", "RPB5", "RPB8", "RPB6", NA,
                 NA, NA, "Ascl1", "FBXL10", "Ngn2", "Chd8", "Taf1", "Zbtb11",
