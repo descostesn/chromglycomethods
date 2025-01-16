@@ -16,7 +16,7 @@ V. [Pre-processing](#pre-processing)
 
 ## Description
 
-Volcano plot indicating the differentially expressed genes upon degradation of OGT by siRNA in mouse ES cells. We found 867 dow- (dark blue) and 594 up- (dark red) regulated genes. Among these, 44 down- and 12 up-regulated genes have a fold-change higher than two. 33 down- (light blue) and 2 up- (orange) regulated genes had an O-GlcNac peaks. Note that the differences with the numbers obtained with the script below are due to the conversion from ensembl to symbol.
+Volcano plot indicating the differentially expressed genes upon degradation of OGT by siRNA in mouse ES cells. We found 867 dow- (dark blue) and 594 up- (dark red) regulated genes. Among these, 44 down- and 12 up-regulated genes have a fold-change higher than two. 31 down- (light blue) and 2 up- (orange) regulated genes had an O-GlcNac peaks. Note that the differences with the numbers obtained with the script below are due to the conversion from ensembl to symbol.
 
 ## Data
 
@@ -226,4 +226,4 @@ You should obtain the raw figure:
 
 <img src="pictures/mergedrep1-2_vs_DEGsiogt.png" alt="venn DEG siOgt vs OGlcNac" width="400"/>
 
-Note the three common genes between up and down which are due to intertwined genes.
+Note the three common genes between up and down which are due to intertwined genes. The number 33 goes down to 31 when alternative annotations are removed.
