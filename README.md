@@ -1,6 +1,10 @@
 # Computational Methods
 
-Describe the computational methods of the article on glycosylation and transcription on chromatin in mammalian cells. The description of the methodology and the code for each figure are available in the corresponding folders.
+Describe the computational methods of the article:
+
+Sofia Rucli*, Nicolas Descostes*, Yulia Ermakova1, Urvashi Chitnavis, Jeanne Couturier, Ana Boskovic, Matthieu Boulard. "Functional genomic profiling of O-GlcNAc reveals its context-specific interplay with RNA polymerase II". Genome Biology (accepted)
+
+The description of the methodology and the code for each figure are available in the corresponding folders.
 
 ## Data
 
