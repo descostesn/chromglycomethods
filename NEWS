@@ -3,4 +3,4 @@ v1.0.7:
 - Replace devtools install by library in fig 1A README.
 - Correct file names in upsetgenomecomp.R of fig 1A.
 - Remove command getParams(paramsDefinition) and correct file name in promexpression.R.
-
+- Add instruction in fig 1d README.
