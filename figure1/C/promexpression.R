@@ -45,7 +45,7 @@ library("biomaRt")
 ##################
 
 
-queryfile <- "data/ESCHGGlcNAc_rep1.gff"
+queryfile <- "data/ESCHGGlcNAc_rep1_peaks.gff"
 countspath <- "data/ESCRNAseq_SRR11294181counts.txt"
 namescountsvec <- "rep1"
 countslength <- "data/ESCRNAseq_SRR11294181countslength.txt"
