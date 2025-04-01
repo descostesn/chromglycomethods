@@ -1,6 +1,7 @@
 channels:
   - bioconda
 dependencies:
+  - pysam=0.14.0
   - matplotlib-base=3.10.1
   - deeptoolsintervals=0.1.9
   - deeptools=3.5.5
