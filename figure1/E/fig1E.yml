@@ -1,9 +1,10 @@
 channels:
   - bioconda
 dependencies:
-  - zlib=1.2.8
-  - python=2.7.15
-  - python_abi=2.7-cp27mu
+  - zlib=1.2.11
+  - libzlib=1.2.11
+  - python=3.10
+  - python_abi=3.10-cp310
   - pysam=0.14.0
   - matplotlib-base=3.10.1
   - deeptoolsintervals=0.1.9
