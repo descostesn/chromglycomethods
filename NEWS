@@ -4,3 +4,5 @@ v1.0.7:
 - Correct file names in upsetgenomecomp.R of fig 1A.
 - Remove command getParams(paramsDefinition) and correct file name in promexpression.R.
 - Add instruction in fig 1d README.
+- In fig1E.yml, add deeptoolsintervals=0.1.9.
+
