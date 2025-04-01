@@ -4,4 +4,4 @@ v1.0.7:
 - Correct file names in upsetgenomecomp.R of fig 1A.
 - Remove command getParams(paramsDefinition) and correct file name in promexpression.R.
 - Add instruction in fig 1d README.
-- In fig1E.yml, add deeptoolsintervals=0.1.9, matplotlib-base=3.10.1, pysam=0.14.0.
+- In fig1E.yml, add deeptoolsintervals=0.1.9, matplotlib-base=3.10.1, pysam=0.14.0, zlib=1.2.8, python=2.7.15, python_abi=2.7-cp27mu.
