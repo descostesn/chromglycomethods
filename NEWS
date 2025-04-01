@@ -1,5 +1,5 @@
 v1.0.7:
-- Add devtools (fig1A), downgrading r-dbplyr to 2.3.4 (fig1A), and upgrading ggplot2 to 3.5.1 (fig1A, fig1C).
+- Add devtools (fig1A), downgrading r-dbplyr to 2.3.4 (fig1A, fig1C), and upgrading ggplot2 to 3.5.1 (fig1A, fig1C).
 - Replace devtools install by library in fig 1A README.
 - Correct file names in upsetgenomecomp.R of fig 1A.
 - Remove command getParams(paramsDefinition) and correct file name in promexpression.R.
