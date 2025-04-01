@@ -54,7 +54,7 @@ conda activate fig1d
 
 ## Figure Generation
 
-Run the command:
+Run the script [heatmap-chipatlas.R](heatmap-chipatlas.R) from the current folder, it uses the files of the subfolders chipatlas_results/. From the terminal:
 
 ```
 Rscript heatmap-chipatlas.R
