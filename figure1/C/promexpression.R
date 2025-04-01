@@ -306,9 +306,6 @@ retrieveglcproms <- function(upstreambp, downstreambp, queryfile,
 # MAIN
 ##################
 
-# Retreives the parameters
-getParams(paramsDefinition)
-
 if (!file.exists(outputfolder))
     dir.create(outputfolder, recursive = TRUE)
 
