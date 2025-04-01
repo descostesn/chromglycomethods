@@ -5,6 +5,7 @@ dependencies:
   - r-base=4.3
   - r-ggplot2=3.5.1
   - r-rcolorbrewer=1.1_3
+  - r-dbplyr=2.3.4
   - bioconductor-txdb.mmusculus.ucsc.mm10.knowngene=3.10.0
   - bioconductor-genomicfeatures=1.52.1
   - bioconductor-genomicranges=1.52.0
