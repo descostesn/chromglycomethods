@@ -11,7 +11,3 @@ dependencies:
   - matplotlib-base=3.10
   - deeptoolsintervals
   - deeptools=3.5.5
-  - r-base=4.3
-  - bioconductor-genomicfeatures=1.52.1
-  - bioconductor-biomart >=2.56.0
-  - bioconductor-genomicranges=1.52.0
