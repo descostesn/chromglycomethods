@@ -5,4 +5,4 @@ dependencies:
   - deeptools=3.5.5
   - r-base=4.3
   - bioconductor-iranges=2.36.0
-  - bioconductor-genomicranges=1.54.1 
+  - bioconductor-genomicranges=1.52.0
