@@ -5,4 +5,4 @@ v1.0.7:
 - Remove command getParams(paramsDefinition) and correct file name in promexpression.R.
 - Add instruction in fig 1d README.
 - Add several modules to fig1E.yml due to new conflicts.
-- Correct yml file name in conda creation for fig1F.
+- Correct yml file name in conda creation for fig1F. downgrade bioconductor-genomicranges to 1.52.0.
