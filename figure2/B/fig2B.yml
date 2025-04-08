@@ -6,7 +6,7 @@ dependencies:
   - bioconductor-clusterprofiler=4.8.1
   - bioconductor-chippeakanno=3.34.1
   - bioconductor-genomicranges=1.52.0
-  - bioconductor-org.mm.eg.db=3.18.0
+  - bioconductor-org.mm.eg.db=3.17.0
   - r-venndiagram=1.7.3
   - r-ggrepel=0.9.5
   - r-ggplot2=3.5.1
