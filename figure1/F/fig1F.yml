@@ -3,7 +3,7 @@ channels:
   - conda-forge
 dependencies:
   - zlib=1.2.11
-  - openssl=1.0
+  - openssl
   - python=2.7.12
   - deeptoolsintervals=0.1.8
   - deeptools=3.5.5
