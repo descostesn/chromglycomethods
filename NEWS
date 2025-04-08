@@ -1,6 +1,6 @@
 v1.0.7:
 - Update several conda environments.
-- Replace devtools install by library in fig 1A README.
+- Replace devtools install by library in fig 1A README and install specific version of genomecompr.
 - Correct file names in upsetgenomecomp.R of fig 1A.
 - Remove command getParams(paramsDefinition) and correct file name in promexpression.R.
 - Add instruction in fig 1d README.
