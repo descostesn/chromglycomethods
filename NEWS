@@ -1,10 +1,8 @@
 v1.0.7:
-- Add devtools (fig1A), downgrading r-dbplyr to 2.3.4 (fig1A, fig1C), and upgrading ggplot2 to 3.5.1 (fig1A, fig1C).
+- Update several conda environments.
 - Replace devtools install by library in fig 1A README.
 - Correct file names in upsetgenomecomp.R of fig 1A.
 - Remove command getParams(paramsDefinition) and correct file name in promexpression.R.
 - Add instruction in fig 1d README.
-- Add several modules to fig1E.yml due to new conflicts.
-- Correct yml file name in conda creation for fig1F. downgrade bioconductor-genomicranges to 1.52.0.
-- Change paths in fig2B volcanosiogt.R and add bioconductor-org.mm.eg.db to yml.
+- Change paths in fig2B volcanosiogt.R.
 - Change file names and modify stop message in fig2D enrichmentanalysis.R.
