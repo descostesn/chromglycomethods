@@ -6,3 +6,4 @@ v1.0.7:
 - Add instruction in fig 1d README.
 - Change paths in fig2B volcanosiogt.R.
 - Change file names and modify stop message in fig2D enrichmentanalysis.R.
+- Change paths in figure4/B/script/heatmap-chipatlas.R.
