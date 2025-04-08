@@ -2,6 +2,6 @@ channels:
   - bioconda
   - conda-forge
 dependencies:
-  - deeptools
-  - r-base
-  - bioconductor-genomicranges
+  - deeptools=3.5.4
+  - r-base=4.0.3
+  - bioconductor-genomicranges=1.42.0
