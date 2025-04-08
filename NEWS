@@ -6,3 +6,4 @@ v1.0.7:
 - Add instruction in fig 1d README.
 - Add several modules to fig1E.yml due to new conflicts.
 - Correct yml file name in conda creation for fig1F. downgrade bioconductor-genomicranges to 1.52.0.
+- Change paths in fig2B volcanosiogt.R and add bioconductor-org.mm.eg.db to yml.
