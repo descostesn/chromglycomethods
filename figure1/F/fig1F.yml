@@ -2,10 +2,6 @@ channels:
   - bioconda
   - conda-forge
 dependencies:
-  - zlib=1.2.11
-  - openssl
-  - python=2.7.12
-  - deeptoolsintervals=0.1.8
-  - deeptools=3.5.5
+  - deeptools
   - r-base
   - bioconductor-genomicranges
