@@ -1,3 +1,5 @@
+Latest:
+[![DOI](https://zenodo.org/badge/827160708.svg)](https://doi.org/10.5281/zenodo.14979440)
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.14979441.svg)](https://doi.org/10.5281/zenodo.14979441)
 
