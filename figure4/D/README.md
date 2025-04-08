@@ -72,15 +72,15 @@ You should obtain the raw figure:
 Replace the groups 'cluster_2/3/4/5' in data/peakscoord-fig4C.bed to avoid visual separation of the groups:
 
 ```
-sed "s/cluster_[2-5]/cluster_1/" data/peakscoord-fig4C.bed > results/peakscoord-fig4C-modified.bed
+sed "s/cluster_[2-5]/cluster_1/" data/union_OGlcNac_noauxaux-fig4C.bed > results/union_OGlcNac_noauxaux-fig4C-modified.bed
 ```
 
-Using the sorted peak coordinates `peakscoord-fig4C.bed`, generate a matrix of RNAPol II signal before and after (Dox)/Auxin treatment:
+Using the sorted peak coordinates `union_OGlcNac_noauxaux-fig4C-modified.bed`, generate a matrix of RNAPol II signal before and after (Dox)/Auxin treatment:
 
 ```
 FILENAME="heatmap_RNAPolII.png"
 
-computeMatrix  reference-point --regionsFileName results/peakscoord-fig4C-modified.bed --scoreFileName data/RNAPolII_SRX11070611_control.bw data/RNAPolII_SRX11070613_auxin.bw --outFileName results/RNAPolIInoauxaux.mat --samplesLabel RNAPolIInoaux RNAPolIIaux --numberOfProcessors $NBCPU --referencePoint TSS --beforeRegionStartLength 1000 --afterRegionStartLength 1000
+computeMatrix  reference-point --regionsFileName results/union_OGlcNac_noauxaux-fig4C-modified.bed --scoreFileName data/RNAPolII_SRX11070611_control.bw data/RNAPolII_SRX11070613_auxin.bw --outFileName results/RNAPolIInoauxaux.mat --samplesLabel RNAPolIInoaux RNAPolIIaux --numberOfProcessors $NBCPU --referencePoint TSS --beforeRegionStartLength 1000 --afterRegionStartLength 1000
 
 plotHeatmap --matrixFile results/RNAPolIInoauxaux.mat --outFileName $FILENAME --plotFileFormat 'png' --dpi '200' --sortRegions 'no' --sortUsing 'mean' --averageTypeSummaryPlot 'mean' --plotType 'lines' --missingDataColor 'black' --alpha '1.0' --colorList white,blue --xAxisLabel 'distance from peak (bp)' --yAxisLabel 'peaks' --heatmapWidth 7.5 --heatmapHeight 25.0 --whatToShow 'plot, heatmap and colorbar' --startLabel 'start' --endLabel 'TES' --refPointLabel 'start' --legendLocation 'best' --labelRotation '0'
 ```
