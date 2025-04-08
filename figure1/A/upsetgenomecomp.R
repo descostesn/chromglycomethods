@@ -70,8 +70,8 @@ peakspathcategoriesvec <- c(H3K27ac = "data/H3K27ac_SRX19148013_peaks_broadPeak.
         Ser2P = "data/Ser2P_SRR391039_peaks_broadPeak.gff",
         ATACSeq = "data/ATAC_SRR5466767_peaks_narrow.gff")
 
-peakspathqueryvec <- c("data/ESCHGGlcNAc_rep1.gff",
-"data/ESCHGGlcNAc_rep2.gff")
+peakspathqueryvec <- c("data/ESCHGGlcNAc_rep1_peaks.gff",
+"data/ESCHGGlcNAc_rep2_peaks.gff")
 
 querynamevec <- c("Rep1", "Rep2")
 

@@ -85,8 +85,8 @@ conda activate fig1a
 Open an R session and install our in-house package [genomecompR](https://github.com/descostesn/genomecompR/tree/main):
 
 ```
-if (!require("devtools")) install.packages("devtools")
-devtools::install_github("descostesn/genomecompR")
+library("devtools")
+install_github("descostesn/genomecompR@1.0.8")
 ```
 
 

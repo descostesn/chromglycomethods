@@ -17,8 +17,7 @@ library("biomaRt")
 # PARAMETERS
 ################
 
-
-gffvec <- c("data/log0_down-ensembl.gff", "data/log0_up-ensembl.gff",
+gffvec <- c("data/log0_siogtdown-ensembl.gff", "data/log0_siogtup-ensembl.gff",
     "data/siogtdown_withOGlcNac.gff")
 expnamesvec <- c("down", "up", "downglc")
 species_name <- "mouse"
@@ -136,14 +135,9 @@ tryUseMart <- function(biomart = "ensembl", dataset, version, #nolint
             message(error_type$message)
 
             if (c > 5) {
-                stop(
-                    "There is a problem of connexion to Ensembl for ",
+                stop("There is a problem of connexion to Ensembl for ",
                     "now. Please retry later or set ",
-                    "alternativeMirror=TRUE. ATTENTION: If you use the ",
-                    "alternative mirror at a time a more recent version ",
-                    "of FVB or mm39 is availablde, the alternative mirror ",
-                    "will pick the more recent version."
-                )
+                    "alternativeMirror=TRUE.")
             }
         } else {
             message("Connected with success.")

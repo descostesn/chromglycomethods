@@ -54,7 +54,7 @@ wget https://www.ebi.ac.uk/biostudies/files/E-MTAB-14308/ESCHGGlcNAc_rep2_peaks.
 Install conda following the instructions [here](https://conda.io/projects/conda/en/latest/user-guide/install/index.html). Using the recipe [fig1F.yml](fig1F.yml), run:
 
 ```
-conda env create -n fig1f --file ./fig1f.yml
+conda env create -n fig1f --file ./fig1F.yml
 conda activate fig1f
 ```
 
