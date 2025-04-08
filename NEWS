@@ -7,4 +7,4 @@ v1.0.7:
 - Change paths in fig2B volcanosiogt.R.
 - Change file names and modify stop message in fig2D enrichmentanalysis.R.
 - Change paths in figure4/B/script/heatmap-chipatlas.R.
-- Change bed file name in computeMatrix command of fig4D.
+- Change bed file name in computeMatrix and output plot path in plotHeatmap commands of fig4D.
