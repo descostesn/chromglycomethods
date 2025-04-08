@@ -17,8 +17,7 @@ library("biomaRt")
 # PARAMETERS
 ################
 
-
-gffvec <- c("data/log0_down-ensembl.gff", "data/log0_up-ensembl.gff",
+gffvec <- c("data/log0_siogtdown-ensembl.gff", "data/log0_siogtup-ensembl.gff",
     "data/siogtdown_withOGlcNac.gff")
 expnamesvec <- c("down", "up", "downglc")
 species_name <- "mouse"
